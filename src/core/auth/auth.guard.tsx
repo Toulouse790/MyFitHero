@@ -1,0 +1,59 @@
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuthStore } from './auth.store';
+
+interface AuthGuardProps {
+  children: React.ReactNode;
+  redirectTo?: string;
+  requireProfile?: boolean;
+}
+
+export const AuthGuard: React.FC<AuthGuardProps> = ({
+  children,
+  redirectTo = '/login',
+  requireProfile = false,
+}) => {
+  const { isAuthenticated, isLoading, user } = useAuthStore();
+  const location = useLocation();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to={redirectTo} state={{ from: location }} replace />;
+  }
+
+  // Vérifier si le profil est complet si nécessaire
+  if (requireProfile && user) {
+    const profileComplete = user.sport && user.weight && user.height && user.age;
+    if (!profileComplete) {
+      return <Navigate to="/onboarding" replace />;
+    }
+  }
+
+  return <>{children}</>;
+};
+
+// Guard pour les routes publiques
+export const PublicGuard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated, isLoading } = useAuthStore();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return <>{children}</>;
+};
