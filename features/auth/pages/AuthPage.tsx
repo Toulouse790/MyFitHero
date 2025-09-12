@@ -1,595 +1,462 @@
-import { createClient } from '@supabase/supabase-js';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { motion } from 'framer-motion';
-import clsx from 'clsx';
-import { toast } from 'sonner';
+import React, { useState, useMemo } from 'react';
+import { useLocation } from 'wouter';
+import { Dumbbell, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
-// Supabase client - remplacer par vos clés publiques réelles
-const supabaseUrl = 'https://zfmlzxhxhaezdkzjanbc.supabase.co';
-const supabaseAnonKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmbWx6eGh4aGFlemRremphbmJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NDc4MzIsImV4cCI6MjA2NjMyMzgzMn0.x6GpX8ep6YxVEZQt7pcH0SIWzxhTYcXLnaVmD5IGErw';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-const trackEvent = (event: string) => {
-  if (window.gtag) window.gtag('event', event);
-};
-
-// --- Types ---
-type PackType = 'nutrition' | 'hydration' | 'sport';
-
-interface FormInputs {
+// Types
+interface FormData {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  fullName: string;
-  phone?: string;
-  packs: PackType[];
-  nutritionGoal?: string;
-  hydrationGoal?: string;
-  sportGoal?: string;
+  confirmPassword: string;
 }
 
-// --- Zod schemas ---
-const packOptions = z.enum(['nutrition', 'hydration', 'sport']);
+// Composants UI basiques (si ils n'existent pas encore)
+const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-white rounded-2xl shadow-xl border border-gray-100 ${className}`}>
+    {children}
+  </div>
+);
 
-const schemaStep1 = z.object({
-  email: z.string().email('Email invalide'),
-  password: z
-    .string()
-    .min(8, 'Mot de passe minimum 8 caractères')
-    .max(50)
-    .regex(/[A-Z]/, 'Doit contenir une majuscule')
-    .regex(/[a-z]/, 'Doit contenir une minuscule')
-    .regex(/[0-9]/, 'Doit contenir un chiffre')
-    .regex(/[^A-Za-z0-9]/, 'Doit contenir un caractère spécial'),
-});
+const CardHeader = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`p-6 ${className}`}>
+    {children}
+  </div>
+);
 
-const schemaStep2 = z.object({
-  fullName: z.string().min(2, 'Nom complet requis'),
-  phone: z.string().min(10, 'Numéro invalide').max(15).optional().or(z.literal('')),
-});
+const CardContent = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`p-6 pt-0 ${className}`}>
+    {children}
+  </div>
+);
 
-const schemaStep3 = z.object({
-  packs: z.array(packOptions).nonempty('Sélectionnez au moins un pack'),
-});
+const Button = ({ 
+  children, 
+  type = 'button', 
+  disabled = false, 
+  onClick, 
+  className = '',
+  variant = 'default'
+}: {
+  children: React.ReactNode;
+  type?: 'button' | 'submit';
+  disabled?: boolean;
+  onClick?: () => void;
+  className?: string;
+  variant?: 'default' | 'outline';
+}) => {
+  const baseClasses = 'px-6 py-3 rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500';
+  const variantClasses = {
+    default: disabled 
+      ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+      : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-lg hover:scale-105',
+    outline: 'border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
+  };
 
-const schemaStep4 = z.object({
-  nutritionGoal: z.string().optional(),
-  hydrationGoal: z.string().optional(),
-  sportGoal: z.string().optional(),
-});
-
-const combinedSchema = schemaStep1.and(schemaStep2).and(schemaStep3).and(schemaStep4);
-
-// --- Components ---
-const Step1: React.FC = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormInputs>();
   return (
-    <div className="space-y-4">
-      <label htmlFor="email" className="block font-semibold">
-        Email
-      </label>
-      <input
-        id="email"
-        type="email"
-        {...register('email')}
-        className={clsx(
-          'w-full px-3 py-2 border rounded-md',
-          errors.email ? 'border-red-600' : 'border-gray-300'
-        )}
-        aria-invalid={!!errors.email}
-        aria-describedby="email-error"
-      />
-      {errors.email && (
-        <p id="email-error" className="text-red-600 text-sm">
-          {errors.email.message}
-        </p>
-      )}
-
-      <label htmlFor="password" className="block font-semibold mt-4">
-        Mot de passe
-      </label>
-      <input
-        id="password"
-        type="password"
-        {...register('password')}
-        className={clsx(
-          'w-full px-3 py-2 border rounded-md',
-          errors.password ? 'border-red-600' : 'border-gray-300'
-        )}
-        aria-invalid={!!errors.password}
-        aria-describedby="password-error"
-      />
-      {errors.password && (
-        <p id="password-error" className="text-red-600 text-sm">
-          {errors.password.message}
-        </p>
-      )}
-    </div>
+    <button
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+    >
+      {children}
+    </button>
   );
 };
 
-const Step2: React.FC = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormInputs>();
-  return (
-    <div className="space-y-4">
-      <label htmlFor="fullName" className="block font-semibold">
-        Nom complet
-      </label>
-      <input
-        id="fullName"
-        type="text"
-        {...register('fullName')}
-        className={clsx(
-          'w-full px-3 py-2 border rounded-md',
-          errors.fullName ? 'border-red-600' : 'border-gray-300'
-        )}
-        aria-invalid={!!errors.fullName}
-        aria-describedby="fullname-error"
-      />
-      {errors.fullName && (
-        <p id="fullname-error" className="text-red-600 text-sm">
-          {errors.fullName.message}
-        </p>
-      )}
+const Input = ({ 
+  id, 
+  type = 'text', 
+  value, 
+  onChange, 
+  required = false, 
+  minLength,
+  placeholder = '',
+  className = '' 
+}: {
+  id: string;
+  type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  minLength?: number;
+  placeholder?: string;
+  className?: string;
+}) => (
+  <input
+    id={id}
+    type={type}
+    value={value}
+    onChange={onChange}
+    required={required}
+    minLength={minLength}
+    placeholder={placeholder}
+    className={`w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${className}`}
+  />
+);
 
-      <label htmlFor="phone" className="block font-semibold mt-4">
-        Téléphone (optionnel)
-      </label>
-      <input
-        id="phone"
-        type="tel"
-        {...register('phone')}
-        className={clsx(
-          'w-full px-3 py-2 border rounded-md',
-          errors.phone ? 'border-red-600' : 'border-gray-300'
-        )}
-        aria-invalid={!!errors.phone}
-        aria-describedby="phone-error"
-      />
-      {errors.phone && (
-        <p id="phone-error" className="text-red-600 text-sm">
-          {errors.phone.message}
-        </p>
-      )}
-    </div>
-  );
-};
+const Label = ({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) => (
+  <label htmlFor={htmlFor} className="block text-sm font-medium text-gray-700 mb-1">
+    {children}
+  </label>
+);
 
-const Step3: React.FC<{ onSelectPack: (selected: PackType[]) => void }> = ({ onSelectPack }) => {
-  const {
-    register,
-    formState: { errors },
-    watch,
-  } = useFormContext<FormInputs>();
-
-  const selectedPacks = watch('packs') || [];
-
-  useEffect(() => {
-    onSelectPack(selectedPacks as PackType[]);
-  }, [selectedPacks, onSelectPack]);
-
-  return (
-    <div className="space-y-4">
-      <label className="block font-semibold mb-2">
-        Sélectionnez les packs qui vous intéressent
-      </label>
-      <div className="flex flex-col gap-3">
-        {['nutrition', 'hydration', 'sport'].map(pack => (
-          <label key={pack} className="cursor-pointer inline-flex items-center space-x-2">
-            <input
-              type="checkbox"
-              value={pack}
-              {...register('packs')}
-              aria-checked={selectedPacks.includes(pack as PackType)}
-            />
-            <span>{pack.charAt(0).toUpperCase() + pack.slice(1)}</span>
-          </label>
-        ))}
-      </div>
-      {errors.packs && <p className="text-red-600 text-sm">{errors.packs.message}</p>}
-    </div>
-  );
-};
-
-const Step4: React.FC<{ selectedPacks: PackType[] }> = ({ selectedPacks }) => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormInputs>();
-
-  return (
-    <div className="space-y-4">
-      {selectedPacks.includes('nutrition') && (
-        <>
-          <label htmlFor="nutritionGoal" className="block font-semibold">
-            Objectif Nutritionnel (ex: prise de masse, sèche...)
-          </label>
-          <input
-            id="nutritionGoal"
-            type="text"
-            {...register('nutritionGoal')}
-            className={clsx(
-              'w-full px-3 py-2 border rounded-md',
-              errors.nutritionGoal ? 'border-red-600' : 'border-gray-300'
-            )}
-            aria-invalid={!!errors.nutritionGoal}
-          />
-          {errors.nutritionGoal && (
-            <p className="text-red-600 text-sm">{errors.nutritionGoal.message}</p>
-          )}
-        </>
-      )}
-      {selectedPacks.includes('hydration') && (
-        <>
-          <label htmlFor="hydrationGoal" className="block font-semibold mt-4">
-            Objectif Hydratation (ex: 2L/jour)
-          </label>
-          <input
-            id="hydrationGoal"
-            type="text"
-            {...register('hydrationGoal')}
-            className={clsx(
-              'w-full px-3 py-2 border rounded-md',
-              errors.hydrationGoal ? 'border-red-600' : 'border-gray-300'
-            )}
-            aria-invalid={!!errors.hydrationGoal}
-          />
-          {errors.hydrationGoal && (
-            <p className="text-red-600 text-sm">{errors.hydrationGoal.message}</p>
-          )}
-        </>
-      )}
-      {selectedPacks.includes('sport') && (
-        <>
-          <label htmlFor="sportGoal" className="block font-semibold mt-4">
-            Objectif Sportif (ex: perdre du poids, préparation marathon)
-          </label>
-          <input
-            id="sportGoal"
-            type="text"
-            {...register('sportGoal')}
-            className={clsx(
-              'w-full px-3 py-2 border rounded-md',
-              errors.sportGoal ? 'border-red-600' : 'border-gray-300'
-            )}
-            aria-invalid={!!errors.sportGoal}
-          />
-          {errors.sportGoal && <p className="text-red-600 text-sm">{errors.sportGoal.message}</p>}
-        </>
-      )}
-    </div>
-  );
-};
-
-const STEPS = [
-  'Informations connexion',
-  'Infos personnelles',
-  'Sélection pack',
-  'Objectifs personnalisés',
-];
-
-const AuthPage: React.FC = () => {
-  const methods = useForm<FormInputs>({
-    mode: 'onBlur',
-    resolver: zodResolver(combinedSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-      fullName: '',
-      phone: '',
-      packs: [],
-      nutritionGoal: '',
-      hydrationGoal: '',
-      sportGoal: '',
-    },
+// Composant principal
+export function AuthPage() {
+  const [, setLocation] = useLocation();
+  const [isSignUp, setIsSignUp] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
 
-  const [currentStep, setCurrentStep] = useState(0);
-  const [selectedPacks, setSelectedPacks] = useState<PackType[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [showRecoverPassword, setShowRecoverPassword] = useState(false);
-  const [recoverEmail, setRecoverEmail] = useState('');
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  // Validation en temps réel
+  const isFormValid = useMemo(() => {
+    if (isSignUp) {
+      return (
+        formData.firstName.trim().length > 0 &&
+        formData.lastName.trim().length > 0 &&
+        formData.email.includes('@') &&
+        formData.email.includes('.') &&
+        formData.password.length >= 8 &&
+        formData.password === formData.confirmPassword
+      );
+    } else {
+      return (
+        formData.email.includes('@') &&
+        formData.email.includes('.') &&
+        formData.password.length >= 6
+      );
+    }
+  }, [formData, isSignUp]);
 
-  const onStepNext = () => {
-    if (currentStep < STEPS.length - 1) setCurrentStep(x => x + 1);
-  };
+  // Handler de soumission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!isFormValid) {
+      setErrors(['Veuillez remplir tous les champs correctement']);
+      return;
+    }
 
-  const onStepBack = () => {
-    if (currentStep > 0) setCurrentStep(x => x - 1);
-  };
+    setIsLoading(true);
+    setErrors([]);
 
-  const onSubmit: SubmitHandler<FormInputs> = async data => {
-    setAuthError(null);
-    setLoading(true);
     try {
-      const { error: _error } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
+      if (isSignUp) {
+        // Inscription
+        const { data, error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              first_name: formData.firstName,
+              last_name: formData.lastName,
+              full_name: `${formData.firstName} ${formData.lastName}`
+            }
+          }
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        if (data.user) {
+          // Succès - redirection vers onboarding
+          setLocation('/onboarding');
+        }
+      } else {
+        // Connexion
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        if (data.user) {
+          // Succès - redirection vers dashboard
+          setLocation('/dashboard');
+        }
+      }
+
+    } catch (error: any) {
+      console.error('Erreur auth:', error);
+      
+      // Messages d'erreur en français
+      let errorMessage = 'Une erreur est survenue';
+      
+      if (error.message?.includes('Invalid login credentials')) {
+        errorMessage = 'Email ou mot de passe incorrect';
+      } else if (error.message?.includes('User already registered')) {
+        errorMessage = 'Cet email est déjà utilisé';
+      } else if (error.message?.includes('Password should be at least')) {
+        errorMessage = 'Le mot de passe doit contenir au moins 6 caractères';
+      } else if (error.message?.includes('Invalid email')) {
+        errorMessage = 'Format d\'email invalide';
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      setErrors([errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handler pour changer les champs
+  const handleInputChange = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ 
+      ...prev, 
+      [field]: e.target.value 
+    }));
+    
+    // Effacer les erreurs quand l'utilisateur tape
+    if (errors.length > 0) {
+      setErrors([]);
+    }
+  };
+
+  // Connexion Google (optionnel)
+  const handleGoogleAuth = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
         options: {
-          data: {
-            full_name: data.fullName,
-            phone: data.phone,
-            packs: data.packs,
-            nutritionGoal: data.nutritionGoal,
-            hydrationGoal: data.hydrationGoal,
-            sportGoal: data.sportGoal,
-          },
-        },
+          redirectTo: `${window.location.origin}/dashboard`
+        }
       });
-      if (error) throw error;
-      toast.success('Inscription réussie, merci de confirmer votre email.');
-      trackEvent('sign_up');
-      setCurrentStep(0);
-      setUserLoggedIn(true);
+
+      if (error) {
+        throw error;
+      }
     } catch (error: any) {
-      setAuthError(error.message);
-      toast.error('Erreur inscription : ' + error.message);
-    } finally {
-      setLoading(false);
+      console.error('Erreur Google Auth:', error);
+      setErrors(['Erreur de connexion avec Google']);
     }
   };
-
-  const onLogin = async (email: string, password: string) => {
-    setAuthError(null);
-    setLoading(true);
-    try {
-      const { data: _data, error: _error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) throw error;
-      toast.success('Connexion réussie');
-      trackEvent('login');
-      setUserLoggedIn(true);
-    } catch (error: any) {
-      setAuthError(error.message);
-      toast.error('Erreur connexion : ' + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const onRecoverPassword = async () => {
-    setAuthError(null);
-    setLoading(true);
-    try {
-      const { error: _error } = await supabase.auth.resetPasswordForEmail(recoverEmail);
-      if (error) throw error;
-      toast.success('Email de récupération envoyé');
-      setShowRecoverPassword(false);
-    } catch (error: any) {
-      setAuthError(error.message);
-      toast.error('Erreur récupération: ' + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const onSocialLogin = async (provider: 'google' | 'apple' | 'facebook') => {
-    setLoading(true);
-    setAuthError(null);
-    try {
-      const { error: _error } = await supabase.auth.signInWithOAuth({ provider });
-      if (error) throw error;
-      trackEvent('oauth_login_' + provider);
-    } catch (error: any) {
-      setAuthError(error.message);
-      toast.error('Erreur login social : ' + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const LoginForm = () => {
-    const [loginEmail, setLoginEmail] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
-
-    return (
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          onLogin(loginEmail, loginPassword);
-        }}
-        className="space-y-4"
-        aria-label="Formulaire de connexion"
-      >
-        <div>
-          <label htmlFor="loginEmail" className="block font-semibold">
-            Email
-          </label>
-          <input
-            id="loginEmail"
-            type="email"
-            value={loginEmail}
-            onChange={e => setLoginEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md"
-            required
-            autoComplete="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="loginPassword" className="block font-semibold">
-            Mot de passe
-          </label>
-          <input
-            id="loginPassword"
-            type="password"
-            value={loginPassword}
-            onChange={e => setLoginPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md"
-            required
-            autoComplete="current-password"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md"
-        >
-          {loading ? 'Connexion...' : 'Se connecter'}
-        </button>
-        <button
-          type="button"
-          onClick={() => setShowRecoverPassword(true)}
-          className="mt-2 underline text-blue-600 dark:text-blue-400"
-        >
-          Mot de passe oublié ?
-        </button>
-      </form>
-    );
-  };
-
-  const renderStep = () => {
-    switch (currentStep) {
-      case 0:
-        return <Step1 />;
-      case 1:
-        return <Step2 />;
-      case 2:
-        return <Step3 onSelectPack={setSelectedPacks} />;
-      case 3:
-        return <Step4 selectedPacks={selectedPacks} />;
-      default:
-        return <Step1 />;
-    }
-  };
-
-  if (userLoggedIn) {
-    return (
-      <div className="max-w-md mx-auto p-4 text-center">
-        <h2 className="text-2xl font-bold">Bienvenue sur MyFitHero !</h2>
-        <p>Vous êtes connecté.</p>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-900">
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white dark:bg-gray-800 p-8 rounded-md shadow-md"
-        aria-live="polite"
-      >
-        {!showRecoverPassword ? (
-          <>
-            <h1 className="text-3xl font-bold mb-6 text-center">Se connecter / S'inscrire</h1>
-
-            <form
-              onSubmit={methods.handleSubmit(onSubmit)}
-              aria-label="Formulaire d'inscription multi-étapes"
-            >
-              <FormProvider {...methods}>{renderStep()}</FormProvider>
-
-              <div className="flex justify-between mt-6">
-                {currentStep > 0 ? (
-                  <button
-                    type="button"
-                    onClick={onStepBack}
-                    disabled={loading}
-                    className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
-                  >
-                    Précédent
-                  </button>
-                ) : (
-                  <div />
-                )}
-                {currentStep < STEPS.length - 1 ? (
-                  <button
-                    type="button"
-                    onClick={() => methods.trigger().then(valid => valid && onStepNext())}
-                    disabled={loading}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                  >
-                    Suivant
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-                  >
-                    {loading ? 'Inscription...' : "S'inscrire"}
-                  </button>
-                )}
-              </div>
-              {authError && <p className="mt-3 text-red-600">{authError}</p>}
-            </form>
-
-            <div className="mt-8 text-center">
-              <p>Ou connectez-vous avec</p>
-              <div className="flex justify-center space-x-4 mt-3">
-                <button
-                  onClick={() => onSocialLogin('google')}
-                  className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                  aria-label="Connexion avec Google"
-                >
-                  <FcGoogle size={32} />
-                </button>
-                <button
-                  onClick={() => onSocialLogin('apple')}
-                  className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                  aria-label="Connexion avec Apple"
-                >
-                  <FaApple size={28} />
-                </button>
-                <button
-                  onClick={() => onSocialLogin('facebook')}
-                  className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                  aria-label="Connexion avec Facebook"
-                >
-                  <FaFacebook size={28} />
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-2 text-center">Vous avez déjà un compte ?</h2>
-              <LoginForm />
-            </div>
-          </>
-        ) : (
-          <div className="space-y-4" aria-label="Récupération mot de passe">
-            <h2 className="text-xl font-semibold mb-4 text-center">Récupération du mot de passe</h2>
-            <input
-              type="email"
-              placeholder="Votre email"
-              value={recoverEmail}
-              onChange={e => setRecoverEmail(e.target.value)}
-              className="w-full p-2 border rounded-md"
-              autoComplete="email"
-            />
-            <button
-              onClick={onRecoverPassword}
-              disabled={loading}
-              className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
-              {loading ? 'Envoi en cours...' : 'Envoyer le lien de récupération'}
-            </button>
-            <button
-              onClick={() => {
-                setShowRecoverPassword(false);
-                setAuthError(null);
-              }}
-              className="w-full py-2 mt-2 bg-gray-300 dark:bg-gray-700 rounded-md hover:bg-gray-400"
-            >
-              Retour
-            </button>
-            {authError && <p className="text-red-600">{authError}</p>}
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center px-4 py-8">
+      <Card className="w-full max-w-md">
+        <CardHeader className="text-center">
+          {/* Logo et titre */}
+          <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+            <Dumbbell className="text-white" size={24} />
           </div>
-        )}
-      </motion.div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">MyFitHero</h1>
+          <p className="text-gray-600">Votre coach fitness personnel</p>
+          
+          {/* Toggle Connexion/Inscription */}
+          <div className="flex bg-gray-100 rounded-xl p-1 mt-6">
+            <button
+              onClick={() => setIsSignUp(false)}
+              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                !isSignUp 
+                  ? 'bg-white text-gray-800 shadow-sm' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Connexion
+            </button>
+            <button
+              onClick={() => setIsSignUp(true)}
+              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                isSignUp 
+                  ? 'bg-white text-gray-800 shadow-sm' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Inscription
+            </button>
+          </div>
+        </CardHeader>
+        
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* Affichage des erreurs */}
+            {errors.length > 0 && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start space-x-3">
+                <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={16} />
+                <div className="flex-1">
+                  {errors.map((error, index) => (
+                    <p key={index} className="text-red-700 text-sm">{error}</p>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Champs pour inscription uniquement */}
+            {isSignUp && (
+              <>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">Prénom</Label>
+                    <Input
+                      id="firstName"
+                      type="text"
+                      value={formData.firstName}
+                      onChange={handleInputChange('firstName')}
+                      placeholder="Chris"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Nom</Label>
+                    <Input
+                      id="lastName"
+                      type="text"
+                      value={formData.lastName}
+                      onChange={handleInputChange('lastName')}
+                      placeholder="Topher"
+                      required
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Email */}
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange('email')}
+                placeholder="votre@email.com"
+                required
+              />
+            </div>
+
+            {/* Mot de passe */}
+            <div className="space-y-2">
+              <Label htmlFor="password">Mot de passe</Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={handleInputChange('password')}
+                  placeholder="••••••••"
+                  minLength={isSignUp ? 8 : 6}
+                  required
+                  className="pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+              {isSignUp && (
+                <p className="text-xs text-gray-500">
+                  Le mot de passe doit contenir au moins 8 caractères
+                </p>
+              )}
+            </div>
+
+            {/* Confirmation mot de passe (inscription uniquement) */}
+            {isSignUp && (
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
+                <div className="relative">
+                  <Input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange('confirmPassword')}
+                    placeholder="••••••••"
+                    required
+                    className="pr-12"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  >
+                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                  <p className="text-xs text-red-500">
+                    Les mots de passe ne correspondent pas
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Bouton de soumission */}
+            <Button
+              type="submit"
+              disabled={!isFormValid || isLoading}
+              className="w-full h-12"
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <Loader2 className="animate-spin" size={16} />
+                  <span>{isSignUp ? 'Création en cours...' : 'Connexion...'}</span>
+                </div>
+              ) : (
+                isSignUp ? 'Créer mon compte' : 'Se connecter'
+              )}
+            </Button>
+
+            {/* Séparateur */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-white px-2 text-gray-500">Ou continuer avec</span>
+              </div>
+            </div>
+
+            {/* Google Auth */}
+            <Button
+              type="button"
+              onClick={handleGoogleAuth}
+              variant="outline"
+              className="w-full h-12 flex items-center justify-center space-x-2"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              <span>Google</span>
+            </Button>
+
+          </form>
+
+          {/* CGU et politique de confidentialité */}
+          {isSignUp && (
+            <p className="text-xs text-gray-500 text-center mt-6">
+              En vous inscrivant, vous acceptez nos{' '}
+              <a href="#" className="text-blue-600 hover:underline">conditions d'utilisation</a>
+              {' '}et notre{' '}
+              <a href="#" className="text-blue-600 hover:underline">politique de confidentialité</a>
+            </p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
-};
-
-export default memo(AuthPage);
+}
