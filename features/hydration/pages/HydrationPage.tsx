@@ -26,7 +26,6 @@ import {
 } from 'lucide-react';
 import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
-import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
 import { supabase } from '@/lib/supabase';
 import { useRealtimeSync } from '@/features/workout/hooks/useRealtimeSync';
 import UniformHeader from '@/features/profile/components/UniformHeader';
@@ -44,11 +43,14 @@ import {
 } from '@/components/ui/dialog';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Database } from '@/features/workout/types/database';
+import { getSportCategoryForHydration, HydrationSportCategory } from '@/shared/utils/sportMapping';
+import { getHydrationPersonalizedMessage } from '@/shared/utils/personalizedMessages';
+import { useDataLoader } from '@/shared/hooks/useDataLoader';
+import { AIModal } from '@/shared/components/AIModal';
 
 // --- TYPES & INTERFACES ---
 type DrinkType = Database['public']['Tables']['hydration_logs']['Row']['drink_type'];
 type HydrationContext = Database['public']['Tables']['hydration_logs']['Row']['hydration_context'];
-type SportCategory = 'endurance' | 'contact' | 'court' | 'strength';
 
 interface RecommendedDrink {
   type: DrinkType;
@@ -75,7 +77,7 @@ type HydrationLog = Database['public']['Tables']['hydration_logs']['Row'];
 type DailyStats = Database['public']['Tables']['daily_stats']['Row'];
 
 // --- CONFIGURATION HYDRATATION PAR SPORT ---
-const sportsHydrationData: Record<SportCategory, SportHydrationConfig> = {
+const sportsHydrationData: Record<HydrationSportCategory, SportHydrationConfig> = {
   endurance: {
     emoji: '🏃‍♂️',
     goalModifierMl: 1000,
@@ -204,10 +206,12 @@ const Hydration: React.FC = () => {
   const navigate = useNavigate();
   const { appStoreUser } = appStore();
   const { toast } = useToast();
+  const { isLoading, withLoader, setIsLoading } = useDataLoader({
+    onError: (title, description) => toast({ title, description, variant: 'destructive' })
+  });
 
   const [currentMl, setCurrentMl] = useState(0);
   const [selectedAmount, setSelectedAmount] = useState(250);
-  const [isLoading, setIsLoading] = useState(true);
   const [dailyLogs, setDailyLogs] = useState<HydrationLog[]>([]);
   const [dailyStats, setDailyStats] = useState<DailyStats | null>(null);
   const [lastDrinkTime, setLastDrinkTime] = useState<Date | null>(null);
@@ -218,31 +222,7 @@ const Hydration: React.FC = () => {
   const todayDate = new Date().toISOString().split('T')[0];
 
   // --- LOGIQUE DE PERSONNALISATION ---
-  const getSportCategory = useCallback((sport: string | null | undefined): SportCategory => {
-    const sportMappings: Record<string, SportCategory> = {
-      basketball: 'court',
-      tennis: 'court',
-      volleyball: 'court',
-      badminton: 'court',
-      american_football: 'contact',
-      rugby: 'contact',
-      hockey: 'contact',
-      football: 'endurance',
-      running: 'endurance',
-      cycling: 'endurance',
-      swimming: 'endurance',
-      triathlon: 'endurance',
-      'course à pied': 'endurance',
-      musculation: 'strength',
-      powerlifting: 'strength',
-      crossfit: 'strength',
-      weightlifting: 'strength',
-    };
-
-    return sportMappings[sport?.toLowerCase() || ''] || 'strength';
-  }, []);
-
-  const userSportCategory = getSportCategory(appStoreUser?.sport);
+  const userSportCategory = getSportCategoryForHydration(appStoreUser?.sport);
   const sportConfig = sportsHydrationData[userSportCategory];
 
   // --- CALCUL OBJECTIF PERSONNALISÉ ---
@@ -483,17 +463,7 @@ const Hydration: React.FC = () => {
 
   // --- MESSAGES PERSONNALISÉS ---
   const getPersonalizedMessage = useCallback(() => {
-    const userName = appStoreUser?.first_name || appStoreUser?.username || 'Champion';
-
-    if (isGoalReached) {
-      return `🎉 Excellent ${userName} ! Objectif atteint !`;
-    } else if (percentage >= 75) {
-      return `💪 Bravo ${userName}, tu y es presque !`;
-    } else if (percentage >= 50) {
-      return `⚡ Continue ${userName} !`;
-    } else {
-      return `💧 ${userName}, hydrate-toi !`;
-    }
+    return getHydrationPersonalizedMessage(percentage, isGoalReached, appStoreUser);
   }, [percentage, isGoalReached, appStoreUser]);
 
   // Conseil prioritaire du jour
@@ -612,11 +582,20 @@ const Hydration: React.FC = () => {
         </div>
 
         {/* Message motivationnel */}
-        <div className="text-center">
+        <div className="text-center mb-6">
           <p className="text-gray-600 text-sm">
             {getPersonalizedMessage()}
           </p>
         </div>
+
+        {/* Coaching IA Modal */}
+        <AIModal
+          open={showCoachingModal}
+          onOpenChange={setShowCoachingModal}
+          pillar="hydration"
+          title="Coaching IA"
+          description="Analyse personnalisée et conseils"
+        />
 
         {/* Actions rapides supplémentaires - masquées pour le design simple */}
         <div className="hidden">

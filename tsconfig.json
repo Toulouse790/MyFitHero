@@ -24,13 +24,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
+      "@/components/*": ["./components/*", "./src/components/*"],
       "@/shared/*": ["./src/shared/*"],
-      "@/features/*": ["./src/features/*"],
+      "@/features/*": ["./src/features/*", "./features/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/stores/*": ["./src/stores/*"],
       "@/lib/*": ["./src/lib/*"],
-      "@/utils/*": ["./src/utils/*"],
+      "@/utils/*": ["./src/utils/*", "./utils/*"],
       "@/types/*": ["./src/types/*"]
     },
 

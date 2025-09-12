@@ -27,7 +27,13 @@ export default defineConfig({
   plugins: [react(), spa404Plugin()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'), // imports du type '@/...'
+      '@/components': path.resolve(__dirname, 'components'),
+      '@/features': path.resolve(__dirname, 'features'),
+      '@/utils': path.resolve(__dirname, 'utils'),
+      '@/lib': path.resolve(__dirname, 'src/lib'),
+      '@/shared': path.resolve(__dirname, 'src/shared'),
+      '@/store': path.resolve(__dirname, 'src/store'),
+      '@': path.resolve(__dirname, 'src'), // fallback pour tout le reste
     },
   },
   optimizeDeps: {

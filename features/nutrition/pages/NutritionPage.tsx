@@ -43,11 +43,13 @@ import {
 } from 'lucide-react';
 import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
-import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
 import { UniformHeader } from '@/features/profile/components/UniformHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { getSportCategoryForNutrition, NutritionSport } from '@/shared/utils/sportMapping';
+import { getNutritionPersonalizedMessage } from '@/shared/utils/personalizedMessages';
+import { AIModal } from '@/shared/components/AIModal';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -61,8 +63,6 @@ import {
 import { supabase } from '@/lib/supabase';
 
 // --- TYPES & INTERFACES ---
-type Sport = 'strength' | 'basketball' | 'american_football' | 'tennis' | 'endurance' | 'football';
-
 interface MealSuggestion {
   name: string;
   icon: React.ElementType;
@@ -100,7 +100,7 @@ interface DailyNutritionData {
 }
 
 // --- CONFIGURATION NUTRITIONNELLE PAR SPORT ---
-const sportsNutritionData: Record<Sport, SportNutritionConfig> = {
+const sportsNutritionData: Record<NutritionSport, SportNutritionConfig> = {
   strength: {
     emoji: '💪',
     calorieModifier: 300,
@@ -388,25 +388,7 @@ const Nutrition: React.FC = () => {
   const [showAllMeals, setShowAllMeals] = useState(false);
 
   // --- MAPPING SPORT UTILISATEUR ---
-  const getSportCategory = useCallback((sport: string): Sport => {
-    const mappings: Record<string, Sport> = {
-      basketball: 'basketball',
-      tennis: 'tennis',
-      american_football: 'american_football',
-      football: 'football',
-      running: 'endurance',
-      cycling: 'endurance',
-      swimming: 'endurance',
-      'course à pied': 'endurance',
-      musculation: 'strength',
-      powerlifting: 'strength',
-      crossfit: 'strength',
-      weightlifting: 'strength',
-    };
-    return mappings[sport?.toLowerCase()] || 'strength';
-  }, []);
-
-  const userSport = getSportCategory(appStoreUser.sport || 'none');
+  const userSport = getSportCategoryForNutrition(appStoreUser.sport || 'none');
   const sportConfig = sportsNutritionData[userSport];
 
   // --- CALCULS PERSONNALISÉS SÉCURISÉS ---
@@ -585,18 +567,7 @@ const Nutrition: React.FC = () => {
 
   // --- MESSAGES PERSONNALISÉS ---
   const getPersonalizedMessage = useCallback(() => {
-    const progress = (dailyData.calories / personalizedGoals.calories) * 100;
-    const userName = appStoreUser?.first_name || appStoreUser?.username || 'Champion';
-
-    if (progress >= 90) {
-      return `🎯 Parfait ${userName} ! Objectif nutritionnel atteint`;
-    } else if (progress >= 70) {
-      return `💪 Excellent ${userName}, tu nourris bien ton corps !`;
-    } else if (progress >= 50) {
-      return `⚡ Bien joué ${userName}, continue !`;
-    } else {
-      return `🍎 ${userName}, ton corps a besoin de plus de carburant !`;
-    }
+    return getNutritionPersonalizedMessage(dailyData.calories, personalizedGoals.calories, appStoreUser);
   }, [dailyData.calories, personalizedGoals.calories, appStoreUser]);
 
   // Repas prioritaires
