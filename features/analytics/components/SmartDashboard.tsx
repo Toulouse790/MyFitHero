@@ -25,7 +25,7 @@ import {
 import { supabase } from '../../../src/lib/supabase';
 import { useLocation } from 'wouter';
 import { appStore } from '../../../src/store/appStore';
-import { SmartDashboardContext, DailyProgramDisplay, Exercise } from '../../../src/shared/types/dashboard';
+import { SmartDashboardContext, DailyProgramDisplay, Exercise, DailyStats, Json } from '../../../src/shared/types/dashboard';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
 import { UserProfile } from '../../../src/shared/types/user';
 import { useAnimateOnMount, useHaptic } from '../../../src/shared/hooks/useAnimations';
@@ -33,7 +33,7 @@ import { useAdaptiveColors } from '../../../src/shared/components/ThemeProvider'
 import AIIntelligence from '../../ai-coach/components/AIIntelligence';
 
 // Types locaux
-interface DailyStats {
+interface DailyStatsLocal {
   total_calories?: number;
   hydration_ml?: number;
   hydration_goal_ml?: number;
@@ -46,7 +46,7 @@ interface DailyStats {
 }
 
 // Interface pour Json (remplace import manquant)
-type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+// type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 import { DailyCheckIn } from '../../../src/shared/components/DailyCheckIn';
 import { BadgeDisplay } from '../../../src/shared/components/BadgeDisplay';
 import { StatsOverview } from '../../../src/shared/components/StatsOverview';
@@ -433,10 +433,16 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
     hydration: {
       target: dailyGoals.water * 1000,
       current: 0,
+      target_ml: dailyGoals.water * 1000,
+      current_ml: 0,
+      percentage: 0,
     },
     sleep: {
       target: dailyGoals.sleep,
       current: 0,
+      target_hours: dailyGoals.sleep,
+      last_night_hours: 0,
+      quality: 0,
     },
     stats: {
       completion: 0,
@@ -556,19 +562,21 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
       const contextData: SmartDashboardContext = {
         user: {
           id: userProfile.id,
-          username: appStoreUser.username,
-          age: appStoreUser.age,
-          gender: appStoreUser.gender,
-          fitness_goal: appStoreUser.goal,
-          primary_goals: appStoreUser.primary_goals,
-          sport: appStoreUser.sport,
-          sport_position: appStoreUser.sport_position,
-          fitness_experience: appStoreUser.fitness_experience,
-          lifestyle: appStoreUser.lifestyle,
-          available_time_per_day: appStoreUser.available_time_per_day,
-          training_frequency: appStoreUser.training_frequency,
-          season_period: appStoreUser.season_period,
-          injuries: appStoreUser.injuries,
+          username: appStoreUser?.username,
+          age: appStoreUser?.age,
+          gender: appStoreUser?.gender,
+          fitness_goal: appStoreUser?.goal,
+          primary_goals: appStoreUser?.primary_goals,
+          sport: appStoreUser?.sport,
+          sport_position: appStoreUser?.sport_position,
+          fitness_experience: appStoreUser?.fitness_experience,
+          lifestyle: appStoreUser?.lifestyle,
+          available_time_per_day: appStoreUser?.available_time_per_day,
+          training_frequency: typeof appStoreUser?.training_frequency === 'string' 
+            ? parseInt(appStoreUser.training_frequency) 
+            : appStoreUser?.training_frequency,
+          season_period: appStoreUser?.season_period,
+          injuries: appStoreUser?.injuries,
         },
         dailyStats: dailyStats,
         currentDate: new Date().toISOString().split('T')[0],
@@ -1014,7 +1022,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-3">
-                  {dailyProgram.workout.exercises.slice(0, 3).map((exercise, index: number) => (
+                  {dailyProgram.workout.exercises.slice(0, 3).map((exercise: Exercise, index: number) => (
                     <span
                       key={index}
                       className="px-2 py-1 bg-red-100 text-red-700 text-xs rounded-full font-medium"
@@ -1047,7 +1055,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
         <StatsOverview className="mb-6" />
 
         {/* Badges récents */}
-        <BadgeDisplay className="mb-6" maxDisplay={3} showProgress={false} />
+        <BadgeDisplay className="mb-6" badges={dailyProgram.badges.earned} />
 
         {/* Chat IA Ultra-Personnalisé */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">

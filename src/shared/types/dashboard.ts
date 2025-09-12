@@ -1,17 +1,47 @@
 // Dashboard types
+
+// Type for JSON data from Supabase
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+
+// Interface for daily statistics
+export interface DailyStats {
+  total_calories?: number;
+  hydration_ml?: number;
+  hydration_goal_ml?: number;
+  sleep_hours?: number;
+  steps_count?: number;
+  workouts_completed?: number;
+  water_intake_ml?: number;
+  sleep_duration_minutes?: number;
+  sleep_quality?: number;
+}
+
 export interface SmartDashboardContext {
-  userId: string;
-  user?: any; // Utilisateur complet
-  sport: string;
-  position?: string;
-  currentGoals: string[];
-  fitnessLevel: 'beginner' | 'intermediate' | 'advanced';
-  availableTime: number;
-  preferences: {
-    workoutIntensity: 'low' | 'medium' | 'high';
-    focusAreas: string[];
-    avoidAreas: string[];
+  user: {
+    id: string;
+    username?: string;
+    age?: number;
+    gender?: string;
+    fitness_goal?: string;
+    primary_goals?: string[];
+    sport?: string;
+    sport_position?: string;
+    fitness_experience?: string;
+    lifestyle?: string;
+    available_time_per_day?: number;
+    training_frequency?: number;
+    season_period?: string;
+    injuries?: string[];
   };
+  dailyStats: DailyStats | null;
+  currentDate: string;
+  currentTime: string;
+  isWeekend: boolean;
+  weatherContext: string;
+  motivationLevel: string;
+  recentActivity: string;
+  upcomingEvents: any[];
+  personalizedTips: string[];
 }
 
 export interface DailyProgramDisplay {
@@ -23,22 +53,22 @@ export interface DailyProgramDisplay {
   // Sections principales
   workout: {
     title: string;
-    name?: string;
+    name: string;
     description: string;
     duration: number;
     intensity: 'light' | 'moderate' | 'intense';
     exercises: Exercise[];
     warmup: Exercise[];
     cooldown: Exercise[];
-    completed?: boolean;
+    completed: boolean;
   };
   
   nutrition: {
     title: string;
     description: string;
     calories: number;
-    calories_current?: number;
-    calories_target?: number;
+    calories_current: number;
+    calories_target: number;
     macros: {
       protein: number;
       carbs: number;
@@ -52,15 +82,21 @@ export interface DailyProgramDisplay {
   };
 
   // Propriétés d'hydratation au niveau principal
-  hydration?: {
+  hydration: {
     target: number;
     current: number;
+    target_ml: number;
+    current_ml: number;
+    percentage: number;
   };
 
   // Propriétés de sommeil au niveau principal  
-  sleep?: {
+  sleep: {
     target: number;
     current: number;
+    target_hours: number;
+    last_night_hours: number;
+    quality: number;
   };
   
   recovery: {
