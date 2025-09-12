@@ -1,12 +1,13 @@
 // client/src/components/ConversationalOnboarding.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Slider } from '@/components/ui/slider';
-import { Switch } from '@/components/ui/switch';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Textarea } from '@/components/ui/textarea';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Slider } from '../../../components/ui/slider';
+import { Switch } from '../../../components/ui/switch';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Textarea } from '../../../components/ui/textarea';
 import {
   ChevronRight,
   ChevronLeft,
@@ -28,8 +29,8 @@ import {
   Brain,
   Package,
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { useToast } from '../hooks/use-toast';
+import { supabase } from '../../../src/lib/supabase';
+import { useToast } from '../../../src/shared/hooks/use-toast';
 import {
   ConversationalStep,
   OnboardingData,
@@ -104,18 +105,20 @@ export default function ConversationalOnboarding({
   debug = false,
 }: ConversationalOnboardingProps) {
   const { toast } = useToast();
-  const { sports: dynamicSports, loading: sportsLoading } = useSports();
+  const sportsService = useSports();
+  const dynamicSports = AVAILABLE_SPORTS;
+  const sportsLoading = false;
 
   // État principal consolidé
   const [state, setState] = useState<OnboardingState>(() => ({
-    currentStepId: CONVERSATIONAL_ONBOARDING_FLOW.initialStep,
+    currentStepId: 'welcome', // Premier step du flow
     data: {
       ...initialData,
       progress: {
-        currentStep: CONVERSATIONAL_ONBOARDING_FLOW.initialStep,
+        currentStep: 'welcome',
         completedSteps: [],
         skippedSteps: [],
-        totalSteps: CONVERSATIONAL_ONBOARDING_FLOW.steps.length,
+        totalSteps: CONVERSATIONAL_ONBOARDING_FLOW.length,
         estimatedTimeLeft: 15,
         timeSpent: 0,
         startedAt: new Date(),
@@ -147,38 +150,38 @@ export default function ConversationalOnboarding({
       startedAt: new Date(),
       lastUpdated: new Date(),
       // Valeurs par défaut
-      selectedPack: initialData.selectedPack || null,
+      selectedPack: initialData.selectedPack || undefined,
       selectedModules: initialData.selectedModules || [],
       firstName: initialData.firstName || '',
-      age: initialData.age || null,
-      gender: initialData.gender || undefined,
-      lifestyle: initialData.lifestyle || undefined,
-      mainObjective: initialData.mainObjective || undefined,
+      age: initialData.age ?? undefined,
+      gender: initialData.gender,
+      lifestyle: initialData.lifestyle,
+      mainObjective: initialData.mainObjective,
       sport: initialData.sport || '',
       sportPosition: initialData.sportPosition || '',
-      sportLevel: initialData.sportLevel || undefined,
-      seasonPeriod: initialData.seasonPeriod || undefined,
+      sportLevel: initialData.sportLevel,
+      seasonPeriod: initialData.seasonPeriod,
       trainingFrequency: initialData.trainingFrequency || '',
-      equipmentLevel: initialData.equipmentLevel || undefined,
-      strengthObjective: initialData.strengthObjective || undefined,
-      strengthExperience: initialData.strengthExperience || undefined,
-      dietaryPreference: initialData.dietaryPreference || undefined,
+      equipmentLevel: initialData.equipmentLevel,
+      strengthObjective: initialData.strengthObjective,
+      strengthExperience: initialData.strengthExperience,
+      dietaryPreference: initialData.dietaryPreference,
       foodAllergies: initialData.foodAllergies || [],
-      nutritionObjective: initialData.nutritionObjective || undefined,
+      nutritionObjective: initialData.nutritionObjective,
       dietaryRestrictions: initialData.dietaryRestrictions || [],
       averageSleepHours: initialData.averageSleepHours || 8,
       sleepDifficulties: initialData.sleepDifficulties || [],
       hydrationGoal: initialData.hydrationGoal || 2.5,
-      hydrationReminders: initialData.hydrationReminders || true,
+      hydrationReminders: initialData.hydrationReminders !== undefined ? initialData.hydrationReminders : true,
       motivation: initialData.motivation || '',
       availableTimePerDay: initialData.availableTimePerDay || 60,
       privacyConsent: initialData.privacyConsent || false,
       marketingConsent: initialData.marketingConsent || false,
       healthConditions: initialData.healthConditions || [],
       fitnessGoals: initialData.fitnessGoals || [],
-      currentWeight: initialData.currentWeight || null,
-      targetWeight: initialData.targetWeight || null,
-      height: initialData.height || null,
+      currentWeight: initialData.currentWeight ?? undefined,
+      targetWeight: initialData.targetWeight ?? undefined,
+      height: initialData.height ?? undefined,
     },
     currentResponse: null,
     validationErrors: [],
@@ -195,11 +198,11 @@ export default function ConversationalOnboarding({
   // Mise à jour des étapes disponibles selon le pack
   useEffect(() => {
     if (state.data.selectedPack) {
-      const steps = getQuestionsForPack(state.data.selectedPack, state.data.selectedModules);
-      setState(prev => ({ ...prev, availableSteps: steps }));
+      const steps = getQuestionsForPack(state.data.selectedPack);
+      setState((prev: OnboardingState) => ({ ...prev, availableSteps: steps }));
 
       // Mettre à jour le nombre total d'étapes
-      setState(prev => ({
+      setState((prev: OnboardingState) => ({
         ...prev,
         data: {
           ...prev.data,
@@ -224,11 +227,11 @@ export default function ConversationalOnboarding({
 
       if (nextValidStep && nextValidStep !== state.currentStepId) {
         setState(prev => ({ ...prev, currentStepId: nextValidStep }));
-        return CONVERSATIONAL_ONBOARDING_FLOW.steps.find(step => step.id === nextValidStep);
+        return CONVERSATIONAL_ONBOARDING_FLOW.find(step => step.id === nextValidStep);
       }
     }
 
-    return CONVERSATIONAL_ONBOARDING_FLOW.steps.find(step => step.id === state.currentStepId);
+    return CONVERSATIONAL_ONBOARDING_FLOW.find(step => step.id === state.currentStepId);
   }, [
     state.currentStepId,
     state.data.selectedPack,
@@ -426,11 +429,11 @@ export default function ConversationalOnboarding({
         const upsertData = {
           id: user.id,
           first_name: data.firstName || null,
-          age: data.age || null,
-          gender: data.gender || null,
-          height: data.height || null,
-          current_weight: data.currentWeight || null,
-          target_weight: data.targetWeight || null,
+          age: data.age || undefined,
+          gender: data.gender || undefined,
+          height: data.height || undefined,
+          current_weight: data.currentWeight || undefined,
+          target_weight: data.targetWeight || undefined,
           lifestyle: data.lifestyle || null,
           fitness_goal: mapFitnessGoal(data.mainObjective || ''),
           fitness_goals: data.fitnessGoals || [],
@@ -480,7 +483,7 @@ export default function ConversationalOnboarding({
             console.log('🟢 [DEBUG] Sauvegarde Supabase réussie:', insertedData);
           }
         }
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('🔴 Erreur lors de la sauvegarde:', error);
         toast({
@@ -534,7 +537,7 @@ export default function ConversationalOnboarding({
 
       if (currentStep.id === 'module_selection') {
         updatedData.selectedModules = state.currentResponse;
-        updatedData.progress.estimatedTimeLeft = calculateEstimatedTime(state.currentResponse);
+        updatedData.progress.estimatedTimeLeft = calculateEstimatedTime(currentStep.id, state.data.progress.completedSteps);
       }
 
       // Gestion des informations personnelles
@@ -545,28 +548,22 @@ export default function ConversationalOnboarding({
       // Gestion de la sélection de sport
       if (currentStep.id === 'sport_selection') {
         const selectedSportData =
-          (dynamicSports as any[]).find(sport => sport.id === state.currentResponse) ||
-          AVAILABLE_SPORTS.find(sport => sport.id === state.currentResponse);
+          dynamicSports.find((sport: SportOption) => sport.id === state.currentResponse) ||
+          AVAILABLE_SPORTS.find((sport: SportOption) => sport.id === state.currentResponse);
 
         if (selectedSportData) {
-          setState(prev => ({ ...prev, selectedSport: selectedSportData }));
+          setState((prev: OnboardingState) => ({ ...prev, selectedSport: selectedSportData }));
 
           // Mise à jour des options pour l'étape position si nécessaire
-          const positionStep = CONVERSATIONAL_ONBOARDING_FLOW.steps.find(
-            s => s.id === 'sport_position'
+          const positionStep = CONVERSATIONAL_ONBOARDING_FLOW.find(
+            (s: ConversationalStep) => s.id === 'sport_position'
           );
           if (
             positionStep &&
             selectedSportData.positions &&
             selectedSportData.positions.length > 0
           ) {
-            positionStep.options = selectedSportData.positions.map(pos => ({
-              id: pos.toLowerCase().replace(/\s+/g, '_'),
-              label: pos,
-              value: pos,
-              description: undefined,
-              icon: undefined,
-            }));
+            // Note: Les options seront gérées par le composant PositionSelector
           }
         }
       }
@@ -598,7 +595,7 @@ export default function ConversationalOnboarding({
           nextStepId;
       }
 
-      setState(prev => ({
+      setState((prev: OnboardingState) => ({
         ...prev,
         data: updatedData,
         currentStepId: nextStepId,
@@ -617,7 +614,7 @@ export default function ConversationalOnboarding({
       if (importantSteps.includes(currentStep.id)) {
         await saveProgress(updatedData);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('🔴 Erreur lors de la navigation:', error);
       toast({
@@ -637,7 +634,7 @@ export default function ConversationalOnboarding({
     const previousStepId = state.stepHistory[state.stepHistory.length - 1];
     const newHistory = state.stepHistory.slice(0, -1);
 
-    setState(prev => ({
+    setState((prev: OnboardingState) => ({
       ...prev,
       currentStepId: previousStepId,
       stepHistory: newHistory,
@@ -647,7 +644,7 @@ export default function ConversationalOnboarding({
         ...prev.data,
         progress: {
           ...prev.data.progress,
-          completedSteps: prev.data.progress.completedSteps.filter(id => id !== prev.currentStepId),
+          completedSteps: prev.data.progress.completedSteps.filter((id: string) => id !== prev.currentStepId),
         },
       },
     }));
@@ -717,7 +714,7 @@ export default function ConversationalOnboarding({
       });
 
       onComplete(finalData);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('🔴 Erreur lors de la finalisation:', error);
       toast({
@@ -747,7 +744,7 @@ export default function ConversationalOnboarding({
             <Input
               type="text"
               value={state.currentResponse || ''}
-              onChange={e => setState(prev => ({ ...prev, currentResponse: e.target.value }))}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState((prev: OnboardingState) => ({ ...prev, currentResponse: e.target.value }))}
               placeholder={currentStep.placeholder || 'Votre réponse...'}
               className="text-lg p-4 h-12"
               disabled={state.isLoading}
@@ -766,7 +763,7 @@ export default function ConversationalOnboarding({
           <div className="space-y-4">
             <Textarea
               value={state.currentResponse || ''}
-              onChange={e => setState(prev => ({ ...prev, currentResponse: e.target.value }))}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setState((prev: OnboardingState) => ({ ...prev, currentResponse: e.target.value }))}
               placeholder={currentStep.placeholder || 'Décrivez votre réponse...'}
               className="min-h-[120px] text-base"
               disabled={state.isLoading}
@@ -786,8 +783,8 @@ export default function ConversationalOnboarding({
             <Input
               type="number"
               value={state.currentResponse || ''}
-              onChange={e =>
-                setState(prev => ({
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setState((prev: OnboardingState) => ({
                   ...prev,
                   currentResponse: e.target.value ? Number(e.target.value) : null,
                 }))
@@ -819,8 +816,8 @@ export default function ConversationalOnboarding({
             <div className="px-4">
               <Slider
                 value={[sliderValue]}
-                onValueChange={value =>
-                  setState(prev => ({
+                onValueChange={(value: number[]) =>
+                  setState((prev: OnboardingState) => ({
                     ...prev,
                     currentResponse: value[0],
                   }))
@@ -968,7 +965,7 @@ export default function ConversationalOnboarding({
             {...({
               sports: [...AVAILABLE_SPORTS, ...(dynamicSports as any[])],
               selectedSport: state.currentResponse,
-              onSportSelect: sportId =>
+              onSportSelect: (sportId: string) =>
                 setState(prev => ({
                   ...prev,
                   currentResponse: sportId,
@@ -981,12 +978,12 @@ export default function ConversationalOnboarding({
       case 'position_selector':
         return (
           <PositionSelector
-            sport={state.selectedSport}
-            selectedPositions={Array.isArray(state.currentResponse) ? state.currentResponse : []}
-            onPositionChange={positions =>
+            sport={state.selectedSport?.id || ''}
+            selectedPosition={Array.isArray(state.currentResponse) ? state.currentResponse[0] || '' : state.currentResponse || ''}
+            onPositionSelect={(position: string) =>
               setState(prev => ({
                 ...prev,
-                currentResponse: positions,
+                currentResponse: position,
               }))
             }
           />
@@ -997,7 +994,7 @@ export default function ConversationalOnboarding({
           <PersonalInfoForm
             {...({
               data: state.currentResponse || {},
-              onChange: data =>
+              onChange: (data: Record<string, any>) =>
                 setState(prev => ({
                   ...prev,
                   currentResponse: data,
@@ -1013,7 +1010,7 @@ export default function ConversationalOnboarding({
             {...({
               packs: SMART_PACKS,
               selectedPack: state.currentResponse,
-              onPackSelect: packId =>
+              onPackSelect: (packId: string) =>
                 setState(prev => ({
                   ...prev,
                   currentResponse: packId,
