@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react';
-import { Router, Route, Switch } from 'wouter';
+import { Router, Route, Switch, Redirect } from 'wouter';
+import { useLocation } from 'wouter';
 import { createClient, Session } from '@supabase/supabase-js';
 import { ThemeProvider } from 'next-themes';
-import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 import { toast } from 'sonner';
@@ -10,7 +10,6 @@ import { toast } from 'sonner';
 // Configuration et services core
 import { env } from './core/config/env.config';
 import LoadingScreen from './components/LoadingScreen';
-import ErrorFallback from './components/ErrorFallback';
 
 // Lazy loading des composants principaux
 const AuthPage = lazy(() => import('./features/auth/pages/AuthPage'));
@@ -53,7 +52,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // 5 minutes
-      cacheTime: 10 * 60 * 1000, // 10 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (remplace cacheTime)
       retry: 2,
       refetchOnWindowFocus: false,
     },
@@ -152,6 +151,8 @@ function useAuthState(): AuthState & {
       async (event, session) => {
         if (!mounted) return;
 
+        console.log('Auth state change:', event);
+
         if (event === 'SIGNED_IN' && session) {
           const { data: profile } = await supabase
             .from('profiles')
@@ -168,6 +169,9 @@ function useAuthState(): AuthState & {
             isAuthenticated: true,
             error: null,
           });
+
+          // Redirection après connexion/inscription
+          // Note: La redirection sera gérée par le composant Router
         } else if (event === 'SIGNED_OUT') {
           setAuthState({
             user: null,
@@ -191,7 +195,7 @@ function useAuthState(): AuthState & {
     try {
       setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
       
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -211,7 +215,7 @@ function useAuthState(): AuthState & {
     try {
       setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
       
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -303,30 +307,14 @@ function useAuthState(): AuthState & {
 // Composant App principal
 function App() {
   const auth = useAuthState();
-
-  // Handler pour l'erreur globale
-  const handleError = (error: Error, errorInfo: { componentStack: string }) => {
-    console.error('Erreur globale capturée:', error, errorInfo);
-    toast.error('Une erreur inattendue s\'est produite');
-  };
-
-  // Handler pour l'inscription
-  const handleRegister = async (data: any) => {
-    try {
-      await auth.signUp(data.email, data.password, {
-        firstName: data.firstName,
-        lastName: data.lastName,
-      });
-    } catch (error) {
-      console.error('Erreur d\'inscription:', error);
-      throw error;
-    }
-  };
+  const [, setLocation] = useLocation();
 
   // Handler pour la completion de l'onboarding
   const handleOnboardingComplete = async (data: any) => {
     try {
       await auth.completeOnboarding(data);
+      // Rediriger vers le dashboard après completion
+      setLocation('/dashboard');
     } catch (error) {
       console.error('Erreur lors de la completion de l\'onboarding:', error);
       toast.error('Erreur lors de la sauvegarde de votre profil');
@@ -341,99 +329,92 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <ErrorBoundary
-          FallbackComponent={ErrorFallback}
-          onError={handleError}
-          onReset={() => window.location.reload()}
-        >
-          <Router>
-            <Suspense fallback={<LoadingScreen />}>
-              <Switch>
-                {/* Route d'authentification */}
-                <Route path="/auth">
-                  {!auth.isAuthenticated ? (
-                    <AuthPage
-                      onLogin={auth.signIn}
-                      onRegister={handleRegister}
-                      isLoading={auth.isLoading}
-                    />
+        <Router>
+          <Suspense fallback={<LoadingScreen />}>
+            <Switch>
+              {/* Route racine */}
+              <Route path="/">
+                {auth.isAuthenticated ? (
+                  auth.user?.onboardingCompleted ? (
+                    <Redirect to="/dashboard" />
                   ) : (
-                    <div>{window.location.href = auth.user?.onboardingCompleted ? '/dashboard' : '/onboarding'}</div>
-                  )}
-                </Route>
+                    <Redirect to="/onboarding" />
+                  )
+                ) : (
+                  <AuthPage />
+                )}
+              </Route>
 
-                {/* Route d'onboarding */}
-                <Route path="/onboarding">
-                  {auth.isAuthenticated ? (
-                    auth.user?.onboardingCompleted ? (
-                      <div>{window.location.href = '/dashboard'}</div>
-                    ) : (
-                      <OnboardingFlow
-                        onComplete={handleOnboardingComplete}
-                        isLoading={auth.isLoading}
-                      />
-                    )
+              {/* Route auth - redirige si déjà connecté */}
+              <Route path="/auth">
+                {auth.isAuthenticated ? (
+                  auth.user?.onboardingCompleted ? (
+                    <Redirect to="/dashboard" />
                   ) : (
-                    <div>{window.location.href = '/auth'}</div>
-                  )}
-                </Route>
+                    <Redirect to="/onboarding" />
+                  )
+                ) : (
+                  <AuthPage />
+                )}
+              </Route>
 
-                {/* Route dashboard */}
-                <Route path="/dashboard">
-                  {auth.isAuthenticated && auth.user?.onboardingCompleted ? (
-                    <Dashboard user={auth.user} onSignOut={auth.signOut} />
-                  ) : (
-                    <div>{window.location.href = auth.isAuthenticated ? '/onboarding' : '/auth'}</div>
-                  )}
-                </Route>
+              {/* Route onboarding - protégée */}
+              <Route path="/onboarding">
+                {!auth.isAuthenticated ? (
+                  <Redirect to="/" />
+                ) : auth.user?.onboardingCompleted ? (
+                  <Redirect to="/dashboard" />
+                ) : (
+                  <OnboardingFlow onComplete={handleOnboardingComplete} />
+                )}
+              </Route>
 
-                {/* Route par défaut */}
-                <Route path="/">
-                  <div>
-                    {auth.isAuthenticated ? (
-                      <div>{window.location.href = auth.user?.onboardingCompleted ? '/dashboard' : '/onboarding'}</div>
-                    ) : (
-                      <div>{window.location.href = '/auth'}</div>
-                    )}
+              {/* Route dashboard - protégée et onboarding requis */}
+              <Route path="/dashboard">
+                {!auth.isAuthenticated ? (
+                  <Redirect to="/" />
+                ) : !auth.user?.onboardingCompleted ? (
+                  <Redirect to="/onboarding" />
+                ) : (
+                  <Dashboard user={auth.user} onLogout={auth.signOut} />
+                )}
+              </Route>
+
+              {/* Page 404 */}
+              <Route>
+                <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+                  <div className="text-center">
+                    <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                      404
+                    </h1>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                      Page non trouvée
+                    </p>
+                    <button
+                      onClick={() => setLocation('/')}
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                    >
+                      Retour à l'accueil
+                    </button>
                   </div>
-                </Route>
+                </div>
+              </Route>
+            </Switch>
+          </Suspense>
+        </Router>
 
-                {/* Page 404 */}
-                <Route>
-                  <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                        404
-                      </h1>
-                      <p className="text-gray-600 dark:text-gray-400 mb-6">
-                        Page non trouvée
-                      </p>
-                      <button
-                        onClick={() => window.location.href = '/dashboard'}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
-                      >
-                        Retour au tableau de bord
-                      </button>
-                    </div>
-                  </div>
-                </Route>
-              </Switch>
-            </Suspense>
-          </Router>
-
-          {/* Toast notifications */}
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: 'var(--background)',
-                color: 'var(--foreground)',
-                border: '1px solid var(--border)',
-              },
-            }}
-          />
-        </ErrorBoundary>
+        {/* Toast notifications */}
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: 'var(--background)',
+              color: 'var(--foreground)',
+              border: '1px solid var(--border)',
+            },
+          }}
+        />
       </ThemeProvider>
     </QueryClientProvider>
   );
