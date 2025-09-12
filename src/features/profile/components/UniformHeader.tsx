@@ -64,8 +64,8 @@ const UniformHeader: React.FC<UniformHeaderProps> = ({
   const navigate = useNavigate();
   const user = useAppStoreUser();
   const { notifications, unreadCount } = useAppStoreNotifications();
-  const { theme, toggleSidebar } = useAppStoreUI();
-  const { setTheme } = appStore();
+  const { theme } = useAppStoreUI();
+  const { setTheme, toggleSidebar } = appStore();
 
   // Default handlers
   const handleBack = () => {

@@ -1,5 +1,5 @@
 // client/src/pages/Nutrition.tsx
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Déclaration globale pour window.gtag
@@ -43,26 +43,26 @@ import {
   Brain,
   ChevronRight,
 } from 'lucide-react';
-import { appStore } from '@/store/appStore';
-import { useToast } from '@/shared/hooks/use-toast';
-import { UniformHeader } from '@/features/profile/components/UniformHeader';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { getSportCategoryForNutrition, NutritionSport } from '@/shared/utils/sportMapping';
-import { getNutritionPersonalizedMessage } from '@/shared/utils/personalizedMessages';
-import { AIModal } from '@/shared/components/AIModal';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { appStore } from '../../../src/store/appStore';
+import { useToast } from '../../../src/shared/hooks/use-toast';
+import { UniformHeader } from '../../profile/components/UniformHeader';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
+import { getSportCategoryForNutrition, NutritionSport } from '../../../src/shared/utils/sportMapping';
+import { getNutritionPersonalizedMessage } from '../../../src/shared/utils/personalizedMessages';
+import { AIModal } from '../../../src/shared/components/AIModal';
+import { Progress } from '../../../components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { supabase } from '@/lib/supabase';
+} from '../../../components/ui/dialog';
+import { supabase } from '../../../src/lib/supabase';
 
 // --- TYPES & INTERFACES ---
 interface MealSuggestion {

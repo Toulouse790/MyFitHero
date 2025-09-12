@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
+import { Badge } from '../../../components/ui/badge';
 import { AlertCircle, User, Calendar, Ruler, Weight, Activity } from 'lucide-react';
 
 export interface PersonalInfo {
@@ -221,7 +221,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
                 type="number"
                 placeholder="Ex: 25"
                 value={formData.age || ''}
-                onChange={(e) => updateField('age', parseInt(e.target.value) || null)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('age', parseInt(e.target.value) || null)}
                 className={errors.age ? 'border-red-500' : ''}
               />
               {errors.age && (
@@ -235,7 +235,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             {/* Genre */}
             <div className="space-y-2">
               <Label htmlFor="gender">Genre *</Label>
-              <Select value={formData.gender} onValueChange={(value) => updateField('gender', value)}>
+              <Select value={formData.gender} onValueChange={(value: string) => updateField('gender', value)}>
                 <SelectTrigger className={errors.gender ? 'border-red-500' : ''}>
                   <SelectValue placeholder="Sélectionnez votre genre" />
                 </SelectTrigger>
@@ -266,7 +266,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
                 type="number"
                 placeholder="Ex: 175"
                 value={formData.height || ''}
-                onChange={(e) => updateField('height', parseInt(e.target.value) || null)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('height', parseInt(e.target.value) || null)}
                 className={errors.height ? 'border-red-500' : ''}
               />
               {errors.height && (
@@ -288,7 +288,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
                 type="number"
                 placeholder="Ex: 70"
                 value={formData.weight || ''}
-                onChange={(e) => updateField('weight', parseInt(e.target.value) || null)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('weight', parseInt(e.target.value) || null)}
                 className={errors.weight ? 'border-red-500' : ''}
               />
               {errors.weight && (

@@ -32,7 +32,7 @@ export const useRealtimeSync = ({
     pendingChanges: 0,
   });
 
-  const { toast } = useToast();
+  const { toast, success, info } = useToast();
   const channelRef = useRef<any>(null);
   const syncIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const pendingChangesRef = useRef<any[]>([]);
@@ -73,7 +73,7 @@ export const useRealtimeSync = ({
 
       // Show notification for changes from other sources
       if (payload.eventType !== 'INSERT' || payload.new?.user_id !== userId) {
-        toast.info('Données synchronisées', `Nouvelles données ${pillar} disponibles`);
+        info('Données synchronisées', `Nouvelles données ${pillar} disponibles`);
       }
     } catch (error) {
       console.error('Error handling realtime update:', error);
@@ -127,7 +127,7 @@ export const useRealtimeSync = ({
           }));
 
           if (status === 'SUBSCRIBED') {
-            toast.success('Synchronisation activée', `Données ${pillar} en temps réel`);
+            success('Synchronisation activée', `Données ${pillar} en temps réel`);
           }
         });
 
@@ -230,7 +230,7 @@ export const useRealtimeSync = ({
         await change.execute();
       }
 
-      toast.success('Synchronisation', 'Changements locaux synchronisés');
+      success('Synchronisation', 'Changements locaux synchronisés');
     } catch (error) {
       console.error('Error processing pending changes:', error);
       // Re-add failed changes

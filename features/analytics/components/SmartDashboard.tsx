@@ -22,19 +22,19 @@ import {
   AlertCircle,
   ArrowRight,
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../src/lib/supabase';
 import { useLocation } from 'wouter';
-import { appStore } from '@/store/appStore';
-import { SmartDashboardContext, DailyProgramDisplay } from '@/shared/types/dashboard';
-import { DailyStats, Json } from '@/lib/supabase';
+import { appStore } from '../../../src/store/appStore';
+import { SmartDashboardContext, DailyProgramDisplay, Exercise } from '../../../src/shared/types/dashboard';
+import { DailyStats, Json } from '../../../src/lib/supabase';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
-import { UserProfile } from '@/shared/types/user';
-import { useAnimateOnMount, useHaptic } from '@/shared/hooks/useAnimations';
-import { useAdaptiveColors } from '@/shared/components/ThemeProvider';
-import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
-import { DailyCheckIn } from '@/shared/components/DailyCheckIn';
-import { BadgeDisplay } from '@/shared/components/BadgeDisplay';
-import { StatsOverview } from '@/shared/components/StatsOverview';
+import { UserProfile } from '../../../src/shared/types/user';
+import { useAnimateOnMount, useHaptic } from '../../../src/shared/hooks/useAnimations';
+import { useAdaptiveColors } from '../../../src/shared/components/ThemeProvider';
+import AIIntelligence from '../ai-coach/components/AIIntelligence';
+import { DailyCheckIn } from '../../../src/shared/components/DailyCheckIn';
+import { BadgeDisplay } from '../../../src/shared/components/BadgeDisplay';
+import { StatsOverview } from '../../../src/shared/components/StatsOverview';
 
 interface SmartDashboardProps {
   userProfile?: SupabaseAuthUserType;
@@ -370,7 +370,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
       setDailyStats(fetchedDailyStats);
 
       if (fetchedDailyStats) {
-        setDailyProgram(prev => ({
+        setDailyProgram((prev: DailyProgramDisplay) => ({
           ...prev,
           workout: {
             ...prev.workout,
@@ -403,7 +403,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
       const recentAiRecs = await fetchAiRecommendations(userProfile.id, 'general', 3);
       if (recentAiRecs.length > 0) {
         setMessages(
-          recentAiRecs.map((rec, index) => ({
+          recentAiRecs.map((rec: any, index: number) => ({
             id: index + 1,
             type: 'ai',
             content: rec.content,
@@ -421,7 +421,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
           },
         ]);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement données dashboard:', error);
       setMessages([
@@ -554,7 +554,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
           subscription.unsubscribe();
         }
       }, 30000);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error("Erreur lors de l'envoi du message:", error);
       setMessages(prev => [
@@ -926,12 +926,12 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-3">
-                  {dailyProgram.workout.exercises.slice(0, 3).map((exercise, index) => (
+                  {dailyProgram.workout.exercises.slice(0, 3).map((exercise, index: number) => (
                     <span
                       key={index}
                       className="px-2 py-1 bg-red-100 text-red-700 text-xs rounded-full font-medium"
                     >
-                      {exercise}
+                      {exercise.name}
                     </span>
                   ))}
                   {dailyProgram.workout.exercises.length > 3 && (

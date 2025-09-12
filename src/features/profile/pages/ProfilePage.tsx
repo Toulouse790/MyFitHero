@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { useAuthStore } from '@/core/auth/auth.store';
 
 const ProfilePage: React.FC = () => {
-  const { user, updateUser } = useAuthStore();
+  const { user, updateProfile } = useAuthStore();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     firstName: user?.firstName || '',
@@ -24,12 +24,12 @@ const ProfilePage: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      await updateUser({
+      await updateProfile({
         firstName: formData.firstName,
         lastName: formData.lastName,
-        age: parseInt(formData.age) || undefined,
-        weight: parseFloat(formData.weight) || undefined,
-        height: parseFloat(formData.height) || undefined,
+        age: formData.age ? parseInt(formData.age.toString()) : undefined,
+        weight: formData.weight ? parseFloat(formData.weight.toString()) : undefined,
+        height: formData.height ? parseFloat(formData.height.toString()) : undefined,
         sport: formData.sport,
       });
       setIsEditing(false);
@@ -170,15 +170,15 @@ const ProfilePage: React.FC = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
                 <span className="font-medium">Niveau</span>
-                <span className="text-blue-600 font-bold">{user?.level || 1}</span>
+                <span className="text-blue-600 font-bold">{1}</span>
               </div>
               <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
                 <span className="font-medium">Points d'expérience</span>
-                <span className="text-green-600 font-bold">{user?.experiencePoints || 0}</span>
+                <span className="text-green-600 font-bold">{0}</span>
               </div>
               <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
                 <span className="font-medium">Streak actuelle</span>
-                <span className="text-purple-600 font-bold">{user?.currentStreak || 0} jours</span>
+                <span className="text-purple-600 font-bold">{0} jours</span>
               </div>
               <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
                 <span className="font-medium">Badges obtenus</span>
@@ -195,7 +195,7 @@ const ProfilePage: React.FC = () => {
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-4">
-              {user?.goals?.map((goal, index) => (
+              {user?.primaryGoals?.map((goal: string, index: number) => (
                 <div key={index} className="p-3 border rounded-lg">
                   <p className="font-medium">{goal}</p>
                 </div>
