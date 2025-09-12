@@ -270,53 +270,63 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
-              <Dumbbell className="text-white" size={20} />
+    <div className="min-h-screen bg-gradient-to-br from-orange-500 to-red-500 pb-20">
+      {/* Header - Card blanche centrée */}
+      <div className="p-4">
+        <Card className="bg-white shadow-xl rounded-2xl p-8 max-w-2xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+                <Dumbbell className="text-white" size={28} />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">
+                  {currentSession?.name || 'Entraînement'}
+                </h1>
+                <p className="text-gray-600">
+                  {currentSession?.status === 'active' ? 'En cours' : 'Prêt à commencer'}
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-800">
-                {currentSession?.name || 'Entraînement'}
-              </h1>
-              <p className="text-sm text-gray-600">
-                {currentSession?.status === 'active' ? 'En cours' : 'Prêt à commencer'}
-              </p>
+            <div className="text-right">
+              <div className="text-2xl font-bold text-orange-600">{formatTime(workoutTime)}</div>
+              <p className="text-sm text-gray-500">Temps écoulé</p>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-lg font-bold text-blue-600">{formatTime(workoutTime)}</div>
-            <p className="text-xs text-gray-500">Temps écoulé</p>
-          </div>
-        </div>
+        </Card>
       </div>
 
-      {/* Content */}
-      <div className="p-4 space-y-4">
+      {/* Content dans cards centrées */}
+      <div className="p-4 space-y-6">
         {!currentSession ? (
           // Écran de démarrage
-          <div className="text-center py-12">
-            <div className="mb-6">
-              <Dumbbell size={64} className="mx-auto text-gray-400 mb-4" />
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                Prêt pour l&apos;entraînement ?
-              </h2>
-              <p className="text-gray-600">
-                Commencez votre session d&apos;entraînement maintenant
-              </p>
+          <Card className="bg-white shadow-xl rounded-2xl p-8 max-w-2xl mx-auto">
+            <div className="text-center py-12">
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <Dumbbell size={40} className="text-white" />
+                </div>
+                <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                  Prêt pour l&apos;entraînement ?
+                </h2>
+                <p className="text-gray-600 text-lg">
+                  Commencez votre session d&apos;entraînement maintenant
+                </p>
+              </div>
+              <Button 
+                onClick={handleStartWorkout} 
+                size="lg" 
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold px-8 py-3 rounded-xl shadow-lg text-lg"
+              >
+                <Play className="mr-2" size={24} />
+                Commencer l&apos;entraînement
+              </Button>
             </div>
-            <Button onClick={handleStartWorkout} size="lg" className="bg-red-600 hover:bg-red-700">
-              <Play className="mr-2" size={20} />
-              Commencer l&apos;entraînement
-            </Button>
-          </div>
+          </Card>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6 max-w-2xl mx-auto">
             {/* Progress */}
-            <Card>
+            <Card className="bg-white shadow-xl rounded-2xl">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -342,16 +352,20 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
                     style={{ width: `${progressPercentage}%` }}
                   ></div>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex space-x-3">
                   {currentSession.status === 'active' ? (
-                    <Button onClick={pauseSession} variant="outline" className="flex-1">
+                    <Button 
+                      onClick={pauseSession} 
+                      variant="outline" 
+                      className="flex-1 border-orange-300 text-orange-600 hover:bg-orange-50 rounded-xl"
+                    >
                       <Pause className="mr-2" size={16} />
                       Pause
                     </Button>
                   ) : (
                     <Button
                       onClick={resumeSession}
-                      className="flex-1 bg-blue-600 hover:bg-blue-700"
+                      className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl shadow-lg"
                     >
                       <Play className="mr-2" size={16} />
                       Reprendre
@@ -359,7 +373,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
                   )}
                   <Button
                     onClick={handleCompleteSession}
-                    className="flex-1 bg-green-600 hover:bg-green-700"
+                    className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-xl shadow-lg"
                   >
                     <CheckCircle className="mr-2" size={16} />
                     Terminer
@@ -367,7 +381,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
                   <Button
                     onClick={cancelSession}
                     variant="outline"
-                    className="flex-1 text-red-600 border-red-600 hover:bg-red-50"
+                    className="flex-1 text-red-600 border-red-300 hover:bg-red-50 rounded-xl"
                   >
                     <Square className="mr-2" size={16} />
                     Arrêter
@@ -377,15 +391,15 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
             </Card>
 
             {/* Tip contextuel */}
-            <Card className="bg-blue-50 border-blue-100">
-              <CardContent className="p-4">
-                <div className="flex items-start space-x-3">
+            <Card className="bg-gradient-to-r from-orange-50 to-red-50 border-orange-200 shadow-lg rounded-2xl">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-4">
                   {React.createElement(currentTip.icon, {
-                    size: 18,
-                    className: 'text-blue-500 mt-0.5',
+                    size: 24,
+                    className: 'text-orange-500 mt-1',
                   })}
                   <div>
-                    <h3 className="font-semibold text-blue-800 text-sm mb-1">
+                    <h3 className="font-bold text-orange-800 text-lg mb-2">
                       Conseil d&apos;entraînement
                     </h3>
                     <p className="text-blue-700 text-xs">{currentTip.text}</p>
