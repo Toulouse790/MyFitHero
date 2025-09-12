@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 // client/src/pages/Admin.tsx
 import { useLocation } from 'wouter';
 import { AdminDashboard } from '../components';

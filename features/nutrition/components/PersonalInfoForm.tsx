@@ -1,3 +1,5 @@
+import { Info, X, Clock, Star, Check } from 'lucide-react';
+import React, { useState } from 'react';
 // client/src/components/PersonalInfoForm.tsx
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';

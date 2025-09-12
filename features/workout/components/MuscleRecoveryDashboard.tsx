@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useMuscleRecovery } from '@/features/workout/hooks/useMuscleRecovery';
 import type { MuscleGroup } from '@/features/workout/types/muscleRecovery';
 

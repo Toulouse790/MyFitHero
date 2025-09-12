@@ -1,3 +1,4 @@
+import { Star, Check } from 'lucide-react';
 import React from 'react';
 
 interface ExerciseCardProps {

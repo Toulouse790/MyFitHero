@@ -1,3 +1,4 @@
+import { TrendingUp, Bell } from 'lucide-react';
 // client/src/components/UniformHeader.tsx
 import React from 'react';
 import { Button } from '@/components/ui/button';

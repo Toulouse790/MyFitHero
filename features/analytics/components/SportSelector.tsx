@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 // client/src/components/SportSelector.tsx
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -198,7 +199,7 @@ export default function SportSelector({
           showSuggestion: enrichedResults.length === 0 && allowCustom,
           customSportName: enrichedResults.length === 0 ? query : '',
         }));
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         const errorMessage = error instanceof Error ? error.message : 'Erreur lors de la recherche';
 
@@ -275,7 +276,7 @@ export default function SportSelector({
           customSportName: '',
         }));
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',

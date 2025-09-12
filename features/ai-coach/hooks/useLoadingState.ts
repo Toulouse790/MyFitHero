@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 
 // Types pour l'état de chargement
 export interface LoadingState {

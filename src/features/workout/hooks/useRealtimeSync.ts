@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useEffect, useCallback, useRef, useState } from 'react';
 import { supabase, supabaseHelpers } from '@/lib/supabase';
 import { useToast } from '@/shared/hooks/use-toast';

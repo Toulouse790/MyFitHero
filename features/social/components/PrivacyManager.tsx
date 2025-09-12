@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Shield,
   Eye,
@@ -67,7 +68,7 @@ const PrivacyManager: React.FC = () => {
       if (data) {
         setSettings(data);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement paramètres:', error);
     }
@@ -95,7 +96,7 @@ const PrivacyManager: React.FC = () => {
         title: 'Paramètres mis à jour',
         description: 'Vos préférences de confidentialité ont été sauvegardées.',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur sauvegarde paramètres:', error);
       toast({
@@ -161,7 +162,7 @@ const PrivacyManager: React.FC = () => {
         title: 'Export terminé',
         description: 'Vos données ont été exportées avec succès.',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur export données:', error);
       toast({
@@ -200,7 +201,7 @@ const PrivacyManager: React.FC = () => {
 
       // Déconnexion
       await supabase.auth.signOut();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur suppression compte:', error);
       toast({

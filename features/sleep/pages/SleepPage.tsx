@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // client/src/components/Sleep.tsx
 import {
   Moon,
@@ -468,7 +469,7 @@ const Sleep: React.FC = () => {
           }
         }
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement sommeil:', error);
     } finally {
@@ -514,7 +515,7 @@ const Sleep: React.FC = () => {
         title: 'Session de sommeil enregistrée',
         description: `${Math.floor(durationMinutes / 60)}h${durationMinutes % 60}min de sommeil`,
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur sauvegarde sommeil:', error);
       toast({

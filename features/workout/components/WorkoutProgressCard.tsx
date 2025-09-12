@@ -1,3 +1,4 @@
+import { TrendingUp, Clock, Star, Target } from 'lucide-react';
 import React from 'react';
 
 interface WorkoutProgressCardProps {

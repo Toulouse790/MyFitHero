@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from 'react';
 import type { AnalyticsData, DateRange } from '../types';
 
 export const useAnalytics = () => {

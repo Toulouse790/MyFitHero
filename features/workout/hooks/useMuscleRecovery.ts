@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 import { appStore } from '@/store/appStore';
 import type {
   MuscleRecoveryData,

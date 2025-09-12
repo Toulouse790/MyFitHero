@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { AuthState, User, SignUpData, SignInData, UpdateProfileData } from './auth.types';

@@ -1,3 +1,4 @@
+import { Activity } from 'lucide-react';
 // Types de base pour l'utilisateur
 export interface UserProfile {
   id: string;

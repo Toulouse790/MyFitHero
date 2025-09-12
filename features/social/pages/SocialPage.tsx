@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // pages/Social.tsx
 import {
   Users,
@@ -208,7 +209,7 @@ const Social: React.FC = () => {
         achievements_count: 15,
       };
       setUserStats(mockStats);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement stats:', error);
     }
@@ -286,7 +287,7 @@ const Social: React.FC = () => {
       ];
 
       setPosts(mockPosts);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement posts:', error);
     } finally {
@@ -350,7 +351,7 @@ const Social: React.FC = () => {
       ];
 
       setChallenges(mockChallenges);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement challenges:', error);
     } finally {
@@ -399,7 +400,7 @@ const Social: React.FC = () => {
       ];
 
       setFriends(mockFriends);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement amis:', error);
     }
@@ -470,7 +471,7 @@ const Social: React.FC = () => {
           user_id: appStoreUser?.id,
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur création post:', error);
       toast({
@@ -545,7 +546,7 @@ const Social: React.FC = () => {
           user_id: appStoreUser?.id,
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur création challenge:', error);
       toast({

@@ -1,3 +1,4 @@
+import { CheckCircle, AlertCircle, Info, X, Check } from 'lucide-react';
 import React from 'react';
 import { useAnimatedToast } from '@/shared/hooks/useAnimations';
 

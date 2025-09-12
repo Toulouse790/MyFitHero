@@ -1,3 +1,4 @@
+import { Info, Moon, TrendingUp } from 'lucide-react';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { SleepStats, SleepDayData } from '../types';

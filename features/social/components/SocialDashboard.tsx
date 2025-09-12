@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Users,
   Trophy,
@@ -73,7 +74,7 @@ const SocialDashboard: React.FC<SocialDashboardProps> = ({ userId }) => {
         const stats = await socialService.getSocialStats(userId);
         setSocialStats(stats);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error loading social data:', error);
       toast({
@@ -105,7 +106,7 @@ const SocialDashboard: React.FC<SocialDashboardProps> = ({ userId }) => {
         title: 'Post aimé !',
         description: 'Votre réaction a été enregistrée',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',
@@ -132,7 +133,7 @@ const SocialDashboard: React.FC<SocialDashboardProps> = ({ userId }) => {
           description: 'Bonne chance pour relever ce défi !',
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',

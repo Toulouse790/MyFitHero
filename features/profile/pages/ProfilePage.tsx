@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { appStore } from '@/store/appStore';
 import AvatarUpload from '@/features/profile/components/AvatarUpload';
 import UserProfileTabs from '@/features/profile/components/UserProfileTabs';
@@ -78,7 +79,7 @@ const ProfilePage: React.FC = () => {
         fitness_goal: fitnessGoal as any,
       } as any);
       toast.success('Profil mis à jour avec succès !');
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast.error('Erreur lors de la mise à jour du profil');
       console.error('Profile update error:', error);
@@ -94,7 +95,7 @@ const ProfilePage: React.FC = () => {
       const mockWeight = Math.random() * 20 + 60; // Poids simulé entre 60-80kg
       setCurrentWeight(mockWeight.toFixed(1));
       toast.success('Poids synchronisé avec succès !');
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast.error('Erreur lors de la synchronisation');
       console.error('Scale sync error:', error);
@@ -115,7 +116,7 @@ const ProfilePage: React.FC = () => {
       } else {
         toast.success(`${mockDevices.length} balance(s) trouvée(s)`);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast.error('Erreur lors de la recherche');
       console.error('Scale scan error:', error);
@@ -135,7 +136,7 @@ const ProfilePage: React.FC = () => {
         is_active: true,
       } as any);
       toast.success(`${device.name} connectée avec succès !`);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast.error('Échec de la connexion');
       console.error('Scale connect error:', error);

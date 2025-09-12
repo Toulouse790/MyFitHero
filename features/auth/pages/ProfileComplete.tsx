@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 // pages/profile-complete.tsx
 import { useLocation, useRoute } from 'wouter';
 import { useAppNavigation } from '@/routes/hooks';

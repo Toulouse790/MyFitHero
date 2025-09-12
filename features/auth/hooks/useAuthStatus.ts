@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 
 export interface AuthStatus {
@@ -25,7 +26,7 @@ export const useAuthStatus = (): AuthStatus => {
 
         setSession(session);
         setUser(session?.user || null);
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Error checking user:', error);
         setUser(null);
@@ -52,7 +53,7 @@ export const useAuthStatus = (): AuthStatus => {
       const { error: _error } = await supabase.auth.signOut();
       if (error) throw error;
       setUser(null);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error signing out:', error);
     }

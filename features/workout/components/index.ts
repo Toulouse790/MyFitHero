@@ -1,3 +1,4 @@
+import { Star, Check } from 'lucide-react';
 // Export des composants de la feature workout
 export { default as WorkoutTimer } from './WorkoutTimer';
 export { default as PillarHeader } from './PillarHeader';

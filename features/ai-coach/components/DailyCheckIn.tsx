@@ -1,3 +1,5 @@
+import { Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 // client/src/components/DailyCheckIn.tsx
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -63,7 +65,7 @@ export const DailyCheckIn: React.FC<DailyCheckInProps> = ({
         };
         setCheckin(newCheckin);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors du chargement du check-in:', error);
       toast({
@@ -127,7 +129,7 @@ export const DailyCheckIn: React.FC<DailyCheckInProps> = ({
           });
         }
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors de la sauvegarde du check-in:', error);
       toast({

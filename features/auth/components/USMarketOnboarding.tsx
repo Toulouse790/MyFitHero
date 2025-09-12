@@ -1,3 +1,5 @@
+import { Info, Star, Target } from 'lucide-react';
+import React, { useState } from 'react';
 // client/src/components/USMarketOnboarding.tsx
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';

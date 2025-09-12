@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react';
 import { supabase } from './supabase.client';
 
 // Types pour les intercepteurs

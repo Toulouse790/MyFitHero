@@ -1,3 +1,5 @@
+import { X, Loader2 } from 'lucide-react';
+import React, { useState, useRef } from 'react';
 import { useToast } from '@/shared/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 import { appStore } from '@/store/appStore';
@@ -122,7 +124,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
         title: 'Photo mise à jour',
         description: 'Votre photo de profil a été mise à jour avec succès.',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur upload avatar:', error);
       setPreviewUrl(null);
@@ -167,7 +169,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
         title: 'Photo supprimée',
         description: 'Votre photo de profil a été supprimée.',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur suppression avatar:', error);
       toast({

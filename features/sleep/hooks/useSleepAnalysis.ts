@@ -1,3 +1,5 @@
+import { Star } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import { appStore } from '@/store/app-store';
 import { useToast } from '@/shared/hooks/use-toast';
@@ -276,7 +278,7 @@ export function useSleepAnalysis() {
         setSleepEntries(prev => [data, ...prev]);
         showToast(`Sommeil enregistré: ${formatDuration(duration)}`, 'success');
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error("Erreur lors de l'ajout:", error);
         showToast("Erreur lors de l'enregistrement", 'error');
@@ -317,7 +319,7 @@ export function useSleepAnalysis() {
         setSleepEntries(prev => prev.map(entry => (entry.id === entryId ? data : entry)));
         showToast('Entrée mise à jour', 'success');
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors de la mise à jour:', error);
         showToast('Erreur lors de la mise à jour', 'error');
@@ -341,7 +343,7 @@ export function useSleepAnalysis() {
         setSleepEntries(prev => prev.filter(entry => entry.id !== entryId));
         showToast('Entrée supprimée', 'success');
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors de la suppression:', error);
         showToast('Erreur lors de la suppression', 'error');
@@ -376,7 +378,7 @@ export function useSleepAnalysis() {
         setSleepGoals(data);
         showToast('Objectifs de sommeil mis à jour', 'success');
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors de la mise à jour:', error);
         showToast('Erreur lors de la mise à jour', 'error');
@@ -427,7 +429,7 @@ export function useSleepAnalysis() {
           };
           setSleepGoals(defaultGoals);
         }
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors du chargement:', error);
       } finally {

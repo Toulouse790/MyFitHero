@@ -1,3 +1,5 @@
+import { Activity, Download, RefreshCw, Target } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { appStore } from '@/store/appStore';
 import { useAdaptiveColors } from '@/shared/components/ThemeProvider';
 import { useAnimateOnMount } from '@/shared/hooks/useAnimations';

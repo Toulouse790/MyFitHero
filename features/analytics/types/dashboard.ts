@@ -1,3 +1,4 @@
+import { Activity } from 'lucide-react';
 export interface SmartDashboardContext {
   user: any;
   dailyStats: any;

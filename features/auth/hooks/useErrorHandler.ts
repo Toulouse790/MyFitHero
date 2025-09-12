@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from 'react';
 import { useLoadingState } from './useLoadingState';
 
 // Types d'erreurs standardisés
@@ -140,7 +141,7 @@ export function useErrorHandler(options: UseErrorHandlerOptions = {}): UseErrorH
       }
 
       return null;
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       return null;
     }
@@ -163,7 +164,7 @@ export function useErrorHandler(options: UseErrorHandlerOptions = {}): UseErrorH
       try {
         clearError();
         return await asyncFn();
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         handleError(error);
         return null;

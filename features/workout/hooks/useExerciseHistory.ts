@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react';
 // hooks/workout/useExerciseHistory.ts
 import { appStore } from '@/store/appStore';
 import { supabase } from '@/lib/supabase';
@@ -24,7 +25,7 @@ export const useExerciseHistory = (): UseExerciseHistoryReturn => {
           (entry: any) => entry.userId === appStoreUser?.id
         );
         return userHistory.length ? userHistory[userHistory.length - 1].weight : null;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lecture historique poids:', error);
         return null;
@@ -53,7 +54,7 @@ export const useExerciseHistory = (): UseExerciseHistoryReturn => {
         }
 
         localStorage.setItem('exerciseWeightHistory', JSON.stringify(history));
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur sauvegarde historique poids:', error);
       }
@@ -91,7 +92,7 @@ export const useExerciseHistory = (): UseExerciseHistoryReturn => {
             timestamp: undefined,
           })),
         }));
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur chargement dernière session:', error);
         return [];

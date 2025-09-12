@@ -1,8 +1,11 @@
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useWearableSync, WearableData } from '@/features/wearables/hooks/useWearableSync';
-import { AnalyticsService } from '@/lib/analytics';
+import { Activity, Heart, Moon, Zap, TrendingUp, Clock } from 'lucide-react';
+// Import temporaire depuis le chemin racine features/
+import { useWearableSync, WearableData } from '../../../features/wearables/hooks/useWearableSync';
+import { analyticsService } from '@/services/analyticsService';
 
 interface WearableStatsProps {
   userId?: string;
@@ -31,9 +34,9 @@ const WearableStats: React.FC<WearableStatsProps> = ({ userId = 'current-user-id
       }
 
       // Charger les statistiques depuis Supabase
-      const wearableStats = await AnalyticsService.getWearableStats(userId, selectedPeriod);
+      const wearableStats = await analyticsService.getPerformanceMetrics(userId);
       setStats(wearableStats);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors du chargement des données wearables:', error);
     } finally {

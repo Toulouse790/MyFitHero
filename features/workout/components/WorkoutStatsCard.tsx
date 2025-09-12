@@ -1,3 +1,4 @@
+import { Heart, Clock, Star } from 'lucide-react';
 import React from 'react';
 
 interface WorkoutStatsCardProps {

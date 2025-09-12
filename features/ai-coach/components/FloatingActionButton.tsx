@@ -1,3 +1,4 @@
+import { Plus } from 'lucide-react';
 
 /**
  * Bouton flottant (mobile d’abord) qui amène vers une page d’actions rapides.

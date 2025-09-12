@@ -1,3 +1,5 @@
+import { X, Search } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';

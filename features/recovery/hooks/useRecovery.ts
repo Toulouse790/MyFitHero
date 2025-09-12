@@ -1,3 +1,5 @@
+import { Activity, Heart, Plus } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { RecoveryService } from '../services/recovery.service';
 import type {
   RecoveryData,

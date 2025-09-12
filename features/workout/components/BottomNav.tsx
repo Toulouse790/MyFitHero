@@ -1,3 +1,4 @@
+import { Heart, Moon, Users } from 'lucide-react';
 import React from 'react';
 import { useLocation, Link } from 'wouter';
 

@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from 'react';
 import { useToast } from '@/shared/hooks/use-toast';
 
 export interface SleepSession {
@@ -122,7 +123,7 @@ export const useWearableSync = () => {
       });
 
       return mockHealthData;
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       const errorMessage =
         error instanceof Error ? error.message : 'Erreur de synchronisation Apple Health';
@@ -185,7 +186,7 @@ export const useWearableSync = () => {
       });
 
       return mockFitData;
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       const errorMessage =
         error instanceof Error ? error.message : 'Erreur de synchronisation Google Fit';
@@ -249,7 +250,7 @@ export const useWearableSync = () => {
         async () => {
           try {
             await syncAll();
-          } catch {
+          } catch (error) {
       // Erreur silencieuse
             console.error('Erreur lors de la synchronisation programmée:', error);
           }
@@ -278,7 +279,7 @@ export const useWearableSync = () => {
           })),
         };
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors de la lecture des données mises en cache:', error);
     }
@@ -289,7 +290,7 @@ export const useWearableSync = () => {
   const cacheData = useCallback((data: WearableData) => {
     try {
       localStorage.setItem('wearableData', JSON.stringify(data));
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors de la sauvegarde des données en cache:', error);
     }

@@ -1,3 +1,5 @@
+import { Info } from 'lucide-react';
+import React, { useState } from 'react';
 
 // components/UserProfileTabs.tsx
 const tabs = [

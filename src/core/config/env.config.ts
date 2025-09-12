@@ -1,3 +1,4 @@
+import { X } from 'lucide-react';
 // Configuration des variables d'environnement
 export const env = {
   // Supabase

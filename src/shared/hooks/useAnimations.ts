@@ -1,4 +1,28 @@
-import { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+
+export const useAnimatedToast = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  const showToast = () => {
+    setIsVisible(true);
+    setIsAnimating(true);
+  };
+  
+  const hideToast = () => {
+    setIsAnimating(false);
+    setTimeout(() => setIsVisible(false), 300);
+  };
+  
+  return {
+    isVisible,
+    isAnimating,
+    showToast,
+    hideToast,
+    setIsVisible
+  };
+};
 
 // Hook pour animation au montage
 export const useAnimateOnMount = (delay: number = 0) => {

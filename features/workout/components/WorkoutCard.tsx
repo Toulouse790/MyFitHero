@@ -1,3 +1,5 @@
+import { Clock, Star, Users, Plus, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
 // client/src/components/WorkoutCard.tsx
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

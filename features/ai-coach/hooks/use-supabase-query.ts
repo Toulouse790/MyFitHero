@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 

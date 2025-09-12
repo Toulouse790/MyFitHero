@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 // client/src/components/AuthPages.tsx
 import { authClient } from '@/lib/auth';
 import { useToast } from '@/shared/hooks/use-toast';
@@ -124,7 +125,7 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
           variant: 'destructive',
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('🔥 Exception lors inscription:', error);
       toast({
@@ -178,7 +179,7 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
           variant: 'destructive',
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('🔥 Exception lors connexion:', error);
       toast({

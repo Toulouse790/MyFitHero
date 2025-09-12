@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 // hooks/workout/useWorkoutSessionCore.ts
 import { useToast } from '@/shared/hooks/use-toast';
 import { appStore } from '@/store/appStore';
@@ -49,7 +50,7 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
     try {
       const raw = localStorage.getItem('currentWorkoutSession');
       return raw ? (JSON.parse(raw) as WorkoutSession) : null;
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur parsing session localStorage:', error);
       localStorage.removeItem('currentWorkoutSession');
@@ -224,7 +225,7 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
           onConflict: 'user_id,stat_date',
         }
       );
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur mise à jour stats quotidiennes:', error);
     }
@@ -295,7 +296,7 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
             setIsSessionActive(session.status === 'active');
             saveLocalSession(session);
           }
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           console.error('Erreur récupération session interrompue:', error);
         }

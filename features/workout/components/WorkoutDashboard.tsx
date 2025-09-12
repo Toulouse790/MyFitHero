@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // client/src/components/WorkoutDashboard.tsx
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -183,7 +184,7 @@ export default function WorkoutDashboard() {
       setWorkoutStats(statsResult);
       setRecentWorkouts(workoutsResult);
       setWorkoutPlans(plansResult);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement dashboard:', error);
       toast({
@@ -333,7 +334,7 @@ export default function WorkoutDashboard() {
         title: 'Entraînement terminé !',
         description: `Bien joué ! ${Math.floor(sessionTimer / 60)} minutes d'effort.`,
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',

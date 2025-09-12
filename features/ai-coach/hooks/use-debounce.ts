@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 /**
  * Hook de debouncing avancé pour optimiser les appels d'API ou d'autres traitements coûteux.

@@ -1,3 +1,4 @@
+import { Activity, Target } from 'lucide-react';
 // Dashboard types
 
 // Type for JSON data from Supabase

@@ -1,3 +1,5 @@
+import { Star } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 export interface PerformanceMetrics {
   loadTime: number;
@@ -114,7 +116,7 @@ export const usePerformanceMonitoring = (): UsePerformanceMonitoringReturn => {
           networkRequests: getNetworkRequests(),
           bundleSize: getBundleSize(),
         }));
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.warn('Performance monitoring not supported:', error);
       }

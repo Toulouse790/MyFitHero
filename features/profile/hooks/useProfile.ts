@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 import { ProfileService } from '../services/profile.service';
 import type {
   UserProfile,

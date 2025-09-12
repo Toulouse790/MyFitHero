@@ -1,3 +1,4 @@
+import { Scale, Globe, Ruler, Waves, Thermometer } from 'lucide-react';
 // client/src/components/UnitPreferencesSelector.tsx
 import React from 'react';
 import { useUnitPreferences } from '@/shared/hooks/useUnitPreferences';

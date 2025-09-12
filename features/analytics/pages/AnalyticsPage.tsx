@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // pages/analytics.tsx
 import { useLocation } from 'wouter';
 import {
@@ -102,7 +103,7 @@ const Analytics: React.FC = () => {
       };
 
       setAnalyticsData(mockData);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement analytics:', error);
       toast({
@@ -203,7 +204,7 @@ const Analytics: React.FC = () => {
             user_id: appStoreUser.id,
           });
         }
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur export:', error);
         toast({

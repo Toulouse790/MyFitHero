@@ -1,3 +1,4 @@
+import { Activity } from 'lucide-react';
 // Types de base pour MyFitHero
 export type ActivityLevel =
   | 'sedentary'

@@ -1,3 +1,4 @@
+import { Activity, Bell } from 'lucide-react';
 export interface CoachingSession {
   id: string;
   userId: string;

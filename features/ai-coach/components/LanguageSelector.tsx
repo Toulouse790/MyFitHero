@@ -1,3 +1,5 @@
+import { Globe, Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 // client/src/components/LanguageSelector.tsx
 import React from 'react';
 import { Button } from '@/components/ui/button';

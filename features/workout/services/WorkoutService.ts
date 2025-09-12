@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react';
 import type {
   Workout,
   WorkoutSession,
@@ -38,7 +39,7 @@ export class WorkoutService {
       const response = await fetch(`${this.BASE_URL}/user/${userId}?${params}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des workouts');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.getWorkouts:', error);
       return this.getMockWorkouts();
@@ -55,7 +56,7 @@ export class WorkoutService {
       });
       if (!response.ok) throw new Error('Erreur lors de la création du workout');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.createWorkout:', error);
       throw error;
@@ -72,7 +73,7 @@ export class WorkoutService {
       });
       if (!response.ok) throw new Error('Erreur lors de la mise à jour du workout');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.updateWorkout:', error);
       throw error;
@@ -86,7 +87,7 @@ export class WorkoutService {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Erreur lors de la suppression du workout');
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.deleteWorkout:', error);
       throw error;
@@ -105,7 +106,7 @@ export class WorkoutService {
       });
       if (!response.ok) throw new Error('Erreur lors du démarrage de la session');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.startWorkoutSession:', error);
       return this.getMockWorkoutSession(workoutId, userId);
@@ -120,7 +121,7 @@ export class WorkoutService {
       });
       if (!response.ok) throw new Error('Erreur lors de la pause de la session');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.pauseWorkoutSession:', error);
       throw error;
@@ -135,7 +136,7 @@ export class WorkoutService {
       });
       if (!response.ok) throw new Error('Erreur lors de la reprise de la session');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.resumeWorkoutSession:', error);
       throw error;
@@ -150,7 +151,7 @@ export class WorkoutService {
       });
       if (!response.ok) throw new Error('Erreur lors de la finalisation de la session');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.completeWorkoutSession:', error);
       throw error;
@@ -164,7 +165,7 @@ export class WorkoutService {
         method: 'POST',
       });
       if (!response.ok) throw new Error("Erreur lors de l'annulation de la session");
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.cancelWorkoutSession:', error);
       throw error;
@@ -187,7 +188,7 @@ export class WorkoutService {
         }
       );
       if (!response.ok) throw new Error("Erreur lors de l'enregistrement de l'exercice");
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.logExercise:', error);
       throw error;
@@ -202,7 +203,7 @@ export class WorkoutService {
       const response = await fetch(`${this.BASE_URL}/stats/${userId}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des statistiques');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.getWorkoutStats:', error);
       return this.getMockWorkoutStats();
@@ -215,7 +216,7 @@ export class WorkoutService {
       const response = await fetch(`${this.BASE_URL}/progress/${userId}/exercise/${exerciseId}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération de la progression');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.getExerciseProgress:', error);
       return this.getMockExerciseProgress();
@@ -234,7 +235,7 @@ export class WorkoutService {
       });
       if (!response.ok) throw new Error('Erreur lors de la recherche');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.searchWorkouts:', error);
       return this.getMockWorkouts();
@@ -247,7 +248,7 @@ export class WorkoutService {
       const response = await fetch(`${this.BASE_URL}/templates/popular`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des templates');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur WorkoutService.getPopularTemplates:', error);
       return this.getMockWorkoutTemplates();

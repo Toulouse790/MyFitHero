@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 // client/src/components/ConversationalOnboarding.tsx
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';

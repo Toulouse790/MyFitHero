@@ -1,3 +1,4 @@
+import { Moon, Clock, Globe } from 'lucide-react';
 import React from 'react';
 import { useUserPreferences } from '@/shared/hooks/useUserPreferences';
 import { UnitSystem } from '@/utils/unitConversion';

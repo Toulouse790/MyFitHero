@@ -1,3 +1,4 @@
+import { Wifi, WifiOff, Download, RefreshCw, Bell } from 'lucide-react';
 import React from 'react';
 import { usePWA } from '@/features/auth/hooks/usePWA';
 

@@ -1,3 +1,5 @@
+import { Star } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 // hooks/workout/useWorkoutTimer.ts
 
 export interface UseWorkoutTimerReturn {

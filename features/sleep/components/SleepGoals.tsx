@@ -1,3 +1,5 @@
+import { CheckCircle, Moon, Clock, Target, Check } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -42,7 +44,7 @@ export const SleepGoals: React.FC<SleepGoalsProps> = ({ className = '' }) => {
         }
 
         setIsEditing(false);
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         toast({
           title: 'Erreur',

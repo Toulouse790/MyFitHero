@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 // pages/WearableHub.tsx
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -100,7 +101,7 @@ const WearableHub: React.FC = () => {
       ];
 
       setErrors(mockErrors);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement appareils:', error);
       toast({
@@ -141,7 +142,7 @@ const WearableHub: React.FC = () => {
           value: devices.filter(d => d.connected).length,
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur synchronisation:', error);
       toast({
@@ -190,7 +191,7 @@ const WearableHub: React.FC = () => {
           title: 'Appareil reconnecté',
           description: `${device?.name} est maintenant connecté et synchronisé.`,
         });
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur reconnexion:', error);
         setDevices(prev =>

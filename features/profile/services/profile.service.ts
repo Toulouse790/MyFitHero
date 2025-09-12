@@ -9,7 +9,7 @@ export class ProfileService {
       const response = await fetch(`${this.BASE_URL}/${userId}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des données');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur API profile:', error);
       return this.getMockProfileData();
@@ -25,7 +25,7 @@ export class ProfileService {
       });
       if (!response.ok) throw new Error('Erreur lors de la mise à jour');
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur mise à jour profile:', error);
       throw error;

@@ -1,3 +1,4 @@
+import { X, Plus } from 'lucide-react';
 // Données statiques pour l'onboarding conversationnel
 
 export interface SportOption {

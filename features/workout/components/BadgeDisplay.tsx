@@ -1,3 +1,5 @@
+import { Zap, Star, Target } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 // client/src/components/BadgeDisplay.tsx
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
@@ -48,7 +50,7 @@ export const BadgeDisplay: React.FC<BadgeDisplayProps> = ({
         const badges = await BadgeService.getUserBadges(uid);
         setUserBadges(badges);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors du chargement des badges:', error);
       toast({

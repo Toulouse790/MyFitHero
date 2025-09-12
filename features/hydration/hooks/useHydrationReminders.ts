@@ -1,3 +1,5 @@
+import { Plus } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { appStore } from '@/store/app-store';
 import { useToast } from '@/shared/hooks/use-toast';
@@ -171,7 +173,7 @@ export function useHydrationReminders() {
         }
 
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error("Erreur lors de l'ajout:", error);
         showToast("Erreur lors de l'ajout", 'error');
@@ -203,7 +205,7 @@ export function useHydrationReminders() {
         setHydrationEntries(prev => prev.filter(entry => entry.id !== entryId));
         showToast('Entrée supprimée', 'success');
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors de la suppression:', error);
         showToast('Erreur lors de la suppression', 'error');
@@ -238,7 +240,7 @@ export function useHydrationReminders() {
         setHydrationGoal(data);
         showToast('Objectifs mis à jour', 'success');
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors de la mise à jour:', error);
         showToast('Erreur lors de la mise à jour', 'error');
@@ -314,7 +316,7 @@ export function useHydrationReminders() {
           };
           setHydrationGoal(defaultGoal);
         }
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors du chargement:', error);
       } finally {

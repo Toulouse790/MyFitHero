@@ -22,22 +22,22 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./components/*", "./src/components/*"],
+      "@/components/*": ["./components/*"],
       "@/components/ui/*": ["./components/ui/*"],
       "@/shared/*": ["./src/shared/*"],
-      "@/features/*": ["./src/features/*", "./features/*"],
+      "@/features/*": ["./src/features/*"],
       "@/services/*": ["./services/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/stores/*": ["./src/stores/*"],
       "@/store/*": ["./src/store/*"],
       "@/lib/*": ["./src/lib/*"],
-      "@/utils/*": ["./src/utils/*", "./utils/*"],
+      "@/utils/*": ["./utils/*"],
       "@/types/*": ["./src/types/*"]
     },
 
     "types": ["node", "vite/client"]
   },
-  "include": ["src", "src/**/*"],
+  "include": ["src", "src/**/*", "components", "features", "services", "utils"],
   "exclude": [
     "node_modules",
     "dist",

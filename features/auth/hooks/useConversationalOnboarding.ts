@@ -1,3 +1,5 @@
+import { Activity } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
 // hooks/onboarding/useConversationalOnboarding.ts
 import { supabase } from '@/lib/supabase';
 import { useToast } from '@/shared/hooks/use-toast';
@@ -257,7 +259,7 @@ export const useConversationalOnboarding = ({
         };
 
         await supabase.from('user_profiles').upsert(upsertData, { onConflict: 'id' });
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Erreur sauvegarde:', error);
         if (debug) {
@@ -368,7 +370,7 @@ export const useConversationalOnboarding = ({
       if (importantSteps.includes(currentStep.id)) {
         await saveProgress(updatedData);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur navigation:', error);
       toast({
@@ -453,7 +455,7 @@ export const useConversationalOnboarding = ({
       }
 
       return finalData;
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur finalisation:', error);
       throw error;

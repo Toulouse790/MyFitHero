@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Users,
   Trophy,
@@ -39,7 +40,7 @@ const FriendsComparison: React.FC<FriendsComparisonProps> = ({
       setIsLoading(true);
       const data = await socialService.getFriendsComparison(userId, period);
       setComparisonData(data);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error loading friends comparison:', error);
       toast({

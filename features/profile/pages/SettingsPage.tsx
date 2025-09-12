@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 // pages/settings.tsx
 import { useLocation } from 'wouter';
 import {
@@ -218,7 +219,7 @@ const Settings: React.FC = () => {
       setTimeout(() => {
         setLocation('/goodbye');
       }, 2000);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur suppression compte:', error);
       toast({
@@ -267,7 +268,7 @@ const Settings: React.FC = () => {
       if (savedInterval) {
         setSyncInterval(parseInt(savedInterval));
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur chargement paramètres:', error);
     }
@@ -303,7 +304,7 @@ const Settings: React.FC = () => {
           section: 'settings',
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur sauvegarde profil:', error);
       toast({
@@ -340,7 +341,7 @@ const Settings: React.FC = () => {
         title: 'Notifications mises à jour',
         description: 'Vos préférences de notification ont été sauvegardées.',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur sauvegarde notifications:', error);
       toast({
@@ -377,7 +378,7 @@ const Settings: React.FC = () => {
         title: 'Préférences mises à jour',
         description: "Vos préférences d'application ont été sauvegardées.",
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur sauvegarde préférences:', error);
       toast({
@@ -414,7 +415,7 @@ const Settings: React.FC = () => {
         title: 'Confidentialité mise à jour',
         description: 'Vos paramètres de confidentialité ont été sauvegardés.',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur sauvegarde confidentialité:', error);
       toast({

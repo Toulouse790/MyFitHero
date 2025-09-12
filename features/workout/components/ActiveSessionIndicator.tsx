@@ -1,3 +1,4 @@
+import { Star } from 'lucide-react';
 // client/src/components/ActiveSessionIndicator.tsx
 import React from 'react';
 import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';

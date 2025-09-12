@@ -1,3 +1,5 @@
+import { Users } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
 
 export interface AdminStats {
   totalUsers: number;
@@ -106,7 +108,7 @@ export const useAdmin = (): UseAdminReturn => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       setStats(mockStats);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       setStatsError(error instanceof Error ? error.message : 'Failed to load stats');
     } finally {
@@ -162,7 +164,7 @@ export const useAdmin = (): UseAdminReturn => {
         totalUsers: filteredUsers.length,
         filters,
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       setUsersError(error instanceof Error ? error.message : 'Failed to load users');
     } finally {
@@ -183,7 +185,7 @@ export const useAdmin = (): UseAdminReturn => {
         }));
 
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Failed to update user status:', error);
         return false;
@@ -205,7 +207,7 @@ export const useAdmin = (): UseAdminReturn => {
         }));
 
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Failed to update user role:', error);
         return false;
@@ -227,7 +229,7 @@ export const useAdmin = (): UseAdminReturn => {
       }));
 
       return true;
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Failed to delete user:', error);
       return false;
@@ -258,7 +260,7 @@ export const useAdmin = (): UseAdminReturn => {
         }));
 
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Failed to bulk update users:', error);
         return false;
@@ -275,7 +277,7 @@ export const useAdmin = (): UseAdminReturn => {
         await new Promise(resolve => setTimeout(resolve, 800));
         console.log('Sending notification to users:', targetUsers, 'Message:', message);
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Failed to send notification:', error);
         return false;
@@ -322,7 +324,7 @@ export const useAdmin = (): UseAdminReturn => {
         }
 
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Failed to export data:', error);
         return false;
@@ -339,7 +341,7 @@ export const useAdmin = (): UseAdminReturn => {
         await new Promise(resolve => setTimeout(resolve, 2000));
         console.log(`Generating ${type} report...`);
         return true;
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Failed to generate report:', error);
         return false;

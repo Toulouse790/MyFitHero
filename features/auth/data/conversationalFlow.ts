@@ -1,3 +1,4 @@
+import { Info } from 'lucide-react';
 import { ConversationalStep } from '../types/conversationalOnboarding';
 
 export interface ConversationalStep {

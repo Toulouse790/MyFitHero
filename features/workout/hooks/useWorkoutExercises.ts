@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react';
 import { useToast } from '@/shared/hooks/use-toast';
 import { WorkoutSession, WorkoutExercise, ExerciseSet } from './useWorkoutSessionCore';
 

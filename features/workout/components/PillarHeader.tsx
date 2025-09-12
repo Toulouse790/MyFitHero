@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Trophy,
   Target,
@@ -93,7 +94,7 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
           created_at: aiData.created_at,
         });
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       // Erreur silencieuse
       // Erreur silencieuse pour les recommandations IA
@@ -122,7 +123,7 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
       } else {
         setDailyGoal(getDefaultGoal());
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       // Erreur silencieuse
       setDailyGoal(getDefaultGoal());
@@ -190,7 +191,7 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
 
         setStreak(currentStreak);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       // Erreur silencieuse
     }

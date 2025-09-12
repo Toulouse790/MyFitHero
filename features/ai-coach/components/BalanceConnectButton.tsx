@@ -1,3 +1,5 @@
+import { CheckCircle, AlertCircle, X, Loader2, Scale, Wifi, Check } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface BalanceDevice {
   id: string;
@@ -64,7 +66,7 @@ const BalanceConnectButton: React.FC<BalanceConnectButtonProps> = ({
 
       setAvailableDevices(mockDevices);
       toast.success(`${mockDevices.length} balance(s) trouvée(s)`);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast.error('Erreur lors de la recherche');
     } finally {
@@ -84,7 +86,7 @@ const BalanceConnectButton: React.FC<BalanceConnectButtonProps> = ({
       setShowDeviceList(false);
       setAvailableDevices([]);
       toast.success(`${device.name} connectée avec succès !`);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast.error('Échec de la connexion');
     } finally {

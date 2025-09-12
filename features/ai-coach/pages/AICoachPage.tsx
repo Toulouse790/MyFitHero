@@ -259,7 +259,7 @@ const useAICoachLogic = () => {
       try {
         const response = await fetchAICoachResponse({ messages: [...messages, newUserMsg] });
         setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         toast.error('Erreur communication IA.');
       } finally {
@@ -298,7 +298,7 @@ const useAICoachLogic = () => {
         const plan = await fetchPersonalizedPlan();
         setPersonalPlan(plan);
         toast.success('Plan personnalisé généré.');
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         toast.error('Erreur lors génération plan.');
       }
@@ -313,7 +313,7 @@ const useAICoachLogic = () => {
         const analysis = await fetchExerciseAnalysis(videoRef.current);
         setExerciseAnalysis(analysis);
         toast.success('Analyse forme terminée.');
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         toast.error('Erreur analyse video.');
       }
@@ -329,7 +329,7 @@ const useAICoachLogic = () => {
       try {
         const analysis = await fetchExerciseAnalysis(videoRef.current);
         setExerciseAnalysis(analysis);
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         // Silence error buffering
       }

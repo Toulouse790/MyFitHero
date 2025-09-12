@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   UnitSystem,
   UnitPreferences,
@@ -52,7 +54,7 @@ export const useUserPreferences = () => {
           setPreferences(detectedPrefs);
           localStorage.setItem('userPreferences', JSON.stringify(detectedPrefs));
         }
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         console.error('Error loading preferences:', error);
         setPreferences(DEFAULT_PREFERENCES);

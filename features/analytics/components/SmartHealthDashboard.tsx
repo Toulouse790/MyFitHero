@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -54,7 +55,7 @@ const SmartHealthDashboard: React.FC = () => {
         description: 'Vos données wearables ont été mises à jour',
         variant: 'default',
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur de synchronisation',

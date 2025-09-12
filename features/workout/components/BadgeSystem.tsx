@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Trophy,
   Star,
@@ -181,7 +182,7 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
 
       // Vérifier si des badges peuvent être débloqués
       await checkForNewBadges(updatedBadges);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors du chargement des badges:', error);
     } finally {
@@ -258,7 +259,7 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
         // Notification (si toast disponible)
         console.log(`Badge débloqué: ${badge.title}`);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error("Erreur lors de l'attribution du badge:", error);
     }

@@ -1,3 +1,5 @@
+import { Target } from 'lucide-react';
+import React, { useEffect } from 'react';
 
 // Preloading intelligent des routes probables
 export const useIntelligentPreloading = () => {
@@ -49,7 +51,7 @@ export const useIntelligentPreloading = () => {
               await import('@/pages/index'); // ✅ Corrigé:
               break;
           }
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           console.log('Preload failed for', route, error);
         }

@@ -1,3 +1,4 @@
+import { Star, Target } from 'lucide-react';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { supabase } from '@/lib/supabase';
@@ -46,7 +47,7 @@ export const useHydrationStore = create<HydrationStore>()(
 
           // Recalculer les stats après ajout
           get().calculateStats('daily');
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : "Erreur lors de l'ajout";
           set({ error: message, isLoading: false });
@@ -76,7 +77,7 @@ export const useHydrationStore = create<HydrationStore>()(
           }));
 
           get().calculateStats('daily');
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : 'Erreur lors de la mise à jour';
           set({ error: message, isLoading: false });
@@ -98,7 +99,7 @@ export const useHydrationStore = create<HydrationStore>()(
           }));
 
           get().calculateStats('daily');
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : 'Erreur lors de la suppression';
           set({ error: message, isLoading: false });
@@ -136,7 +137,7 @@ export const useHydrationStore = create<HydrationStore>()(
             entries: data || [],
             isLoading: false,
           });
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : 'Erreur lors du chargement';
           set({ error: message, isLoading: false });
@@ -183,7 +184,7 @@ export const useHydrationStore = create<HydrationStore>()(
             currentGoal: data,
             isLoading: false,
           }));
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           const message =
             error instanceof Error ? error.message : "Erreur lors de la définition de l'objectif";
@@ -213,7 +214,7 @@ export const useHydrationStore = create<HydrationStore>()(
             currentGoal: data.isActive ? data : state.currentGoal,
             isLoading: false,
           }));
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           const message =
             error instanceof Error ? error.message : "Erreur lors de la mise à jour de l'objectif";
@@ -246,7 +247,7 @@ export const useHydrationStore = create<HydrationStore>()(
             currentGoal: activeGoal,
             isLoading: false,
           });
-        } catch {
+        } catch (error) {
       // Erreur silencieuse
           const message =
             error instanceof Error ? error.message : 'Erreur lors du chargement des objectifs';

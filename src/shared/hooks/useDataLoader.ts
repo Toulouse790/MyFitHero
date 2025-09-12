@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from 'react';
 // src/shared/hooks/useDataLoader.ts
 
 import { useState, useCallback } from 'react';

@@ -1,3 +1,4 @@
+import { Scale, Heart, Check } from 'lucide-react';
 // types/supabase.ts
 
 // Imports des nouveaux types workout

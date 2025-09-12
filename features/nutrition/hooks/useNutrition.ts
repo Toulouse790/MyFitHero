@@ -1,3 +1,5 @@
+import { Search, Target } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { NutritionService } from '../services/nutrition.service';
 import type {
   NutritionData,

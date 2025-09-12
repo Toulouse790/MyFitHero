@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Users,
   Search,
@@ -42,7 +43,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
       setIsLoading(true);
       const friendsData = await socialService.getFriends(userId);
       setFriends(friendsData);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error loading friends:', error);
       toast({
@@ -59,7 +60,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
     try {
       const stats = await socialService.getSocialStats(userId);
       setSocialStats(stats);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error loading social stats:', error);
     }
@@ -72,7 +73,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
       setIsLoading(true);
       const results = await socialService.searchUsers(searchQuery, userId);
       setSearchResults(results);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',
@@ -95,7 +96,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
         // Mettre à jour l'état local
         setSearchResults(prev => prev.filter(user => user.friend_id !== friendId));
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',
@@ -116,7 +117,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
         loadFriends();
         setFriendRequests(prev => prev.filter(req => req.id !== connectionId));
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',

@@ -1,3 +1,5 @@
+import { Clock, Star, Check, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
 // client/src/components/PackSelector.tsx
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';

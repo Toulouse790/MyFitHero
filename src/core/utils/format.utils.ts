@@ -1,3 +1,4 @@
+import { Star } from 'lucide-react';
 // Formatage des nombres
 export const formatNumber = (
   num: number,

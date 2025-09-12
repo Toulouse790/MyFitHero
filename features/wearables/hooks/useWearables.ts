@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 import { WearablesService } from '../services/wearables.service';
 
 export interface UseWearablesReturn {

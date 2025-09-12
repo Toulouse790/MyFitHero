@@ -1,3 +1,5 @@
+import { Info, X, Zap, Star, Target } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 // client/src/components/BadgeNotification.tsx
 import { RARITY_CONFIGS, type BadgeRarity } from '@/utils/badgeConfig';
 

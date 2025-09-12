@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 // Export des composants de la feature ai-coach
 export { default as BalanceConnectButton } from './BalanceConnectButton';
 export { default as PWAControls } from './PWAControls';

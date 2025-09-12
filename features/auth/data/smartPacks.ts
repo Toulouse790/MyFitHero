@@ -1,3 +1,4 @@
+import { Plus } from 'lucide-react';
 // Packs intelligents prédéfinis selon le profil utilisateur
 
 export interface SmartPack {

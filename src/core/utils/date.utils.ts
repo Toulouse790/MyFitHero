@@ -1,3 +1,4 @@
+import { Star } from 'lucide-react';
 import { format, parseISO, isValid, addDays, subDays, differenceInDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
 import { fr } from 'date-fns/locale';
 

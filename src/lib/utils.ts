@@ -106,7 +106,7 @@ export const isValidUrl = (url: string) => {
   try {
     new URL(url);
     return true;
-  } catch {
+  } catch (error) {
     return false;
   }
 };
@@ -124,7 +124,7 @@ export const copyToClipboard = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text);
     return true;
-  } catch {
+  } catch (error) {
     // Fallback for older browsers
     const textArea = document.createElement('textarea');
     textArea.value = text;

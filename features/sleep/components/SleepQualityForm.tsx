@@ -1,3 +1,5 @@
+import { CheckCircle, Moon, Clock, Plus, Check } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -103,7 +105,7 @@ export const SleepQualityForm: React.FC<SleepQualityFormProps> = ({
         setErrors({});
 
         onComplete?.();
-      } catch {
+      } catch (error) {
       // Erreur silencieuse
         toast({
           title: 'Erreur',

@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react';
 // Types pour le module Workout
 
 export interface Workout {

@@ -1,3 +1,5 @@
+import { Zap, Clock, Star, Target } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
 // client/src/components/WorkoutTimer.tsx
 import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';
 

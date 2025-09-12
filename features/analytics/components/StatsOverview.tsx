@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 // client/src/components/StatsOverview.tsx
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
@@ -59,7 +60,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({
 
       setStats(userStats);
       setBadgeStats(badgeStatsData);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors du chargement des statistiques:', error);
       toast({

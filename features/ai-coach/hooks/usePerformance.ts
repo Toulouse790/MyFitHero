@@ -1,3 +1,5 @@
+import { X, Target } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
 // Hook pour la virtualisation de listes longues
 
 interface VirtualizedListProps {

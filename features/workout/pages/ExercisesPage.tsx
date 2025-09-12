@@ -1,3 +1,5 @@
+import { X, Heart, Search, Check } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // src/pages/ExercisesPage.tsx
 import { createClient } from '@supabase/supabase-js';
 import clsx from 'clsx';

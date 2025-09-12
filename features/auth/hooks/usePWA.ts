@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 // Hook pour la gestion PWA et mode hors ligne
 import { useToast } from '@/shared/hooks/use-toast';
 
@@ -127,7 +128,7 @@ export const usePWA = (): PWAState & PWAActions => {
         setIsInstallable(false);
         setDeferredPrompt(null);
       }
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error("Erreur lors de l'installation:", error);
     }
