@@ -6,7 +6,7 @@ export interface Badge {
   name: string;
   description: string;
   icon: string;
-  category: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'streak' | 'level' | 'special';
+  category: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'social' | 'special';
   condition_type: 'count' | 'streak' | 'level' | 'special';
   condition_value: number;
   rarity: 'common' | 'rare' | 'epic' | 'legendary';
@@ -40,7 +40,7 @@ export class BadgeService {
    */
   static async getAllBadges(): Promise<Badge[]> {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('badges')
         .select('*')
         .eq('is_active', true)
@@ -52,9 +52,9 @@ export class BadgeService {
       }
 
       return data || [];
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des badges:', error);
+      console.error('Erreur lors de la récupération des badges:', catchError);
       return [];
     }
   }
@@ -64,7 +64,7 @@ export class BadgeService {
    */
   static async getUserBadges(userId: string): Promise<UserBadge[]> {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('user_badges')
         .select(
           `
@@ -81,9 +81,9 @@ export class BadgeService {
       }
 
       return data || [];
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des badges utilisateur:', error);
+      console.error('Erreur lors de la récupération des badges utilisateur:', catchError);
       return [];
     }
   }
@@ -112,9 +112,9 @@ export class BadgeService {
       });
 
       return progress;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des progrès des badges:', error);
+      console.error('Erreur lors de la récupération des progrès des badges:', catchError);
       return [];
     }
   }
@@ -187,9 +187,9 @@ export class BadgeService {
       }
 
       return newBadges;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la vérification des badges:', error);
+      console.error('Erreur lors de la vérification des badges:', catchError);
       return [];
     }
   }
@@ -236,14 +236,14 @@ export class BadgeService {
   private static calculateSpecialProgress(
     badge: Badge,
     userStats: any,
-    userCheckins: unknown[]
+    userCheckins: any[]
   ): number {
     // Logique spécifique pour chaque badge spécial
     switch (badge.name) {
       case 'Perfectionniste':
         // Compter les check-ins parfaits (tous les piliers complétés)
         return userCheckins.filter(
-          checkin =>
+          (checkin: any) =>
             checkin.workout_completed &&
             checkin.nutrition_logged &&
             checkin.sleep_tracked &&
@@ -251,7 +251,7 @@ export class BadgeService {
         ).length;
       case 'Lève-tôt':
         // Compter les check-ins avec un bon score de sommeil
-        return userCheckins.filter(checkin => checkin.sleep_tracked && checkin.energy_level >= 8)
+        return userCheckins.filter((checkin: any) => checkin.sleep_tracked && checkin.energy_level >= 8)
           .length;
       case 'Warrior':
         // Compter les workouts intenses
@@ -277,9 +277,9 @@ export class BadgeService {
         is_notified: false,
         created_at: new Date().toISOString(),
       });
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la mise à jour du progrès du badge:', error);
+      console.error('Erreur lors de la mise à jour du progrès du badge:', catchError);
     }
   }
 
@@ -307,9 +307,9 @@ export class BadgeService {
           updated_at: new Date().toISOString(),
         })
         .eq('user_id', userId);
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error("Erreur lors de la mise à jour de l'expérience:", error);
+      console.error("Erreur lors de la mise à jour de l'expérience:", catchError);
     }
   }
 
@@ -323,9 +323,9 @@ export class BadgeService {
         .update({ is_notified: true })
         .eq('user_id', userId)
         .in('badge_id', badgeIds);
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la mise à jour des notifications:', error);
+      console.error('Erreur lors de la mise à jour des notifications:', catchError);
     }
   }
 
@@ -334,7 +334,7 @@ export class BadgeService {
    */
   static async getUnnotifiedBadges(userId: string): Promise<UserBadge[]> {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('user_badges')
         .select(
           `
@@ -352,9 +352,9 @@ export class BadgeService {
       }
 
       return data || [];
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des badges non notifiés:', error);
+      console.error('Erreur lors de la récupération des badges non notifiés:', catchError);
       return [];
     }
   }
@@ -364,7 +364,7 @@ export class BadgeService {
    */
   static async getBadgesByCategory(category: string): Promise<Badge[]> {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('badges')
         .select('*')
         .eq('category', category)
@@ -377,9 +377,9 @@ export class BadgeService {
       }
 
       return data || [];
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des badges par catégorie:', error);
+      console.error('Erreur lors de la récupération des badges par catégorie:', catchError);
       return [];
     }
   }
@@ -423,9 +423,9 @@ export class BadgeService {
         legendaryBadges: rarityCount.legendary || 0,
         totalPoints,
       };
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des statistiques des badges:', error);
+      console.error('Erreur lors de la récupération des statistiques des badges:', catchError);
       return {
         totalBadges: 0,
         earnedBadges: 0,

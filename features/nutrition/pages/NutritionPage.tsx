@@ -1,4 +1,6 @@
 // client/src/pages/Nutrition.tsx
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Déclaration globale pour window.gtag
 declare global {
@@ -458,19 +460,19 @@ const Nutrition: React.FC = () => {
         .eq('stat_date', today)
         .single();
 
-      if (!error && data) {
+      if (!_error && _data) {
         setDailyData({
-          calories: (data as any).total_calories || 0,
-          protein: (data as any).total_protein || 0,
-          carbs: (data as any).total_carbs || 0,
-          fat: (data as any).total_fat || 0,
-          water: (data as any).water_intake_ml || 0,
+          calories: (_data as any).total_calories || 0,
+          protein: (_data as any).total_protein || 0,
+          carbs: (_data as any).total_carbs || 0,
+          fat: (_data as any).total_fat || 0,
+          water: (_data as any).water_intake_ml || 0,
           lastUpdated: new Date(),
         });
       }
-    } catch {
+    } catch (err) {
       // Erreur silencieuse
-      console.error('Erreur chargement nutrition:', error);
+      console.error('Erreur chargement nutrition:', err);
     } finally {
       setIsLoading(false);
     }
@@ -678,8 +680,6 @@ const Nutrition: React.FC = () => {
               >
                 {showDetailedView ? 'Vue Simple' : 'Vue Détaillée'}
               </button>
-            </div>
-              </Button>
             </div>
           </div>
 
@@ -918,12 +918,11 @@ const Nutrition: React.FC = () => {
                   <DialogHeader>
                     <DialogTitle>Analyse Nutritionnelle IA</DialogTitle>
                   </DialogHeader>
-                  <AIIntelligence
-                    pillar="nutrition"
-                    showPredictions={true}
-                    showCoaching={true}
-                    showRecommendations={true}
-                  />
+                  <div className="p-4">
+                    <p className="text-gray-600">
+                      Fonctionnalité d'analyse IA en cours de développement.
+                    </p>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>

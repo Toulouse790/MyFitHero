@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   aiService,
   type AIAnalysis,
@@ -246,7 +247,7 @@ const AIIntelligence: React.FC<AIIntelligenceProps> = ({
 
             <div className="recommendations-list">
               <h4 style={{ color: adaptiveColors.text }}>Recommandations AI</h4>
-              {aiAnalysis.recommendations.map((rec, index) => (
+              {aiAnalysis.recommendations.map((rec: string, index: number) => (
                 <div
                   key={index}
                   className="recommendation-item"
@@ -274,7 +275,7 @@ const AIIntelligence: React.FC<AIIntelligenceProps> = ({
 
             <div className="action-items">
               <h4 style={{ color: adaptiveColors.text }}>Actions recommandées</h4>
-              {coaching.actions.map((action, index) => (
+              {coaching.actions.map((action: any, index: number) => (
                 <div
                   key={index}
                   className="action-item"
@@ -325,7 +326,7 @@ const AIIntelligence: React.FC<AIIntelligenceProps> = ({
             {recommendations.length > 0 && (
               <div className="contextual-recommendations">
                 <h4 style={{ color: adaptiveColors.text }}>Recommandations contextuelles</h4>
-                {recommendations.map((rec, index) => (
+                {recommendations.map((rec: ContextualRecommendation, index: number) => (
                   <div
                     key={index}
                     className="context-rec"
@@ -337,7 +338,7 @@ const AIIntelligence: React.FC<AIIntelligenceProps> = ({
                     <h5 style={{ color: adaptiveColors.accent }}>{rec.title}</h5>
                     <p style={{ color: adaptiveColors.text }}>{rec.message}</p>
                     <div className="rec-actions">
-                      {rec.actions.map((action, idx) => (
+                      {rec.actions.map((action: any, idx: number) => (
                         <button
                           key={idx}
                           className="action-btn"

@@ -69,7 +69,7 @@ export class UserDataService {
         query = query.lte('date', endDate);
       }
 
-      const { data: _data, error: _error } = await query;
+      const { data, error } = await query;
 
       if (error) {
         console.error('Erreur lors de la récupération des données du pilier:', error);
@@ -77,9 +77,9 @@ export class UserDataService {
       }
 
       return data || [];
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des données du pilier:', error);
+      console.error('Erreur lors de la récupération des données du pilier:', catchError);
       return [];
     }
   }
@@ -105,9 +105,9 @@ export class UserDataService {
       }
 
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la sauvegarde des données du pilier:', error);
+      console.error('Erreur lors de la sauvegarde des données du pilier:', catchError);
       return false;
     }
   }
@@ -131,9 +131,9 @@ export class UserDataService {
       }
 
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la mise à jour des données du pilier:', error);
+      console.error('Erreur lors de la mise à jour des données du pilier:', catchError);
       return false;
     }
   }
@@ -143,7 +143,7 @@ export class UserDataService {
    */
   static async getUserStats(userId: string): Promise<UserStats | null> {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('user_stats')
         .select('*')
         .eq('user_id', userId)
@@ -155,9 +155,9 @@ export class UserDataService {
       }
 
       return data;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des statistiques:', error);
+      console.error('Erreur lors de la récupération des statistiques:', catchError);
       return null;
     }
   }
@@ -179,9 +179,9 @@ export class UserDataService {
       }
 
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la mise à jour des statistiques:', error);
+      console.error('Erreur lors de la mise à jour des statistiques:', catchError);
       return false;
     }
   }
@@ -191,7 +191,7 @@ export class UserDataService {
    */
   static async getDailyCheckin(userId: string, date: string): Promise<DailyCheckin | null> {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('daily_checkins')
         .select('*')
         .eq('user_id', userId)
@@ -204,9 +204,9 @@ export class UserDataService {
       }
 
       return data;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération du check-in:', error);
+      console.error('Erreur lors de la récupération du check-in:', catchError);
       return null;
     }
   }
@@ -230,9 +230,9 @@ export class UserDataService {
       }
 
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la sauvegarde du check-in:', error);
+      console.error('Erreur lors de la sauvegarde du check-in:', catchError);
       return false;
     }
   }
@@ -242,7 +242,7 @@ export class UserDataService {
    */
   static async getCheckinHistory(userId: string, limit: number = 30): Promise<DailyCheckin[]> {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('daily_checkins')
         .select('*')
         .eq('user_id', userId)
@@ -255,9 +255,9 @@ export class UserDataService {
       }
 
       return data || [];
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error("Erreur lors de la récupération de l'historique des check-ins:", error);
+      console.error("Erreur lors de la récupération de l'historique des check-ins:", catchError);
       return [];
     }
   }
@@ -288,9 +288,9 @@ export class UserDataService {
       }
 
       return streak;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors du calcul de la streak:', error);
+      console.error('Erreur lors du calcul de la streak:', catchError);
       return 0;
     }
   }
@@ -333,9 +333,9 @@ export class UserDataService {
         weeklyData,
         currentStreak,
       };
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Erreur lors de la récupération des données du dashboard:', error);
+      console.error('Erreur lors de la récupération des données du dashboard:', catchError);
       return {
         stats: null,
         todayCheckin: null,

@@ -59,7 +59,7 @@ class AIService {
       }
 
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Pattern analysis error:', error);
       throw error;
@@ -87,7 +87,7 @@ class AIService {
       }
 
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Adaptive coaching error:', error);
       throw error;
@@ -111,7 +111,7 @@ class AIService {
       }
 
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Anomaly detection error:', error);
       throw error;
@@ -135,7 +135,7 @@ class AIService {
       }
 
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Predictions error:', error);
       throw error;
@@ -166,7 +166,7 @@ class AIService {
       }
 
       return await response.json();
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Contextual recommendations error:', error);
       throw error;
@@ -196,7 +196,7 @@ class AIService {
         analysis_period: '30d',
         generated_at: new Date().toISOString(),
       };
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Habits insights error:', error);
       throw error;
@@ -221,7 +221,7 @@ class AIService {
         next_action: this.getNextRecommendedAction(proactiveAdvice),
         generated_at: new Date().toISOString(),
       };
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Proactive coaching error:', error);
       throw error;
@@ -234,15 +234,15 @@ class AIService {
     return localStorage.getItem('auth_token') || '';
   }
 
-  private analyzeHabitsLocally(logs: unknown[]): any {
+  private analyzeHabitsLocally(logs: any[]): any {
     // Analyse locale des habitudes pour réduire les appels API
-    const dayStats = logs.reduce((acc, log) => {
+    const dayStats = logs.reduce((acc: any, log: any) => {
       const day = new Date(log.created_at).getDay();
       acc[day] = (acc[day] || 0) + 1;
       return acc;
     }, {});
 
-    const hourStats = logs.reduce((acc, log) => {
+    const hourStats = logs.reduce((acc: any, log: any) => {
       const hour = new Date(log.created_at).getHours();
       acc[hour] = (acc[hour] || 0) + 1;
       return acc;
@@ -261,9 +261,9 @@ class AIService {
     };
   }
 
-  private calculateConsistency(logs: unknown[]): number {
+  private calculateConsistency(logs: any[]): number {
     // Calcul du score de consistance basé sur la régularité
-    const dailyCounts = logs.reduce((acc, log) => {
+    const dailyCounts = logs.reduce((acc: any, log: any) => {
       const date = new Date(log.created_at).toDateString();
       acc[date] = (acc[date] || 0) + 1;
       return acc;
