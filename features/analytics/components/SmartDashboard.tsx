@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Mic,
   MicOff,
@@ -30,7 +31,7 @@ import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
 import { UserProfile } from '@/shared/types/user';
 import { useAnimateOnMount, useHaptic } from '@/shared/hooks/useAnimations';
 import { useAdaptiveColors } from '@/shared/components/ThemeProvider';
-import AIIntelligence from '@/shared/components/AIIntelligence';
+import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
 import { DailyCheckIn } from '@/shared/components/DailyCheckIn';
 import { BadgeDisplay } from '@/shared/components/BadgeDisplay';
 import { StatsOverview } from '@/shared/components/StatsOverview';
