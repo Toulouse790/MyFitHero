@@ -1,25 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-export interface UserProfile {
-  id: string;
-  email: string;
-  full_name?: string;
-  avatar_url?: string;
-  created_at?: string;
-  updated_at?: string;
-  age?: number;
-  weight?: number;
-  height?: number;
-  gender?: 'male' | 'female' | 'other';
-  activity_level?: 'sedentary' | 'lightly_active' | 'moderately_active' | 'very_active' | 'extremely_active';
-  goals?: string[];
-  preferred_sports?: string[];
-  timezone?: string;
-  language?: string;
-  notifications_enabled?: boolean;
-  onboarding_completed?: boolean;
-}
+import { UserProfile } from '../shared/types/user';
 
 export interface Notification {
   id: string;

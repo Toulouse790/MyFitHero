@@ -3,6 +3,7 @@ export interface UserProfile {
   id: string;
   email: string;
   full_name?: string;
+  username?: string;
   avatar_url?: string;
   created_at?: string;
   updated_at?: string;
@@ -13,6 +14,23 @@ export interface UserProfile {
   activity_level?: 'sedentary' | 'lightly_active' | 'moderately_active' | 'very_active' | 'extremely_active';
   goals?: string[];
   preferred_sports?: string[];
+  
+  // Propriétés spécifiques au sport et aux objectifs
+  sport?: string;
+  sport_position?: string;
+  primary_goals?: string[];
+  fitness_experience?: string;
+  lifestyle?: string;
+  available_time_per_day?: number;
+  training_frequency?: string;
+  season_period?: string;
+  injuries?: string[];
+  
+  // Propriétés de gamification
+  level?: number;
+  totalPoints?: number;
+  goal?: string;
+  
   timezone?: string;
   language?: string;
   notifications_enabled?: boolean;

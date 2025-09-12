@@ -1,6 +1,7 @@
 // Dashboard types
 export interface SmartDashboardContext {
   userId: string;
+  user?: any; // Utilisateur complet
   sport: string;
   position?: string;
   currentGoals: string[];
@@ -22,18 +23,22 @@ export interface DailyProgramDisplay {
   // Sections principales
   workout: {
     title: string;
+    name?: string;
     description: string;
     duration: number;
     intensity: 'light' | 'moderate' | 'intense';
     exercises: Exercise[];
     warmup: Exercise[];
     cooldown: Exercise[];
+    completed?: boolean;
   };
   
   nutrition: {
     title: string;
     description: string;
     calories: number;
+    calories_current?: number;
+    calories_target?: number;
     macros: {
       protein: number;
       carbs: number;
@@ -44,6 +49,18 @@ export interface DailyProgramDisplay {
       target: number;
       current: number;
     };
+  };
+
+  // Propriétés d'hydratation au niveau principal
+  hydration?: {
+    target: number;
+    current: number;
+  };
+
+  // Propriétés de sommeil au niveau principal  
+  sleep?: {
+    target: number;
+    current: number;
   };
   
   recovery: {

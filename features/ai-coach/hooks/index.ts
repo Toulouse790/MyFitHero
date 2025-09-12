@@ -4,7 +4,6 @@ export * from './useLoadingState';
 export * from './useUserPreferences';
 export * from './useUnifiedLoading';
 export * from './usePositions';
-export * from './index';
 export * from './use-debounce';
 export * from './usePerformanceMonitoring';
 export * from './use-supabase-query';

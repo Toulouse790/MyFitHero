@@ -4,7 +4,6 @@ export * from './useIntelligentPreloading';
 export * from './useWorkoutPersistence';
 export * from './useWorkoutExercises';
 export * from './useWorkoutSession';
-export * from './index';
 export * from './useRealtimeSync';
 export * from './useWorkoutSessionCore';
 export * from './useMuscleRecovery';
