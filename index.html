@@ -1,22 +1,311 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyFitHero - Votre Coach Personnel</title>
-  <meta name="description" content="Application de fitness et bien-être avec coach IA personnalisé" />
-  
-  <!-- PWA -->
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#000000" />
-  
-  <!-- Preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
+  <head>
+    <!-- Meta tags essentiels -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Titre et description SEO -->
+    <title>MyFitHero - Votre Coach Fitness Personnel</title>
+    <meta name="description" content="MyFitHero est votre compagnon fitness intelligent qui vous accompagne dans l'atteinte de vos objectifs de forme, nutrition et bien-être. Suivi personnalisé, programmes d'entraînement et coaching IA." />
+    <meta name="keywords" content="fitness, nutrition, sport, santé, musculation, cardio, coaching, entraînement, bien-être, suivi sportif, objectifs fitness" />
+    <meta name="author" content="MyFitHero Team" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://myfithero.app/" />
+    <meta property="og:title" content="MyFitHero - Votre Coach Fitness Personnel" />
+    <meta property="og:description" content="Atteignez vos objectifs fitness avec MyFitHero : suivi personnalisé, programmes d'entraînement et coaching IA intelligent." />
+    <meta property="og:image" content="https://myfithero.app/og-image.jpg" />
+    <meta property="og:site_name" content="MyFitHero" />
+    <meta property="og:locale" content="fr_FR" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://myfithero.app/" />
+    <meta name="twitter:title" content="MyFitHero - Votre Coach Fitness Personnel" />
+    <meta name="twitter:description" content="Atteignez vos objectifs fitness avec MyFitHero : suivi personnalisé, programmes d'entraînement et coaching IA intelligent." />
+    <meta name="twitter:image" content="https://myfithero.app/twitter-image.jpg" />
+    <meta name="twitter:creator" content="@MyFitHero" />
+    
+    <!-- PWA et Mobile -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MyFitHero" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Favicons et icônes -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2563eb" />
+    
+    <!-- Manifest PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Performance - DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//api.supabase.io" />
+    
+    <!-- Performance - Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Fonts Google - Inter et Roboto -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" />
+    </noscript>
+    
+    <!-- CSS Reset et Variables CSS -->
+    <style>
+      /* CSS Reset moderne */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      html {
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      body {
+        margin: 0;
+        font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #1f2937;
+        background-color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      
+      /* Variables CSS Custom Properties */
+      :root {
+        /* Couleurs principales */
+        --primary-50: #eff6ff;
+        --primary-100: #dbeafe;
+        --primary-500: #3b82f6;
+        --primary-600: #2563eb;
+        --primary-700: #1d4ed8;
+        --primary-900: #1e3a8a;
+        
+        /* Couleurs secondaires */
+        --secondary-500: #8b5cf6;
+        --secondary-600: #7c3aed;
+        
+        /* Couleurs neutres */
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+        
+        /* Couleurs d'état */
+        --success-500: #10b981;
+        --warning-500: #f59e0b;
+        --error-500: #ef4444;
+        
+        /* Spacing */
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 2.5rem;
+        --spacing-3xl: 3rem;
+        
+        /* Typography */
+        --font-family-sans: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+        
+        /* Shadows */
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        
+        /* Border radius */
+        --radius-sm: 0.125rem;
+        --radius-md: 0.375rem;
+        --radius-lg: 0.5rem;
+        --radius-xl: 0.75rem;
+        --radius-2xl: 1rem;
+        --radius-full: 9999px;
+        
+        /* Transitions */
+        --transition-fast: 150ms ease-in-out;
+        --transition-normal: 250ms ease-in-out;
+        --transition-slow: 350ms ease-in-out;
+      }
+      
+      /* Dark mode */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --gray-50: #111827;
+          --gray-100: #1f2937;
+          --gray-200: #374151;
+          --gray-300: #4b5563;
+          --gray-400: #6b7280;
+          --gray-500: #9ca3af;
+          --gray-600: #d1d5db;
+          --gray-700: #e5e7eb;
+          --gray-800: #f3f4f6;
+          --gray-900: #f9fafb;
+        }
+        
+        body {
+          color: #f9fafb;
+          background-color: #111827;
+        }
+      }
+      
+      /* Loading placeholder */
+      #root {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .loading-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-lg);
+        color: var(--gray-600);
+      }
+      
+      .loading-spinner {
+        width: 2rem;
+        height: 2rem;
+        border: 2px solid var(--gray-200);
+        border-top: 2px solid var(--primary-600);
+        border-radius: var(--radius-full);
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      
+      /* Focus styles pour l'accessibilité */
+      :focus-visible {
+        outline: 2px solid var(--primary-600);
+        outline-offset: 2px;
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Optimisations performance */
+      img, video {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+    
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "MyFitHero",
+      "description": "Application de coaching fitness personnalisé avec suivi de la nutrition, des entraînements et du bien-être",
+      "url": "https://myfithero.app",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "MyFitHero Team"
+      },
+      "featureList": [
+        "Suivi des entraînements",
+        "Coaching nutritionnel",
+        "Objectifs personnalisés",
+        "Suivi du sommeil",
+        "Hydratation",
+        "Intelligence artificielle"
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Container principal de l'application -->
+    <div id="root">
+      <!-- Placeholder de chargement initial -->
+      <div class="loading-placeholder">
+        <div class="loading-spinner"></div>
+        <p>Chargement de MyFitHero...</p>
+      </div>
+    </div>
+    
+    <!-- Message pour les utilisateurs sans JavaScript -->
+    <noscript>
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        font-family: 'Inter', sans-serif;
+        text-align: center;
+        padding: 2rem;
+      ">
+        <div>
+          <h1 style="color: #1f2937; margin-bottom: 1rem; font-size: 2rem; font-weight: 700;">
+            MyFitHero
+          </h1>
+          <p style="color: #4b5563; margin-bottom: 1.5rem; font-size: 1.125rem;">
+            JavaScript est requis pour utiliser MyFitHero.
+          </p>
+          <p style="color: #6b7280; font-size: 0.875rem;">
+            Veuillez activer JavaScript dans votre navigateur pour accéder à votre coach fitness personnel.
+          </p>
+        </div>
+      </div>
+    </noscript>
+    
+    <!-- Script principal de l'application -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
