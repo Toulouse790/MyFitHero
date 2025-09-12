@@ -28,6 +28,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
     totalWorkouts: 127,
     caloriesBurned: 2450,
     sleepAverage: 7.2,
+    waterIntake: 1.8, // Litres d'eau aujourd'hui
+    waterGoal: 2.5,   // Objectif quotidien
   };
 
   return (
@@ -100,7 +102,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
+          <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
             <TabsTrigger 
               value="overview" 
               className="rounded-xl data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-500 data-[state=active]:text-white font-medium"
@@ -121,6 +123,13 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
             >
               <Apple className="w-4 h-4 mr-2" />
               Nutrition
+            </TabsTrigger>
+            <TabsTrigger 
+              value="hydration" 
+              className="rounded-xl data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white font-medium"
+            >
+              <Droplets className="w-4 h-4 mr-2" />
+              Hydratation
             </TabsTrigger>
             <TabsTrigger 
               value="wellness" 
@@ -200,7 +209,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
             </div>
 
             {/* Modules d'action modernes */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
@@ -231,6 +240,23 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                 <CardContent className="text-center">
                   <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-xl h-12">
                     Gérer
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                    <Droplets className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl text-gray-800">Hydratation</CardTitle>
+                  <CardDescription className="text-gray-600">
+                    Suivez votre consommation d'eau
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-xl h-12">
+                    Enregistrer
                   </Button>
                 </CardContent>
               </Card>
@@ -337,6 +363,52 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                       <div>
                         <p className="text-sm text-gray-500">Lipides</p>
                         <p className="font-bold text-green-500">78g</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="hydration" className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white border-0 shadow-2xl">
+                <CardHeader className="text-center">
+                  <div className="w-20 h-20 bg-white/20 rounded-3xl mx-auto mb-4 flex items-center justify-center">
+                    <Droplets className="w-10 h-10 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl">Hydratation</CardTitle>
+                  <CardDescription className="text-blue-100">
+                    Suivez votre consommation d'eau
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white rounded-xl h-12">
+                    Ajouter de l'eau
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-gray-800">Objectif du jour</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Eau consommée</span>
+                      <span className="font-bold text-blue-500">1.8L / 2.5L</span>
+                    </div>
+                    <Progress value={72} className="h-2" />
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div>
+                        <p className="text-sm text-gray-500">Dernière prise</p>
+                        <p className="font-bold text-blue-500">Il y a 45min</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Reste</p>
+                        <p className="font-bold text-blue-500">0.7L</p>
                       </div>
                     </div>
                   </div>
