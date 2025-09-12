@@ -620,107 +620,94 @@ const Nutrition: React.FC = () => {
   const priorityMeals = getPriorityMeals();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="px-4 py-6 space-y-6 max-w-2xl mx-auto">
-        {/* Header Uniforme */}
-        <UniformHeader
-          title="Nutrition"
-          subtitle={`${sportConfig.emoji} ${getPersonalizedMessage()}`}
-          showBackButton={true}
-          showSettings={true}
-          showNotifications={true}
-          showProfile={true}
-          gradient={true}
-        />
+    <div className="min-h-screen bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Card principale centrée avec design de référence */}
+        <div className="bg-white shadow-xl rounded-2xl p-8">
+          {/* Header avec icône Apple et typography de référence */}
+          <div className="text-center mb-8">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mb-4">
+              <Apple className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Nutrition</h1>
+            <p className="text-gray-600 text-sm">
+              {sportConfig.emoji} {getPersonalizedMessage()}
+            </p>
+          </div>
 
-        {/* Alerte Profil Incomplet */}
-        {profileIncomplete && (
-          <Card className="border-amber-200 bg-amber-50">
-            <CardContent className="p-4">
+          {/* Alerte Profil Incomplet */}
+          {profileIncomplete && (
+            <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
               <div className="flex items-start space-x-3">
-                <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5" />
+                <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
                 <div className="flex-1">
                   <h3 className="font-semibold text-amber-800 mb-1">Profil incomplet</h3>
                   <p className="text-amber-700 text-sm mb-3">
                     Renseignez votre poids, taille et âge pour des calculs nutritionnels précis.
                   </p>
-                  <Button
-                    size="sm"
+                  <button
                     onClick={handleCompleteProfile}
-                    className="bg-amber-600 hover:bg-amber-700"
+                    className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
                   >
                     Compléter mon profil
-                  </Button>
+                  </button>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        )}
+            </div>
+          )}
 
-        {/* Calories avec Objectif Personnalisé - FOCUS */}
-        <Card className="bg-gradient-to-r from-green-600 to-teal-600 text-white">
-          <CardContent className="p-5">
+          {/* Calories aujourd'hui - Design moderne */}
+          <div className="mb-6 p-6 bg-gradient-to-r from-green-600 to-teal-600 rounded-xl text-white">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-lg">Calories aujourd'hui</h3>
               <div className="flex items-center space-x-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
+                <button
                   onClick={() => setShowDetailedView(!showDetailedView)}
-                  className="text-white hover:bg-white/20"
+                  className="p-1 rounded-lg hover:bg-white/20 transition-colors duration-200"
                 >
                   {showDetailedView ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </Button>
-                <Target size={24} />
+                </button>
+                <Target size={20} />
               </div>
             </div>
             <div className="text-center mb-4">
-              <div className="text-4xl font-bold mb-1">{dailyData.calories}</div>
-              <div className="text-white/80">
+              <div className="text-3xl font-bold mb-1">{dailyData.calories}</div>
+              <div className="text-white/80 text-sm">
                 sur {personalizedGoals.calories} kcal ({appStoreUser?.sport || 'sport'})
               </div>
-              <div className="text-sm text-white/70 mt-1">
+              <div className="text-xs text-white/70 mt-1">
                 {personalizedGoals.calories - dailyData.calories > 0
                   ? `${personalizedGoals.calories - dailyData.calories} kcal restantes`
                   : 'Objectif atteint ! 🎉'}
               </div>
             </div>
-            <div className="w-full bg-white/20 rounded-full h-3 mb-4">
+            <div className="w-full bg-white/20 rounded-full h-2 mb-4">
               <div
-                className="bg-white rounded-full h-3 transition-all duration-500"
+                className="bg-white rounded-full h-2 transition-all duration-500"
                 style={{ width: `${caloriesPercentage}%` }}
               />
             </div>
-            <div className="flex justify-center">
-              <Button
-                onClick={handleAddFood}
-                variant="secondary"
-                size="sm"
-                className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Ajouter un aliment
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+            <button
+              onClick={handleAddFood}
+              className="w-full bg-white/20 hover:bg-white/30 text-white font-medium py-2 px-4 rounded-lg border border-white/30 transition-colors duration-200"
+            >
+              <Plus className="w-4 h-4 inline mr-2" />
+              <Plus className="w-4 h-4 inline mr-2" />
+              Ajouter un repas
+            </button>
+          </div>
 
-        {/* Macronutriments - MODE COMPACT/DÉTAILLÉ */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-800">Vos Macros</h2>
-            <div className="flex items-center space-x-2">
-              <Button
-                variant={showDetailedView ? 'default' : 'outline'}
-                size="sm"
+          {/* Macronutriments - MODE COMPACT/DÉTAILLÉ */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">Vos Macros</h2>
+              <button
                 onClick={() => setShowDetailedView(!showDetailedView)}
-                className="text-xs"
+                className="text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
               >
                 {showDetailedView ? 'Vue Simple' : 'Vue Détaillée'}
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => navigate('/nutrition/details')}>
-                <TrendingUp className="h-4 w-4 mr-2" />
-                Historique
+              </button>
+            </div>
               </Button>
             </div>
           </div>
