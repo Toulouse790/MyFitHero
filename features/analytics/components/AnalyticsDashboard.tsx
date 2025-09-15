@@ -10,7 +10,7 @@ import {
   type PillarProgress,
   type PerformanceMetrics,
   type DetailedInsight,
-} from '@/services/analyticsService';
+} from '@/lib/services/analyticsService';
 
 interface AnalyticsDashboardProps {
   className?: string;

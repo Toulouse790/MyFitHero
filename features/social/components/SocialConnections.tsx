@@ -10,7 +10,7 @@ import {
   MoreHorizontal,
   Mail,
 } from 'lucide-react';
-import { socialService, UserConnection, SocialStats } from '@/services/socialService';
+import { socialService, UserConnection, SocialStats } from '@/lib/services/socialService';
 import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
 

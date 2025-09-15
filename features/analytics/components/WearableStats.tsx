@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Activity, Heart, Moon, Zap, TrendingUp, Clock } from 'lucide-react';
 // Import temporaire depuis le chemin racine features/
 import { useWearableSync, WearableData } from '../../../features/wearables/hooks/useWearableSync';
-import { analyticsService } from '@/services/analyticsService';
+import { analyticsService } from '@/lib/services/analyticsService';
 
 interface WearableStatsProps {
   userId?: string;

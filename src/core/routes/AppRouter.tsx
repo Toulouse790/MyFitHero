@@ -5,7 +5,7 @@ import { Suspense, lazy } from 'react';
 import { AuthGuard } from '../auth/auth.guard';
 
 // Import des pages principales
-import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 // Lazy loading des features
 const LandingPage = lazy(() => import('../../features/landing/pages/LandingPage'));

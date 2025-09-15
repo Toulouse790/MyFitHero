@@ -1,7 +1,10 @@
 import { Moon, Clock, Globe } from 'lucide-react';
 import React from 'react';
 import { useUserPreferences } from '@/shared/hooks/useUserPreferences';
-import { UnitSystem } from '@/utils/unitConversion';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { UnitSystem } from '@/shared/utils/unitConversion';
 
 interface PreferencesSettingsProps {
   onClose?: () => void;

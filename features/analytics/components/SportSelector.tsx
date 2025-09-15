@@ -18,7 +18,7 @@ import {
   Filter,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useSports } from '@/services/sportsService';
+import { useSports } from '@/lib/services/sportsService';
 import { SportOption } from '@/shared/types/onboarding';
 import { useToast } from '@/shared/hooks/use-toast';
 import { useDebounce } from '@/features/ai-coach/hooks/use-debounce';

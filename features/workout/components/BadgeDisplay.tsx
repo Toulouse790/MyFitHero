@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { useToast } from '@/shared/hooks/use-toast';
-import { BadgeService, UserBadge, BadgeProgress } from '@/services/badgeService';
+import { BadgeService, UserBadge, BadgeProgress } from '@/lib/services/badgeService';
 import { supabase } from '@/lib/supabase';
-import { RARITY_CONFIGS, type BadgeRarity } from '@/utils/badgeConfig';
+import { RARITY_CONFIGS, type BadgeRarity } from '@/shared/utils/badgeConfig';
 
 interface BadgeDisplayProps {
   className?: string;

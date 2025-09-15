@@ -27,10 +27,8 @@ export default defineConfig({
   plugins: [react(), spa404Plugin()],
   resolve: {
     alias: {
-      '@/components': path.resolve(__dirname, 'components'),
+      '@/components': path.resolve(__dirname, 'src/components'),
       '@/features': path.resolve(__dirname, 'src/features'),
-      '@/utils': path.resolve(__dirname, 'utils'),
-      '@/services': path.resolve(__dirname, 'services'),
       '@/lib': path.resolve(__dirname, 'src/lib'),
       '@/shared': path.resolve(__dirname, 'src/shared'),
       '@/store': path.resolve(__dirname, 'src/store'),

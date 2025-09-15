@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // client/src/components/StatsOverview.tsx
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import {
   TrendingUp,
   Flame,
@@ -16,8 +16,8 @@ import {
   Zap,
 } from 'lucide-react';
 import { useToast } from '@/shared/hooks/use-toast';
-import { UserDataService, UserStats } from '@/services/userDataService';
-import { BadgeService } from '@/services/badgeService';
+import { UserDataService, UserStats } from '@/lib/services/userDataService';
+import { BadgeService } from '@/lib/services/badgeService';
 import { supabase } from '@/lib/supabase';
 
 interface StatsOverviewProps {
