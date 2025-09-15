@@ -21,7 +21,14 @@ import {
   Save,
   AlertTriangle
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+
+// Import des types et hooks compatibles avec la base existante
+import { 
+  WorkoutSet, 
+  WorkoutSession, 
+  Exercise 
+} from '@/shared/types/database-mapping';
+import { useWorkoutSession, useWorkoutSets } from '@/features/workout/hooks/useSupabaseWorkout';
 import { AdvancedSessionTimer } from './AdvancedSessionTimer';
 import { SmartRestTimer } from './SmartRestTimer';
 import VolumeAnalyticsEngine from './VolumeAnalyticsEngine';
@@ -49,31 +56,7 @@ type WorkoutEvent =
   | { type: 'EMERGENCY_STOP'; reason: string }
   | { type: 'SYNC_STATE'; remoteState: Partial<WorkoutFlowState> };
 
-interface WorkoutSet {
-  id: string;
-  exerciseId: string;
-  weight: number;
-  reps: number;
-  rpe?: number;
-  tempo?: string;
-  notes?: string;
-  timestamp: Date;
-  completed: boolean;
-}
-
-interface Exercise {
-  id: string;
-  name: string;
-  type: 'strength' | 'cardio' | 'power' | 'endurance';
-  muscleGroups: string[];
-  targetSets: number;
-  targetReps: number | [number, number]; // range si nécessaire
-  targetWeight?: number;
-  restTime: number; // secondes
-  instructions?: string;
-  videoUrl?: string;
-}
-
+// Interface WorkoutPlan temporaire (sera remplacée par celle de la base)
 interface WorkoutPlan {
   id: string;
   name: string;
