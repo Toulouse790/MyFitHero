@@ -1,78 +1,58 @@
+import { TrendingUp, Bell } from 'lucide-react';
+// client/src/components/UniformHeader.tsx
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Avatar } from '@/components/ui/avatar';
-import { 
-  ArrowLeft, 
-  Settings, 
-  Bell, 
-  User, 
-  Menu,
-  Search,
-  Sun,
-  Moon,
-  MoreVertical
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { appStore, useAppStoreUser, useAppStoreNotifications, useAppStoreUI } from '@/store/appStore';
+import { useLocation } from 'wouter';
 
-export interface UniformHeaderProps {
+interface UniformHeaderProps {
   title: string;
   subtitle?: string;
   showBackButton?: boolean;
   showSettings?: boolean;
   showNotifications?: boolean;
   showProfile?: boolean;
-  showSearch?: boolean;
-  showMenu?: boolean;
-  gradient?: boolean;
-  backgroundColor?: string;
-  textColor?: string;
-  className?: string;
+  showStats?: boolean;
+  showBadges?: boolean;
   onBack?: () => void;
   onSettings?: () => void;
   onNotifications?: () => void;
   onProfile?: () => void;
-  onSearch?: () => void;
-  onMenu?: () => void;
-  rightAction?: React.ReactNode;
-  leftAction?: React.ReactNode;
+  onStats?: () => void;
+  onBadges?: () => void;
+  notificationCount?: number;
+  className?: string;
+  rightContent?: React.ReactNode;
+  gradient?: boolean;
 }
 
-const UniformHeader: React.FC<UniformHeaderProps> = ({
+export const UniformHeader: React.FC<UniformHeaderProps> = ({
   title,
   subtitle,
   showBackButton = false,
-  showSettings = true,
-  showNotifications = true,
-  showProfile = true,
-  showSearch = false,
-  showMenu = false,
-  gradient = true,
-  backgroundColor,
-  textColor = 'text-white',
-  className = '',
+  showSettings = false,
+  showNotifications = false,
+  showProfile = false,
+  showStats = false,
+  showBadges = false,
   onBack,
   onSettings,
   onNotifications,
   onProfile,
-  onSearch,
-  onMenu,
-  rightAction,
-  leftAction,
+  onStats,
+  onBadges,
+  notificationCount = 0,
+  className = '',
+  rightContent,
+  gradient = false,
 }) => {
-  const navigate = useNavigate();
-  const user = useAppStoreUser();
-  const { notifications, unreadCount } = useAppStoreNotifications();
-  const { theme } = useAppStoreUI();
-  const { setTheme, toggleSidebar } = appStore();
+  const [, navigate] = useLocation();
 
-  // Default handlers
   const handleBack = () => {
     if (onBack) {
       onBack();
     } else {
-      navigate(-1);
+      window.history.back();
     }
   };
 
@@ -84,14 +64,6 @@ const UniformHeader: React.FC<UniformHeaderProps> = ({
     }
   };
 
-  const handleNotifications = () => {
-    if (onNotifications) {
-      onNotifications();
-    } else {
-      navigate('/notifications');
-    }
-  };
-
   const handleProfile = () => {
     if (onProfile) {
       onProfile();
@@ -100,226 +72,139 @@ const UniformHeader: React.FC<UniformHeaderProps> = ({
     }
   };
 
-  const handleSearch = () => {
-    if (onSearch) {
-      onSearch();
+  const handleNotifications = () => {
+    if (onNotifications) {
+      onNotifications();
     } else {
-      navigate('/search');
+      navigate('/notifications');
     }
   };
 
-  const handleMenu = () => {
-    if (onMenu) {
-      onMenu();
+  const handleStats = () => {
+    if (onStats) {
+      onStats();
     } else {
-      toggleSidebar();
+      navigate('/analytics');
     }
   };
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
+  const handleBadges = () => {
+    if (onBadges) {
+      onBadges();
+    } else {
+      navigate('/achievements');
+    }
   };
 
-  // Generate gradient classes
-  const getGradientClass = () => {
-    if (!gradient) return backgroundColor || 'bg-blue-600';
-    
-    return 'bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600';
-  };
+  const headerClasses = `
+    ${
+      gradient
+        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+        : 'bg-white border-b border-gray-200'
+    }
+    ${className}
+  `;
 
   return (
-    <header 
-      className={`
-        ${getGradientClass()}
-        ${textColor}
-        px-4 py-3 
-        flex items-center justify-between
-        shadow-lg
-        relative
-        z-10
-        ${className}
-      `}
-    >
-      {/* Left Section */}
-      <div className="flex items-center space-x-3">
-        {leftAction || (
-          <>
+    <header className={headerClasses}>
+      <div className="px-4 py-3">
+        <div className="flex items-center justify-between">
+          {/* Section gauche */}
+          <div className="flex items-center space-x-3">
             {showBackButton && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleBack}
-                className={`${textColor} hover:bg-white/10 p-2`}
+                className={`${gradient ? 'text-white hover:bg-white/20' : 'text-gray-600 hover:bg-gray-100'}`}
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
             )}
-            
-            {showMenu && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleMenu}
-                className={`${textColor} hover:bg-white/10 p-2`}
-              >
-                <Menu className="w-5 h-5" />
-              </Button>
-            )}
-          </>
-        )}
-        
-        {/* Title and Subtitle */}
-        <div className="flex-1">
-          <h1 className="text-xl font-bold tracking-tight">{title}</h1>
-          {subtitle && (
-            <p className="text-sm opacity-90 mt-0.5">{subtitle}</p>
-          )}
-        </div>
-      </div>
 
-      {/* Right Section */}
-      <div className="flex items-center space-x-2">
-        {rightAction || (
-          <>
-            {/* Search */}
-            {showSearch && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleSearch}
-                className={`${textColor} hover:bg-white/10 p-2`}
-              >
-                <Search className="w-5 h-5" />
-              </Button>
-            )}
-
-            {/* Theme Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleTheme}
-              className={`${textColor} hover:bg-white/10 p-2`}
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
+            <div>
+              <h1 className={`text-lg font-semibold ${gradient ? 'text-white' : 'text-gray-900'}`}>
+                {title}
+              </h1>
+              {subtitle && (
+                <p className={`text-sm ${gradient ? 'text-white/80' : 'text-gray-600'}`}>
+                  {subtitle}
+                </p>
               )}
-            </Button>
+            </div>
+          </div>
 
-            {/* Notifications */}
-            {showNotifications && (
-              <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleNotifications}
-                  className={`${textColor} hover:bg-white/10 p-2 relative`}
-                >
-                  <Bell className="w-5 h-5" />
-                  {unreadCount > 0 && (
-                    <Badge 
-                      className="absolute -top-1 -right-1 w-5 h-5 text-xs bg-red-500 text-white border-0 flex items-center justify-center"
-                    >
-                      {unreadCount > 9 ? '9+' : unreadCount}
-                    </Badge>
-                  )}
-                </Button>
-              </div>
-            )}
+          {/* Section droite */}
+          <div className="flex items-center space-x-2">
+            {rightContent && <div className="mr-2">{rightContent}</div>}
 
-            {/* Settings */}
             {showSettings && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleSettings}
-                className={`${textColor} hover:bg-white/10 p-2`}
+                className={`${gradient ? 'text-white hover:bg-white/20' : 'text-gray-600 hover:bg-gray-100'}`}
               >
                 <Settings className="w-5 h-5" />
               </Button>
             )}
 
-            {/* Profile */}
+            {showStats && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleStats}
+                className={`${gradient ? 'text-white hover:bg-white/20' : 'text-gray-600 hover:bg-gray-100'}`}
+              >
+                <TrendingUp className="w-5 h-5" />
+              </Button>
+            )}
+
+            {showBadges && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleBadges}
+                className={`${gradient ? 'text-white hover:bg-white/20' : 'text-gray-600 hover:bg-gray-100'}`}
+              >
+                <Trophy className="w-5 h-5" />
+              </Button>
+            )}
+
+            {showNotifications && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleNotifications}
+                className={`relative ${gradient ? 'text-white hover:bg-white/20' : 'text-gray-600 hover:bg-gray-100'}`}
+              >
+                <Bell className="w-5 h-5" />
+                {notificationCount > 0 && (
+                  <Badge
+                    variant="destructive"
+                    className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs flex items-center justify-center"
+                  >
+                    {notificationCount > 9 ? '9+' : notificationCount}
+                  </Badge>
+                )}
+              </Button>
+            )}
+
             {showProfile && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleProfile}
-                className={`${textColor} hover:bg-white/10 p-2`}
+                className={`${gradient ? 'text-white hover:bg-white/20' : 'text-gray-600 hover:bg-gray-100'}`}
               >
-                {user?.avatar_url ? (
-                  <Avatar className="w-6 h-6">
-                    <img 
-                      src={user.avatar_url} 
-                      alt={user.full_name || 'Profile'} 
-                      className="w-full h-full object-cover rounded-full"
-                    />
-                  </Avatar>
-                ) : (
-                  <User className="w-5 h-5" />
-                )}
+                <User className="w-5 h-5" />
               </Button>
             )}
-
-            {/* More Options */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className={`${textColor} hover:bg-white/10 p-2`}
-            >
-              <MoreVertical className="w-5 h-5" />
-            </Button>
-          </>
-        )}
+          </div>
+        </div>
       </div>
-
-      {/* Gradient Overlay for additional depth */}
-      {gradient && (
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
-      )}
     </header>
   );
 };
-
-// Predefined header variants for common use cases
-export const DashboardHeader: React.FC<Omit<UniformHeaderProps, 'showMenu' | 'showSearch'>> = (props) => (
-  <UniformHeader
-    {...props}
-    showMenu={true}
-    showSearch={true}
-    gradient={true}
-  />
-);
-
-export const FeatureHeader: React.FC<Omit<UniformHeaderProps, 'showBackButton'>> = (props) => (
-  <UniformHeader
-    {...props}
-    showBackButton={true}
-    gradient={true}
-  />
-);
-
-export const SimpleHeader: React.FC<Omit<UniformHeaderProps, 'showSettings' | 'showNotifications'>> = (props) => (
-  <UniformHeader
-    {...props}
-    showSettings={false}
-    showNotifications={false}
-    gradient={false}
-    backgroundColor="bg-white"
-    textColor="text-gray-900"
-  />
-);
-
-export const AuthHeader: React.FC<Omit<UniformHeaderProps, 'showProfile' | 'showNotifications' | 'showSettings'>> = (props) => (
-  <UniformHeader
-    {...props}
-    showProfile={false}
-    showNotifications={false}
-    showSettings={false}
-    gradient={true}
-  />
-);
 
 export default UniformHeader;

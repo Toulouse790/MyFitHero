@@ -1,579 +1,462 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { toast } from 'sonner';
-import { Eye, EyeOff, Mail, Lock, User, Chrome, Loader2, Dumbbell } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Separator } from '@/components/ui/separator';
+import { Dumbbell, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
-// Schémas de validation Zod
-const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'L\'email est requis')
-    .email('Format d\'email invalide')
-    .max(255, 'Email trop long'),
-  password: z
-    .string()
-    .min(1, 'Le mot de passe est requis')
-    .min(6, 'Le mot de passe doit contenir au moins 6 caractères')
-    .max(100, 'Mot de passe trop long'),
-});
+// Types
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
-const registerSchema = z.object({
-  firstName: z
-    .string()
-    .min(1, 'Le prénom est requis')
-    .min(2, 'Le prénom doit contenir au moins 2 caractères')
-    .max(50, 'Prénom trop long')
-    .regex(/^[a-zA-ZÀ-ÿ\s-']+$/, 'Caractères invalides dans le prénom'),
-  lastName: z
-    .string()
-    .min(1, 'Le nom est requis')
-    .min(2, 'Le nom doit contenir au moins 2 caractères')
-    .max(50, 'Nom trop long')
-    .regex(/^[a-zA-ZÀ-ÿ\s-']+$/, 'Caractères invalides dans le nom'),
-  email: z
-    .string()
-    .min(1, 'L\'email est requis')
-    .email('Format d\'email invalide')
-    .max(255, 'Email trop long'),
-  password: z
-    .string()
-    .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
-    .max(100, 'Mot de passe trop long')
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/,
-      'Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial'
-    ),
-  confirmPassword: z.string().min(1, 'Confirmez votre mot de passe'),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'Les mots de passe ne correspondent pas',
-  path: ['confirmPassword'],
-});
+// Composants UI basiques (si ils n'existent pas encore)
+const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-white rounded-2xl shadow-xl border border-gray-100 ${className}`}>
+    {children}
+  </div>
+);
 
-type LoginFormData = z.infer<typeof loginSchema>;
-type RegisterFormData = z.infer<typeof registerSchema>;
+const CardHeader = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`p-6 ${className}`}>
+    {children}
+  </div>
+);
 
-const AuthPage: React.FC = () => {
+const CardContent = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
+  <div className={`p-6 pt-0 ${className}`}>
+    {children}
+  </div>
+);
+
+const Button = ({ 
+  children, 
+  type = 'button', 
+  disabled = false, 
+  onClick, 
+  className = '',
+  variant = 'default'
+}: {
+  children: React.ReactNode;
+  type?: 'button' | 'submit';
+  disabled?: boolean;
+  onClick?: () => void;
+  className?: string;
+  variant?: 'default' | 'outline';
+}) => {
+  const baseClasses = 'px-6 py-3 rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500';
+  const variantClasses = {
+    default: disabled 
+      ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+      : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-lg hover:scale-105',
+    outline: 'border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
+  };
+
+  return (
+    <button
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+    >
+      {children}
+    </button>
+  );
+};
+
+const Input = ({ 
+  id, 
+  type = 'text', 
+  value, 
+  onChange, 
+  required = false, 
+  minLength,
+  placeholder = '',
+  className = '' 
+}: {
+  id: string;
+  type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  minLength?: number;
+  placeholder?: string;
+  className?: string;
+}) => (
+  <input
+    id={id}
+    type={type}
+    value={value}
+    onChange={onChange}
+    required={required}
+    minLength={minLength}
+    placeholder={placeholder}
+    className={`w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${className}`}
+  />
+);
+
+const Label = ({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) => (
+  <label htmlFor={htmlFor} className="block text-sm font-medium text-gray-700 mb-1">
+    {children}
+  </label>
+);
+
+// Composant principal
+export function AuthPage() {
   const [, setLocation] = useLocation();
-  const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  // Form pour login
-  const loginForm = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-    mode: 'onChange',
+  
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
 
-  // Form pour register
-  const registerForm = useForm<RegisterFormData>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      firstName: '',
-      lastName: '',
-    },
-    mode: 'onChange',
-  });
-
-  // Fonction pour vérifier si le profil est complet
-  const checkProfileCompletion = async (userId: string) => {
-    try {
-      const { data: profile, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-
-      if (error) {
-        console.warn('Erreur lors de la vérification du profil:', error);
-        return false;
-      }
-
-      // Vérifier si les champs essentiels sont remplis
-      const isComplete = profile && 
-        profile.first_name && 
-        profile.last_name && 
-        profile.age && 
-        profile.weight && 
-        profile.height;
-
-      return !!isComplete;
-    } catch (error) {
-      console.warn('Erreur lors de la vérification du profil:', error);
-      return false;
+  // Validation en temps réel
+  const isFormValid = useMemo(() => {
+    if (isSignUp) {
+      return (
+        formData.firstName.trim().length > 0 &&
+        formData.lastName.trim().length > 0 &&
+        formData.email.includes('@') &&
+        formData.email.includes('.') &&
+        formData.password.length >= 8 &&
+        formData.password === formData.confirmPassword
+      );
+    } else {
+      return (
+        formData.email.includes('@') &&
+        formData.email.includes('.') &&
+        formData.password.length >= 6
+      );
     }
-  };
+  }, [formData, isSignUp]);
 
-  // Gestion de la connexion
-  const handleLogin = async (data: LoginFormData) => {
+  // Handler de soumission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!isFormValid) {
+      setErrors(['Veuillez remplir tous les champs correctement']);
+      return;
+    }
+
     setIsLoading(true);
+    setErrors([]);
+
     try {
-      const { data: authData, error } = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
-      });
-
-      if (error) {
-        throw error;
-      }
-
-      if (authData.user) {
-        toast.success('Connexion réussie !', {
-          description: `Bienvenue ${authData.user.email}`,
+      if (isSignUp) {
+        // Inscription
+        const { data, error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              first_name: formData.firstName,
+              last_name: formData.lastName,
+              full_name: `${formData.firstName} ${formData.lastName}`
+            }
+          }
         });
 
-        // Vérifier si le profil est complet
-        const isProfileComplete = await checkProfileCompletion(authData.user.id);
-        
-        // Rediriger vers dashboard ou onboarding
-        setLocation(isProfileComplete ? '/dashboard' : '/onboarding');
-      }
-    } catch (error: any) {
-      console.error('Erreur de connexion:', error);
-      
-      let errorMessage = 'Erreur de connexion';
-      if (error.message?.includes('Invalid login credentials')) {
-        errorMessage = 'Email ou mot de passe incorrect';
-      } else if (error.message?.includes('Email not confirmed')) {
-        errorMessage = 'Veuillez confirmer votre email avant de vous connecter';
-      } else if (error.message?.includes('Too many requests')) {
-        errorMessage = 'Trop de tentatives. Veuillez réessayer plus tard';
-      }
+        if (error) {
+          throw error;
+        }
 
-      toast.error(errorMessage, {
-        description: 'Vérifiez vos identifiants et réessayez',
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Gestion de l'inscription
-  const handleRegister = async (data: RegisterFormData) => {
-    setIsLoading(true);
-    try {
-      const { data: authData, error } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
-        options: {
-          data: {
-            first_name: data.firstName,
-            last_name: data.lastName,
-            full_name: `${data.firstName} ${data.lastName}`,
-          },
-        },
-      });
-
-      if (error) {
-        throw error;
-      }
-
-      if (authData.user) {
-        toast.success('Inscription réussie !', {
-          description: 'Vérifiez votre email pour confirmer votre compte',
-        });
-
-        // Si l'email est confirmé automatiquement, rediriger vers onboarding
-        if (authData.user.email_confirmed_at) {
+        if (data.user) {
+          // Succès - redirection vers onboarding
           setLocation('/onboarding');
-        } else {
-          // Basculer vers l'onglet login avec un message
-          setActiveTab('login');
-          toast.info('Confirmation requise', {
-            description: 'Cliquez sur le lien dans votre email, puis connectez-vous',
-          });
+        }
+      } else {
+        // Connexion
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        if (data.user) {
+          // Succès - redirection vers dashboard
+          setLocation('/dashboard');
         }
       }
+
     } catch (error: any) {
-      console.error('Erreur d\'inscription:', error);
+      console.error('Erreur auth:', error);
       
-      let errorMessage = 'Erreur d\'inscription';
-      if (error.message?.includes('User already registered')) {
-        errorMessage = 'Un compte existe déjà avec cet email';
-      } else if (error.message?.includes('Password should be')) {
-        errorMessage = 'Le mot de passe ne respecte pas les critères de sécurité';
+      // Messages d'erreur en français
+      let errorMessage = 'Une erreur est survenue';
+      
+      if (error.message?.includes('Invalid login credentials')) {
+        errorMessage = 'Email ou mot de passe incorrect';
+      } else if (error.message?.includes('User already registered')) {
+        errorMessage = 'Cet email est déjà utilisé';
+      } else if (error.message?.includes('Password should be at least')) {
+        errorMessage = 'Le mot de passe doit contenir au moins 6 caractères';
       } else if (error.message?.includes('Invalid email')) {
         errorMessage = 'Format d\'email invalide';
+      } else if (error.message) {
+        errorMessage = error.message;
       }
-
-      toast.error(errorMessage, {
-        description: 'Veuillez corriger les erreurs et réessayer',
-      });
+      
+      setErrors([errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Connexion avec Google OAuth
-  const handleGoogleLogin = async () => {
-    setIsLoading(true);
+  // Handler pour changer les champs
+  const handleInputChange = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ 
+      ...prev, 
+      [field]: e.target.value 
+    }));
+    
+    // Effacer les erreurs quand l'utilisateur tape
+    if (errors.length > 0) {
+      setErrors([]);
+    }
+  };
+
+  // Connexion Google (optionnel)
+  const handleGoogleAuth = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`,
-        },
+          redirectTo: `${window.location.origin}/dashboard`
+        }
       });
 
       if (error) {
         throw error;
       }
-
-      // Note: La redirection se fait automatiquement avec OAuth
     } catch (error: any) {
-      console.error('Erreur connexion Google:', error);
-      toast.error('Erreur de connexion Google', {
-        description: 'Impossible de se connecter avec Google',
-      });
-      setIsLoading(false);
+      console.error('Erreur Google Auth:', error);
+      setErrors(['Erreur de connexion avec Google']);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 via-blue-600 to-purple-800 p-4">
-      <div className="w-full max-w-md space-y-8">
-        {/* Logo et titre */}
-        <div className="text-center space-y-6">
-          <div className="flex justify-center">
-            <div className="w-24 h-24 bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl flex items-center justify-center shadow-2xl transform transition-transform hover:scale-105 hover:rotate-3">
-              <Dumbbell className="text-white w-10 h-10" />
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center px-4 py-8">
+      <Card className="w-full max-w-md">
+        <CardHeader className="text-center">
+          {/* Logo et titre */}
+          <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+            <Dumbbell className="text-white" size={24} />
           </div>
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-white drop-shadow-lg">
-              MyFitHero
-            </h1>
-            <p className="text-blue-100 text-lg">
-              Votre coach fitness personnel
-            </p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">MyFitHero</h1>
+          <p className="text-gray-600">Votre coach fitness personnel</p>
+          
+          {/* Toggle Connexion/Inscription */}
+          <div className="flex bg-gray-100 rounded-xl p-1 mt-6">
+            <button
+              onClick={() => setIsSignUp(false)}
+              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                !isSignUp 
+                  ? 'bg-white text-gray-800 shadow-sm' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Connexion
+            </button>
+            <button
+              onClick={() => setIsSignUp(true)}
+              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                isSignUp 
+                  ? 'bg-white text-gray-800 shadow-sm' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Inscription
+            </button>
           </div>
-        </div>
-
-        {/* Card d'authentification */}
-        <Card className="backdrop-blur-lg bg-white/95 border-0 shadow-2xl rounded-3xl overflow-hidden">
-          <CardHeader className="space-y-1 pb-4 bg-gradient-to-r from-gray-50 to-white">
-            <CardTitle className="text-2xl text-center text-gray-800">
-              {activeTab === 'login' ? 'Connexion' : 'Créer un compte'}
-            </CardTitle>
-            <CardDescription className="text-center text-gray-600">
-              {activeTab === 'login' 
-                ? 'Connectez-vous à votre compte' 
-                : 'Rejoignez la communauté MyFitHero'
-              }
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent className="space-y-6 p-8">
-            <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'login' | 'register')}>
-              <TabsList className="grid w-full grid-cols-2 bg-gray-100 rounded-2xl p-1">
-                <TabsTrigger value="login" className="transition-all rounded-xl data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
-                  Connexion
-                </TabsTrigger>
-                <TabsTrigger value="register" className="transition-all rounded-xl data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
-                  Inscription
-                </TabsTrigger>
-              </TabsList>
-
-              {/* Onglet Connexion */}
-              <TabsContent value="login" className="space-y-6 mt-8">
-                <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="login-email" className="text-sm font-semibold text-gray-700">
-                      Email
-                    </Label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
-                      <Input
-                        id="login-email"
-                        type="email"
-                        placeholder="votre@email.com"
-                        className={`pl-12 h-14 rounded-2xl border-2 transition-all focus:ring-4 focus:ring-blue-500/20 ${loginForm.formState.errors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'}`}
-                        {...loginForm.register('email')}
-                      />
-                    </div>
-                    {loginForm.formState.errors.email && (
-                      <p className="text-sm text-red-500 flex items-center gap-1 mt-2">
-                        {loginForm.formState.errors.email.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="login-password" className="text-sm font-semibold text-gray-700">
-                      Mot de passe
-                    </Label>
-                    <div className="relative">
-                      <Lock className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
-                      <Input
-                        id="login-password"
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="••••••••"
-                        className={`pl-12 pr-12 h-14 rounded-2xl border-2 transition-all focus:ring-4 focus:ring-blue-500/20 ${loginForm.formState.errors.password ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'}`}
-                        {...loginForm.register('password')}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-4 h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors"
-                      >
-                        {showPassword ? <EyeOff /> : <Eye />}
-                      </button>
-                    </div>
-                    {loginForm.formState.errors.password && (
-                      <p className="text-sm text-red-500 flex items-center gap-1 mt-2">
-                        {loginForm.formState.errors.password.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full h-14 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl"
-                    disabled={isLoading || !loginForm.formState.isValid}
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        Connexion...
-                      </>
-                    ) : (
-                      'Se connecter'
-                    )}
-                  </Button>
-                </form>
-              </TabsContent>
-
-              {/* Onglet Inscription */}
-              <TabsContent value="register" className="space-y-6 mt-8">
-                <form onSubmit={registerForm.handleSubmit(handleRegister)} className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName" className="text-sm font-semibold text-gray-700">
-                        Prénom
-                      </Label>
-                      <div className="relative">
-                        <User className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
-                        <Input
-                          id="firstName"
-                          placeholder="Jean"
-                          className={`pl-12 h-14 rounded-2xl border-2 transition-all focus:ring-4 focus:ring-blue-500/20 ${registerForm.formState.errors.firstName ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'}`}
-                          {...registerForm.register('firstName')}
-                        />
-                      </div>
-                      {registerForm.formState.errors.firstName && (
-                        <p className="text-xs text-red-500 mt-2">
-                          {registerForm.formState.errors.firstName.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName" className="text-sm font-semibold text-gray-700">
-                        Nom
-                      </Label>
-                      <div className="relative">
-                        <User className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
-                        <Input
-                          id="lastName"
-                          placeholder="Dupont"
-                          className={`pl-12 h-14 rounded-2xl border-2 transition-all focus:ring-4 focus:ring-blue-500/20 ${registerForm.formState.errors.lastName ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'}`}
-                          {...registerForm.register('lastName')}
-                        />
-                      </div>
-                      {registerForm.formState.errors.lastName && (
-                        <p className="text-xs text-red-500 mt-2">
-                          {registerForm.formState.errors.lastName.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="register-email" className="text-sm font-semibold text-gray-700">
-                      Email
-                    </Label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
-                      <Input
-                        id="register-email"
-                        type="email"
-                        placeholder="votre@email.com"
-                        className={`pl-12 h-14 rounded-2xl border-2 transition-all focus:ring-4 focus:ring-blue-500/20 ${registerForm.formState.errors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'}`}
-                        {...registerForm.register('email')}
-                      />
-                    </div>
-                    {registerForm.formState.errors.email && (
-                      <p className="text-sm text-red-500 mt-2">
-                        {registerForm.formState.errors.email.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="register-password" className="text-sm font-semibold text-gray-700">
-                      Mot de passe
-                    </Label>
-                    <div className="relative">
-                      <Lock className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
-                      <Input
-                        id="register-password"
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="••••••••"
-                        className={`pl-12 pr-12 h-14 rounded-2xl border-2 transition-all focus:ring-4 focus:ring-blue-500/20 ${registerForm.formState.errors.password ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'}`}
-                        {...registerForm.register('password')}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-4 h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors"
-                      >
-                        {showPassword ? <EyeOff /> : <Eye />}
-                      </button>
-                    </div>
-                    {registerForm.formState.errors.password && (
-                      <p className="text-xs text-red-500 mt-2">
-                        {registerForm.formState.errors.password.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword" className="text-sm font-semibold text-gray-700">
-                      Confirmer le mot de passe
-                    </Label>
-                    <div className="relative">
-                      <Lock className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
-                      <Input
-                        id="confirmPassword"
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        placeholder="••••••••"
-                        className={`pl-12 pr-12 h-14 rounded-2xl border-2 transition-all focus:ring-4 focus:ring-blue-500/20 ${registerForm.formState.errors.confirmPassword ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-blue-500'}`}
-                        {...registerForm.register('confirmPassword')}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-4 top-4 h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors"
-                      >
-                        {showConfirmPassword ? <EyeOff /> : <Eye />}
-                      </button>
-                    </div>
-                    {registerForm.formState.errors.confirmPassword && (
-                      <p className="text-sm text-red-500 mt-2">
-                        {registerForm.formState.errors.confirmPassword.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full h-14 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl"
-                    disabled={isLoading || !registerForm.formState.isValid}
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        Inscription...
-                      </>
-                    ) : (
-                      'Créer mon compte'
-                    )}
-                  </Button>
-                </form>
-              </TabsContent>
-            </Tabs>
-
-            {/* Séparateur et OAuth */}
-            <div className="space-y-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <Separator className="w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
-                </div>
-                <div className="relative flex justify-center text-sm uppercase">
-                  <span className="bg-white px-4 text-gray-500 font-medium">
-                    Ou continuer avec
-                  </span>
+        </CardHeader>
+        
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* Affichage des erreurs */}
+            {errors.length > 0 && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start space-x-3">
+                <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={16} />
+                <div className="flex-1">
+                  {errors.map((error, index) => (
+                    <p key={index} className="text-red-700 text-sm">{error}</p>
+                  ))}
                 </div>
               </div>
+            )}
 
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full h-14 rounded-2xl border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 transform hover:scale-[1.02]"
-                onClick={handleGoogleLogin}
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <Loader2 className="mr-3 h-5 w-5 animate-spin" />
-                ) : (
-                  <Chrome className="mr-3 h-5 w-5 text-red-500" />
-                )}
-                <span className="font-medium">Continuer avec Google</span>
-              </Button>
+            {/* Champs pour inscription uniquement */}
+            {isSignUp && (
+              <>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">Prénom</Label>
+                    <Input
+                      id="firstName"
+                      type="text"
+                      value={formData.firstName}
+                      onChange={handleInputChange('firstName')}
+                      placeholder="Chris"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Nom</Label>
+                    <Input
+                      id="lastName"
+                      type="text"
+                      value={formData.lastName}
+                      onChange={handleInputChange('lastName')}
+                      placeholder="Topher"
+                      required
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Email */}
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange('email')}
+                placeholder="votre@email.com"
+                required
+              />
             </div>
 
-            {/* Footer */}
-            <div className="text-center text-sm text-gray-600">
-              {activeTab === 'login' ? (
-                <p>
-                  Pas encore de compte ?{' '}
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab('register')}
-                    className="text-purple-600 hover:text-purple-700 font-semibold transition-colors"
-                  >
-                    S'inscrire
-                  </button>
-                </p>
-              ) : (
-                <p>
-                  Déjà un compte ?{' '}
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab('login')}
-                    className="text-purple-600 hover:text-purple-700 font-semibold transition-colors"
-                  >
-                    Se connecter
-                  </button>
+            {/* Mot de passe */}
+            <div className="space-y-2">
+              <Label htmlFor="password">Mot de passe</Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={handleInputChange('password')}
+                  placeholder="••••••••"
+                  minLength={isSignUp ? 8 : 6}
+                  required
+                  className="pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+              {isSignUp && (
+                <p className="text-xs text-gray-500">
+                  Le mot de passe doit contenir au moins 8 caractères
                 </p>
               )}
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Note de sécurité */}
-        <div className="text-center text-sm text-blue-100/80">
-          <p>
-            En vous inscrivant, vous acceptez nos{' '}
-            <a href="/terms" className="text-white hover:text-blue-100 underline font-medium">
-              conditions d'utilisation
-            </a>{' '}
-            et notre{' '}
-            <a href="/privacy" className="text-white hover:text-blue-100 underline font-medium">
-              politique de confidentialité
-            </a>
-          </p>
-        </div>
-      </div>
+            {/* Confirmation mot de passe (inscription uniquement) */}
+            {isSignUp && (
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
+                <div className="relative">
+                  <Input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange('confirmPassword')}
+                    placeholder="••••••••"
+                    required
+                    className="pr-12"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  >
+                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                  <p className="text-xs text-red-500">
+                    Les mots de passe ne correspondent pas
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Bouton de soumission */}
+            <Button
+              type="submit"
+              disabled={!isFormValid || isLoading}
+              className="w-full h-12"
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <Loader2 className="animate-spin" size={16} />
+                  <span>{isSignUp ? 'Création en cours...' : 'Connexion...'}</span>
+                </div>
+              ) : (
+                isSignUp ? 'Créer mon compte' : 'Se connecter'
+              )}
+            </Button>
+
+            {/* Séparateur */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-white px-2 text-gray-500">Ou continuer avec</span>
+              </div>
+            </div>
+
+            {/* Google Auth */}
+            <Button
+              type="button"
+              onClick={handleGoogleAuth}
+              variant="outline"
+              className="w-full h-12 flex items-center justify-center space-x-2"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              <span>Google</span>
+            </Button>
+
+          </form>
+
+          {/* CGU et politique de confidentialité */}
+          {isSignUp && (
+            <p className="text-xs text-gray-500 text-center mt-6">
+              En vous inscrivant, vous acceptez nos{' '}
+              <a href="#" className="text-blue-600 hover:underline">conditions d'utilisation</a>
+              {' '}et notre{' '}
+              <a href="#" className="text-blue-600 hover:underline">politique de confidentialité</a>
+            </p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
-};
-
-export default AuthPage;
+}
