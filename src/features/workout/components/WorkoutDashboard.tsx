@@ -197,8 +197,8 @@ export default function WorkoutDashboard() {
     }
   }, [toast]);
 
-  const loadWorkoutStats = async (_userId: string): Promise<WorkoutStats> => {
-    const { data: _data, error: _error } = await supabase
+  const loadWorkoutStats = async (userId: string): Promise<WorkoutStats> => {
+    const { data, error } = await supabase
       .from('workouts')
       .select(
         `
@@ -216,16 +216,19 @@ export default function WorkoutDashboard() {
 
     if (error) throw error;
 
+    // Vérifier que data existe
+    const workouts = data || [];
+
     // Calculs statistiques avec JavaScript optimisé
-    const totalWorkouts = data.length;
-    const totalMinutes = data.reduce((sum, w) => sum + (w.duration_minutes || 0), 0);
-    const totalCalories = data.reduce((sum, w) => sum + (w.calories_burned || 0), 0);
+    const totalWorkouts = workouts.length;
+    const totalMinutes = workouts.reduce((sum, w) => sum + (w.duration_minutes || 0), 0);
+    const totalCalories = workouts.reduce((sum, w) => sum + (w.calories_burned || 0), 0);
     const avgDuration = totalWorkouts > 0 ? totalMinutes / totalWorkouts : 0;
 
     // Progression hebdomadaire
     const weekAgo = new Date();
     weekAgo.setDate(weekAgo.getDate() - 7);
-    const weeklyProgress = data.filter(w => new Date(w.completed_at) >= weekAgo).length;
+    const weeklyProgress = workouts.filter(w => new Date(w.completed_at) >= weekAgo).length;
 
     return {
       totalWorkouts,
@@ -233,14 +236,14 @@ export default function WorkoutDashboard() {
       totalCalories,
       avgDuration,
       weeklyProgress,
-      currentStreak: calculateStreak(data),
+      currentStreak: calculateStreak(workouts),
       favoriteExercise: 'Développé couché', // À calculer depuis exercises
       strongestLift: { exercise: 'Squat', weight: 120 }, // À calculer
     };
   };
 
-  const loadRecentWorkouts = async (_userId: string): Promise<WorkoutSession[]> => {
-    const { data: _data, error: _error } = await supabase
+  const loadRecentWorkouts = async (userId: string): Promise<WorkoutSession[]> => {
+    const { data, error } = await supabase
       .from('workouts')
       .select('*')
       .eq('user_id', userId)
@@ -251,21 +254,46 @@ export default function WorkoutDashboard() {
     return data || [];
   };
 
-  const loadWorkoutPlans = async (_userId: string): Promise<WorkoutPlan[]> => {
-    // Simulation - À adapter selon votre structure de table
-    return [
-      {
-        id: '1',
-        name: 'Force & Puissance',
-        description: 'Programme de 8 semaines pour développer la force',
-        duration_weeks: 8,
-        difficulty: 'intermediate',
-        workouts_per_week: 4,
-        target_muscles: ['chest', 'back', 'legs'],
-        created_at: new Date(),
-        is_active: true,
-      },
-    ];
+  const loadWorkoutPlans = async (userId: string): Promise<WorkoutPlan[]> => {
+    // Utiliser la nouvelle table workout_plans
+    const { data, error } = await supabase
+      .from('workout_plans')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('is_active', true)
+      .order('created_at', { ascending: false })
+      .limit(10);
+
+    if (error) {
+      console.error('Erreur chargement plans:', error);
+      // Retourner des données de démonstration en cas d'erreur
+      return [
+        {
+          id: '1',
+          name: 'Force & Puissance',
+          description: 'Programme de 8 semaines pour développer la force',
+          duration_weeks: 8,
+          difficulty: 'intermediate',
+          workouts_per_week: 4,
+          target_muscles: ['chest', 'back', 'legs'],
+          created_at: new Date(),
+          is_active: true,
+        },
+      ];
+    }
+
+    // Adapter les données de la nouvelle structure vers l'ancienne interface
+    return (data || []).map(plan => ({
+      id: plan.id,
+      name: plan.name,
+      description: plan.description || '',
+      duration_weeks: Math.ceil((plan.estimated_duration_minutes || 60) / 60 / 4), // Estimation
+      difficulty: plan.difficulty || 'intermediate',
+      workouts_per_week: 4, // Valeur par défaut
+      target_muscles: plan.muscle_groups || [],
+      created_at: new Date(plan.created_at),
+      is_active: plan.is_active,
+    }));
   };
 
   const calculateStreak = (workouts: unknown[]): number => {
