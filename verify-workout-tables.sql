@@ -55,36 +55,46 @@ ORDER BY tablename, policyname;
 -- Test d'insertion (nécessite un utilisateur authentifié)
 SELECT 'Test d''insertion...' as etape;
 
--- Insérer un plan de test si un utilisateur existe
-INSERT INTO public.workout_plans (
-  user_id,
-  name,
-  description,
-  exercises,
-  estimated_duration_minutes,
-  difficulty,
-  workout_type
-)
-SELECT 
-  u.id,
-  'Plan de Test - Débutant',
-  'Plan d''entraînement de test pour vérifier le système',
-  '[
-    {
-      "exerciseId": "push-ups",
-      "name": "Pompes",
-      "targetSets": 3,
-      "targetReps": [8, 12],
-      "restTime": 60,
-      "type": "strength"
-    }
-  ]'::jsonb,
-  30,
-  'beginner',
-  'strength'
-FROM auth.users u
-LIMIT 1
-ON CONFLICT DO NOTHING;
+-- Vérifier qu'il y a des utilisateurs
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM auth.users LIMIT 1) THEN
+        -- Insérer un plan de test si un utilisateur existe
+        INSERT INTO public.workout_plans (
+          user_id,
+          name,
+          description,
+          exercises,
+          estimated_duration_minutes,
+          difficulty,
+          workout_type
+        )
+        SELECT 
+          u.id,
+          'Plan de Test - Débutant',
+          'Plan d''entraînement de test pour vérifier le système',
+          '[
+            {
+              "exerciseId": "push-ups",
+              "name": "Pompes",
+              "targetSets": 3,
+              "targetReps": [8, 12],
+              "restTime": 60,
+              "type": "strength"
+            }
+          ]'::jsonb,
+          30,
+          'beginner',
+          'strength'
+        FROM auth.users u
+        LIMIT 1
+        ON CONFLICT DO NOTHING;
+        
+        RAISE NOTICE 'Plan de test inséré avec succès';
+    ELSE
+        RAISE NOTICE 'Aucun utilisateur trouvé - ignoré l''insertion de test';
+    END IF;
+END $$;
 
 -- Vérifier l'insertion
 SELECT 

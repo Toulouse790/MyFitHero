@@ -1,10 +1,12 @@
 -- ============================================================================
--- SCRIPT SQL SIMPLIFIÉ POUR MYFITHERO WORKOUT SYSTEM
--- Créer les tables une par une sans dépendances circulaires
+-- SCRIPT SQL CORRIGÉ POUR MYFITHERO WORKOUT SYSTEM
+-- Version sans erreurs pour Supabase
 -- ============================================================================
 
+BEGIN;
+
 -- ============================================================================
--- ÉTAPE 1: CRÉER LA TABLE WORKOUT_PLANS EN PREMIER
+-- ÉTAPE 1: CRÉER LA TABLE WORKOUT_PLANS
 -- ============================================================================
 
 CREATE TABLE IF NOT EXISTS public.workout_plans (
@@ -105,7 +107,7 @@ CREATE TABLE IF NOT EXISTS public.workout_sessions (
 CREATE TABLE IF NOT EXISTS public.workout_sets (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   session_id uuid NOT NULL REFERENCES public.workout_sessions(id) ON DELETE CASCADE,
-  exercise_id uuid NOT NULL REFERENCES public.exercises_library(id),
+  exercise_id uuid NOT NULL,
   user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   
   -- Position dans la session
@@ -270,13 +272,15 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- Triggers pour updated_at
+-- Supprimer les triggers existants s'ils existent
 DROP TRIGGER IF EXISTS update_workout_sessions_updated_at ON public.workout_sessions;
+DROP TRIGGER IF EXISTS update_workout_plans_updated_at ON public.workout_plans;
+
+-- Créer les nouveaux triggers
 CREATE TRIGGER update_workout_sessions_updated_at 
   BEFORE UPDATE ON public.workout_sessions 
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
-DROP TRIGGER IF EXISTS update_workout_plans_updated_at ON public.workout_plans;
 CREATE TRIGGER update_workout_plans_updated_at 
   BEFORE UPDATE ON public.workout_plans 
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
@@ -292,64 +296,66 @@ ALTER TABLE public.workout_sets ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.session_metrics ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.sync_queue ENABLE ROW LEVEL SECURITY;
 
--- Policies pour workout_plans
+-- Supprimer les policies existantes
 DROP POLICY IF EXISTS "Users can view their own workout plans" ON public.workout_plans;
+DROP POLICY IF EXISTS "Users can manage their own workout plans" ON public.workout_plans;
+DROP POLICY IF EXISTS "Users can view their own workout sessions" ON public.workout_sessions;
+DROP POLICY IF EXISTS "Users can manage their own workout sessions" ON public.workout_sessions;
+DROP POLICY IF EXISTS "Users can view their own workout sets" ON public.workout_sets;
+DROP POLICY IF EXISTS "Users can manage their own workout sets" ON public.workout_sets;
+DROP POLICY IF EXISTS "Users can view their own session metrics" ON public.session_metrics;
+DROP POLICY IF EXISTS "Users can manage their own session metrics" ON public.session_metrics;
+DROP POLICY IF EXISTS "Users can view their own sync queue" ON public.sync_queue;
+DROP POLICY IF EXISTS "Users can manage their own sync queue" ON public.sync_queue;
+
+-- Créer les nouvelles policies
+
+-- Policies pour workout_plans
 CREATE POLICY "Users can view their own workout plans" ON public.workout_plans
     FOR SELECT USING (auth.uid() = user_id OR is_public = true);
 
-DROP POLICY IF EXISTS "Users can manage their own workout plans" ON public.workout_plans;
 CREATE POLICY "Users can manage their own workout plans" ON public.workout_plans
     FOR ALL USING (auth.uid() = user_id);
 
 -- Policies pour workout_sessions
-DROP POLICY IF EXISTS "Users can view their own workout sessions" ON public.workout_sessions;
 CREATE POLICY "Users can view their own workout sessions" ON public.workout_sessions
     FOR SELECT USING (auth.uid() = user_id);
 
-DROP POLICY IF EXISTS "Users can manage their own workout sessions" ON public.workout_sessions;
 CREATE POLICY "Users can manage their own workout sessions" ON public.workout_sessions
     FOR ALL USING (auth.uid() = user_id);
 
 -- Policies pour workout_sets
-DROP POLICY IF EXISTS "Users can view their own workout sets" ON public.workout_sets;
 CREATE POLICY "Users can view their own workout sets" ON public.workout_sets
     FOR SELECT USING (auth.uid() = user_id);
 
-DROP POLICY IF EXISTS "Users can manage their own workout sets" ON public.workout_sets;
 CREATE POLICY "Users can manage their own workout sets" ON public.workout_sets
     FOR ALL USING (auth.uid() = user_id);
 
 -- Policies pour session_metrics
-DROP POLICY IF EXISTS "Users can view their own session metrics" ON public.session_metrics;
 CREATE POLICY "Users can view their own session metrics" ON public.session_metrics
     FOR SELECT USING (auth.uid() = user_id);
 
-DROP POLICY IF EXISTS "Users can manage their own session metrics" ON public.session_metrics;
 CREATE POLICY "Users can manage their own session metrics" ON public.session_metrics
     FOR ALL USING (auth.uid() = user_id);
 
 -- Policies pour sync_queue
-DROP POLICY IF EXISTS "Users can view their own sync queue" ON public.sync_queue;
 CREATE POLICY "Users can view their own sync queue" ON public.sync_queue
     FOR SELECT USING (auth.uid() = user_id);
 
-DROP POLICY IF EXISTS "Users can manage their own sync queue" ON public.sync_queue;
 CREATE POLICY "Users can manage their own sync queue" ON public.sync_queue
     FOR ALL USING (auth.uid() = user_id);
 
--- ============================================================================
--- ÉTAPE 9: VÉRIFICATION FINALE
--- ============================================================================
+COMMIT;
 
--- Vérifier que toutes les tables ont été créées
-SELECT 
-  schemaname,
-  tablename,
-  tableowner
-FROM pg_tables 
-WHERE schemaname = 'public' 
-  AND tablename IN ('workout_plans', 'workout_sessions', 'workout_sets', 'session_metrics', 'sync_queue')
-ORDER BY tablename;
+-- ============================================================================
+-- VÉRIFICATION FINALE
+-- ============================================================================
 
 -- Afficher un message de confirmation
 SELECT 'Tables workout créées avec succès!' as status;
+
+-- Compter les tables créées
+SELECT COUNT(*) as tables_created
+FROM information_schema.tables 
+WHERE table_schema = 'public' 
+  AND table_name IN ('workout_plans', 'workout_sessions', 'workout_sets', 'session_metrics', 'sync_queue');
