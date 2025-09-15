@@ -1,16 +1,10 @@
 import { X, Search } from 'lucide-react';
 import React, { useState, useCallback } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { create } from 'zustand';
 import { toast } from 'sonner';
-
-// ---- Supabase client ----
-const supabaseUrl = 'https://zfmlzxhxhaezdkzjanbc.supabase.co';
-const supabaseAnonKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmbWx6eGh4aGFlemRremphbmJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NDc4MzIsImV4cCI6MjA2NjMyMzgzMn0.x6GpX8ep6YxVEZQt7pcH0SIWzxhTYcXLnaVmD5IGErw';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // ---- TypeScript types ----
 interface Challenge {

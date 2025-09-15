@@ -1,18 +1,12 @@
 import { X, Heart, Search, Check } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // src/pages/ExercisesPage.tsx
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { debounce } from 'lodash-es';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-// ---------------- supabase client ----------------
-const supabaseUrl = 'https://zfmlzxhxhaezdkzjanbc.supabase.co';
-const supabaseAnonKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmbWx6eGh4aGFlemRremphbmJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NDc4MzIsImV4cCI6MjA2NjMyMzgzMn0.x6GpX8ep6YxVEZQt7pcH0SIWzxhTYcXLnaVmD5IGErw'; // à remplacer réels
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // ---------------- Typescript Types ----------------
 

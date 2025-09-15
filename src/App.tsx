@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Router, Route, Switch, Redirect } from 'wouter';
 import { useLocation } from 'wouter';
-import { createClient, Session } from '@supabase/supabase-js';
+import { Session } from '@supabase/supabase-js';
 import { ThemeProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 
 // Configuration et services core
 import { env } from './core/config/env.config';
+import { supabase } from './lib/supabase';
 import LoadingScreen from './components/LoadingScreen';
 
 // Lazy loading des composants principaux
@@ -43,9 +44,6 @@ interface AuthState {
   isAuthenticated: boolean;
   error: string | null;
 }
-
-// Client Supabase
-const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
 
 // QueryClient pour React Query
 const queryClient = new QueryClient({
