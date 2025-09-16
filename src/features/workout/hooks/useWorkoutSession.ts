@@ -44,4 +44,4 @@ export const useWorkoutSession = () => {
 };
 
 // Export des types pour réutilisation
-export type { WorkoutSession, WorkoutExercise, ExerciseSet } from '@/shared/types/workout';
+export type { WorkoutSession, WorkoutExercise, ExerciseSet } from '../../../shared/types/workout';

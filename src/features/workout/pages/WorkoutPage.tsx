@@ -67,6 +67,18 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
   const [showSessionSummary, setShowSessionSummary] = useState(false);
   const [__error, __setError] = useState<string | null>(null);
   const [isLoading, __setIsLoading] = useState(false);
+  
+  // États pour la propagation des poids
+  const [showPropagationModal, setShowPropagationModal] = useState(false);
+  const [propagationData, setPropagationData] = useState<{
+    exerciseId: string;
+    currentSetIndex: number;
+    field: 'reps' | 'weight' | 'duration';
+    newValue: number;
+    affectedSets: number;
+    isIncrement: boolean;
+  } | null>(null);
+  const [completingSet, setCompletingSet] = useState<{exerciseId: string, setIndex: number} | null>(null);
 
   // Exercices par défaut
   const defaultExercises: WorkoutExercise[] = [
@@ -132,18 +144,39 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     // Charger avec les données de la dernière session
     const exercisesToAdd = await loadExercisesFromLastSession(workoutName);
 
+    // Charger les poids préférés depuis la dernière session
+    const savedWeights = JSON.parse(localStorage.getItem('preferredWeights') || '{}');
+    
+    // Appliquer les poids préférés aux exercices
+    const exercisesWithPreferredWeights = exercisesToAdd.map(exercise => ({
+      ...exercise,
+      sets: exercise.sets.map(set => ({
+        ...set,
+        weight: savedWeights[exercise.name] || set.weight
+      }))
+    }));
+
+    // Si pas d'exercices précédents, appliquer aux exercices par défaut
+    const finalExercises = exercisesWithPreferredWeights.length > 0 
+      ? exercisesWithPreferredWeights 
+      : defaultExercises.map(exercise => ({
+          ...exercise,
+          sets: exercise.sets.map(set => ({
+            ...set,
+            weight: savedWeights[exercise.name] || set.weight
+          }))
+        }));
+
     // Démarrer la session avec les exercices
     await startSession(workoutName, {
       workout_type: 'strength',
       difficulty: 'intermediate',
-      exercises: exercisesToAdd.length > 0 ? exercisesToAdd : defaultExercises,
+      exercises: finalExercises,
     });
 
     // Ouvrir le premier exercice par défaut
-    if (exercisesToAdd.length > 0) {
-      setExpandedExercise(exercisesToAdd[0].id);
-    } else if (defaultExercises.length > 0) {
-      setExpandedExercise(defaultExercises[0].name);
+    if (finalExercises.length > 0) {
+      setExpandedExercise(finalExercises[0].id || finalExercises[0].name);
     }
   };
 
@@ -203,16 +236,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     setIndex: number,
     field: 'reps' | 'weight' | 'duration'
   ) => {
-    const exercise = currentSession?.exercises.find(e => e.id === exerciseId);
-    const set = exercise?.sets[setIndex];
-
-    if (set) {
-      const currentValue = set[field] || 0;
-      const increment = field === 'weight' ? 2.5 : 1;
-      updateExerciseSet(exerciseId, setIndex, {
-        [field]: currentValue + increment,
-      });
-    }
+    handleWeightPropagation(exerciseId, setIndex, field, true);
   };
 
   const decrementSet = (
@@ -220,17 +244,84 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     setIndex: number,
     field: 'reps' | 'weight' | 'duration'
   ) => {
-    const exercise = currentSession?.exercises.find(e => e.id === exerciseId);
-    const set = exercise?.sets[setIndex];
+    handleWeightPropagation(exerciseId, setIndex, field, false);
+  };
 
-    if (set) {
-      const currentValue = set[field] || 0;
-      const decrement = field === 'weight' ? 2.5 : 1;
-      const newValue = Math.max(0, currentValue - decrement);
-      updateExerciseSet(exerciseId, setIndex, {
-        [field]: newValue,
-      });
+  // Fonction pour gérer la propagation intelligente des poids
+  const handleWeightPropagation = (
+    exerciseId: string,
+    setIndex: number,
+    field: 'reps' | 'weight' | 'duration',
+    increment: boolean
+  ) => {
+    const exercise = currentSession?.exercises.find(e => e.id === exerciseId);
+    if (!exercise) return;
+
+    const currentSet = exercise.sets[setIndex];
+    if (!currentSet) return;
+
+    // Appliquer le changement au set actuel
+    const currentValue = currentSet[field] || 0;
+    const change = field === 'weight' ? 2.5 : 1;
+    const newValue = increment 
+      ? currentValue + change 
+      : Math.max(0, currentValue - change);
+
+    updateExerciseSet(exerciseId, setIndex, {
+      [field]: newValue,
+    });
+
+    // Si c'est un changement de poids et qu'il y a des sets suivants non complétés
+    if (field === 'weight' && setIndex < exercise.sets.length - 1) {
+      const remainingSets = exercise.sets.slice(setIndex + 1);
+      const uncompletedSets = remainingSets.filter(set => !set.completed);
+      
+      if (uncompletedSets.length > 0) {
+        setPropagationData({
+          exerciseId,
+          currentSetIndex: setIndex,
+          field,
+          newValue,
+          affectedSets: uncompletedSets.length,
+          isIncrement: increment
+        });
+        setShowPropagationModal(true);
+      }
     }
+  };
+
+  // Fonction pour appliquer la propagation après confirmation
+  const applyPropagation = () => {
+    if (!propagationData || !currentSession) return;
+
+    const { exerciseId, currentSetIndex, field, newValue } = propagationData;
+    const exercise = currentSession.exercises.find(e => e.id === exerciseId);
+    
+    if (exercise) {
+      // Appliquer le nouveau poids à tous les sets suivants non complétés
+      exercise.sets.forEach((set, index) => {
+        if (index > currentSetIndex && !set.completed) {
+          updateExerciseSet(exerciseId, index, {
+            [field]: newValue,
+          });
+        }
+      });
+
+      // Sauvegarder les préférences pour la prochaine session
+      const exerciseName = exercise.name;
+      const savedWeights = JSON.parse(localStorage.getItem('preferredWeights') || '{}');
+      savedWeights[exerciseName] = newValue;
+      localStorage.setItem('preferredWeights', JSON.stringify(savedWeights));
+    }
+
+    setShowPropagationModal(false);
+    setPropagationData(null);
+  };
+
+  // Fonction pour refuser la propagation
+  const cancelPropagation = () => {
+    setShowPropagationModal(false);
+    setPropagationData(null);
   };
 
   // Timer pour suivre le temps d'entraînement
@@ -270,12 +361,45 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     return <div>Loading...</div>;
   }
 
+  // Navigation retour intelligente
+  const handleBackNavigation = () => {
+    if (isSessionActive && currentSession?.status === 'active') {
+      // Confirmer avant de quitter une session active
+      if (window.confirm('Voulez-vous vraiment quitter cette session d\'entraînement en cours ? Votre progression sera sauvegardée.')) {
+        // Sauvegarder avant de quitter
+        if (currentSession) {
+          localStorage.setItem('myfithero-workout-draft', JSON.stringify({
+            session: currentSession,
+            timestamp: Date.now(),
+            status: 'paused'
+          }));
+        }
+        cancelSession();
+        setLocation('/dashboard');
+      }
+    } else {
+      setLocation('/dashboard');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-500 to-red-500 pb-20">
-      {/* Header - Card blanche centrée */}
+      {/* Header avec bouton retour - Card blanche centrée */}
       <div className="p-4">
         <Card className="bg-white shadow-xl rounded-2xl p-8 max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-6">
+            {/* Bouton retour amélioré */}
+            <Button 
+              variant="outline"
+              onClick={handleBackNavigation}
+              className="flex items-center space-x-2 border-gray-300 hover:bg-gray-50"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              <span>{isSessionActive && currentSession?.status === 'active' ? 'Quitter Session' : 'Retour'}</span>
+            </Button>
+            
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
                 <Dumbbell className="text-white" size={28} />
@@ -801,6 +925,42 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
               <Button onClick={() => setShowSessionSummary(false)} className="w-full">
                 Fermer
               </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Modal de propagation des poids */}
+        <Dialog open={showPropagationModal} onOpenChange={setShowPropagationModal}>
+          <DialogContent className="sm:max-w-md">
+            <div className="space-y-4">
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-foreground">
+                  Propagation automatique
+                </h3>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Voulez-vous appliquer ce {propagationData?.isIncrement ? 'nouveau poids' : 'poids réduit'} 
+                  {' '}({propagationData?.newValue}kg) aux {propagationData?.affectedSets} séries restantes ?
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Ce réglage sera également mémorisé pour votre prochaine session.
+                </p>
+              </div>
+
+              <div className="flex space-x-3">
+                <Button 
+                  variant="outline" 
+                  onClick={cancelPropagation}
+                  className="flex-1"
+                >
+                  Non, garder séparément
+                </Button>
+                <Button 
+                  onClick={applyPropagation}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                >
+                  Oui, appliquer à tout
+                </Button>
+              </div>
             </div>
           </DialogContent>
         </Dialog>
