@@ -1,6 +1,6 @@
 // client/src/services/usePositions.ts
-import { supabase } from '@/lib/supabase';
-import { useToast } from '@/shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+// Note: useToast peut être importé plus tard si nécessaire depuis shared/hooks
 
 const CACHE_TTL = 5 * 60_000; // 5 minutes
 

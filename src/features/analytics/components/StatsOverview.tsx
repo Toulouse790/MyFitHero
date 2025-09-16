@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// client/src/components/StatsOverview.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
 import {
   TrendingUp,
+  TrendingDown,
   Flame,
   Target,
   Calendar,
@@ -14,11 +13,38 @@ import {
   Trophy,
   Star,
   Zap,
+  Activity,
+  BarChart3,
+  Award,
+  Clock,
+  Heart,
+  Brain,
+  Shield
 } from 'lucide-react';
-import { useToast } from '@/shared/hooks/use-toast';
-import { UserDataService, UserStats } from '@/lib/services/userDataService';
-import { BadgeService } from '@/lib/services/badgeService';
-import { supabase } from '@/lib/supabase';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Button } from '../../../components/ui/button';
+import { supabase } from '../../../lib/supabase';
+
+// Types pour les statistiques utilisateur MyFitHero
+interface UserStats {
+  userId: string;
+  totalWorkouts: number;
+  totalCaloriesBurned: number;
+  averageWorkoutDuration: number;
+  streakDays: number;
+  longestStreak: number;
+  totalNutritionLogs: number;
+  averageSleepQuality: number;
+  averageHydrationScore: number;
+  totalBadges: number;
+  totalXP: number;
+  level: number;
+  healthScore: number;
+  lastActivityDate: Date | null;
+  joinDate: Date;
+  updatedAt: Date;
+}
 
 interface StatsOverviewProps {
   className?: string;

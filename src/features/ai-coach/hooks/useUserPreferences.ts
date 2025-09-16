@@ -1,11 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  UnitSystem,
-  UnitPreferences,
-  getUnitSystemFromLocale,
-  getUnitPreferences,
-} from '@/utils/unitConversion';
+
+// Interface pour les systèmes d'unités
+export type UnitSystem = 'metric' | 'imperial';
+
+export interface UnitPreferences {
+  weight: 'kg' | 'lbs';
+  height: 'cm' | 'ft';
+  distance: 'km' | 'mi';
+  temperature: 'celsius' | 'fahrenheit';
+  liquid: 'ml' | 'oz';
+}
+
+// Fonction utilitaire pour obtenir les préférences d'unités
+export const getUnitPreferences = (system: UnitSystem): UnitPreferences => {
+  if (system === 'metric') {
+    return {
+      weight: 'kg',
+      height: 'cm',
+      distance: 'km',
+      temperature: 'celsius',
+      liquid: 'ml',
+    };
+  } else {
+    return {
+      weight: 'lbs',
+      height: 'ft',
+      distance: 'mi',
+      temperature: 'fahrenheit',
+      liquid: 'oz',
+    };
+  }
+};
+
+// Fonction pour obtenir le système d'unités depuis la locale
+export const getUnitSystemFromLocale = (locale: string): UnitSystem => {
+  const metricCountries = ['fr', 'de', 'es', 'it', 'ca', 'au', 'nz'];
+  const countryCode = locale.split('-')[0].toLowerCase();
+  return metricCountries.includes(countryCode) ? 'metric' : 'imperial';
+};
 
 export interface UserPreferences {
   language: string;
