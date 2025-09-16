@@ -162,25 +162,25 @@ export const CRITICAL_USER_JOURNEYS: RouteTest[] = [
 export const USER_JOURNEYS = {
   // 🎯 ACQUISITION (Non-connecté → Inscription)
   acquisition: [
-    '/' → '/register' → '/onboarding' → '/dashboard'
+    '/ → /register → /onboarding → /dashboard'
   ],
   
   // 🚀 ACTIVATION (Nouveau utilisateur → Premier usage)
   activation: [
-    '/login' → '/onboarding' → '/dashboard' → '/workouts'
+    '/login → /onboarding → /dashboard → /workouts'
   ],
   
   // 💪 ENGAGEMENT (Utilisateur actif → Usage régulier)
   engagement: [
-    '/dashboard' → '/workouts' → '/analytics' → '/ai-coach',
-    '/dashboard' → '/nutrition' → '/sleep' → '/analytics',
-    '/workouts' → '/social' → '/profile' → '/settings'
+    '/dashboard → /workouts → /analytics → /ai-coach',
+    '/dashboard → /nutrition → /sleep → /analytics',
+    '/workouts → /social → /profile → /settings'
   ],
   
   // 🌟 RETENTION (Utilisateur fidèle → Ambassadeur)
   retention: [
-    '/analytics' → '/social' → '/social/challenges',
-    '/profile' → '/wearables' → '/analytics' → '/ai-coach'
+    '/analytics → /social → /social/challenges',
+    '/profile → /wearables → /analytics → /ai-coach'
   ]
 };
 

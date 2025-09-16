@@ -1,8 +1,7 @@
 import { Scale, Heart, Check } from 'lucide-react';
 // types/supabase.ts
 
-// Imports des nouveaux types workout
-export * from './workout.types';
+// Types pour l'intégration Supabase avec MyFitHero
 
 export interface UserProfile {
   id: string;
@@ -105,6 +104,7 @@ export interface ExerciseSet {
   duration_seconds: number | null;
   distance_meters: number | null;
   rest_seconds: number | null;
+  completed: boolean;
 }
 
 export interface UserNutrition {

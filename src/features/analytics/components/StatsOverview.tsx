@@ -25,20 +25,62 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
 import { supabase } from '../../../lib/supabase';
+import { useToast } from '../../../shared/hooks/use-toast';
+
+// Services temporaires (à implémenter)
+const UserDataService = {
+  getUserStats: async (uid: string): Promise<UserStats> => ({
+    userId: uid,
+    totalWorkouts: 15,
+    total_workouts: 15,
+    totalCaloriesBurned: 2500,
+    averageWorkoutDuration: 45,
+    streakDays: 7,
+    current_streak: 7,
+    longestStreak: 14,
+    longest_streak: 14,
+    totalNutritionLogs: 25,
+    total_nutrition_logs: 25,
+    total_sleep_hours: 56,
+    total_hydration_logs: 30,
+    averageSleepQuality: 8.2,
+    averageHydrationScore: 85,
+    totalBadges: 8,
+    badges_earned: 8,
+    totalXP: 1250,
+    experience_points: 1250,
+    level: 5,
+    healthScore: 87,
+    lastActivityDate: new Date(),
+    joinDate: new Date('2024-01-01'),
+    updatedAt: new Date(),
+  }),
+};
+const BadgeService = {
+  getBadgeStats: async (uid: string) => ({ totalBadges: 8 }),
+};
 
 // Types pour les statistiques utilisateur MyFitHero
 interface UserStats {
   userId: string;
   totalWorkouts: number;
+  total_workouts: number;
   totalCaloriesBurned: number;
   averageWorkoutDuration: number;
   streakDays: number;
+  current_streak: number;
   longestStreak: number;
+  longest_streak: number;
   totalNutritionLogs: number;
+  total_nutrition_logs: number;
+  total_sleep_hours: number;
+  total_hydration_logs: number;
   averageSleepQuality: number;
   averageHydrationScore: number;
   totalBadges: number;
+  badges_earned: number;
   totalXP: number;
+  experience_points: number;
   level: number;
   healthScore: number;
   lastActivityDate: Date | null;

@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
 import { useWorkoutSession } from '../hooks/useWorkoutSession';
-import type { WorkoutExercise } from '../../../shared/types/workout.types';
+import type { WorkoutExercise } from '../types/supabase';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
@@ -49,13 +49,11 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     resumeSession,
     completeSession,
     cancelSession,
-    _addExercise,
     updateExerciseSet,
     completeExercise,
     addSetToExercise,
     removeSetFromExercise,
     loadExercisesFromLastSession,
-    _getLastWeightForExercise,
     calculateCalories,
     formatTime,
   } = useWorkoutSession();
@@ -85,12 +83,11 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     {
       id: 'ex-1',
       name: 'Développé Couché',
-      category: 'strength',
       muscle_groups: ['chest', 'shoulders', 'triceps'],
       sets: [
-        { reps: 10, weight: 60, completed: false },
-        { reps: 8, weight: 65, completed: false },
-        { reps: 6, weight: 70, completed: false },
+        { reps: 10, weight: 60, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
+        { reps: 8, weight: 65, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
+        { reps: 6, weight: 70, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
       ],
       completed: false,
       restTime: 120,
@@ -101,9 +98,9 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
       category: 'strength',
       muscle_groups: ['quads', 'glutes', 'hamstrings'],
       sets: [
-        { reps: 12, weight: 80, completed: false },
-        { reps: 10, weight: 85, completed: false },
-        { reps: 8, weight: 90, completed: false },
+        { reps: 12, weight: 80, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
+        { reps: 10, weight: 85, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
+        { reps: 8, weight: 90, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
       ],
       completed: false,
       restTime: 90,
@@ -114,9 +111,9 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
       category: 'strength',
       muscle_groups: ['back', 'biceps'],
       sets: [
-        { reps: 8, completed: false },
-        { reps: 6, completed: false },
-        { reps: 5, completed: false },
+        { reps: 8, weight: null, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
+        { reps: 6, weight: null, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
+        { reps: 5, weight: null, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
       ],
       completed: false,
       restTime: 90,
@@ -148,7 +145,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     const savedWeights = JSON.parse(localStorage.getItem('preferredWeights') || '{}');
     
     // Appliquer les poids préférés aux exercices
-    const exercisesWithPreferredWeights = exercisesToAdd.map(exercise => ({
+    const exercisesWithPreferredWeights = exercisesToAdd.map((exercise: any) => ({
       ...exercise,
       sets: exercise.sets.map(set => ({
         ...set,
@@ -159,7 +156,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     // Si pas d'exercices précédents, appliquer aux exercices par défaut
     const finalExercises = exercisesWithPreferredWeights.length > 0 
       ? exercisesWithPreferredWeights 
-      : defaultExercises.map(exercise => ({
+      : defaultExercises.map((exercise: any) => ({
           ...exercise,
           sets: exercise.sets.map(set => ({
             ...set,
@@ -185,7 +182,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     setIndex: number,
     field: 'reps' | 'weight' | 'duration'
   ) => {
-    const exercise = currentSession?.exercises.find(e => e.id === exerciseId);
+    const exercise = currentSession?.exercises.find((e: any) => e.id === exerciseId);
     const set = exercise?.sets[setIndex];
 
     if (set) {
@@ -220,7 +217,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
   const handleExerciseComplete = (exerciseId: string) => {
     completeExercise(exerciseId);
     // Passer au prochain exercice non terminé
-    const nextExercise = currentSession?.exercises.find(e => !e.completed && e.id !== exerciseId);
+    const nextExercise = currentSession?.exercises.find((e: any) => !e.completed && e.id !== exerciseId);
     if (nextExercise) {
       setExpandedExercise(nextExercise.id);
     }
@@ -254,7 +251,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     field: 'reps' | 'weight' | 'duration',
     increment: boolean
   ) => {
-    const exercise = currentSession?.exercises.find(e => e.id === exerciseId);
+    const exercise = currentSession?.exercises.find((e: any) => e.id === exerciseId);
     if (!exercise) return;
 
     const currentSet = exercise.sets[setIndex];
@@ -274,7 +271,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     // Si c'est un changement de poids et qu'il y a des sets suivants non complétés
     if (field === 'weight' && setIndex < exercise.sets.length - 1) {
       const remainingSets = exercise.sets.slice(setIndex + 1);
-      const uncompletedSets = remainingSets.filter(set => !set.completed);
+      const uncompletedSets = remainingSets.filter((set: any) => !set.completed);
       
       if (uncompletedSets.length > 0) {
         setPropagationData({
@@ -295,11 +292,11 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     if (!propagationData || !currentSession) return;
 
     const { exerciseId, currentSetIndex, field, newValue } = propagationData;
-    const exercise = currentSession.exercises.find(e => e.id === exerciseId);
+    const exercise = currentSession.exercises.find((e: any) => e.id === exerciseId);
     
     if (exercise) {
       // Appliquer le nouveau poids à tous les sets suivants non complétés
-      exercise.sets.forEach((set, index) => {
+      exercise.sets.forEach((set: any, index: any) => {
         if (index > currentSetIndex && !set.completed) {
           updateExerciseSet(exerciseId, index, {
             [field]: newValue,
@@ -535,7 +532,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
 
             {/* Exercises - ACCORDION */}
             <div className="space-y-3">
-              {currentSession?.exercises.map(exercise => (
+              {currentSession?.exercises.map((exercise: any) => (
                 <Card
                   key={exercise.id}
                   className={exercise.completed ? 'bg-green-50 border-green-200' : ''}
@@ -556,7 +553,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
                           </div>
                           <div className="flex items-center space-x-2">
                             <Badge variant="outline" className="text-xs">
-                              {exercise.sets?.filter(s => s.completed).length || 0}/
+                              {exercise.sets?.filter((s: any) => s.completed).length || 0}/
                               {exercise.sets?.length || 0} séries
                             </Badge>
                             {expandedExercise === exercise.id ? (
@@ -573,7 +570,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
                       <CardContent className="pt-0">
                         <div className="space-y-3">
                           {exercise.sets && exercise.sets.length > 0 ? (
-                            exercise.sets.map((set, setIndex) => (
+                            exercise.sets.map((set: any, setIndex: any) => (
                               <div
                                 key={setIndex}
                                 className={`p-4 rounded-lg border-2 ${set.completed ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}
