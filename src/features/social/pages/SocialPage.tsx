@@ -21,27 +21,27 @@ import {
   UserPlus,
   MessageSquare,
 } from 'lucide-react';
-import { appStore } from '@/store/appStore';
-import { useToast } from '@/shared/hooks/use-toast';
-import { UniformHeader } from '@/features/profile/components/UniformHeader';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { appStore } from '../../../store/appStore';
+import { useToast } from '../../../shared/hooks/use-toast';
+import { UniformHeader } from '../../profile/components/UniformHeader';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Textarea } from '../../../components/ui/textarea';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
+} from '../../../components/ui/select';
+import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar';
+import { Skeleton } from '../../../components/ui/skeleton';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../../components/ui/dialog';
+import AIIntelligence from '../../ai-coach/components/AIIntelligence';
 
 // Types
 interface SocialPost {

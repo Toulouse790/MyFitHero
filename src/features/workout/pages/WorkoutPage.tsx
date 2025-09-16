@@ -20,14 +20,14 @@ import {
   Info,
 } from 'lucide-react';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
-import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';
-import type { WorkoutExercise } from '@/shared/types/workout.types';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useWorkoutSession } from '../hooks/useWorkoutSession';
+import type { WorkoutExercise } from '../../../shared/types/workout.types';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../../components/ui/dialog';
 
 interface WorkoutPageProps {
   userProfile?: SupabaseAuthUserType;
