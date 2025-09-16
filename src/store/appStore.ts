@@ -21,6 +21,10 @@ interface AppStoreState {
   notifications: Notification[];
   unreadCount: number;
   
+  // Profile & Weight Management
+  connectedScales: any[];
+  weightHistory: any[];
+  
   // App state
   theme: 'light' | 'dark' | 'system';
   sidebarCollapsed: boolean;
@@ -29,8 +33,13 @@ interface AppStoreState {
   // Actions
   setUser: (user: UserProfile | null) => void;
   updateUser: (updates: Partial<UserProfile>) => void;
+  updateUserProfile: (updates: Partial<UserProfile>) => void;
   setAuthenticated: (isAuth: boolean) => void;
   setLoading: (loading: boolean) => void;
+  
+  // Profile actions
+  addConnectedScale: (scale: any) => void;
+  addWeightEntry: (entry: any) => void;
   
   // Notification actions
   addNotification: (notification: Omit<Notification, 'id' | 'created_at'>) => void;
@@ -56,6 +65,8 @@ const initialState = {
   isLoading: false,
   notifications: [],
   unreadCount: 0,
+  connectedScales: [],
+  weightHistory: [],
   theme: 'system' as const,
   sidebarCollapsed: false,
   activeFeature: null,
@@ -80,6 +91,21 @@ export const appStore = create<AppStoreState>()(
       
       setAuthenticated: (isAuth) => set({ isAuthenticated: isAuth }),
       setLoading: (loading) => set({ isLoading: loading }),
+      
+      // Profile actions
+      updateUserProfile: (updates) => set((state) => ({
+        appStoreUser: state.appStoreUser 
+          ? { ...state.appStoreUser, ...updates }
+          : null
+      })),
+      
+      addConnectedScale: (scale) => set((state) => ({
+        connectedScales: [...state.connectedScales, scale]
+      })),
+      
+      addWeightEntry: (entry) => set((state) => ({
+        weightHistory: [...state.weightHistory, entry]
+      })),
       
       // Notification actions
       addNotification: (notification) => set((state) => {

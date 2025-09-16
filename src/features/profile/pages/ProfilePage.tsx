@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { appStore } from '../../../store/appStore';
+import { useToast } from '../../../shared/hooks/use-toast';
 import AvatarUpload from '../components/AvatarUpload';
 import UserProfileTabs from '../components/UserProfileTabs';
 import {
@@ -27,6 +28,9 @@ const ProfilePage: React.FC = () => {
     addConnectedScale,
     addWeightEntry,
   } = appStore();
+
+  // Hook pour les notifications toast
+  const { toast } = useToast();
 
   // États locaux pour les champs modifiables
   const [currentWeight, setCurrentWeight] = useState('');
@@ -65,7 +69,11 @@ const ProfilePage: React.FC = () => {
   // Sauvegarder le profil
   const handleSaveProfile = async () => {
     if (!appStoreUser?.id) {
-      toast.error('Utilisateur non connecté');
+      toast({
+        title: "Erreur",
+        description: "Utilisateur non connecté",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -78,10 +86,10 @@ const ProfilePage: React.FC = () => {
         activity_level: activityLevel as any,
         fitness_goal: fitnessGoal as any,
       } as any);
-      toast.success('Profil mis à jour avec succès !');
+      toast({ title: "Succès", description: "Profil mis à jour avec succès !" });
     } catch (error) {
       // Erreur silencieuse
-      toast.error('Erreur lors de la mise à jour du profil');
+      toast({ title: "Erreur", description: "Erreur lors de la mise à jour du profil", variant: "destructive" });
       console.error('Profile update error:', error);
     }
   };
@@ -94,10 +102,10 @@ const ProfilePage: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
       const mockWeight = Math.random() * 20 + 60; // Poids simulé entre 60-80kg
       setCurrentWeight(mockWeight.toFixed(1));
-      toast.success('Poids synchronisé avec succès !');
+      toast({ title: "Succès", description: "Poids synchronisé avec succès !" });
     } catch (error) {
       // Erreur silencieuse
-      toast.error('Erreur lors de la synchronisation');
+      toast({ title: "Erreur", description: "Erreur lors de la synchronisation", variant: "destructive" });
       console.error('Scale sync error:', error);
     } finally {
       setIsSyncing(false);
@@ -112,13 +120,13 @@ const ProfilePage: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 3000));
       const mockDevices = []; // Simulation: aucun appareil trouvé
       if (mockDevices.length === 0) {
-        toast.success('Recherche terminée. Aucune nouvelle balance trouvée.');
+        toast({ title: "Succès", description: "Recherche terminée. Aucune nouvelle balance trouvée." });
       } else {
-        toast.success(`${mockDevices.length} balance(s) trouvée(s)`);
+        toast({ title: "Succès", description: `${mockDevices.length} balance(s) trouvée(s)` });
       }
     } catch (error) {
       // Erreur silencieuse
-      toast.error('Erreur lors de la recherche');
+      toast({ title: "Erreur", description: "Erreur lors de la recherche", variant: "destructive" });
       console.error('Scale scan error:', error);
     } finally {
       setIsScanning(false);
@@ -135,10 +143,10 @@ const ProfilePage: React.FC = () => {
         model: device.model,
         is_active: true,
       } as any);
-      toast.success(`${device.name} connectée avec succès !`);
+      toast({ title: "Succès", description: `${device.name} connectée avec succès !` });
     } catch (error) {
       // Erreur silencieuse
-      toast.error('Échec de la connexion');
+      toast({ title: "Erreur", description: "Échec de la connexion", variant: "destructive" });
       console.error('Scale connect error:', error);
     }
   };

@@ -96,6 +96,8 @@ export interface WorkoutExercise {
   muscle_groups: string[];
   equipment: string | null;
   instructions: string | null;
+  completed: boolean;
+  category?: string;
 }
 
 export interface ExerciseSet {
