@@ -1,13 +1,14 @@
 // Export principal du module sleep
-// export * from './types/index';
+export * from './types';
+export * from './utils/sleep-mapping';
+export * from './components/SleepQualityAnalyzer';
+
+// Exports des services et hooks (à implémenter si nécessaire)
 // export * from './services/sleep.service';
 // export * from './hooks/useSleep';
 
-// Exports des composants (à implémenter)
-// export * from './components';
-// export * from './pages';
-
-// Placeholder pour éviter les erreurs d'import
+// Export default du composant principal
+export { default as SleepQualityAnalyzer } from './components/SleepQualityAnalyzer';
 export const SleepModule = {
   name: 'sleep',
   status: 'planned',

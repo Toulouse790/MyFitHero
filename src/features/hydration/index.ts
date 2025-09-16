@@ -1,13 +1,14 @@
 // Export principal du module hydration
-// export * from './types/index';
+export * from './types';
+export * from './utils/hydration-mapping';
+export * from './components/HydrationOptimizer';
+
+// Exports des services et hooks (à implémenter si nécessaire)
 // export * from './services/hydration.service';
 // export * from './hooks/useHydration';
 
-// Exports des composants (à implémenter)
-// export * from './components';
-// export * from './pages';
-
-// Placeholder pour éviter les erreurs d'import
+// Export default du composant principal
+export { default as HydrationOptimizer } from './components/HydrationOptimizer';
 export const HydrationModule = {
   name: 'hydration',
   status: 'planned',
