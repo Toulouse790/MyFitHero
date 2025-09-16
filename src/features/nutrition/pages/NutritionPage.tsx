@@ -42,27 +42,30 @@ import {
   EyeOff,
   Brain,
   ChevronRight,
+  Camera,
 } from 'lucide-react';
-import { appStore } from '../../../src/store/appStore';
-import { useToast } from '../../../src/shared/hooks/use-toast';
+import { appStore } from '../../../store/appStore';
+import { useToast } from '../../../shared/hooks/use-toast';
 import { UniformHeader } from '../../profile/components/UniformHeader';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { getSportCategoryForNutrition, NutritionSport } from '../../../src/shared/utils/sportMapping';
-import { getNutritionPersonalizedMessage } from '../../../src/shared/utils/personalizedMessages';
-import { AIModal } from '../../../src/shared/components/AIModal';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
+import { getSportCategoryForNutrition, NutritionSport } from '../../../shared/utils/sportMapping';
+import { getNutritionPersonalizedMessage } from '../../../shared/utils/personalizedMessages';
+import { AIModal } from '../../../shared/components/AIModal';
+import { Progress } from '../../../components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { supabase } from '../../../src/lib/supabase';
+} from '../../../components/ui/dialog';
+import { supabase } from '../../../lib/supabase';
+import { PhotoNutritionAnalyzer } from '../components/PhotoNutritionAnalyzer';
+import { RecognizedFood } from '../services/foodRecognition';
 
 // --- TYPES & INTERFACES ---
 interface MealSuggestion {
@@ -388,9 +391,10 @@ const Nutrition: React.FC = () => {
   const [showDetailedView, setShowDetailedView] = useState(false);
   const [showCoachingModal, setShowCoachingModal] = useState(false);
   const [showAllMeals, setShowAllMeals] = useState(false);
+  const [showPhotoAnalyzer, setShowPhotoAnalyzer] = useState(false);
 
   // --- MAPPING SPORT UTILISATEUR ---
-  const userSport = getSportCategoryForNutrition(appStoreUser.sport || 'none');
+  const userSport = getSportCategoryForNutrition(appStoreUser?.sport || 'none');
   const sportConfig = sportsNutritionData[userSport];
 
   // --- CALCULS PERSONNALISÉS SÉCURISÉS ---
@@ -404,7 +408,7 @@ const Nutrition: React.FC = () => {
     const isIncomplete = !appStoreUser?.weight || !appStoreUser?.height || !appStoreUser?.age;
     setProfileIncomplete(isIncomplete);
 
-    let baseCalories = appStoreUser?.daily_calories || 0;
+    let baseCalories = 2000; // Valeur par défaut
 
     // Calcul BMR avec formule Harris-Benedict
     if (!baseCalories && weight && height && age) {
@@ -511,6 +515,73 @@ const Nutrition: React.FC = () => {
     navigate('/meals/add');
   }, [navigate]);
 
+  // Gestionnaire pour les aliments confirmés depuis la reconnaissance photo
+  const handleFoodsConfirmed = useCallback(async (recognizedFoods: RecognizedFood[]) => {
+    try {
+      // Mettre à jour les données nutritionnelles locales
+      const additionalCalories = recognizedFoods.reduce((sum, food) => sum + food.estimated_calories, 0);
+      const additionalProtein = recognizedFoods.reduce((sum, food) => sum + food.estimated_protein, 0);
+      const additionalCarbs = recognizedFoods.reduce((sum, food) => sum + food.estimated_carbs, 0);
+      const additionalFat = recognizedFoods.reduce((sum, food) => sum + food.estimated_fat, 0);
+
+      setDailyData(prev => ({
+        ...prev,
+        calories: prev.calories + additionalCalories,
+        protein: prev.protein + additionalProtein,
+        carbs: prev.carbs + additionalCarbs,
+        fat: prev.fat + additionalFat,
+        lastUpdated: new Date()
+      }));
+
+      // Sauvegarder en base de données (optionnel - selon votre implémentation)
+      const today = new Date().toISOString().split('T')[0];
+      
+      for (const food of recognizedFoods) {
+        try {
+          await supabase.from('nutrition_logs').insert({
+            user_id: appStoreUser?.id,
+            food_name: food.food.name,
+            quantity_grams: food.estimated_quantity,
+            calories: food.estimated_calories,
+            protein_grams: food.estimated_protein,
+            carbs_grams: food.estimated_carbs,
+            fat_grams: food.estimated_fat,
+            meal_type: 'other', // ou déterminer selon l'heure
+            logged_at: new Date().toISOString(),
+            date: today,
+            source: 'photo_recognition'
+          });
+        } catch (dbError) {
+          console.error('Erreur sauvegarde aliment:', dbError);
+        }
+      }
+
+      toast({
+        title: 'Aliments ajoutés !',
+        description: `${recognizedFoods.length} aliment(s) ajouté(s) à votre journal nutritionnel`,
+        variant: 'default'
+      });
+
+      // Analytics
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'photo_nutrition_added', {
+          event_category: 'nutrition',
+          event_label: 'photo_recognition',
+          value: recognizedFoods.length,
+          user_id: appStoreUser?.id
+        });
+      }
+      
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout des aliments:', error);
+      toast({
+        title: 'Erreur',
+        description: 'Impossible d\'ajouter les aliments',
+        variant: 'destructive'
+      });
+    }
+  }, [navigate, appStoreUser?.id, toast]);
+
   // --- CALCULS POURCENTAGES ---
   const caloriesPercentage = Math.min((dailyData.calories / personalizedGoals.calories) * 100, 100);
   const proteinPercentage = Math.min((dailyData.protein / personalizedGoals.protein) * 100, 100);
@@ -586,7 +657,11 @@ const Nutrition: React.FC = () => {
 
   useEffect(() => {
     if (profileIncomplete) {
-      toast.warning('Complétez votre profil pour des recommandations nutritionnelles précises');
+      toast({
+        title: 'Profil incomplet',
+        description: 'Complétez votre profil pour des recommandations nutritionnelles précises',
+        variant: 'destructive'
+      });
     }
   }, [profileIncomplete, toast, handleCompleteProfile]);
 
@@ -660,14 +735,23 @@ const Nutrition: React.FC = () => {
                 style={{ width: `${caloriesPercentage}%` }}
               />
             </div>
-            <button
-              onClick={handleAddFood}
-              className="w-full bg-white/20 hover:bg-white/30 text-white font-medium py-2 px-4 rounded-lg border border-white/30 transition-colors duration-200"
-            >
-              <Plus className="w-4 h-4 inline mr-2" />
-              <Plus className="w-4 h-4 inline mr-2" />
-              Ajouter un repas
-            </button>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={handleAddFood}
+                className="bg-white/20 hover:bg-white/30 text-white font-medium py-2 px-4 rounded-lg border border-white/30 transition-colors duration-200"
+              >
+                <Plus className="w-4 h-4 inline mr-2" />
+                Ajouter un repas
+              </button>
+              
+              <button
+                onClick={() => setShowPhotoAnalyzer(true)}
+                className="bg-white/20 hover:bg-white/30 text-white font-medium py-2 px-4 rounded-lg border border-white/30 transition-colors duration-200"
+              >
+                <Camera className="w-4 h-4 inline mr-2" />
+                Scanner photo
+              </button>
+            </div>
           </div>
 
           {/* Macronutriments - MODE COMPACT/DÉTAILLÉ */}
@@ -961,6 +1045,13 @@ const Nutrition: React.FC = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Modal de reconnaissance photo */}
+      <PhotoNutritionAnalyzer
+        isOpen={showPhotoAnalyzer}
+        onClose={() => setShowPhotoAnalyzer(false)}
+        onFoodsConfirmed={handleFoodsConfirmed}
+      />
     </div>
   );
 };

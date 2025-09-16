@@ -140,8 +140,10 @@ export const BadgeNotification: React.FC<BadgeNotificationProps> = ({
         clearTimeout(autoCloseTimer);
         setAutoCloseTimer(null);
       }
+      // Retourner une fonction vide pour éviter l'erreur
+      return () => {};
     }
-  }, [isVisible, badge.rarity, onClose]);
+  }, [isVisible, badge.rarity, onClose, autoCloseTimer]);
 
   const handleClose = () => {
     if (autoCloseTimer) {
