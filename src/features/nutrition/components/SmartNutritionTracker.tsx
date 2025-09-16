@@ -65,6 +65,7 @@ interface NutritionState {
 type NutritionAction = 
   | { type: 'SET_STATE'; state: NutritionTrackingState }
   | { type: 'SET_MEAL_TYPE'; mealType: NutritionData['mealType'] }
+  | { type: 'RESET_MEAL_TYPE' }
   | { type: 'ADD_FOOD_ITEM'; item: NutritionData }
   | { type: 'REMOVE_FOOD_ITEM'; itemId: string }
   | { type: 'UPDATE_FOOD_SEARCH'; query: string; results?: FoodSearchResult[] }
@@ -122,6 +123,13 @@ const nutritionReducer = (state: NutritionState, action: NutritionAction): Nutri
         ...state,
         currentMeal: { ...state.currentMeal, type: action.mealType },
         currentState: 'adding_meal'
+      };
+
+    case 'RESET_MEAL_TYPE':
+      return {
+        ...state,
+        currentMeal: { ...initialState.currentMeal },
+        currentState: 'idle'
       };
       
     case 'ADD_FOOD_ITEM': {
@@ -300,7 +308,12 @@ export const SmartNutritionTracker: React.FC<SmartNutritionTrackerProps> = ({
         dinner: { calories: 0, percentage: 0 },
         snacks: { calories: 0, percentage: 0 }
       },
-      nutritionGoals: state.goals,
+      nutritionGoals: {
+        calorieGoal: state.goals.dailyCalories,
+        proteinGoal: state.goals.proteinTarget,
+        carbGoal: state.goals.carbTarget,
+        fatGoal: state.goals.fatTarget,
+      },
       adherenceScores: {
         calorieAdherence: Math.min(100, (totalCalories / state.goals.dailyCalories) * 100),
         macroAdherence: 85,
@@ -684,7 +697,7 @@ export const SmartNutritionTracker: React.FC<SmartNutritionTrackerProps> = ({
                   )}
                 </button>
                 <button
-                  onClick={() => dispatch({ type: 'SET_MEAL_TYPE', mealType: null })}
+                  onClick={() => dispatch({ type: 'RESET_MEAL_TYPE' })}
                   className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50"
                 >
                   Annuler

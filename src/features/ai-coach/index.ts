@@ -1,15 +1,26 @@
-// Export principal du module ai-coach
-// export * from './types/index';
-// export * from './services/ai-coach.service';
-// export * from './hooks/useAi-coach';
+// Export principal du module AI Coach
+export * from './types/health-orchestrator';
+export * from './utils/health-orchestrator-mapping';
+export * from './components/HealthOrchestrator';
 
-// Exports des composants (à implémenter)
-// export * from './components';
-// export * from './pages';
+// Exports des hooks
+export * from './hooks/useUnifiedLoading';
+export * from './hooks/useUserPreferences';
 
-// Placeholder pour éviter les erreurs d'import
+// Module AI Coach complet
 export const AiCoachModule = {
   name: 'ai-coach',
-  status: 'planned',
-  description: 'Module ai-coach - À implémenter',
+  status: 'active',
+  description: 'Module AI Coach - Orchestrateur de santé global avec analyse cross-piliers',
+  components: [
+    'HealthOrchestrator',
+  ],
+  features: [
+    'Scoring santé global',
+    'Analyse cross-piliers',
+    'Prédictions IA',
+    'Recommandations personnalisées',
+    'Dashboard unifié',
+    'Optimisation continue',
+  ],
 };

@@ -407,7 +407,7 @@ export const HydrationOptimizer: React.FC = () => {
         amount,
         fluidType,
         temperature,
-        context: 'manual',
+        context: 'habit',
       };
 
       // Nouveau timestamp pour les données
