@@ -13,9 +13,9 @@ import { supabase } from './lib/supabase';
 import LoadingScreen from './components/LoadingScreen';
 
 // Lazy loading des composants principaux
-const AuthPage = lazy(() => import('@/features/auth/pages/AuthPage'));
-const OnboardingFlow = lazy(() => import('@/features/onboarding/pages/OnboardingFlow'));
-const Dashboard = lazy(() => import('@/features/dashboard/pages/Dashboard'));
+const AuthPage = lazy(() => import('./features/auth/pages/AuthPage'));
+const OnboardingFlow = lazy(() => import('./features/onboarding/pages/OnboardingFlow'));
+const Dashboard = lazy(() => import('./features/dashboard/pages/Dashboard'));
 
 // Types
 interface User {

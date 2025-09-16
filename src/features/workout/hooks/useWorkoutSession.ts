@@ -6,7 +6,7 @@ import { useExerciseHistory } from './useExerciseHistory';
 
 export const useWorkoutSession = () => {
   const sessionCore = useWorkoutSessionCore();
-  const timer = useWorkoutTimer(sessionCore);
+  const timer = useWorkoutTimer(sessionCore.isSessionActive);
   const history = useExerciseHistory();
   const exercises = useWorkoutExercises(
     sessionCore.currentSession,

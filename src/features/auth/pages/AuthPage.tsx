@@ -105,8 +105,8 @@ const Label = ({ htmlFor, children }: { htmlFor: string; children: React.ReactNo
 
 // Composant principal
 export function AuthPage() {
-  const [, setLocation] = useLocation();
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [location, setLocation] = useLocation();
+  const [isSignUp, setIsSignUp] = useState(location.includes('signup') || !location.includes('login'));
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   

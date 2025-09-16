@@ -42,7 +42,16 @@ interface BadgeNotificationProps {
 }
 
 // Configuration des raretés avec couleurs MyFitHero
-const RARITY_CONFIGS = {
+const RARITY_CONFIGS: Record<BadgeRarity, {
+  name: string;
+  color: string;
+  gradient: string;
+  borderColor: string;
+  textColor: string;
+  shadowColor: string;
+  particles: string;
+  multiplier: number;
+}> = {
   common: {
     name: 'Commun',
     color: 'green',

@@ -98,6 +98,7 @@ export interface WorkoutExercise {
   instructions: string | null;
   completed: boolean;
   category?: string;
+  restTime?: number; // Rest time in seconds between sets
 }
 
 export interface ExerciseSet {

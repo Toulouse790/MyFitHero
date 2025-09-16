@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
 import { useWorkoutSession } from '../hooks/useWorkoutSession';
-import type { WorkoutExercise } from '../types/supabase';
+import type { WorkoutExercise, ExerciseSet } from '../types/supabase';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
@@ -84,6 +84,8 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
       id: 'ex-1',
       name: 'Développé Couché',
       muscle_groups: ['chest', 'shoulders', 'triceps'],
+      equipment: 'Barbell',
+      instructions: 'Allongez-vous sur le banc, saisissez la barre et développez',
       sets: [
         { reps: 10, weight: 60, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
         { reps: 8, weight: 65, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
@@ -97,6 +99,8 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
       name: 'Squats',
       category: 'strength',
       muscle_groups: ['quads', 'glutes', 'hamstrings'],
+      equipment: 'Barbell',
+      instructions: 'Position debout, descendez en fléchissant les genoux',
       sets: [
         { reps: 12, weight: 80, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
         { reps: 10, weight: 85, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
@@ -110,6 +114,8 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
       name: 'Tractions',
       category: 'strength',
       muscle_groups: ['back', 'biceps'],
+      equipment: 'Pull-up bar',
+      instructions: 'Suspendez-vous et tirez-vous vers le haut',
       sets: [
         { reps: 8, weight: null, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
         { reps: 6, weight: null, completed: false, duration_seconds: null, distance_meters: null, rest_seconds: 90 },
@@ -145,9 +151,9 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     const savedWeights = JSON.parse(localStorage.getItem('preferredWeights') || '{}');
     
     // Appliquer les poids préférés aux exercices
-    const exercisesWithPreferredWeights = exercisesToAdd.map((exercise: any) => ({
+    const exercisesWithPreferredWeights = exercisesToAdd.map((exercise: WorkoutExercise) => ({
       ...exercise,
-      sets: exercise.sets.map(set => ({
+      sets: exercise.sets.map((set: ExerciseSet) => ({
         ...set,
         weight: savedWeights[exercise.name] || set.weight
       }))
@@ -156,9 +162,9 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     // Si pas d'exercices précédents, appliquer aux exercices par défaut
     const finalExercises = exercisesWithPreferredWeights.length > 0 
       ? exercisesWithPreferredWeights 
-      : defaultExercises.map((exercise: any) => ({
+      : defaultExercises.map((exercise: WorkoutExercise) => ({
           ...exercise,
-          sets: exercise.sets.map(set => ({
+          sets: exercise.sets.map((set: ExerciseSet) => ({
             ...set,
             weight: savedWeights[exercise.name] || set.weight
           }))
@@ -335,7 +341,7 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
   }, [isSessionActive, currentSession?.status]);
 
   // Calculer les statistiques
-  const completedExercises = currentSession?.exercises.filter(e => e.completed).length || 0;
+  const completedExercises = currentSession?.exercises.filter((e: WorkoutExercise) => e.completed).length || 0;
   const totalExercises = currentSession?.exercises.length || 0;
   const progressPercentage = totalExercises > 0 ? (completedExercises / totalExercises) * 100 : 0;
 

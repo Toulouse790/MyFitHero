@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/lib/supabase';
+import React, { useState, useEffect, useCallback, ReactNode } from 'react';
+import { supabase } from '../../../lib/supabase';
 
 export interface UserProfile {
   id: string;
@@ -94,3 +94,25 @@ export function useAuth(): UseAuthResult {
 }
 
 export default useAuth;
+
+// AuthProvider Component
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  return React.createElement(React.Fragment, null, children);
+};
+
+// Hook for requiring authentication
+export const useRequireAuth = () => {
+  const auth = useAuth();
+  
+  useEffect(() => {
+    if (!auth.isLoading && !auth.isAuthenticated) {
+      // Redirect to login or handle unauthorized access
+      console.warn('Authentication required');
+    }
+  }, [auth.isLoading, auth.isAuthenticated]);
+  
+  return auth;
+};
+
+// Alias for useAuth
+export const useUserProfile = useAuth;
