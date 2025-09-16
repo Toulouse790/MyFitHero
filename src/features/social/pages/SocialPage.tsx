@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { GtagEvent } from '../../../shared/types/gtag';
 // pages/Social.tsx
 import {
   Users,
@@ -987,7 +988,7 @@ const Social: React.FC = () => {
 
             {post.achievements && post.achievements.length > 0 && (
               <div className="mb-3">
-                {post.achievements.map((achievement, index) => (
+                {post.achievements.map((achievement: any, index) => (
                   <Badge key={index} className="mr-2 bg-yellow-100 text-yellow-800">
                     🏆 {achievement.description}: {achievement.value}
                   </Badge>

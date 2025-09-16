@@ -2,6 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { Dumbbell, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '../../../lib/supabase';
+import { Card, CardHeader, CardContent } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
 
 // Types
 interface FormData {
@@ -11,97 +15,6 @@ interface FormData {
   password: string;
   confirmPassword: string;
 }
-
-// Composants UI basiques (si ils n'existent pas encore)
-const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`bg-white rounded-2xl shadow-xl border border-gray-100 ${className}`}>
-    {children}
-  </div>
-);
-
-const CardHeader = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`p-6 ${className}`}>
-    {children}
-  </div>
-);
-
-const CardContent = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`p-6 pt-0 ${className}`}>
-    {children}
-  </div>
-);
-
-const Button = ({ 
-  children, 
-  type = 'button', 
-  disabled = false, 
-  onClick, 
-  className = '',
-  variant = 'default'
-}: {
-  children: React.ReactNode;
-  type?: 'button' | 'submit';
-  disabled?: boolean;
-  onClick?: () => void;
-  className?: string;
-  variant?: 'default' | 'outline';
-}) => {
-  const baseClasses = 'px-6 py-3 rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500';
-  const variantClasses = {
-    default: disabled 
-      ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-      : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-lg hover:scale-105',
-    outline: 'border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
-  };
-
-  return (
-    <button
-      type={type}
-      disabled={disabled}
-      onClick={onClick}
-      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
-    >
-      {children}
-    </button>
-  );
-};
-
-const Input = ({ 
-  id, 
-  type = 'text', 
-  value, 
-  onChange, 
-  required = false, 
-  minLength,
-  placeholder = '',
-  className = '' 
-}: {
-  id: string;
-  type?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  required?: boolean;
-  minLength?: number;
-  placeholder?: string;
-  className?: string;
-}) => (
-  <input
-    id={id}
-    type={type}
-    value={value}
-    onChange={onChange}
-    required={required}
-    minLength={minLength}
-    placeholder={placeholder}
-    className={`w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${className}`}
-  />
-);
-
-const Label = ({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) => (
-  <label htmlFor={htmlFor} className="block text-sm font-medium text-gray-700 mb-1">
-    {children}
-  </label>
-);
 
 // Composant principal
 export function AuthPage() {

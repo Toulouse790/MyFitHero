@@ -214,8 +214,8 @@ export function useSupabaseQuery<T>(
 export function useSupabaseTable<T>(
   table: string,
   queryBuilder?: (
-    qb: PostgrestFilterBuilder<any, any, any>
-  ) => PostgrestFilterBuilder<any, any, any>,
+    qb: PostgrestFilterBuilder<any, any, any, any>
+  ) => PostgrestFilterBuilder<any, any, any, any>,
   options?: UseSupabaseQueryOptions
 ) {
   return useSupabaseQuery<T[]>(

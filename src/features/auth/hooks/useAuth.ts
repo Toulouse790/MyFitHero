@@ -63,7 +63,7 @@ export function useAuth(): UseAuthResult {
       const { error: _error } = await supabase.auth.signInWithPassword({ email, password });
       await fetchUser();
       setIsLoading(false);
-      return { error: error?.message };
+      return { error: _error?.message };
     },
     [fetchUser]
   );

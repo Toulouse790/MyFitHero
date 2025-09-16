@@ -1,25 +1,7 @@
 // client/src/pages/Nutrition.tsx
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-// Déclaration globale pour window.gtag
-declare global {
-  interface Window {
-    gtag?: (
-      command: 'event',
-      action: string,
-      parameters: {
-        meal_type?: string;
-        meal_name?: string;
-        sport?: string;
-        user_id?: string;
-        event_category?: string;
-        event_label?: string;
-        value?: number;
-      }
-    ) => void;
-  }
-}
+import { GtagEvent } from '../../../shared/types/gtag';
 
 import {
   Target,

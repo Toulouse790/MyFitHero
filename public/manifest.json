@@ -1,33 +1,34 @@
 {
-  "name": "MyFitHero",
+  "name": "MyFitHero - Coach Fitness Intelligent",
   "short_name": "MyFitHero",
-  "description": "Application de fitness intelligente avec IA - Suivi complet d'entraînement, nutrition, sommeil et hydratation",
+  "description": "Application de fitness intelligente avec IA - Suivi complet d'entraînement, nutrition, sommeil et hydratation. Reconnaissance alimentaire par photo incluse.",
   "theme_color": "#2563eb",
   "background_color": "#ffffff",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "scope": "/",
   "start_url": "/",
-  "categories": ["health", "fitness", "sports"],
+  "id": "myfithero-app",
+  "categories": ["health", "fitness", "sports", "lifestyle"],
   "lang": "fr-FR",
   "dir": "ltr",
   "icons": [
     {
       "src": "/favicon.ico",
-      "sizes": "32x32",
-      "type": "image/png"
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
     },
     {
       "src": "/icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/icon-512.svg", 
       "sizes": "512x512",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -37,9 +38,9 @@
       "description": "Démarrer un nouvel entraînement"
     },
     {
-      "name": "Nutrition",
-      "url": "/nutrition", 
-      "description": "Suivre votre nutrition"
+      "name": "Scanner nutrition",
+      "url": "/nutrition",
+      "description": "Scanner un repas par photo"
     },
     {
       "name": "Hydratation",
@@ -48,16 +49,8 @@
     },
     {
       "name": "Profil",
-      "url": "/profile",
-      "description": "Voir votre profil"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/placeholder.svg",
-      "sizes": "540x720",
-      "type": "image/svg+xml",
-      "form_factor": "narrow"
+      "url": "/profile", 
+      "description": "Accéder à votre profil"
     }
   ]
 }
