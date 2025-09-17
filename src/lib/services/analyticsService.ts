@@ -124,7 +124,7 @@ class AnalyticsService {
           },
         ],
       };
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error fetching multi-pillar data:', error);
       throw error;
@@ -143,7 +143,7 @@ class AnalyticsService {
       }
 
       return progressData.sort((a, b) => b.progress_percentage - a.progress_percentage);
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error fetching pillar progress:', error);
       throw error;
@@ -169,7 +169,7 @@ class AnalyticsService {
         challenges_completed: activities.challenges,
         level_progress: consistency.level_progress,
       };
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error fetching performance metrics:', error);
       throw error;
@@ -222,7 +222,7 @@ class AnalyticsService {
         },
         improvement,
       };
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error fetching comparison data:', error);
       throw error;
@@ -320,7 +320,7 @@ class AnalyticsService {
         const priorityOrder = { high: 3, medium: 2, low: 1 };
         return priorityOrder[b.priority] - priorityOrder[a.priority];
       });
-    } catch {
+    } catch (error) {
       // Erreur silencieuse
       console.error('Error generating insights:', error);
       throw error;
@@ -376,9 +376,9 @@ class AnalyticsService {
   private aggregateDataByDay(data: unknown[], field: string, divisor: number = 1): number[] {
     const dailyData: { [key: string]: number } = {};
 
-    data.forEach(item => {
-      const day = format(new Date(item.created_at), 'yyyy-MM-dd');
-      dailyData[day] = (dailyData[day] || 0) + item[field] / divisor;
+    data.forEach((item: any) => {
+      const day = format(new Date((item as any).created_at), 'yyyy-MM-dd');
+      dailyData[day] = (dailyData[day] || 0) + (item as any)[field] / divisor;
     });
 
     // Remplir les jours manquants avec 0

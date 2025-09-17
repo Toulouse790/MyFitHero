@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 interface UnitPreferences {
   weight: 'kg' | 'lbs';
-  height: 'cm' | 'ft';
+  height: 'cm' | 'ft' | 'ft/in';
   distance: 'km' | 'mi';
-  liquid: 'ml' | 'fl oz';
+  liquid: 'ml' | 'fl_oz';
   temperature: 'celsius' | 'fahrenheit';
 }
 

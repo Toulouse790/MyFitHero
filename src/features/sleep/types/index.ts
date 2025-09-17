@@ -217,6 +217,13 @@ export interface SleepStats {
   bedtimeConsistency: number;
   totalSessions: number;
   improvementTrend: number;
+  weeklyData: SleepDayData[];
+  trend: {
+    direction: 'up' | 'down' | 'stable';
+    percentage: number;
+    description: string;
+  };
+  sleepDebt?: number;
 }
 
 export interface SleepDayData {
@@ -224,4 +231,51 @@ export interface SleepDayData {
   duration: number;
   quality: number;
   efficiency: number;
+}
+
+// Types pour useSleepStore
+export interface SleepEntry {
+  id: string;
+  userId: string;
+  date: string;
+  bedtime: Date;
+  wakeTime: Date;
+  quality: number; // 1-10
+  duration: number; // minutes
+  notes?: string;
+  factors?: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SleepGoal {
+  id: string;
+  userId: string;
+  targetDuration: number; // minutes
+  targetBedtime: string; // HH:mm
+  targetWakeTime: string; // HH:mm
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SleepStore {
+  entries: SleepEntry[];
+  currentEntry: SleepEntry | null;
+  goals: SleepGoal[];
+  currentGoal: SleepGoal | null;
+  stats: SleepStats | null;
+  isLoading: boolean;
+  error: string | null;
+  
+  // Actions
+  addEntry: (entryData: Partial<SleepEntry>) => Promise<void>;
+  updateEntry: (id: string, updates: Partial<SleepEntry>) => Promise<void>;
+  deleteEntry: (id: string) => Promise<void>;
+  loadEntries: () => Promise<void>;
+  addGoal: (goalData: Partial<SleepGoal>) => Promise<void>;
+  updateGoal: (id: string, updates: Partial<SleepGoal>) => Promise<void>;
+  deleteGoal: (id: string) => Promise<void>;
+  loadGoals: () => Promise<void>;
+  calculateStats: () => void;
 }

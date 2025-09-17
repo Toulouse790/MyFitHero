@@ -158,6 +158,7 @@ export const useOptimizedLoading = (isLoading: boolean, minLoadingTime: number =
   React.useEffect(() => {
     if (isLoading) {
       setShowSkeleton(true);
+      return; // Explicit return for this branch
     } else {
       // Maintenir le skeleton pour éviter les CLS
       const timer = setTimeout(() => {

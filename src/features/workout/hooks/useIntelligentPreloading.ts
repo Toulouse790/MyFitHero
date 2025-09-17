@@ -96,5 +96,7 @@ export const useNetworkAdaptation = (): void => {
 
       return () => connection.removeEventListener('change', updatePerformanceMode);
     }
+    // Aucun cleanup nécessaire si connection n'est pas supportée
+    return undefined;
   }, []);
 };
