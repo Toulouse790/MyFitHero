@@ -16,7 +16,7 @@ export const useHydrationStore = create<HydrationStore>()(
       error: null,
 
       // Actions - Entries
-      addEntry: async entryData => {
+      addEntry: async (entryData: Omit<HydrationEntry, 'id' | 'userId' | 'created_at' | 'updated_at'>) => {
         set({ isLoading: true, error: null });
 
         try {
@@ -38,10 +38,10 @@ export const useHydrationStore = create<HydrationStore>()(
             .select()
             .single();
 
-          if (error) throw error;
+          if (_error) throw _error;
 
           set(state => ({
-            entries: [...state.entries, data],
+            entries: [...state.entries, _data],
             isLoading: false,
           }));
 
@@ -55,7 +55,7 @@ export const useHydrationStore = create<HydrationStore>()(
         }
       },
 
-      updateEntry: async (id, updates) => {
+      updateEntry: async (id: string, updates: Partial<HydrationEntry>) => {
         set({ isLoading: true, error: null });
 
         try {
@@ -69,10 +69,10 @@ export const useHydrationStore = create<HydrationStore>()(
             .select()
             .single();
 
-          if (error) throw error;
+          if (_error) throw _error;
 
           set(state => ({
-            entries: state.entries.map(entry => (entry.id === id ? data : entry)),
+            entries: state.entries.map(entry => (entry.id === id ? _data : entry)),
             isLoading: false,
           }));
 
@@ -85,13 +85,13 @@ export const useHydrationStore = create<HydrationStore>()(
         }
       },
 
-      deleteEntry: async id => {
+      deleteEntry: async (id: string) => {
         set({ isLoading: true, error: null });
 
         try {
           const { error: _error } = await supabase.from('hydration_entries').delete().eq('id', id);
 
-          if (error) throw error;
+          if (_error) throw _error;
 
           set(state => ({
             entries: state.entries.filter(entry => entry.id !== id),
@@ -107,7 +107,7 @@ export const useHydrationStore = create<HydrationStore>()(
         }
       },
 
-      loadEntries: async (startDate, endDate) => {
+      loadEntries: async (startDate?: string, endDate?: string) => {
         set({ isLoading: true, error: null });
 
         try {
@@ -131,10 +131,10 @@ export const useHydrationStore = create<HydrationStore>()(
 
           const { data: _data, error: _error } = await query;
 
-          if (error) throw error;
+          if (_error) throw _error;
 
           set({
-            entries: data || [],
+            entries: _data || [],
             isLoading: false,
           });
         } catch (error) {
@@ -146,7 +146,7 @@ export const useHydrationStore = create<HydrationStore>()(
       },
 
       // Actions - Goals
-      setGoal: async dailyTarget => {
+      setGoal: async (dailyTarget: number) => {
         set({ isLoading: true, error: null });
 
         try {
@@ -177,11 +177,11 @@ export const useHydrationStore = create<HydrationStore>()(
             .select()
             .single();
 
-          if (error) throw error;
+          if (_error) throw _error;
 
           set(state => ({
-            goals: [...state.goals, data],
-            currentGoal: data,
+            goals: [...state.goals, _data],
+            currentGoal: _data,
             isLoading: false,
           }));
         } catch (error) {
@@ -193,7 +193,7 @@ export const useHydrationStore = create<HydrationStore>()(
         }
       },
 
-      updateGoal: async (id, updates) => {
+      updateGoal: async (id: string, updates: Partial<HydrationGoal>) => {
         set({ isLoading: true, error: null });
 
         try {
@@ -207,11 +207,11 @@ export const useHydrationStore = create<HydrationStore>()(
             .select()
             .single();
 
-          if (error) throw error;
+          if (_error) throw _error;
 
           set(state => ({
-            goals: state.goals.map(goal => (goal.id === id ? data : goal)),
-            currentGoal: data.isActive ? data : state.currentGoal,
+            goals: state.goals.map(goal => (goal.id === id ? _data : goal)),
+            currentGoal: _data.isActive ? _data : state.currentGoal,
             isLoading: false,
           }));
         } catch (error) {
@@ -238,12 +238,12 @@ export const useHydrationStore = create<HydrationStore>()(
             .eq('userId', user.id)
             .order('created_at', { ascending: false });
 
-          if (error) throw error;
+          if (_error) throw _error;
 
-          const activeGoal = data?.find(goal => goal.isActive) || null;
+          const activeGoal = _data?.find(goal => goal.isActive) || null;
 
           set({
-            goals: data || [],
+            goals: _data || [],
             currentGoal: activeGoal,
             isLoading: false,
           });
@@ -257,7 +257,7 @@ export const useHydrationStore = create<HydrationStore>()(
       },
 
       // Actions - Stats
-      calculateStats: async period => {
+      calculateStats: async (period: 'daily' | 'weekly' | 'monthly') => {
         const { entries, currentGoal } = get();
 
         if (!entries.length || !currentGoal) {
@@ -271,7 +271,7 @@ export const useHydrationStore = create<HydrationStore>()(
         // Stats quotidiennes
         const todayEntries = entries.filter(entry => entry.timestamp.split('T')[0] === today);
 
-        const dailyAmount = todayEntries.reduce((sum, entry) => sum + entry.amount, 0);
+        const dailyAmount = todayEntries.reduce((sum, entry) => sum + entry.amount_ml, 0);
         const dailyPercentage = (dailyAmount / currentGoal.dailyTarget) * 100;
 
         // Stats hebdomadaires
@@ -280,7 +280,7 @@ export const useHydrationStore = create<HydrationStore>()(
 
         const weekEntries = entries.filter(entry => new Date(entry.timestamp) >= weekStart);
 
-        const weeklyTotal = weekEntries.reduce((sum, entry) => sum + entry.amount, 0);
+        const weeklyTotal = weekEntries.reduce((sum, entry) => sum + entry.amount_ml, 0);
         const weeklyAverage = weeklyTotal / 7;
         const weeklyTarget = currentGoal.dailyTarget * 7;
         const weeklyPercentage = (weeklyTotal / weeklyTarget) * 100;
@@ -298,12 +298,6 @@ export const useHydrationStore = create<HydrationStore>()(
             target: weeklyTarget,
             percentage: weeklyPercentage,
             dailyBreakdown: [], // À implémenter selon les besoins
-          },
-          monthly: {
-            total: 0, // À implémenter
-            average: 0,
-            bestDay: { date: '', amount: 0 },
-            worstDay: { date: '', amount: 0 },
           },
         };
 

@@ -135,6 +135,8 @@ export const AdvancedSessionTimer: React.FC<SessionTimerProps> = ({
 
       return () => clearInterval(saveInterval);
     }
+    // Retourne undefined explicitement si la condition n'est pas remplie
+    return undefined;
   }, [sessionState.isActive, sessionState.sessionId]);
 
   // Démarrage de session

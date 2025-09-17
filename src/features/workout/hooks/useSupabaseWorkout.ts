@@ -110,6 +110,9 @@ export function useWorkoutSession(sessionId?: string) {
         setSession(newSessionData);
         return newSessionData;
       }
+      
+      // Cas où data est null/undefined
+      throw new Error('Aucune donnée retournée lors de la création de session');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors de la création');
       throw err;
@@ -193,6 +196,9 @@ export function useWorkoutSets(sessionId?: string) {
         setSets(prev => [...prev, newSetData]);
         return newSetData;
       }
+      
+      // Cas où data est null/undefined
+      throw new Error('Aucune donnée retournée lors de l\'ajout du set');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors de l\'ajout du set');
       throw err;
@@ -226,6 +232,9 @@ export function useWorkoutSets(sessionId?: string) {
         setSets(prev => prev.map(s => s.id === setId ? updatedSetData : s));
         return updatedSetData;
       }
+      
+      // Cas où data est null/undefined
+      throw new Error('Aucune donnée retournée lors de la mise à jour du set');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors de la mise à jour du set');
       throw err;

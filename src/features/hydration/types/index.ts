@@ -1,3 +1,60 @@
+export interface HydrationEntry {
+  id: string;
+  userId: string;
+  amount_ml: number;
+  timestamp: string;
+  drink_type: 'water' | 'coffee' | 'tea' | 'juice' | 'alcohol' | 'sports' | 'soda';
+  temperature: 'cold' | 'room' | 'warm' | 'hot';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface HydrationGoal {
+  id?: string;
+  userId: string;
+  dailyTarget: number;
+  isActive: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface HydrationStats {
+  daily: {
+    current: number;
+    target: number;
+    percentage: number;
+    entries: HydrationEntry[];
+  };
+  weekly: {
+    total: number;
+    average: number;
+    target: number;
+    percentage: number;
+    dailyBreakdown: any[];
+  };
+}
+
+export interface HydrationStore {
+  entries: HydrationEntry[];
+  goals: HydrationGoal[];
+  currentGoal: HydrationGoal | null;
+  stats: HydrationStats | null;
+  isLoading: boolean;
+  error: string | null;
+  
+  // Actions
+  addEntry: (entryData: Omit<HydrationEntry, 'id' | 'userId' | 'created_at' | 'updated_at'>) => Promise<void>;
+  updateEntry: (id: string, updates: Partial<HydrationEntry>) => Promise<void>;
+  deleteEntry: (id: string) => Promise<void>;
+  loadEntries: (startDate?: string, endDate?: string) => Promise<void>;
+  
+  setGoal: (dailyTarget: number) => Promise<void>;
+  updateGoal: (id: string, updates: Partial<HydrationGoal>) => Promise<void>;
+  loadGoals: () => Promise<void>;
+  
+  calculateStats: (period: 'daily' | 'weekly' | 'monthly') => Promise<void>;
+}
+
 export interface HydrationData {
   id: string;
   userId: string;

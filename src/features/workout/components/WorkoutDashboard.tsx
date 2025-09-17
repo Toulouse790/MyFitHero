@@ -28,6 +28,11 @@ import { cn } from '@/lib/utils';
 import { useToast } from '@/shared/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 
+interface CompletedWorkout {
+  completed_at: string;
+  // Ajoutez d'autres propriétés selon vos besoins
+}
+
 /* ================================================================== */
 /*                           INTERFACES                               */
 /* ================================================================== */
@@ -296,7 +301,7 @@ export default function WorkoutDashboard() {
     }));
   };
 
-  const calculateStreak = (workouts: unknown[]): number => {
+  const calculateStreak = (workouts: CompletedWorkout[]): number => {
     // Logique de calcul de série
     let streak = 0;
     const today = new Date();
@@ -305,7 +310,7 @@ export default function WorkoutDashboard() {
       const checkDate = new Date(today);
       checkDate.setDate(today.getDate() - i);
 
-      const hasWorkout = workouts.some(w => {
+      const hasWorkout = workouts.some((w: CompletedWorkout) => {
         const workoutDate = new Date(w.completed_at);
         return workoutDate.toDateString() === checkDate.toDateString();
       });

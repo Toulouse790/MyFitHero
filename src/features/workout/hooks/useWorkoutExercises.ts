@@ -1,6 +1,28 @@
 import React, { useCallback } from 'react';
 import { useToast } from '@/shared/hooks/use-toast';
-import { WorkoutSession, WorkoutExercise, ExerciseSet } from './useWorkoutSessionCore';
+
+// Types locaux temporaires jusqu'à ce que les types soient correctement exportés
+interface ExerciseSet {
+  id: string;
+  reps: number;
+  weight: number;
+  completed: boolean;
+  rest_time?: number;
+  timestamp?: string;
+}
+
+interface WorkoutExercise {
+  id: string;
+  name: string;
+  sets: ExerciseSet[];
+  notes?: string;
+}
+
+interface WorkoutSession {
+  id: string;
+  exercises: WorkoutExercise[];
+  // autres propriétés selon vos besoins
+}
 
 export interface UseWorkoutExercisesReturn {
   addExercise: (exercise: Omit<WorkoutExercise, 'id'>) => Promise<void>;

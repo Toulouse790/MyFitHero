@@ -80,12 +80,12 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
         .limit(1)
         .single();
 
-      if (error && error.code !== 'PGRST116') {
+      if (_error && _error.code !== 'PGRST116') {
         return;
       }
 
-      if (data) {
-        const aiData = data as AIRecommendation;
+      if (_data) {
+        const aiData = _data as AIRecommendation;
         setAiRecommendation({
           id: aiData.id,
           title: aiData.title || 'Conseil IA',
@@ -114,12 +114,12 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
         .eq('date', today)
         .single();
 
-      if (error && error.code !== 'PGRST116') {
+      if (_error && _error.code !== 'PGRST116') {
         return;
       }
 
-      if (data) {
-        setDailyGoal(data.goal_description || getDefaultGoal());
+      if (_data) {
+        setDailyGoal(_data.goal_description || getDefaultGoal());
       } else {
         setDailyGoal(getDefaultGoal());
       }
@@ -168,15 +168,15 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
         .order('date', { ascending: false })
         .limit(30);
 
-      if (error) {
+      if (_error) {
         return;
       }
 
-      if (data) {
+      if (_data) {
         let currentStreak = 0;
         const today = new Date();
 
-        for (const record of data) {
+        for (const record of _data) {
           const recordDate = new Date(record.date);
           const diffDays = Math.floor(
             (today.getTime() - recordDate.getTime()) / (1000 * 60 * 60 * 24)

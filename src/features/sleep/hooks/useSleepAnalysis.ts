@@ -1,7 +1,7 @@
 import { Star } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
-import { appStore } from '@/store/app-store';
+import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
 
 interface SleepEntry {
@@ -52,7 +52,16 @@ interface SleepRecommendation {
 
 export function useSleepAnalysis() {
   const { appStoreUser } = appStore();
-  const { showToast } = useToast();
+  const { success, error: toastError } = useToast();
+
+  // Helper pour les toasts
+  const showToast = (message: string, type: 'success' | 'error') => {
+    if (type === 'success') {
+      success(message);
+    } else {
+      toastError(message);
+    }
+  };
 
   const [sleepEntries, setSleepEntries] = useState<SleepEntry[]>([]);
   const [sleepGoals, setSleepGoals] = useState<SleepGoals | null>(null);
@@ -253,7 +262,7 @@ export function useSleepAnalysis() {
   const addSleepEntry = useCallback(
     async (entry: Omit<SleepEntry, 'id' | 'user_id' | 'created_at' | 'sleep_duration_minutes'>) => {
       if (!appStoreUser?.id) {
-        showToast('Erreur: Utilisateur non connecté', 'error');
+        toastError('Erreur: Utilisateur non connecté');
         return false;
       }
 
@@ -273,15 +282,15 @@ export function useSleepAnalysis() {
           .select()
           .single();
 
-        if (error) throw error;
+        if (_error) throw _error;
 
-        setSleepEntries(prev => [data, ...prev]);
-        showToast(`Sommeil enregistré: ${formatDuration(duration)}`, 'success');
+        setSleepEntries(prev => [_data, ...prev]);
+        success(`Sommeil enregistré: ${formatDuration(duration)}`);
         return true;
       } catch (error) {
       // Erreur silencieuse
         console.error("Erreur lors de l'ajout:", error);
-        showToast("Erreur lors de l'enregistrement", 'error');
+        toastError("Erreur lors de l'enregistrement");
         return false;
       } finally {
         setIsLoading(false);
@@ -314,10 +323,10 @@ export function useSleepAnalysis() {
           .select()
           .single();
 
-        if (error) throw error;
+        if (_error) throw _error;
 
-        setSleepEntries(prev => prev.map(entry => (entry.id === entryId ? data : entry)));
-        showToast('Entrée mise à jour', 'success');
+        setSleepEntries(prev => prev.map(entry => (entry.id === entryId ? _data : entry)));
+        success('Entrée mise à jour');
         return true;
       } catch (error) {
       // Erreur silencieuse
@@ -338,7 +347,7 @@ export function useSleepAnalysis() {
       try {
         const { error: _error } = await supabase.from('sleep_entries').delete().eq('id', entryId);
 
-        if (error) throw error;
+        if (_error) throw _error;
 
         setSleepEntries(prev => prev.filter(entry => entry.id !== entryId));
         showToast('Entrée supprimée', 'success');
@@ -373,9 +382,9 @@ export function useSleepAnalysis() {
           .select()
           .single();
 
-        if (error) throw error;
+        if (_error) throw _error;
 
-        setSleepGoals(data);
+        setSleepGoals(_data);
         showToast('Objectifs de sommeil mis à jour', 'success');
         return true;
       } catch (error) {

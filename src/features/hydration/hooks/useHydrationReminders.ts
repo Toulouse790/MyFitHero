@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { appStore } from '@/store/app-store';
+import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
 
 interface HydrationEntry {
@@ -33,7 +33,7 @@ interface HydrationStats {
 
 export function useHydrationReminders() {
   const { appStoreUser } = appStore();
-  const { showToast } = useToast();
+  const { success, error: showError } = useToast();
 
   const [hydrationEntries, setHydrationEntries] = useState<HydrationEntry[]>([]);
   const [hydrationGoal, setHydrationGoal] = useState<HydrationGoal | null>(null);
@@ -137,7 +137,7 @@ export function useHydrationReminders() {
       temperature: HydrationEntry['temperature'] = 'room'
     ) => {
       if (!appStoreUser?.id) {
-        showToast('Erreur: Utilisateur non connecté', 'error');
+        showError('Erreur: Utilisateur non connecté');
         return false;
       }
 
@@ -157,18 +157,17 @@ export function useHydrationReminders() {
           .select()
           .single();
 
-        if (error) throw error;
+        if (_error) throw _error;
 
-        setHydrationEntries(prev => [...prev, data]);
+        setHydrationEntries(prev => [...prev, _data]);
 
         // Feedback positif
         const stats = hydrationStats();
         if (stats.completion_percentage >= 100) {
-          showToast("🎉 Objectif d'hydratation atteint !", 'success');
+          success("🎉 Objectif d'hydratation atteint !");
         } else {
-          showToast(
-            `💧 +${amount}ml ajouté ! (${stats.completion_percentage}% de l'objectif)`,
-            'success'
+          success(
+            `💧 +${amount}ml ajouté ! (${stats.completion_percentage}% de l'objectif)`
           );
         }
 
@@ -176,13 +175,13 @@ export function useHydrationReminders() {
       } catch (error) {
       // Erreur silencieuse
         console.error("Erreur lors de l'ajout:", error);
-        showToast("Erreur lors de l'ajout", 'error');
+        showError("Erreur lors de l'ajout");
         return false;
       } finally {
         setIsLoading(false);
       }
     },
-    [appStoreUser?.id, showToast, hydrationStats]
+    [appStoreUser?.id, success, showError, hydrationStats]
   );
 
   // Raccourcis pour les quantités courantes
@@ -200,21 +199,21 @@ export function useHydrationReminders() {
       try {
         const { error: _error } = await supabase.from('hydration_entries').delete().eq('id', entryId);
 
-        if (error) throw error;
+        if (_error) throw _error;
 
         setHydrationEntries(prev => prev.filter(entry => entry.id !== entryId));
-        showToast('Entrée supprimée', 'success');
+        success('Entrée supprimée');
         return true;
       } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors de la suppression:', error);
-        showToast('Erreur lors de la suppression', 'error');
+        showError('Erreur lors de la suppression');
         return false;
       } finally {
         setIsLoading(false);
       }
     },
-    [showToast]
+    [showError, success]
   );
 
   // Mettre à jour les objectifs d'hydratation
@@ -235,21 +234,21 @@ export function useHydrationReminders() {
           .select()
           .single();
 
-        if (error) throw error;
+        if (_error) throw _error;
 
-        setHydrationGoal(data);
-        showToast('Objectifs mis à jour', 'success');
+        setHydrationGoal(_data);
+        success('Objectifs mis à jour');
         return true;
       } catch (error) {
       // Erreur silencieuse
         console.error('Erreur lors de la mise à jour:', error);
-        showToast('Erreur lors de la mise à jour', 'error');
+        showError('Erreur lors de la mise à jour');
         return false;
       } finally {
         setIsLoading(false);
       }
     },
-    [appStoreUser?.id, hydrationGoal, showToast]
+    [appStoreUser?.id, hydrationGoal, success, showError]
   );
 
   // Configurer les rappels automatiques
@@ -308,7 +307,7 @@ export function useHydrationReminders() {
         } else {
           // Créer des objectifs par défaut
           const defaultGoal: HydrationGoal = {
-            daily_target_ml: Math.max(2000, (appStoreUser.weight_kg || 70) * 35),
+            daily_target_ml: Math.max(2000, (appStoreUser.weight || 70) * 35),
             reminder_interval_minutes: 60,
             start_time: '07:00',
             end_time: '22:00',
