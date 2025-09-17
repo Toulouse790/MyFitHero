@@ -1402,10 +1402,10 @@ const useOfflineSync = () => {
 
 // Pages principales
 const OnboardingPage = lazy(() => import('../features/auth/pages/ProfileComplete'));
-const DashboardPage = lazy(() => import('../features/admin/pages/AdminPage'));
+const DashboardPage = lazy(() => import('../features/dashboard/pages/Dashboard'));
 const NotFoundPage = lazy(() => import('./NotFound'));
-const AppLoadingSpinner = lazy(() => import('../shared/components/AppLoadingSpinner'));
-const AppErrorBoundary = lazy(() => import('../shared/components/AppErrorBoundary'));
+const AppLoadingSpinner = lazy(() => import('../components/LoadingScreen'));
+const AppErrorBoundary = lazy(() => import('../components/ErrorFallback'));
 
 // ====================================================================
 // Définition des Routes de l'Application

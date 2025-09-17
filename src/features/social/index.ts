@@ -3,9 +3,12 @@
 // export * from './services/social.service';
 // export * from './hooks/useSocial';
 
+// Pages
+export { default as SocialPage } from './pages/SocialPage';
+export { default as ChallengesPage } from './pages/ChallengesPage';
+
 // Exports des composants (à implémenter)
 // export * from './components';
-// export * from './pages';
 
 // Placeholder pour éviter les erreurs d'import
 export const SocialModule = {

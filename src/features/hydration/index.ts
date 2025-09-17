@@ -3,6 +3,9 @@ export * from './types';
 export * from './utils/hydration-mapping';
 export * from './components/HydrationOptimizer';
 
+// Pages
+export { default as HydrationPage } from './pages/HydrationPage';
+
 // Exports des services et hooks (à implémenter si nécessaire)
 // export * from './services/hydration.service';
 // export * from './hooks/useHydration';

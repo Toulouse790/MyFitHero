@@ -3,9 +3,11 @@
 // export * from './services/landing.service';
 // export * from './hooks/useLanding';
 
+// Pages
+export { default as LandingPage } from './pages/LandingPage';
+
 // Exports des composants (à implémenter)
 // export * from './components';
-// export * from './pages';
 
 // Placeholder pour éviter les erreurs d'import
 export const LandingModule = {

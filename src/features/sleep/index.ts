@@ -3,6 +3,9 @@ export * from './types';
 export * from './utils/sleep-mapping';
 export * from './components/SleepQualityAnalyzer';
 
+// Pages
+export { default as SleepPage } from './pages/SleepPage';
+
 // Exports des services et hooks (à implémenter si nécessaire)
 // export * from './services/sleep.service';
 // export * from './hooks/useSleep';

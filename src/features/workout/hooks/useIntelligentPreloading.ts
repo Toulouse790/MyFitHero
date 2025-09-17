@@ -33,22 +33,22 @@ export const useIntelligentPreloading = () => {
         try {
           switch (route) {
             case '/workout':
-              await import('@/features/workout/pages/WorkoutPage'); // ✅ Corrigé: nouvelle architecture modulaire
+              await import('../pages/WorkoutPage'); // ✅ Corrigé: chemin relatif correct
               break;
             case '/nutrition':
-              await import('@/features/nutrition/pages/NutritionPage'); // ✅ Nouvelle architecture modulaire
+              await import('../../nutrition/pages/NutritionPage'); // ✅ Chemin relatif correct
               break;
             case '/hydration':
-              await import('@/features/hydration/pages/HydrationPage'); // ✅ Nouvelle architecture modulaire
+              await import('../../hydration/pages/HydrationPage'); // ✅ Chemin relatif correct
               break;
             case '/sleep':
-              await import('@/features/sleep/pages/SleepPage'); // ✅ Nouvelle architecture modulaire
+              await import('../../sleep/pages/SleepPage'); // ✅ Chemin relatif correct
               break;
             case '/profile':
-              await import('@/features/auth/pages/ProfileComplete'); // ✅ Nouvelle architecture modulaire
+              await import('../../auth/pages/ProfileComplete'); // ✅ Chemin relatif correct
               break;
             case '/':
-              await import('@/pages/index'); // ✅ Corrigé:
+              await import('../../../pages/index'); // ✅ Corrigé: chemin relatif correct
               break;
           }
         } catch (error) {

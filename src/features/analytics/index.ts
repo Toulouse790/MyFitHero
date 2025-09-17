@@ -3,9 +3,11 @@
 // export * from './services/analytics.service';
 // export * from './hooks/useAnalytics';
 
+// Pages
+export { default as AnalyticsPage } from './pages/AnalyticsPage';
+
 // Exports des composants (à implémenter)
 // export * from './components';
-// export * from './pages';
 
 // Placeholder pour éviter les erreurs d'import
 export const AnalyticsModule = {

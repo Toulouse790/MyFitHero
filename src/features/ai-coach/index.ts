@@ -3,6 +3,9 @@ export * from './types/health-orchestrator';
 export * from './utils/health-orchestrator-mapping';
 export * from './components/HealthOrchestrator';
 
+// Pages
+export { default as AICoachPage } from './pages/AICoachPage';
+
 // Exports des hooks
 export * from './hooks/useUnifiedLoading';
 export * from './hooks/useUserPreferences';
