@@ -81,8 +81,8 @@ export const SleepQualityForm: React.FC<SleepQualityFormProps> = ({
         );
 
         await addEntry({
-          bedtime: formData.bedtime,
-          wakeTime: formData.wakeTime,
+          bedtime: new Date(formData.bedtime),
+          wakeTime: new Date(formData.wakeTime),
           duration,
           quality: formData.quality,
           factors,

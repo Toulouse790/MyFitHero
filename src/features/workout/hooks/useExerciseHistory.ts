@@ -2,12 +2,12 @@ import React, { useCallback } from 'react';
 // hooks/workout/useExerciseHistory.ts
 import { appStore } from '@/store/appStore';
 import { supabase } from '@/lib/supabase';
-import type { WorkoutExercise } from '@/shared/types/workout';
+import type { SessionExercise } from '../types/WorkoutTypes';
 
 export interface UseExerciseHistoryReturn {
   getLastWeightForExercise: (exerciseName: string) => number | null;
   saveWeightHistory: (exerciseName: string, weight: number) => void;
-  loadExercisesFromLastSession: (workoutName: string) => Promise<WorkoutExercise[]>;
+  loadExercisesFromLastSession: (workoutName: string) => Promise<SessionExercise[]>;
 }
 
 export const useExerciseHistory = (): UseExerciseHistoryReturn => {
@@ -63,7 +63,7 @@ export const useExerciseHistory = (): UseExerciseHistoryReturn => {
   );
 
   const loadExercisesFromLastSession = useCallback(
-    async (workoutName: string): Promise<WorkoutExercise[]> => {
+    async (workoutName: string): Promise<SessionExercise[]> => {
       if (!appStoreUser?.id) return [];
 
       try {
@@ -76,20 +76,20 @@ export const useExerciseHistory = (): UseExerciseHistoryReturn => {
           .order('completed_at', { ascending: false })
           .limit(1);
 
-        if (error || !data?.length) {
+        if (_error || !_data?.length) {
           console.log('Aucune session précédente trouvée pour:', workoutName);
           return [];
         }
 
         // Réinitialiser les exercices pour une nouvelle session
-        return (data[0].exercises as WorkoutExercise[]).map((ex: WorkoutExercise) => ({
+        return (_data[0].exercises as SessionExercise[]).map((ex: SessionExercise) => ({
           ...ex,
           id: crypto.randomUUID(),
           completed: false,
-          sets: ex.sets.map(set => ({
+          sets: ex.sets.map((set: any) => ({
             ...set,
             completed: false,
-            timestamp: undefined,
+            timestamp: new Date().toISOString(),
           })),
         }));
       } catch (error) {

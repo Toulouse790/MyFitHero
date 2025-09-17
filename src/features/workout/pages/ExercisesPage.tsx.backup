@@ -8,7 +8,15 @@ import { debounce } from 'lodash-es';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useQuery } from '@tanstack/react-query';
-import { AiOutlineSearch, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineSearch, AiFillHeart, AiOutlineHeart } from 'react-icons/ai'; X, Heart, Search, Check } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+// src/pages/ExercisesPage.tsx
+import { supabase } from '@/lib/supabase';
+import clsx from 'clsx';
+import { motion } from 'framer-motion';
+import { debounce } from 'lodash-es';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 // ---------------- Typescript Types ----------------
 
@@ -119,7 +127,7 @@ async function fetchExercises({
   filterSeasonPhase,
 }: FetchExercisesParams) {
   let query = supabase
-    .from('exercises_library')
+    .from<ExerciseLibrary>('exercises_library')
     .select('*', { count: 'exact' })
     .order('name');
 
@@ -157,11 +165,6 @@ async function fetchExercises({
   return { exercises: data ?? [], count };
 }
 
-interface ExercisesQueryResult {
-  exercises: ExerciseLibrary[];
-  count: number | null;
-}
-
 function useExercises(params: FetchExercisesParams) {
   const key = [
     'exercises',
@@ -177,10 +180,8 @@ function useExercises(params: FetchExercisesParams) {
     params.filterPosition,
     params.filterSeasonPhase,
   ];
-  return useQuery<ExercisesQueryResult>({
-    queryKey: key,
-    queryFn: () => fetchExercises(params),
-    placeholderData: { exercises: [], count: null },
+  return useQuery(key, () => fetchExercises(params), {
+    keepPreviousData: true,
     staleTime: 30000,
   });
 }
@@ -437,11 +438,11 @@ const FavoritesList: React.FC<{ favoriteIds: Set<string> }> = ({ favoriteIds }) 
       }
       const idsArr = Array.from(favoriteIds);
       const { data: _data, error: _error } = await supabase
-        .from('exercises_library')
+        .from<ExerciseLibrary>('exercises_library')
         .select('*')
         .in('id', idsArr);
 
-      if (!_error && _data) setExercises(_data);
+      if (!error && data) setExercises(data);
     }
     fetchFavorites();
   }, [favoriteIds]);
@@ -526,7 +527,7 @@ const ExercisesPage: React.FC = () => {
             Aucun exercice trouvé.
           </div>
         ) : (
-          exercises.map((exercise: ExerciseLibrary) => (
+          exercises.map(exercise => (
             <ExerciseCard
               key={exercise.id}
               exercise={exercise}

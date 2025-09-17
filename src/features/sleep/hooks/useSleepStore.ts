@@ -99,7 +99,7 @@ export const useSleepStore = create<SleepStore>()(
         try {
           const { error: _error } = await supabase.from('sleep_entries').delete().eq('id', id);
 
-          if (error) throw error;
+          if (_error) throw _error;
 
           set(state => ({
             entries: state.entries.filter(entry => entry.id !== id),
@@ -148,7 +148,7 @@ export const useSleepStore = create<SleepStore>()(
       },
 
       // Actions - Goals
-      setGoal: async goalData => {
+      addGoal: async (goalData: Partial<SleepGoal>) => {
         set({ isLoading: true, error: null });
 
         try {
@@ -161,11 +161,13 @@ export const useSleepStore = create<SleepStore>()(
           await supabase.from('sleep_goals').update({ isActive: false }).eq('userId', user.id);
 
           const newGoal: Omit<SleepGoal, 'id'> = {
-            ...goalData,
             userId: user.id,
+            targetDuration: goalData.targetDuration || 480, // 8h par défaut
+            targetBedtime: goalData.targetBedtime || '23:00',
+            targetWakeTime: goalData.targetWakeTime || '07:00',
             isActive: true,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
+            createdAt: new Date(),
+            updatedAt: new Date(),
           };
 
           const { data, error } = await supabase
@@ -216,6 +218,27 @@ export const useSleepStore = create<SleepStore>()(
         } catch (error: any) {
           set({
             error: error.message || "Erreur lors de la mise à jour de l'objectif",
+            isLoading: false,
+          });
+        }
+      },
+
+      deleteGoal: async (id: string) => {
+        set({ isLoading: true, error: null });
+
+        try {
+          const { error: _error } = await supabase.from('sleep_goals').delete().eq('id', id);
+
+          if (_error) throw _error;
+
+          set(state => ({
+            goals: state.goals.filter(goal => goal.id !== id),
+            currentGoal: state.currentGoal?.id === id ? null : state.currentGoal,
+            isLoading: false,
+          }));
+        } catch (error: any) {
+          set({
+            error: error.message || 'Erreur lors de la suppression de l\'objectif',
             isLoading: false,
           });
         }
@@ -297,23 +320,36 @@ export const useSleepStore = create<SleepStore>()(
             recentEntries.slice(3, 6).reduce((sum, entry) => sum + entry.quality, 0) /
             Math.min(3, recentEntries.slice(3, 6).length);
 
-          let trend: 'improving' | 'stable' | 'declining' = 'stable';
-          if (recentAvg > olderAvg + 0.5) trend = 'improving';
-          else if (recentAvg < olderAvg - 0.5) trend = 'declining';
+          let trendDirection: 'up' | 'down' | 'stable' = 'stable';
+          let trendPercentage = 0;
+          if (recentAvg > olderAvg + 0.5) {
+            trendDirection = 'up';
+            trendPercentage = Math.round(((recentAvg - olderAvg) / olderAvg) * 100);
+          } else if (recentAvg < olderAvg - 0.5) {
+            trendDirection = 'down';
+            trendPercentage = Math.round(((olderAvg - recentAvg) / olderAvg) * 100);
+          }
+
+          const trend = {
+            direction: trendDirection,
+            percentage: trendPercentage,
+            description: trendDirection === 'up' ? 'En amélioration' : trendDirection === 'down' ? 'En baisse' : 'Stable'
+          };
 
           // Données hebdomadaires pour les graphiques
           const weeklyData: SleepDayData[] = entries.slice(0, 7).map(entry => ({
-            date: entry.created_at.split('T')[0],
+            date: entry.createdAt.toISOString().split('T')[0],
             duration: entry.duration,
             quality: entry.quality,
-            bedtime: entry.bedtime,
-            wakeTime: entry.wakeTime,
+            efficiency: Math.round((entry.duration / 480) * 100), // Calculer l'efficacité basée sur 8h de référence
           }));
 
           const stats: SleepStats = {
             averageDuration,
             averageQuality,
             bedtimeConsistency,
+            totalSessions: entries.length,
+            improvementTrend: trendPercentage,
             sleepDebt: recentDeficit,
             trend,
             weeklyData,

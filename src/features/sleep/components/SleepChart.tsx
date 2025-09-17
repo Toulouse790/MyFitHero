@@ -45,25 +45,25 @@ export const SleepChart: React.FC<SleepChartProps> = ({ stats, className = '' })
             <TrendingUp
               size={16}
               className={
-                stats.trend === 'improving'
+                stats.trend.direction === 'up'
                   ? 'text-green-500'
-                  : stats.trend === 'declining'
+                  : stats.trend.direction === 'down'
                     ? 'text-red-500'
                     : 'text-gray-500'
               }
             />
             <span
               className={
-                stats.trend === 'improving'
+                stats.trend.direction === 'up'
                   ? 'text-green-600'
-                  : stats.trend === 'declining'
+                  : stats.trend.direction === 'down'
                     ? 'text-red-600'
                     : 'text-gray-600'
               }
             >
-              {stats.trend === 'improving'
+              {stats.trend.direction === 'up'
                 ? 'En amélioration'
-                : stats.trend === 'declining'
+                : stats.trend.direction === 'down'
                   ? 'En baisse'
                   : 'Stable'}
             </span>

@@ -126,7 +126,7 @@ export const SleepAnalytics: React.FC<SleepAnalyticsProps> = ({ className = '' }
         )}
 
         {/* Dette de sommeil */}
-        {stats.sleepDebt > 0 && (
+        {stats.sleepDebt && stats.sleepDebt > 0 && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <span className="font-medium text-red-800">Dette de sommeil</span>
@@ -144,25 +144,25 @@ export const SleepAnalytics: React.FC<SleepAnalyticsProps> = ({ className = '' }
           <div className="flex items-center justify-between">
             <span className="font-medium">Tendance récente</span>
             <div className="flex items-center space-x-2">
-              {stats.trend === 'improving' ? (
+              {stats.trend.direction === 'up' ? (
                 <TrendingUp size={16} className="text-green-500" />
-              ) : stats.trend === 'declining' ? (
+              ) : stats.trend.direction === 'down' ? (
                 <TrendingDown size={16} className="text-red-500" />
               ) : (
                 <div className="w-4 h-0.5 bg-gray-400"></div>
               )}
               <span
                 className={`text-sm ${
-                  stats.trend === 'improving'
+                  stats.trend.direction === 'up'
                     ? 'text-green-600'
-                    : stats.trend === 'declining'
+                    : stats.trend.direction === 'down'
                       ? 'text-red-600'
                       : 'text-gray-600'
                 }`}
               >
-                {stats.trend === 'improving'
+                {stats.trend.direction === 'up'
                   ? 'En amélioration'
-                  : stats.trend === 'declining'
+                  : stats.trend.direction === 'down'
                     ? 'En baisse'
                     : 'Stable'}
               </span>

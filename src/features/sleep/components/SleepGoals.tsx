@@ -15,7 +15,7 @@ interface SleepGoalsProps {
 
 export const SleepGoals: React.FC<SleepGoalsProps> = ({ className = '' }) => {
   const { toast } = useToast();
-  const { currentGoal, setGoal, updateGoal, isLoading } = useSleepStore();
+  const { currentGoal, addGoal, updateGoal, isLoading } = useSleepStore();
 
   const [isEditing, setIsEditing] = useState(!currentGoal);
   const [formData, setFormData] = useState({
@@ -36,7 +36,7 @@ export const SleepGoals: React.FC<SleepGoalsProps> = ({ className = '' }) => {
             description: 'Vos nouveaux objectifs de sommeil ont été sauvegardés',
           });
         } else {
-          await setGoal(formData);
+          await addGoal(formData);
           toast({
             title: 'Objectif défini !',
             description: 'Votre objectif de sommeil a été créé',
@@ -53,7 +53,7 @@ export const SleepGoals: React.FC<SleepGoalsProps> = ({ className = '' }) => {
         });
       }
     },
-    [currentGoal, formData, setGoal, updateGoal, toast]
+    [currentGoal, formData, addGoal, updateGoal, toast]
   );
 
   const calculateDuration = useCallback(() => {
