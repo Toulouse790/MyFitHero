@@ -18,7 +18,10 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "analyze": "npm run build && node scripts/analyzeBundles.js",
+    "perf": "./scripts/test-performance.sh",
+    "perf:lighthouse": "lighthouse http://localhost:4173 --view"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -1397,15 +1397,46 @@ const useOfflineSync = () => {
 };
 
 // ====================================================================
-// Composants Lazy-loaded pour les pages principales
+// Composants Lazy-loaded pour les pages principales avec optimisations
 // ====================================================================
 
-// Pages principales
-const OnboardingPage = lazy(() => import('../features/auth/pages/ProfileComplete'));
-const DashboardPage = lazy(() => import('../features/dashboard/pages/Dashboard'));
-const NotFoundPage = lazy(() => import('./NotFound'));
-const AppLoadingSpinner = lazy(() => import('../components/LoadingScreen'));
-const AppErrorBoundary = lazy(() => import('../components/ErrorFallback'));
+// Pages principales avec code splitting optimisé
+const OnboardingPage = lazy(() => 
+  import(
+    /* webpackChunkName: "onboarding" */
+    /* webpackPrefetch: true */
+    '../features/auth/pages/ProfileComplete'
+  )
+);
+
+const DashboardPage = lazy(() => 
+  import(
+    /* webpackChunkName: "dashboard" */
+    /* webpackPreload: true */
+    '../features/dashboard/pages/Dashboard'
+  )
+);
+
+const NotFoundPage = lazy(() => 
+  import(
+    /* webpackChunkName: "pages" */
+    './NotFound'
+  )
+);
+
+const AppLoadingSpinner = lazy(() => 
+  import(
+    /* webpackChunkName: "core" */
+    '../components/LoadingScreen'
+  )
+);
+
+const AppErrorBoundary = lazy(() => 
+  import(
+    /* webpackChunkName: "core" */
+    '../components/ErrorFallback'
+  )
+);
 
 // ====================================================================
 // Définition des Routes de l'Application
@@ -1426,10 +1457,16 @@ interface RouteConfig {
 }
 
 const appRoutes: RouteConfig[] = [
-  // Routes publiques
+  // Routes publiques avec optimisations
   {
     path: '/',
-    component: lazy(() => import('../features/landing/pages/LandingPage')),
+    component: lazy(() => 
+      import(
+        /* webpackChunkName: "landing" */
+        /* webpackPrefetch: true */
+        '../features/landing/pages/LandingPage'
+      )
+    ),
     exact: true,
     title: 'MyFitHero - AI-Powered Fitness for Americans',
     description:
@@ -1437,13 +1474,25 @@ const appRoutes: RouteConfig[] = [
   },
   {
     path: '/login',
-    component: lazy(() => import('../features/auth/pages/AuthPage')),
+    component: lazy(() => 
+      import(
+        /* webpackChunkName: "auth" */
+        /* webpackPrefetch: true */
+        '../features/auth/pages/AuthPage'
+      )
+    ),
     title: 'Sign In - MyFitHero',
     description: 'Sign in to your MyFitHero account and continue your fitness journey.',
   },
   {
     path: '/register',
-    component: lazy(() => import('../features/auth/pages/AuthPage')),
+    component: lazy(() => 
+      import(
+        /* webpackChunkName: "auth" */
+        /* webpackPrefetch: true */
+        '../features/auth/pages/AuthPage'
+      )
+    ),
     title: 'Create Account - MyFitHero',
     description: 'Join thousands of Americans achieving their fitness goals with MyFitHero.',
   },
@@ -1464,7 +1513,7 @@ const appRoutes: RouteConfig[] = [
     description: 'Personalized fitness setup designed specifically for Americans.',
   },
 
-  // Routes principales de l'application
+  // Routes principales de l'application avec optimisations
   {
     path: '/dashboard',
     component: DashboardPage,
@@ -1475,7 +1524,13 @@ const appRoutes: RouteConfig[] = [
   },
   {
     path: '/workouts',
-    component: lazy(() => import('../features/workout/pages/WorkoutPage')),
+    component: lazy(() => 
+      import(
+        /* webpackChunkName: "workout" */
+        /* webpackPrefetch: true */
+        '../features/workout/pages/WorkoutPage'
+      )
+    ),
     requiresAuth: true,
     requiresOnboarding: true,
     title: 'Workouts - MyFitHero',
@@ -1483,14 +1538,25 @@ const appRoutes: RouteConfig[] = [
   },
   {
     path: '/workouts/:id',
-    component: lazy(() => import('../features/workout/pages/WorkoutDetailPage')),
+    component: lazy(() => 
+      import(
+        /* webpackChunkName: "workout-detail" */
+        '../features/workout/pages/WorkoutDetailPage'
+      )
+    ),
     requiresAuth: true,
     requiresOnboarding: true,
     title: 'Workout Details - MyFitHero',
   },
   {
     path: '/nutrition',
-    component: lazy(() => import('../features/nutrition/pages/NutritionPage')),
+    component: lazy(() => 
+      import(
+        /* webpackChunkName: "nutrition" */
+        /* webpackPrefetch: true */
+        '../features/nutrition/pages/NutritionPage'
+      )
+    ),
     requiresAuth: true,
     requiresOnboarding: true,
     title: 'Nutrition - MyFitHero',
@@ -1498,7 +1564,12 @@ const appRoutes: RouteConfig[] = [
   },
   {
     path: '/sleep',
-    component: lazy(() => import('../features/sleep/pages/SleepPage')),
+    component: lazy(() => 
+      import(
+        /* webpackChunkName: "sleep" */
+        '../features/sleep/pages/SleepPage'
+      )
+    ),
     requiresAuth: true,
     requiresOnboarding: true,
     title: 'Sleep Tracking - MyFitHero',
