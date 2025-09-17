@@ -1,15 +1,12 @@
 // Export principal du module admin
-// export * from './types/index';
-// export * from './services/admin.service';
-// export * from './hooks/useAdmin';
+export * from './types';
+export * from './services/admin.service';
+export * from './hooks';
+export * from './components';
 
-// Exports des composants (à implémenter)
-// export * from './components';
-// export * from './pages';
-
-// Placeholder pour éviter les erreurs d'import
+// Keep legacy placeholder for compatibility
 export const AdminModule = {
   name: 'admin',
-  status: 'planned',
-  description: 'Module admin - À implémenter',
+  status: 'active',
+  description: 'Module admin - Disponible',
 };
