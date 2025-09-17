@@ -1,4 +1,3 @@
-import { Check } from 'lucide-react';
 // Export des composants de la feature ai-coach
 export { default as BalanceConnectButton } from './BalanceConnectButton';
 export { default as PWAControls } from './PWAControls';
@@ -11,3 +10,5 @@ export { default as OnboardingQuestionnaire } from './OnboardingQuestionnaire';
 export { default as UnitPreferencesSelector } from './UnitPreferencesSelector';
 export { default as DailyCheckIn } from './DailyCheckIn';
 export { default as FloatingActionButton } from './FloatingActionButton';
+export { default as ConversationalOnboarding } from './ConversationalOnboarding';
+export { default as HealthOrchestrator } from './HealthOrchestrator';

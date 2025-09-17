@@ -1,19 +1,15 @@
 // Export principal du module sleep
 export * from './types';
-export * from './utils/sleep-mapping';
-export * from './components/SleepQualityAnalyzer';
+export * from './services/sleep.service';
+export * from './hooks';
+export * from './components';
 
 // Pages
 export { default as SleepPage } from './pages/SleepPage';
 
-// Exports des services et hooks (à implémenter si nécessaire)
-// export * from './services/sleep.service';
-// export * from './hooks/useSleep';
-
-// Export default du composant principal
-export { default as SleepQualityAnalyzer } from './components/SleepQualityAnalyzer';
+// Update module status
 export const SleepModule = {
   name: 'sleep',
-  status: 'planned',
-  description: 'Module sleep - À implémenter',
+  status: 'active',
+  description: 'Module sleep - Analyse qualité sommeil fonctionnelle',
 };

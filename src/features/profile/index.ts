@@ -1,18 +1,16 @@
 // Export principal du module profile
-// export * from './types/index';
-// export * from './services/profile.service';
-// export * from './hooks/useProfile';
+export * from './types';
+export * from './services/profile.service';
+export * from './hooks';
+export * from './components';
 
 // Pages
 export { default as ProfilePage } from './pages/ProfilePage';
 export { default as SettingsPage } from './pages/SettingsPage';
 
-// Exports des composants (à implémenter)
-// export * from './components';
-
-// Placeholder pour éviter les erreurs d'import
+// Update module status
 export const ProfileModule = {
   name: 'profile',
-  status: 'planned',
-  description: 'Module profile - À implémenter',
+  status: 'active',
+  description: 'Module profile - Gestion profil utilisateur fonctionnelle',
 };

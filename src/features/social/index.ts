@@ -1,18 +1,16 @@
 // Export principal du module social
-// export * from './types/index';
-// export * from './services/social.service';
-// export * from './hooks/useSocial';
+export * from './types';
+export * from './services/social.service';
+export * from './hooks';
+export * from './components';
 
 // Pages
 export { default as SocialPage } from './pages/SocialPage';
 export { default as ChallengesPage } from './pages/ChallengesPage';
 
-// Exports des composants (à implémenter)
-// export * from './components';
-
-// Placeholder pour éviter les erreurs d'import
+// Update module status
 export const SocialModule = {
   name: 'social',
-  status: 'planned',
-  description: 'Module social - À implémenter',
+  status: 'active',
+  description: 'Module social - Connexions et défis fonctionnels',
 };

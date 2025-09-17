@@ -1,15 +1,16 @@
 // Export principal du module wearables
-// export * from './types/index';
-// export * from './services/wearables.service';
-// export * from './hooks/useWearables';
+export * from './types';
+export * from './services/wearable.service';
+export * from './services/wearables.service';
+export * from './hooks';
+export * from './components';
 
-// Exports des composants (à implémenter)
-// export * from './components';
-// export * from './pages';
+// Pages
+export { default as WearableHubPage } from './pages/WearableHubPage';
 
-// Placeholder pour éviter les erreurs d'import
+// Update module status
 export const WearablesModule = {
   name: 'wearables',
-  status: 'planned',
-  description: 'Module wearables - À implémenter',
+  status: 'active',
+  description: 'Module wearables - Synchronisation appareils connectés',
 };

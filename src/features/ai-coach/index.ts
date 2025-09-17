@@ -1,14 +1,11 @@
 // Export principal du module AI Coach
-export * from './types/health-orchestrator';
-export * from './utils/health-orchestrator-mapping';
-export * from './components/HealthOrchestrator';
+export * from './types';
+export * from './services/ai-coach.service';
+export * from './hooks';
+export * from './components';
 
 // Pages
 export { default as AICoachPage } from './pages/AICoachPage';
-
-// Exports des hooks
-export * from './hooks/useUnifiedLoading';
-export * from './hooks/useUserPreferences';
 
 // Module AI Coach complet
 export const AiCoachModule = {
