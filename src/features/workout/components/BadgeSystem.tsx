@@ -31,6 +31,12 @@ interface Badge {
   rarity: 'common' | 'rare' | 'epic' | 'legendary';
 }
 
+interface UserBadge {
+  badge_id: string;
+  earned_at: string;
+  user_id: string;
+}
+
 interface BadgeSystemProps {
   showProgress?: boolean;
   compact?: boolean;
@@ -154,7 +160,7 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
       const { data: userBadges } = await (supabase as any)
         .from('user_badges')
         .select('*')
-        .eq('user_id', appStoreUser.id);
+        .eq('user_id', appStoreUser.id) as { data: UserBadge[] | null };
 
       // Récupérer les statistiques pour calculer les progrès
       const { data: stats } = await (supabase as any)
@@ -162,19 +168,20 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
         .select('*')
         .eq('user_id', appStoreUser.id);
 
-      const earnedBadgeIds = userBadges?.map(b => b.badge_id) || [];
+      const earnedBadgeIds = userBadges?.map((b: UserBadge) => b.badge_id) || [];
 
       const updatedBadges = predefinedBadges.map(badge => {
         const isEarned = earnedBadgeIds.includes(badge.id);
         const progress = calculateProgress(badge.id, stats || []);
+        const earnedAtString = isEarned
+          ? userBadges?.find((b: UserBadge) => b.badge_id === badge.id)?.earned_at
+          : undefined;
 
         return {
           ...badge,
           earned: isEarned,
           progress,
-          earnedAt: isEarned
-            ? userBadges?.find(b => b.badge_id === badge.id)?.earned_at
-            : undefined,
+          earnedAt: earnedAtString ? new Date(earnedAtString) : undefined,
         };
       });
 
@@ -190,30 +197,30 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
     }
   };
 
-  const calculateProgress = (badgeId: string, stats: unknown[]): number => {
+  const calculateProgress = (badgeId: string, stats: any[]): number => {
     switch (badgeId) {
       case 'first_week':
         return Math.min(stats.length, 7);
       case 'hydration_master': {
-        const hydrationDays = stats.filter(s => s.completed_goals?.includes('hydration')).length;
+        const hydrationDays = stats.filter((s: any) => s.completed_goals?.includes('hydration')).length;
         return Math.min(hydrationDays, 30);
       }
       case 'workout_warrior': {
-        const workoutDays = stats.filter(s => s.completed_goals?.includes('workout')).length;
+        const workoutDays = stats.filter((s: any) => s.completed_goals?.includes('workout')).length;
         return Math.min(workoutDays, 50);
       }
       case 'sleep_champion': {
-        const sleepDays = stats.filter(s => s.completed_goals?.includes('sleep')).length;
+        const sleepDays = stats.filter((s: any) => s.completed_goals?.includes('sleep')).length;
         return Math.min(sleepDays, 14);
       }
       case 'streak_legend':
         return Math.min(calculateStreak(stats), 100);
       case 'perfect_week': {
-        const perfectDays = stats.filter(s => s.completion_rate === 100).length;
+        const perfectDays = stats.filter((s: any) => s.completion_rate === 100).length;
         return Math.min(perfectDays, 7);
       }
       case 'nutrition_guru': {
-        const nutritionDays = stats.filter(s => s.completed_goals?.includes('nutrition')).length;
+        const nutritionDays = stats.filter((s: any) => s.completed_goals?.includes('nutrition')).length;
         return Math.min(nutritionDays, 21);
       }
       case 'first_milestone':
@@ -223,9 +230,9 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
     }
   };
 
-  const calculateStreak = (stats: unknown[]): number => {
+  const calculateStreak = (stats: any[]): number => {
     // Logique simplifiée pour calculer la streak
-    return stats.filter(s => s.completion_rate >= 75).length;
+    return stats.filter((s: any) => s.completion_rate >= 75).length;
   };
 
   const checkForNewBadges = async (badges: Badge[]) => {
@@ -243,6 +250,8 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
   };
 
   const awardBadge = async (badge: Badge) => {
+    if (!appStoreUser?.id) return;
+    
     try {
       const { error: _error } = await (supabase as any).from('user_badges').insert({
         user_id: appStoreUser.id,
@@ -250,7 +259,7 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
         earned_at: new Date().toISOString(),
       });
 
-      if (!error) {
+      if (!_error) {
         // Mise à jour locale
         setBadges(prev =>
           prev.map(b => (b.id === badge.id ? { ...b, earned: true, earnedAt: new Date() } : b))

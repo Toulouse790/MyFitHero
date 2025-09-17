@@ -1,15 +1,17 @@
 
+import React, { lazy } from 'react';
+
 // === FEATURES-BASED IMPORTS ===
 export const LazySleep = lazy(() => import('@/features/sleep/pages/SleepPage'));
 export const LazySocial = lazy(() => import('@/features/social/pages/SocialPage'));
 export const LazyHydration = lazy(() => import('@/features/hydration/pages/HydrationPage'));
 export const LazyWorkout = lazy(() => import('@/features/workout/pages/WorkoutPage'));
 
-// === LEGACY IMPORTS (à migrer) ===
-export const LazyNutrition = lazy(() => import('@/pages/Nutrition'));
-export const LazyProfile = lazy(() => import('@/pages/ProfileComplete'));
-export const LazySettings = lazy(() => import('@/pages/settings'));
-export const LazyAnalytics = lazy(() => import('@/pages/Analytics'));
+// === IMPORTS CORRIGÉS ===
+export const LazyNutrition = lazy(() => import('@/features/nutrition/pages/NutritionPage'));
+export const LazyProfile = lazy(() => import('@/features/profile/pages/ProfilePage'));
+export const LazySettings = lazy(() => import('@/features/profile/pages/SettingsPage'));
+export const LazyAnalytics = lazy(() => import('@/features/analytics/pages/AnalyticsPage'));
 export const LazyNotFound = lazy(() => import('@/pages/NotFound'));
 
 // === COMPOSANT DE FALLBACK OPTIMISÉ ===
@@ -33,3 +35,19 @@ export const OptimizedSuspenseFallback = ({ text = 'Chargement...' }: { text?: s
     </div>
   </div>
 );
+
+// Export default pour compatibilité avec index.ts
+const LazyComponents = {
+  LazySleep,
+  LazySocial,
+  LazyHydration,
+  LazyWorkout,
+  LazyNutrition,
+  LazyProfile,
+  LazySettings,
+  LazyAnalytics,
+  LazyNotFound,
+  OptimizedSuspenseFallback
+};
+
+export default LazyComponents;

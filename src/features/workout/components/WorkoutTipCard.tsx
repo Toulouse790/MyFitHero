@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { Star, Lightbulb, ArrowRight } from 'lucide-react';
 import React from 'react';
 
 interface WorkoutTipCardProps {
