@@ -1,5 +1,6 @@
 // Export des composants partagés
 export { default as OptimizedImage } from './OptimizedImage';
+export { WorkoutCard } from './WorkoutCard';
 
 // Pour les autres composants, adapter selon leur export réel
 export * from './ThemeProvider';
