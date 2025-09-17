@@ -1,7 +1,7 @@
 // Export principal du module auth
 export * from './types';
-export * from './services/auth.service';
-export * from './hooks';
+export { AuthService } from './services/auth.service';
+export { useAuth, useAuthStatus, useConversationalOnboarding, useErrorHandler, usePWA } from './hooks';
 export * from './components';
 
 // Pages

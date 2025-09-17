@@ -1,7 +1,7 @@
 // Export principal du module landing
 export * from './types';
-export * from './services/landing.service';
-export * from './hooks';
+export { LandingService } from './services/landing.service';
+export { useLanding } from './hooks';
 
 // Pages
 export { default as LandingPage } from './pages/LandingPage';

@@ -1,8 +1,8 @@
 // Export principal du module wearables
 export * from './types';
 export * from './services/wearable.service';
-export * from './services/wearables.service';
-export * from './hooks';
+export { WearablesService } from './services/wearables.service';
+export { useWearables } from './hooks';
 export * from './components';
 
 // Pages

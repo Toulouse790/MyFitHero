@@ -1,8 +1,8 @@
 // Export principal du module sleep
 export * from './types';
-export * from './services/sleep.service';
-export * from './hooks';
-export * from './components';
+export { SleepService } from './services/sleep.service';
+export { useSleep, useSleepAnalysis, useSleepStore } from './hooks';
+export { SleepAnalytics, SleepChart, SleepQualityAnalyzer, SleepQualityForm } from './components';
 
 // Pages
 export { default as SleepPage } from './pages/SleepPage';

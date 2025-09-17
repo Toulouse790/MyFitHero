@@ -1,6 +1,6 @@
 // Export principal du module AI Coach
 export * from './types';
-export * from './services/ai-coach.service';
+export { AICoachService } from './services/ai-coach.service';
 export * from './hooks';
 export * from './components';
 
