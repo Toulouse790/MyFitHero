@@ -1,8 +1,3 @@
-// Service Worker pour MyFitHero
-const CACHE_NAME = 'myfithero-cache-v1';
-const STATIC_CACHE = 'myfithero-static-v1';
-const DYNAMIC_CACHE = 'myfithero-dynamic-v1';
-
 // 🚀 MyFitHero Service Worker - Cache Optimisé
 const CACHE_NAME = 'myfithero-v2';
 const STATIC_CACHE_NAME = 'myfithero-static-v2';
@@ -363,18 +358,6 @@ async function limitCacheSize(cache, maxEntries) {
 }
 
 console.log('🚀 MyFitHero Service Worker chargé');
-
-// URLs à mettre en cache dynamiquement
-const CACHE_STRATEGIES = {
-  // API Supabase - Network First (données fraîches prioritaires)
-  supabaseApi: /^https:\/\/.*\.supabase\.co\/rest\/v1\//,
-  
-  // Assets statiques - Cache First
-  staticAssets: /\.(js|css|woff2?|png|jpg|jpeg|svg|ico)$/,
-  
-  // Pages - Stale While Revalidate
-  pages: /^https?:\/\/localhost.*\/(workout|nutrition|hydration|sleep|profile|social)?$/
-};
 
 // === INSTALLATION DU SERVICE WORKER ===
 self.addEventListener('install', (event) => {

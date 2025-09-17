@@ -62,3 +62,5 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     </DropdownMenu>
   );
 };
+
+export default LanguageSelector;

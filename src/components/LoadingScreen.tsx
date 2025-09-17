@@ -1,6 +1,14 @@
 import React from 'react';
 
-const LoadingScreen: React.FC = () => {
+interface LoadingScreenProps {
+  message?: string;
+  showProgress?: boolean;
+}
+
+const LoadingScreen: React.FC<LoadingScreenProps> = ({ 
+  message = "Chargement en cours...",
+  showProgress = false 
+}) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="text-center">
@@ -24,8 +32,17 @@ const LoadingScreen: React.FC = () => {
           MyFitHero
         </h2>
         <p className="text-gray-600 dark:text-gray-400">
-          Chargement en cours...
+          {message}
         </p>
+        
+        {/* Barre de progression optionnelle */}
+        {showProgress && (
+          <div className="mt-4 w-64 mx-auto">
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="bg-blue-600 h-2 rounded-full animate-pulse" style={{ width: '45%' }}></div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

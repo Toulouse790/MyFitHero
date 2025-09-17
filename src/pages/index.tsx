@@ -1014,7 +1014,7 @@ const useUSLocation = () => {
 
         setLocation({ state, city, zip, timezone });
       }
-    } catch () {
+    } catch (error) {
       setError('Unable to determine your location. Please ensure location services are enabled.');
     } finally {
       setIsLoading(false);
@@ -1249,7 +1249,7 @@ const useConversationalAI = () => {
         });
 
         return { response: data.response, recommendations: data.recommendations };
-      } catch () {
+      } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'AI service unavailable';
         setError(errorMessage);
         throw new Error(errorMessage);
@@ -1294,7 +1294,7 @@ const useConversationalAI = () => {
         });
 
         return recommendations;
-      } catch () {
+      } catch (err) {
         const errorMessage =
           err instanceof Error ? err.message : 'Failed to generate recommendations';
         setError(errorMessage);
@@ -1435,7 +1435,7 @@ const AppLoadingSpinner = lazy(() =>
 const AppErrorBoundary = lazy(() => 
   import(
     /* webpackChunkName: "core" */
-    '../components/ErrorFallback'
+    '../components/ErrorBoundary'
   )
 );
 
@@ -1731,7 +1731,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
         if (session && !user) {
           // Charger les données utilisateur
           const { data: userData, error: userError } = await supabase
-            .from('users')
+            .from('user_profiles')
             .select('*')
             .eq('id', session.user.id)
             .single();
@@ -1759,7 +1759,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
       if (event === 'SIGNED_IN' && session) {
         // Utilisateur connecté
         const { data: userData } = await supabase
-          .from('users')
+          .from('user_profiles')
           .select('*')
           .eq('id', session.user.id)
           .single();

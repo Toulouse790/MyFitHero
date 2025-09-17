@@ -1,9 +1,44 @@
 import { X } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
+interface ToastItem {
+  id: string;
+  message: string;
+  type: 'success' | 'error' | 'info';
+  isExiting: boolean;
+}
+
 export const useAnimatedToast = () => {
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  
+  const addToast = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
+    const id = Date.now().toString();
+    const newToast: ToastItem = {
+      id,
+      message,
+      type,
+      isExiting: false
+    };
+    setToasts(prev => [...prev, newToast]);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      removeToast(id);
+    }, 5000);
+  };
+  
+  const removeToast = (id: string) => {
+    setToasts(prev => prev.map(toast => 
+      toast.id === id ? { ...toast, isExiting: true } : toast
+    ));
+    
+    // Remove completely after animation
+    setTimeout(() => {
+      setToasts(prev => prev.filter(toast => toast.id !== id));
+    }, 300);
+  };
   
   const showToast = () => {
     setIsVisible(true);
@@ -16,6 +51,9 @@ export const useAnimatedToast = () => {
   };
   
   return {
+    toasts,
+    addToast,
+    removeToast,
     isVisible,
     isAnimating,
     showToast,

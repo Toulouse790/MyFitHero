@@ -3,15 +3,22 @@ import { supabase } from '../../../lib/supabase';
 
 export interface UserProfile {
   id: string;
-  email: string;
-  username?: string;
-  first_name?: string;
-  last_name?: string;
-  onboarding_completed: boolean;
-  role?: string;
-  created_at: string;
-  updated_at: string;
-  // Ajoute ici les autres champs de ton profil
+  username?: string | null;
+  full_name?: string | null;
+  first_name?: string | null;
+  email?: string;
+  avatar_url?: string | null;
+  age?: number | null;
+  height_cm?: number | null;
+  weight_kg?: number | null;
+  gender?: 'male' | 'female' | 'other' | null;
+  activity_level?: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | null;
+  fitness_goal?: string | null;
+  onboarding_completed?: boolean | null;
+  onboarding_completed_at?: string | null;
+  role?: 'user' | 'admin' | 'coach' | 'moderator';
+  created_at?: string | null;
+  updated_at?: string | null;
 }
 
 export interface UseAuthResult {
@@ -38,7 +45,7 @@ export function useAuth(): UseAuthResult {
     if (session?.user) {
       // Récupère le profil dans Supabase
       const { data: profile } = await supabase
-        .from('users')
+        .from('user_profiles')
         .select('*')
         .eq('id', session.user.id)
         .single();

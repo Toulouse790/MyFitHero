@@ -1,4 +1,5 @@
 import { Plus } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 /**
  * Bouton flottant (mobile d’abord) qui amène vers une page d’actions rapides.

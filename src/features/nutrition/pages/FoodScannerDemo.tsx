@@ -235,7 +235,7 @@ const FoodScannerDemo: React.FC = () => {
                   <ul className="space-y-1 text-sm text-muted-foreground">
                     <li>• OpenAI GPT-4 Vision</li>
                     <li>• Google Vision API</li>
-                    <li>• Confiance > 70% requis</li>
+                    <li>• Confiance &gt; 70% requis</li>
                     <li>• Support multi-aliments</li>
                   </ul>
                 </div>

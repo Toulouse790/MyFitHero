@@ -152,7 +152,7 @@ export const NutritionSkeleton: React.FC = () => (
 );
 
 // Hook pour gérer les skeletons basés sur l'état de chargement
-export const useOptimizedLoading = (isLoading: boolean, minLoadingTime: number = 300) => {
+export const useOptimizedLoading = (isLoading: boolean, minLoadingTime: number = 300): boolean => {
   const [showSkeleton, setShowSkeleton] = React.useState(isLoading);
 
   React.useEffect(() => {

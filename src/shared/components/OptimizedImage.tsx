@@ -149,7 +149,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   
   // Lazy loading avec Intersection Observer (sauf si priority)
   const isIntersecting = useIntersectionObserver(containerRef, {
-    skip: priority,
+    threshold: 0.1,
+    rootMargin: '50px'
   });
   
   const shouldLoad = priority || isIntersecting;

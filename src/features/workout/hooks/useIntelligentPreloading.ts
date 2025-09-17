@@ -67,7 +67,7 @@ export const useIntelligentPreloading = () => {
 };
 
 // Détection du type de connexion pour ajuster les performances
-export const useNetworkAdaptation = () => {
+export const useNetworkAdaptation = (): void => {
   useEffect(() => {
     if ('connection' in navigator) {
       const connection = (navigator as any).connection;

@@ -82,22 +82,21 @@ const AnimatedToast: React.FC<AnimatedToastProps> = ({
 };
 
 export const AnimatedToastContainer: React.FC = () => {
-  const { toasts, addToast } = useAnimatedToast();
+  const { toasts, removeToast } = useAnimatedToast();
 
   // Expose addToast globally for use in other components
   React.useEffect(() => {
+    const { addToast } = useAnimatedToast();
     (window as any).addAnimatedToast = addToast;
-  }, [addToast]);
+  }, []);
 
   return (
     <div className="fixed top-0 right-0 z-50 p-4 space-y-2">
-      {toasts.map(toast => (
+      {toasts.map((toast: any) => (
         <AnimatedToast
           key={toast.id}
           {...toast}
-          onRemove={() => {
-            // La suppression est gérée par le hook useAnimatedToast
-          }}
+          onRemove={() => removeToast(toast.id)}
         />
       ))}
     </div>

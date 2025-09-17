@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
@@ -266,8 +267,8 @@ export const setupAccessibilityTests = () => {
   // Configuration globale d'axe
   beforeEach(() => {
     // Configurer axe avec les règles WCAG 2.1 AA
-    global.axe = require('jest-axe').axe;
-    global.axe.configure({
+    (globalThis as any).axe = require('jest-axe').axe;
+    (globalThis as any).axe.configure({
       rules: [
         { id: 'color-contrast', enabled: true },
         { id: 'keyboard-navigation', enabled: true },

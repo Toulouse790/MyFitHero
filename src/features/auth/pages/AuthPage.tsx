@@ -103,7 +103,7 @@ export function AuthPage() {
         if (data.user) {
           // Vérifier le statut d'onboarding pour la redirection
           const { data: profile } = await supabase
-            .from('users')
+            .from('user_profiles')
             .select('onboarding_completed')
             .eq('id', data.user.id)
             .single();

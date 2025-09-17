@@ -265,7 +265,7 @@ export const AriaUtils = {
     describedBy?: string
   ) => ({
     'aria-label': label,
-    'aria-current': current ? 'page' : undefined,
+    'aria-current': current ? ('page' as const) : undefined,
     'aria-describedby': describedBy || undefined
   }),
 

@@ -136,3 +136,5 @@ export const UnitPreferencesSelector: React.FC<UnitPreferencesSelectorProps> = (
     </Card>
   );
 };
+
+export default UnitPreferencesSelector;

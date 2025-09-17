@@ -1,5 +1,11 @@
-import { CheckCircle, AlertCircle, X, Loader2, Scale, Wifi, Check } from 'lucide-react';
+import { CheckCircle, AlertCircle, X, Loader2, Scale, Wifi, Check, CheckCircle2, Bluetooth } from 'lucide-react';
 import React, { useState } from 'react';
+
+// Mock toast pour les notifications
+const toast = {
+  success: (message: string) => console.log('Success:', message),
+  error: (message: string) => console.error('Error:', message),
+};
 
 interface BalanceDevice {
   id: string;
