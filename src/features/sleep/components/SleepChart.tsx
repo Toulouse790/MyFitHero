@@ -1,4 +1,4 @@
-import { Info, Moon, TrendingUp } from 'lucide-react';
+import { Info, Moon, TrendingUp, BarChart3 } from 'lucide-react';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { SleepStats, SleepDayData } from '../types';
@@ -30,7 +30,7 @@ export const SleepChart: React.FC<SleepChartProps> = ({ stats, className = '' })
     );
   }
 
-  const maxDuration = Math.max(...stats.weeklyData.map(d => d.duration));
+  const maxDuration = Math.max(...stats.weeklyData.map((d: any) => d.duration));
   const maxQuality = 10;
 
   return (
@@ -74,7 +74,7 @@ export const SleepChart: React.FC<SleepChartProps> = ({ stats, className = '' })
         <div className="space-y-4">
           {/* Graphique en barres simple */}
           <div className="space-y-2">
-            {stats.weeklyData.map((day, index) => {
+            {stats.weeklyData.map((day: any, index: number) => {
               const durationPercent = (day.duration / maxDuration) * 100;
               const qualityPercent = (day.quality / maxQuality) * 100;
               const dayName = new Date(day.date).toLocaleDateString('fr-FR', { weekday: 'short' });
@@ -140,3 +140,5 @@ export const SleepChart: React.FC<SleepChartProps> = ({ stats, className = '' })
     </Card>
   );
 };
+
+export default SleepChart;

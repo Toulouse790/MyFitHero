@@ -209,3 +209,19 @@ export interface DbSleepAnalysis {
   created_at: string;
   updated_at: string;
 }
+
+// Types pour SleepChart
+export interface SleepStats {
+  averageDuration: number;
+  averageQuality: number;
+  bedtimeConsistency: number;
+  totalSessions: number;
+  improvementTrend: number;
+}
+
+export interface SleepDayData {
+  date: string;
+  duration: number;
+  quality: number;
+  efficiency: number;
+}

@@ -1,4 +1,4 @@
-import { CheckCircle, Moon, Clock, Target, Check } from 'lucide-react';
+import { CheckCircle, Moon, Clock, Target, Check, Edit, Sun } from 'lucide-react';
 import React, { useState, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -258,3 +258,5 @@ export const SleepGoals: React.FC<SleepGoalsProps> = ({ className = '' }) => {
     </Card>
   );
 };
+
+export default SleepGoals;

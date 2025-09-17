@@ -1,4 +1,4 @@
-import { Info, Heart, TrendingUp, Clock, Target } from 'lucide-react';
+import { Info, Heart, TrendingUp, Clock, Target, BarChart3, TrendingDown } from 'lucide-react';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -39,8 +39,8 @@ export const SleepAnalytics: React.FC<SleepAnalyticsProps> = ({ className = '' }
   const recentEntries = entries.slice(0, 7);
   const weeklyImprovement =
     recentEntries.length > 3
-      ? recentEntries.slice(0, 3).reduce((sum, e) => sum + e.quality, 0) / 3 -
-        recentEntries.slice(-3).reduce((sum, e) => sum + e.quality, 0) / 3
+      ? recentEntries.slice(0, 3).reduce((sum: number, e: any) => sum + e.quality, 0) / 3 -
+        recentEntries.slice(-3).reduce((sum: number, e: any) => sum + e.quality, 0) / 3
       : 0;
 
   const consistencyScore = Math.round(stats.bedtimeConsistency);
@@ -237,3 +237,5 @@ export const SleepAnalytics: React.FC<SleepAnalyticsProps> = ({ className = '' }
     </Card>
   );
 };
+
+export default SleepAnalytics;
