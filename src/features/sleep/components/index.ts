@@ -3,3 +3,4 @@ export { default as SleepAnalytics } from './SleepAnalytics';
 export { default as SleepQualityForm } from './SleepQualityForm';
 export { default as SleepChart } from './SleepChart';
 export { default as SleepGoals } from './SleepGoals';
+export { default as SleepQualityAnalyzer } from './SleepQualityAnalyzer';

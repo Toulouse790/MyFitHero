@@ -18,3 +18,8 @@ export { WorkoutStartScreen } from './WorkoutStartScreen';
 export { ActiveSessionIndicator } from './ActiveSessionIndicator';
 export { WorkoutStatsCard } from './WorkoutStatsCard';
 export { PreWorkoutRecoveryCheck } from './PreWorkoutRecoveryCheck';
+export { default as AdvancedSessionTimer } from './AdvancedSessionTimer';
+export { default as SmartRestTimer } from './SmartRestTimer';
+export { default as SophisticatedWorkoutFlowManager } from './SophisticatedWorkoutFlowManager';
+export { default as SophisticatedWorkoutFlowManagerV2 } from './SophisticatedWorkoutFlowManager_v2';
+export { default as VolumeAnalyticsEngine } from './VolumeAnalyticsEngine';
