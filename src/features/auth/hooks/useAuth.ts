@@ -5,8 +5,12 @@ export interface UserProfile {
   id: string;
   email: string;
   username?: string;
-  onboarding_completed?: boolean;
+  first_name?: string;
+  last_name?: string;
+  onboarding_completed: boolean;
   role?: string;
+  created_at: string;
+  updated_at: string;
   // Ajoute ici les autres champs de ton profil
 }
 
@@ -34,7 +38,7 @@ export function useAuth(): UseAuthResult {
     if (session?.user) {
       // Récupère le profil dans Supabase
       const { data: profile } = await supabase
-        .from('user_profiles')
+        .from('users')
         .select('*')
         .eq('id', session.user.id)
         .single();

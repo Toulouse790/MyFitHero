@@ -86,7 +86,7 @@ export function AuthPage() {
         }
 
         if (data.user) {
-          // Succès - redirection vers onboarding
+          // Après inscription, toujours rediriger vers onboarding
           setLocation('/onboarding');
         }
       } else {
@@ -101,8 +101,19 @@ export function AuthPage() {
         }
 
         if (data.user) {
-          // Succès - redirection vers dashboard
-          setLocation('/dashboard');
+          // Vérifier le statut d'onboarding pour la redirection
+          const { data: profile } = await supabase
+            .from('users')
+            .select('onboarding_completed')
+            .eq('id', data.user.id)
+            .single();
+
+          // Redirection intelligente basée sur le statut d'onboarding
+          if (profile?.onboarding_completed) {
+            setLocation('/dashboard');
+          } else {
+            setLocation('/onboarding');
+          }
         }
       }
 

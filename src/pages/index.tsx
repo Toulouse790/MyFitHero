@@ -61,6 +61,7 @@ interface User {
   full_name?: string;
   created_at: string;
   updated_at: string;
+  onboarding_completed: boolean;
   // Profil US-spécifique
   preferred_units: 'imperial' | 'metric';
   timezone: string;
