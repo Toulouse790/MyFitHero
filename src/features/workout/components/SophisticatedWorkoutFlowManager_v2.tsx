@@ -373,8 +373,9 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
 
       dispatch({ type: 'COMPLETE_WORKOUT' });
       
-      if (updatedSession && onWorkoutComplete) {
-        onWorkoutComplete(updatedSession);
+      if (onWorkoutComplete) {
+        // updatedSession might be void, so use session as fallback
+        onWorkoutComplete(session);
       }
     } catch (error) {
       console.error('Erreur lors de la finalisation:', error);

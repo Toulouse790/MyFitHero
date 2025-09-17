@@ -29,6 +29,7 @@ import {
   Exercise 
 } from '@/shared/types/database-mapping';
 import { useWorkoutSession, useWorkoutSets } from '@/features/workout/hooks/useSupabaseWorkout';
+import { supabase } from '@/lib/supabase';
 import { AdvancedSessionTimer } from './AdvancedSessionTimer';
 import { SmartRestTimer } from './SmartRestTimer';
 import VolumeAnalyticsEngine from './VolumeAnalyticsEngine';
@@ -235,6 +236,9 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
   onEmergencyStop,
   className = ''
 }) => {
+  // Generate unique session ID
+  const sessionId = useRef(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`).current;
+  
   // État principal avec réducteur
   const [state, dispatch] = useReducer(workoutReducer, {
     currentState: 'idle',
@@ -432,12 +436,14 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
   const handleCompleteSet = useCallback((setData: Partial<WorkoutSet>) => {
     const newSet: WorkoutSet = {
       id: `set_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      sessionId: sessionId,
       exerciseId: state.workoutPlan?.exercises[state.currentExerciseIndex]?.id || '',
+      setNumber: state.currentSetIndex + 1,
       weight: setData.weight || 0,
       reps: setData.reps || 0,
-      rpe: setData.rpe,
-      tempo: setData.tempo,
-      notes: setData.notes,
+      rpe: setData.rpe || 0,
+      tempo: setData.tempo || '',
+      notes: setData.notes || '',
       timestamp: new Date(),
       completed: true,
       ...setData
@@ -617,19 +623,24 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
       {state.currentState === 'working' && (
         <AdvancedSessionTimer
           userId={userId}
-          onSetComplete={handleCompleteSet}
-          isActive={true}
-          currentExercise={currentExercise}
+          workoutId={sessionId}
+          onSessionEnd={(metrics) => console.log('Session metrics:', metrics)}
         />
       )}
 
       {state.currentState === 'resting' && currentExercise && (
         <SmartRestTimer
           userId={userId}
-          exerciseType={currentExercise.type}
-          lastSetData={state.completedSets[state.completedSets.length - 1]}
+          exerciseContext={{
+            type: currentExercise.type,
+            muscleGroups: currentExercise.muscleGroups || [],
+            intensity: 5, // Default intensity
+            setNumber: state.currentSetIndex + 1,
+            totalSets: currentExercise.targetSets || 3,
+            weight: state.completedSets[state.completedSets.length - 1]?.weight,
+            reps: state.completedSets[state.completedSets.length - 1]?.reps
+          }}
           onRestComplete={() => dispatch({ type: 'SKIP_REST' })}
-          targetRestTime={currentExercise.restTime}
         />
       )}
 

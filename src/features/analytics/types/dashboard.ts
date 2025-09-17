@@ -1,16 +1,9 @@
 import { Activity } from 'lucide-react';
-export interface SmartDashboardContext {
-  user: any;
-  dailyStats: any;
-  currentDate: string;
-  currentTime: string;
-  isWeekend: boolean;
-  weatherContext: string;
-  motivationLevel: string;
-  recentActivity: string;
-  upcomingEvents: unknown[];
-  personalizedTips: unknown[];
-}
+// Import du type principal depuis shared
+import type { SmartDashboardContext } from '@/shared/types/dashboard';
+
+// Re-export for backwards compatibility
+export type { SmartDashboardContext } from '@/shared/types/dashboard';
 
 export interface PersonalizedWidget {
   id: string;

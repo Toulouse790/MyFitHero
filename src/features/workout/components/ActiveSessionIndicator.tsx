@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { Star, Pause, Play, Square } from 'lucide-react';
 // client/src/components/ActiveSessionIndicator.tsx
 import React from 'react';
 import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';
