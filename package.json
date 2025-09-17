@@ -25,7 +25,11 @@
     "perf": "./scripts/test-performance.sh",
     "perf:lighthouse": "lighthouse http://localhost:4173 --view",
     "perf:measure": "npm run build && npm run preview & sleep 5 && npm run perf:lighthouse",
-    "build:analyze": "npm run build && npm run analyze && npm run analyze:stats"
+    "build:analyze": "npm run build && npm run analyze && npm run analyze:stats",
+    "test:a11y": "jest --config jest.accessibility.config.cjs",
+    "audit:accessibility": "npm run build && npm run preview & sleep 3 && axe http://localhost:4173",
+    "dev:a11y": "npm run dev & npm run test:a11y -- --watch",
+    "validate:wcag": "npm run test:a11y && npm run audit:accessibility"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -101,6 +105,8 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
+    "@axe-core/cli": "^4.10.2",
+    "@axe-core/react": "^4.10.2",
     "@babel/core": "^7.28.3",
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
@@ -113,6 +119,7 @@
     "@types/express": "4.17.21",
     "@types/express-session": "^1.18.0",
     "@types/jest": "^30.0.0",
+    "@types/jest-axe": "^3.5.9",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "20.16.11",
     "@types/passport": "^1.0.16",
@@ -125,6 +132,7 @@
     "@typescript-eslint/parser": "^8.41.0",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.21",
+    "axe-core": "^4.10.3",
     "babel-jest": "^30.1.1",
     "eslint": "^9.34.0",
     "eslint-plugin-react": "^7.37.5",
@@ -133,13 +141,16 @@
     "globals": "^16.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.4",
+    "jest-axe": "^9.0.0",
     "jest-environment-jsdom": "^30.1.1",
+    "jest-transform-stub": "^2.0.0",
     "jest-watch-typeahead": "^3.0.1",
     "msw": "^2.10.5",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "tailwindcss": "^3.4.17",
     "terser": "^5.36.0",
+    "ts-jest": "^29.4.2",
     "typescript": "5.6.3",
     "vite": "^5.4.14",
     "whatwg-fetch": "^3.6.20"
