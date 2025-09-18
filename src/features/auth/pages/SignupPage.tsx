@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
-import { Mail, Lock, User, Eye, EyeOff, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
-import { supabase } from '../../../lib/supabase';
+import { Mail, Lock, User, Eye, EyeOff, Loader2, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import { supabase, retryWithBackoff, supabaseHealthCheck } from '../../../lib/supabase';
+import NetworkErrorBoundary from '../../../components/NetworkErrorBoundary';
 
 interface SignupFormData {
   firstName: string;
@@ -20,7 +21,7 @@ interface ValidationErrors {
   general?: string;
 }
 
-export const SignupPage: React.FC = () => {
+export const SignupPageComponent: React.FC = () => {
   const [, setLocation] = useLocation();
   const [formData, setFormData] = useState<SignupFormData>({
     firstName: '',
@@ -34,6 +35,9 @@ export const SignupPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [retryCount, setRetryCount] = useState(0);
+  const [isRetrying, setIsRetrying] = useState(false);
+  const MAX_RETRIES = 3;
 
   // Validation en temps réel
   const validateField = (name: keyof SignupFormData, value: string): string | undefined => {
@@ -85,6 +89,30 @@ export const SignupPage: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Fonction de retry avec exponential backoff
+  const retryWithBackoff = async (fn: () => Promise<void>, attempt: number = 0): Promise<void> => {
+    try {
+      await fn();
+      setRetryCount(0); // Reset retry count on success
+    } catch (error) {
+      if (attempt < MAX_RETRIES) {
+        const delay = Math.pow(2, attempt) * 1000; // 1s, 2s, 4s
+        console.log(`🟡 Tentative ${attempt + 1}/${MAX_RETRIES} échouée, retry dans ${delay}ms`);
+        
+        setIsRetrying(true);
+        setRetryCount(attempt + 1);
+        
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return retryWithBackoff(fn, attempt + 1);
+      } else {
+        console.error('🔴 Toutes les tentatives échouées');
+        throw error;
+      }
+    } finally {
+      setIsRetrying(false);
+    }
+  };
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -93,7 +121,7 @@ export const SignupPage: React.FC = () => {
     setIsLoading(true);
     setErrors({});
 
-    try {
+    const performSignup = async () => {
       // 1. Créer l'utilisateur dans auth.users
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
@@ -109,13 +137,11 @@ export const SignupPage: React.FC = () => {
 
       if (authError) {
         console.error('Erreur auth:', authError);
-        setErrors({ general: authError.message });
-        return;
+        throw new Error(authError.message);
       }
 
       if (!authData.user) {
-        setErrors({ general: 'Erreur lors de la création du compte' });
-        return;
+        throw new Error('Erreur lors de la création du compte');
       }
 
       // 2. Créer le profil dans user_profiles
@@ -144,7 +170,10 @@ export const SignupPage: React.FC = () => {
       setTimeout(() => {
         setLocation('/onboarding');
       }, 3000);
+    };
 
+    try {
+      await retryWithBackoff(performSignup);
     } catch (error) {
       console.error('Erreur inscription:', error);
       
@@ -160,6 +189,7 @@ export const SignupPage: React.FC = () => {
       }
     } finally {
       setIsLoading(false);
+      setRetryCount(0);
     }
   };
 
@@ -388,12 +418,19 @@ export const SignupPage: React.FC = () => {
             {isLoading ? (
               <div className="flex items-center justify-center">
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                Création du compte...
+                {isRetrying ? `Tentative ${retryCount}/${MAX_RETRIES}...` : 'Création du compte...'}
               </div>
             ) : (
               'Créer mon compte'
             )}
           </button>
+
+          {/* Affichage des tentatives de retry */}
+          {retryCount > 0 && !isLoading && (
+            <div className="mt-2 p-2 bg-orange-100 border border-orange-300 rounded text-xs text-orange-700">
+              ⚠️ Tentative {retryCount}/{MAX_RETRIES} échouée. {retryCount < MAX_RETRIES ? 'Nouvelle tentative automatique...' : 'Toutes les tentatives épuisées.'}
+            </div>
+          )}
 
           {/* Bouton de test visible pour debug */}
           <div className="mt-2 p-2 bg-red-100 border border-red-300 rounded text-xs text-red-700">
@@ -427,3 +464,19 @@ export const SignupPage: React.FC = () => {
     </div>
   );
 };
+
+// Composant SignupPage avec Error Boundary
+export const SignupPage: React.FC = () => {
+  return (
+    <NetworkErrorBoundary
+      maxRetries={3}
+      onError={(error, errorInfo) => {
+        console.error('🔴 SignupPage Error Boundary:', error, errorInfo);
+      }}
+    >
+      <SignupPageComponent />
+    </NetworkErrorBoundary>
+  );
+};
+
+export default SignupPage;
