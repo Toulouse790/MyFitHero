@@ -464,4 +464,76 @@ export const authHelpers = {
   },
 };
 
+// Utility functions for health checks and error handling
+export const supabaseHealthCheck = {
+  /**
+   * Test basic connectivity to Supabase
+   */
+  testConnection: async (): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const { data, error } = await supabase.from('user_profiles').select('count', { count: 'exact', head: true });
+      
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown connection error' 
+      };
+    }
+  },
+
+  /**
+   * Test authentication service specifically
+   */
+  testAuthService: async (): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const { data, error } = await supabase.auth.getSession();
+      
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Auth service error' 
+      };
+    }
+  }
+};
+
+// Network retry utility with exponential backoff
+export const retryWithBackoff = async <T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 3,
+  baseDelay: number = 1000
+): Promise<T> => {
+  let lastError: Error;
+  
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error('Unknown error');
+      
+      if (attempt === maxRetries) {
+        throw lastError;
+      }
+      
+      // Exponential backoff: 1s, 2s, 4s
+      const delay = baseDelay * Math.pow(2, attempt);
+      console.warn(`Attempt ${attempt + 1} failed, retrying in ${delay}ms:`, lastError.message);
+      
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  throw lastError!;
+};
+
 export default supabase;
