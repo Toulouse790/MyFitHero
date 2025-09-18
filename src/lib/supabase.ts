@@ -1,11 +1,23 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 // Environment variables with fallbacks for development
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://your-project.supabase.co';
-const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key';
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
+
+// Validation des variables d'environnement
+if (!supabaseUrl || supabaseUrl === 'https://your-project.supabase.co') {
+  console.error('❌ VITE_SUPABASE_URL manquante ou invalide');
+}
+
+if (!supabaseAnonKey || supabaseAnonKey === 'your-anon-key') {
+  console.error('❌ VITE_SUPABASE_ANON_KEY manquante ou invalide');
+}
 
 // Create Supabase client
-export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+export const supabase: SupabaseClient = createClient(
+  supabaseUrl || 'https://your-project.supabase.co', 
+  supabaseAnonKey || 'your-anon-key', 
+  {
   auth: {
     autoRefreshToken: true,
     persistSession: true,

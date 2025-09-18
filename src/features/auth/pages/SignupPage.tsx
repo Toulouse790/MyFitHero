@@ -147,7 +147,17 @@ export const SignupPage: React.FC = () => {
 
     } catch (error) {
       console.error('Erreur inscription:', error);
-      setErrors({ general: 'Une erreur inattendue s\'est produite' });
+      
+      // Gestion spécifique des erreurs réseau
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        setErrors({ 
+          general: 'Erreur de connexion. Vérifiez votre connexion internet et la configuration Supabase.' 
+        });
+      } else if (error instanceof Error) {
+        setErrors({ general: error.message });
+      } else {
+        setErrors({ general: 'Une erreur inattendue s\'est produite' });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -357,7 +367,15 @@ export const SignupPage: React.FC = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={isLoading || Object.keys(errors).some(key => errors[key as keyof ValidationErrors])}
+            disabled={
+              isLoading || 
+              !formData.firstName.trim() || 
+              !formData.lastName.trim() || 
+              !formData.email.trim() || 
+              !formData.password.trim() || 
+              !formData.confirmPassword.trim() ||
+              Object.keys(errors).some(key => key !== 'general' && errors[key as keyof ValidationErrors])
+            }
             className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             {isLoading ? (
