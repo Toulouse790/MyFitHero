@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 import type { SleepStore, SleepEntry, SleepGoal, SleepStats, SleepDayData } from '../types';
 
 export const useSleepStore = create<SleepStore>()(

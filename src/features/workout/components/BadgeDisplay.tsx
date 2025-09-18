@@ -1,13 +1,13 @@
 import { Zap, Star, Target, Trophy, Crown } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 // client/src/components/BadgeDisplay.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/shared/hooks/use-toast';
-import { BadgeService, UserBadge, BadgeProgress } from '@/lib/services/badgeService';
-import { supabase } from '@/lib/supabase';
-import { RARITY_CONFIGS, type BadgeRarity } from '@/shared/utils/badgeConfig';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Button } from '../../../components/ui/button';
+import { useToast } from '../../../shared/hooks/use-toast';
+import { BadgeService, UserBadge, BadgeProgress } from '../../../lib/services/badgeService';
+import { supabase } from '../../../lib/supabase';
+import { RARITY_CONFIGS, type BadgeRarity } from '../../../shared/utils/badgeConfig';
 
 interface BadgeDisplayProps {
   className?: string;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // client/src/components/AuthPages.tsx
-import { authClient } from '@/lib/auth';
-import { useToast } from '@/shared/hooks/use-toast';
+import { authClient } from '../../../lib/auth';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 interface AuthPagesProps {
   onAuthSuccess: (user: any, isNewUser?: boolean) => void;

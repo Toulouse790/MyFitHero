@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 // client/src/components/SportSelector.tsx
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '../../../components/ui/input';
+import { Button } from '../../../components/ui/button';
+import { Card, CardContent } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Skeleton } from '../../../components/ui/skeleton';
 import {
   Search,
   Plus,
@@ -17,10 +17,10 @@ import {
   Sparkles,
   Filter,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useSports } from '@/lib/services/sportsService';
-import { SportOption } from '@/shared/types/onboarding';
-import { useToast } from '@/shared/hooks/use-toast';
+import { cn } from '../../../lib/utils';
+import { useSports } from '../../../lib/services/sportsService';
+import { SportOption } from '../../../shared/types/onboarding';
+import { useToast } from '../../../shared/hooks/use-toast';
 import { useDebounce } from '@/features/ai-coach/hooks/use-debounce';
 
 /* ================================================================== */

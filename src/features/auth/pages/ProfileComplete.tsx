@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 // pages/profile-complete.tsx
 import { useLocation, useRoute } from 'wouter';
 import { useAppNavigation } from '@/routes/hooks';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+import { Button } from '../../../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
 import UniformHeader from '@/features/profile/components/UniformHeader';
 import {
   User,
@@ -22,7 +22,7 @@ import {
   Zap,
   Heart,
 } from 'lucide-react';
-import { appStore } from '@/store/appStore';
+import { appStore } from '../../../store/appStore';
 
 const ProfileComplete: React.FC = () => {
   const { navigateTo } = useAppNavigation();

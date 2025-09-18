@@ -2,13 +2,13 @@ import { Globe, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 // client/src/components/LanguageSelector.tsx
 import React from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../../../components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '../../../components/ui/dropdown-menu';
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸', region: 'United States' },

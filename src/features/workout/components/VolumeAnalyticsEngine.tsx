@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import { 
   TrendingUp, 
   BarChart3, 
@@ -15,7 +15,7 @@ import {
   Users,
   Flame
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 
 // Types pour les analytics volumétriques avancés
 interface WorkoutSet {

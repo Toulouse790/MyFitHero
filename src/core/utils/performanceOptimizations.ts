@@ -90,7 +90,7 @@ class PerformanceCollector {
       }
 
       // Envoyer à Supabase pour tracking interne
-      const { supabase } = await import('@/lib/supabase');
+      const { supabase } = await import('../../../lib/supabase');
       await supabase.from('performance_metrics').insert({
         metric_name: metric.name,
         metric_value: metric.value,

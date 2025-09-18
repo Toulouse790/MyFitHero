@@ -1,9 +1,9 @@
 import { Scale, Globe, Ruler, Waves, Thermometer } from 'lucide-react';
 // client/src/components/UnitPreferencesSelector.tsx
 import React from 'react';
-import { useUnitPreferences } from '@/shared/hooks/useUnitPreferences';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { useUnitPreferences } from '../../../shared/hooks/useUnitPreferences';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
 
 interface UnitPreferencesSelectorProps {
   onClose?: () => void;

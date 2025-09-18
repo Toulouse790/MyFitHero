@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // Hook pour la gestion PWA et mode hors ligne
-import { useToast } from '@/shared/hooks/use-toast';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 interface PWAState {
   isInstallable: boolean;

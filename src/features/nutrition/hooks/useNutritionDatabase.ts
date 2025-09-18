@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 
 // Types pour la base de données USDA
 interface USDAFoodItem {

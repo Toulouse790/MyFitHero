@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 
 // Types pour l'analyse IA
 export interface FoodAnalysisRequest {

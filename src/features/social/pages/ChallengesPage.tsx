@@ -1,6 +1,6 @@
 import { X, Search } from 'lucide-react';
 import React, { useState, useCallback } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { create } from 'zustand';

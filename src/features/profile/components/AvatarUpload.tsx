@@ -1,8 +1,8 @@
 import { X, Loader2 } from 'lucide-react';
 import React, { useState, useRef } from 'react';
-import { useToast } from '@/shared/hooks/use-toast';
-import { supabase } from '@/lib/supabase';
-import { appStore } from '@/store/appStore';
+import { useToast } from '../../../shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { appStore } from '../../../store/appStore';
 
 interface AvatarUploadProps {
   currentAvatar?: string;

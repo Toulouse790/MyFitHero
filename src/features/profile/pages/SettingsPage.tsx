@@ -23,20 +23,20 @@ import {
   EyeOff,
 } from 'lucide-react';
 import { useWearableSync } from '@/features/wearables/hooks/useWearableSync';
-import { useToast } from '@/shared/hooks/use-toast';
-import { supabase } from '@/lib/supabase';
-import { appStore } from '@/store/appStore';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '../../../shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { appStore } from '../../../store/appStore';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
+import { Switch } from '../../../components/ui/switch';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+import { Badge } from '../../../components/ui/badge';
+import { Separator } from '../../../components/ui/separator';
+import { Textarea } from '../../../components/ui/textarea';
 import { UniformHeader } from '@/features/profile/components/UniformHeader';
-import { AnalyticsService } from '@/lib/analytics';
+import { AnalyticsService } from '../../../lib/analytics';
 
 interface NotificationSettings {
   workout_reminders: boolean;

@@ -1,11 +1,11 @@
 import { TrendingUp, Target } from 'lucide-react';
 // client/src/components/USMarketDashboard.tsx
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { UnitDisplay } from '@/shared/components/UnitDisplay';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Progress } from '../../../components/ui/progress';
+import { Badge } from '../../../components/ui/badge';
+import { UnitDisplay } from '../../../shared/components/UnitDisplay';
 
 interface USMarketDashboardProps {
   className?: string;

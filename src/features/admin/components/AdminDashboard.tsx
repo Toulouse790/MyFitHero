@@ -1,8 +1,8 @@
 // client/src/features/admin/components/AdminDashboard.tsx
 import React from 'react';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Card } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Button } from '../../../components/ui/button';
 
 interface AdminDashboardProps {
   userProfile?: {

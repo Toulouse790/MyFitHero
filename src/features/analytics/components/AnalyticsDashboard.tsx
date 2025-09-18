@@ -1,16 +1,16 @@
 import { Activity, Download, RefreshCw, Target } from 'lucide-react';
 import React, { useState, useEffect, useCallback } from 'react';
-import { appStore } from '@/store/appStore';
-import { useAdaptiveColors } from '@/shared/components/ThemeProvider';
-import { useAnimateOnMount } from '@/shared/hooks/useAnimations';
-import AdvancedCharts from '@/shared/components/AdvancedCharts';
+import { appStore } from '../../../store/appStore';
+import { useAdaptiveColors } from '../../../shared/components/ThemeProvider';
+import { useAnimateOnMount } from '../../../shared/hooks/useAnimations';
+import AdvancedCharts from '../../../shared/components/AdvancedCharts';
 import {
   analyticsService,
   type AnalyticsData,
   type PillarProgress,
   type PerformanceMetrics,
   type DetailedInsight,
-} from '@/lib/services/analyticsService';
+} from '../../../lib/services/analyticsService';
 
 interface AnalyticsDashboardProps {
   className?: string;

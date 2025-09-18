@@ -15,9 +15,9 @@ import {
   CheckCircle,
   XCircle,
 } from 'lucide-react';
-import { useToast } from '@/shared/hooks/use-toast';
-import { supabase } from '@/lib/supabase';
-import { appStore } from '@/store/appStore';
+import { useToast } from '../../../shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { appStore } from '../../../store/appStore';
 
 interface PrivacySettings {
   profile_visibility: 'public' | 'friends' | 'private';

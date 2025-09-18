@@ -10,9 +10,9 @@ import {
   Calendar,
   Flame,
 } from 'lucide-react';
-import { appStore } from '@/store/appStore';
-import { supabase } from '@/lib/supabase';
-import { useAnimateOnMount, useProgressAnimation, useHaptic } from '@/shared/hooks/useAnimations';
+import { appStore } from '../../../store/appStore';
+import { supabase } from '../../../lib/supabase';
+import { useAnimateOnMount, useProgressAnimation, useHaptic } from '../../../shared/hooks/useAnimations';
 
 interface PillarHeaderProps {
   pillar: 'hydration' | 'nutrition' | 'sleep' | 'workout';

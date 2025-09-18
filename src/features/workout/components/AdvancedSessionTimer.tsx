@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Separator } from '@/components/ui/separator';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Separator } from '../../../components/ui/separator';
 import { 
   Play, 
   Pause, 
@@ -16,7 +16,7 @@ import {
   BarChart3,
   Activity
 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 import { toast } from 'sonner';
 
 // Types avancés pour le timer de session

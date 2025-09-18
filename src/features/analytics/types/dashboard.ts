@@ -1,9 +1,9 @@
 import { Activity } from 'lucide-react';
 // Import du type principal depuis shared
-import type { SmartDashboardContext } from '@/shared/types/dashboard';
+import type { SmartDashboardContext } from '../../../shared/types/dashboard';
 
 // Re-export for backwards compatibility
-export type { SmartDashboardContext } from '@/shared/types/dashboard';
+export type { SmartDashboardContext } from '../../../shared/types/dashboard';
 
 export interface PersonalizedWidget {
   id: string;

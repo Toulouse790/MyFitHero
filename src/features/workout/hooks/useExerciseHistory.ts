@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 // hooks/workout/useExerciseHistory.ts
-import { appStore } from '@/store/appStore';
-import { supabase } from '@/lib/supabase';
+import { appStore } from '../../../store/appStore';
+import { supabase } from '../../../lib/supabase';
 import type { SessionExercise } from '../types/WorkoutTypes';
 
 export interface UseExerciseHistoryReturn {

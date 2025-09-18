@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // client/src/components/WorkoutDashboard.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+import { Skeleton } from '../../../components/ui/skeleton';
 import {
   Calendar,
   Clock,
@@ -24,9 +24,9 @@ import {
   Filter,
   Download,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useToast } from '@/shared/hooks/use-toast';
-import { supabase } from '@/lib/supabase';
+import { cn } from '../../../lib/utils';
+import { useToast } from '../../../shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
 
 interface CompletedWorkout {
   completed_at: string;

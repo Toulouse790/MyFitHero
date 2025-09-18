@@ -1,13 +1,13 @@
 import { Activity } from 'lucide-react';
 import React, { useState, useEffect, useCallback } from 'react';
 // hooks/onboarding/useConversationalOnboarding.ts
-import { supabase } from '@/lib/supabase';
-import { useToast } from '@/shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { useToast } from '../../../shared/hooks/use-toast';
 import {
   OnboardingData,
   ConversationalStep,
   OnboardingProgress,
-} from '@/shared/types/conversationalOnboarding';
+} from '../../../shared/types/conversationalOnboarding';
 import {
   CONVERSATIONAL_ONBOARDING_FLOW,
   getConditionalNextStep,

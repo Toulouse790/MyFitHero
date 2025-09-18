@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SkipLink, AccessibleButton, AccessibleLink } from './AccessibleComponents';
 import { useFocusManagement, useKeyboardShortcuts, useAnnounce } from '../hooks/useAccessibility';
-import { cn } from '@/lib/utils';
+import { cn } from '../../../lib/utils';
 
 interface NavigationItem {
   id: string;

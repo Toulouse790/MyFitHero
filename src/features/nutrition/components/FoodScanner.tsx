@@ -1,9 +1,9 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { Camera, Upload, Loader, CheckCircle, AlertCircle, X, RotateCw, Zap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '../../../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+import { Alert, AlertDescription } from '../../../components/ui/alert';
 import { MockFoodVisionService } from '../services/mockFoodVisionService';
 
 // Types pour le scan alimentaire

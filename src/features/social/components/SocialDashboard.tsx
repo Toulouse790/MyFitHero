@@ -11,8 +11,8 @@ import {
   Zap,
   Crown,
 } from 'lucide-react';
-import { socialService, Challenge, SocialPost, LeaderboardEntry } from '@/lib/services/socialService';
-import { useToast } from '@/shared/hooks/use-toast';
+import { socialService, Challenge, SocialPost, LeaderboardEntry } from '../../../lib/services/socialService';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 interface SocialDashboardProps {
   userId: string;

@@ -4,7 +4,7 @@
 // ============================================================================
 
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 import { 
   WorkoutSession, 
   WorkoutSet, 
@@ -14,7 +14,7 @@ import {
   dbToWorkoutSet,
   workoutSessionToDb,
   workoutSetToDb
-} from '@/shared/types/database-mapping';
+} from '../../../shared/types/database-mapping';
 
 // ============================================================================
 // HOOKS POUR WORKOUT SESSIONS

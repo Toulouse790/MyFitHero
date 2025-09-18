@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
 import {
   Activity,
   Heart,
@@ -17,8 +17,8 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { useWearableSync } from '@/features/wearables/hooks/useWearableSync';
-import { WearableAnalyzer } from '@/lib/wearableUtils';
-import { useToast } from '@/shared/hooks/use-toast';
+import { WearableAnalyzer } from '../../../lib/wearableUtils';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 const SmartHealthDashboard: React.FC = () => {
   const { getCachedData, syncAll, isLoading } = useWearableSync();

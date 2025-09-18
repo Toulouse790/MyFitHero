@@ -1,4 +1,3 @@
-import { Star } from 'lucide-react';
 import React, { useState, useEffect, useCallback } from 'react';
 
 export interface LandingMetrics {

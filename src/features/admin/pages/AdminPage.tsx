@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { AdminDashboard } from '../components';
 import { useAuthStatus } from '@/features/auth/hooks/useAuthStatus';
-import { supabase } from '@/lib/supabase';
-import { useToast } from '@/shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 interface UserProfile {
   id: string;

@@ -22,7 +22,7 @@ import {
   PolarRadiusAxis,
   Radar,
 } from 'recharts';
-import { useAdaptiveColors } from '@/shared/components/ThemeProvider';
+import { useAdaptiveColors } from '../../../shared/components/ThemeProvider';
 
 interface ChartData {
   labels?: string[];

@@ -1,11 +1,11 @@
 import { CheckCircle, Moon, Clock, Target, Check, Edit, Sun } from 'lucide-react';
 import React, { useState, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { useToast } from '@/shared/hooks/use-toast';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
+import { Badge } from '../../../components/ui/badge';
+import { useToast } from '../../../shared/hooks/use-toast';
 import { useSleepStore } from '../hooks/useSleepStore';
 import { formatDuration } from '../utils/sleepConfig';
 

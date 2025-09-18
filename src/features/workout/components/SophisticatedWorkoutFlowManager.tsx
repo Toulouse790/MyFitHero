@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useReducer, useCallback, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
+import { Progress } from '../../../components/ui/progress';
 import { 
   Play, 
   Pause, 
@@ -27,9 +27,9 @@ import {
   WorkoutSet, 
   WorkoutSession, 
   Exercise 
-} from '@/shared/types/database-mapping';
+} from '../../../shared/types/database-mapping';
 import { useWorkoutSession, useWorkoutSets } from '@/features/workout/hooks/useSupabaseWorkout';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '../../../lib/supabase';
 import { AdvancedSessionTimer } from './AdvancedSessionTimer';
 import { SmartRestTimer } from './SmartRestTimer';
 import VolumeAnalyticsEngine from './VolumeAnalyticsEngine';

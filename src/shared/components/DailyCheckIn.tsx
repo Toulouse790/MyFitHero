@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
 import { Check, X, Calendar, Clock } from 'lucide-react';
-import { UserDataService, DailyCheckin } from '@/lib/services/userDataService';
-import { BadgeService } from '@/lib/services/badgeService';
-import { useToast } from '@/shared/hooks/use-toast';
+import { UserDataService, DailyCheckin } from '../../../lib/services/userDataService';
+import { BadgeService } from '../../../lib/services/badgeService';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 interface DailyCheckInProps {
   userId?: string;

@@ -1,8 +1,7 @@
-import { Plus } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { supabase } from '@/lib/supabase';
-import { appStore } from '@/store/appStore';
-import { useToast } from '@/shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { appStore } from '../../../store/appStore';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 interface HydrationEntry {
   id: string;

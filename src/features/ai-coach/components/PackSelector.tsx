@@ -1,11 +1,11 @@
 import { Clock, Star, Check, ChevronRight } from 'lucide-react';
 import React, { useState } from 'react';
 // client/src/components/PackSelector.tsx
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '../../../components/ui/button';
+import { Card } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
 import { SMART_PACKS, getEstimatedTimeForPack } from '@/data/smartPacks';
-import { cn } from '@/lib/utils';
+import { cn } from '../../../lib/utils';
 
 interface PackSelectorProps {
   onSelect: (packId: string) => void;

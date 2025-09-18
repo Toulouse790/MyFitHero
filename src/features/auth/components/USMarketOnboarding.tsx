@@ -1,14 +1,14 @@
 import { Info, Star, Target } from 'lucide-react';
 import React, { useState } from 'react';
 // client/src/components/USMarketOnboarding.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { useUnitPreferences } from '@/shared/hooks/useUnitPreferences';
-import { UnitDisplay } from '@/shared/components/UnitDisplay';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
+import { Progress } from '../../../components/ui/progress';
+import { Badge } from '../../../components/ui/badge';
+import { useUnitPreferences } from '../../../shared/hooks/useUnitPreferences';
+import { UnitDisplay } from '../../../shared/components/UnitDisplay';
 
 interface USUserProfile {
   name: string;

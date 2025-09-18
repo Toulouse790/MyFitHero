@@ -1,8 +1,8 @@
 import { Star } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { supabase } from '@/lib/supabase';
-import { appStore } from '@/store/appStore';
-import { useToast } from '@/shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { appStore } from '../../../store/appStore';
+import { useToast } from '../../../shared/hooks/use-toast';
 
 interface SleepEntry {
   id: string;
