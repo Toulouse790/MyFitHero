@@ -23,3 +23,11 @@ export { default as SmartRestTimer } from './SmartRestTimer';
 export { default as SophisticatedWorkoutFlowManager } from './SophisticatedWorkoutFlowManager';
 export { default as SophisticatedWorkoutFlowManagerV2 } from './SophisticatedWorkoutFlowManager_v2';
 export { default as VolumeAnalyticsEngine } from './VolumeAnalyticsEngine';
+
+// Nouveaux composants refactorisés
+export { WorkoutOverview } from './WorkoutOverview';
+export { WorkoutSessionComponent } from './WorkoutSession';
+export { WorkoutPlans } from './WorkoutPlans';
+export { WorkoutHistory } from './WorkoutHistory';
+export { WorkoutProgress as WorkoutProgressComponent } from './WorkoutProgress';
+export { WorkoutSettings } from './WorkoutSettings';

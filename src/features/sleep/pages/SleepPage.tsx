@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 // client/src/components/Sleep.tsx
 import {
   Moon,
@@ -34,8 +35,8 @@ import {
 } from 'lucide-react';
 import { appStore } from '../../../store/appStore';
 import { useToast } from '../../../shared/hooks/use-toast';
-import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
-import { UniformHeader } from '@/features/profile/components/UniformHeader';
+import AIIntelligence from '../../ai-coach/components/AIIntelligence';
+import { UniformHeader } from '../../profile/components/UniformHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
@@ -51,6 +52,17 @@ import {
   DialogTrigger,
 } from '../../../components/ui/dialog';
 import { supabase } from '../../../lib/supabase';
+
+// Import des composants refactorisés
+import {
+  SleepTimer,
+  SleepSummary,
+  SleepRecommendation,
+  SleepStats,
+  SleepBenefits,
+  SleepTips,
+  SleepActions
+} from '../components';
 
 // --- TYPES ---
 type SportCategory = 'contact' | 'endurance' | 'precision' | 'team';
@@ -393,7 +405,7 @@ const Sleep: React.FC = () => {
     if (appStoreUser?.primary_goals?.includes('performance')) goalHours += 0.5;
 
     // Ajustement selon la fréquence d'entraînement
-    if (appStoreUser?.training_frequency && appStoreUser.training_frequency > 5) {
+    if (appStoreUser?.training_frequency && parseInt(appStoreUser.training_frequency) > 5) {
       goalHours += 0.5;
     }
 
@@ -494,7 +506,7 @@ const Sleep: React.FC = () => {
     const durationMinutes = Math.floor(durationMs / 60000);
 
     try {
-      const { error: _error } = await supabase.from('sleep_sessions').insert({
+      const { error } = await supabase.from('sleep_sessions').insert({
         user_id: appStoreUser.id,
         sleep_date: todayDate,
         bedtime: sleepTimer.startTime.toLocaleTimeString('fr-FR', {
@@ -562,14 +574,14 @@ const Sleep: React.FC = () => {
   // --- COMPOSANTS ---
   const TipCard = ({ tip }: { tip: any }) => {
     const TipIcon = tip.icon;
-    const priorityColors = {
+    const priorityColors: Record<string, string> = {
       high: 'border-l-red-500 bg-red-50',
       medium: 'border-l-yellow-500 bg-yellow-50',
       low: 'border-l-blue-500 bg-blue-50',
     };
 
     return (
-      <Card className={`border-l-4 ${priorityColors[tip.priority]}`}>
+      <Card className={`border-l-4 ${priorityColors[tip.priority] || priorityColors.medium}`}>
         <CardContent className="p-4">
           <div className="flex items-start space-x-3">
             <TipIcon size={20} className="text-gray-600 mt-0.5 flex-shrink-0" />
@@ -969,7 +981,7 @@ const Sleep: React.FC = () => {
                     <p>
                       • Sport {userSportCategory}: {sportConfig.sleepGoalHours}h de base
                     </p>
-                    {appStoreUser?.training_frequency && appStoreUser.training_frequency > 5 && (
+                    {appStoreUser?.training_frequency && parseInt(appStoreUser.training_frequency) > 5 && (
                       <p>• Entraînement intensif ({appStoreUser.training_frequency}x/sem): +0.5h</p>
                     )}
                     {appStoreUser?.primary_goals?.includes('muscle_gain') && (

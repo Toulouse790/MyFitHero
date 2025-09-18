@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Droplets,
   Plus,
@@ -27,8 +28,8 @@ import {
 import { appStore } from '../../../store/appStore';
 import { useToast } from '../../../shared/hooks/use-toast';
 import { supabase } from '../../../lib/supabase';
-import { useRealtimeSync } from '@/features/workout/hooks/useRealtimeSync';
-import UniformHeader from '@/features/profile/components/UniformHeader';
+import { useRealtimeSync } from '../../workout/hooks/useRealtimeSync';
+import UniformHeader from '../../profile/components/UniformHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
@@ -42,11 +43,20 @@ import {
   DialogTrigger,
 } from '../../../components/ui/dialog';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
-import { Database } from '@/features/workout/types/database';
+import { Database } from '../../workout/types/database';
 import { getSportCategoryForHydration, HydrationSportCategory } from '../../../shared/utils/sportMapping';
 import { getHydrationPersonalizedMessage } from '../../../shared/utils/personalizedMessages';
 import { useDataLoader } from '../../../shared/hooks/useDataLoader';
 import { AIModal } from '../../../shared/components/AIModal';
+
+// Import des sous-composants
+import {
+  HydrationHeader,
+  HydrationProgress,
+  HydrationQuickActions,
+  HydrationCustomInput,
+  HydrationMessage,
+} from '../components';
 
 // --- TYPES & INTERFACES ---
 type DrinkType = Database['public']['Tables']['hydration_logs']['Row']['drink_type'];
@@ -251,7 +261,7 @@ const Hydration: React.FC = () => {
     }
 
     const activityLevel = appStoreUser?.activity_level;
-    if (activityLevel === 'extra_active') adjustments += 500;
+    if (activityLevel === 'extremely_active') adjustments += 500;
     else if (activityLevel === 'moderately_active') adjustments += 300;
 
     return Math.round(baseGoalMl + adjustments);
@@ -303,7 +313,7 @@ const Hydration: React.FC = () => {
       }
 
       if (currentLogs && currentLogs.length > 0) {
-        setLastDrinkTime(new Date(currentLogs[0].logged_at));
+        setLastDrinkTime(currentLogs[0].logged_at ? new Date(currentLogs[0].logged_at) : null);
       }
     } catch (error) {
       // Erreur silencieuse
@@ -508,85 +518,35 @@ const Hydration: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center p-4">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md mx-auto">
         {/* Header avec icône Droplets */}
-        <div className="text-center mb-8">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-            <Droplets className="h-8 w-8 text-white" />
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Hydratation</h1>
-          <p className="text-gray-600">{sportConfig.emoji} {getPersonalizedMessage()}</p>
-        </div>
+        <HydrationHeader 
+          sportEmoji={sportConfig.emoji}
+          personalizedMessage={getPersonalizedMessage()}
+        />
 
         {/* Objectif principal */}
-        <div className="text-center mb-6">
-          <div className="text-3xl font-bold text-gray-900 mb-2">
-            {currentHydrationL.toFixed(2).replace(/\.?0+$/, '')}L
-          </div>
-          <div className="text-gray-600 mb-4">
-            sur {goalHydrationL.toFixed(2).replace(/\.?0+$/, '')}L objectif
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
-            <div 
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 h-3 rounded-full transition-all duration-300"
-              style={{ width: `${Math.min(percentage, 100)}%` }}
-            />
-          </div>
-          <div className="text-sm text-gray-600">
-            {remaining > 0
-              ? `${(remaining / 1000).toFixed(2).replace(/\.?0+$/, '')}L restants`
-              : 'Objectif atteint ! 🎉'}
-          </div>
-        </div>
+        <HydrationProgress
+          currentHydrationL={currentHydrationL}
+          goalHydrationL={goalHydrationL}
+          percentage={percentage}
+          remaining={remaining}
+        />
 
         {/* Boutons d'action rapide */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <button 
-            onClick={() => handleAddWater(250, 'water', 'normal')}
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 px-4 rounded-xl font-medium transition-all duration-200 transform hover:scale-105"
-          >
-            <Droplets className="h-5 w-5 mx-auto mb-1" />
-            +250ml
-          </button>
-          <button 
-            onClick={() => handleAddWater(500, 'water', 'normal')}
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 px-4 rounded-xl font-medium transition-all duration-200 transform hover:scale-105"
-          >
-            <Droplets className="h-5 w-5 mx-auto mb-1" />
-            +500ml
-          </button>
-        </div>
+        <HydrationQuickActions
+          onAddWater={handleAddWater}
+        />
 
         {/* Sélection personnalisée */}
-        <div className="mb-6">
-          <div className="flex items-center justify-center space-x-3 mb-3">
-            <button
-              onClick={() => setSelectedAmount(Math.max(50, selectedAmount - 50))}
-              className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 transition-colors"
-            >
-              <Minus className="h-4 w-4" />
-            </button>
-            <span className="font-semibold text-xl min-w-20 text-center text-gray-900">{selectedAmount}ml</span>
-            <button
-              onClick={() => setSelectedAmount(Math.min(2000, selectedAmount + 50))}
-              className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 transition-colors"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
-          </div>
-          <button
-            onClick={() => handleAddWater(selectedAmount, 'water', 'normal')}
-            className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 rounded-xl font-medium transition-all duration-200"
-          >
-            <Droplets className="h-5 w-5 inline mr-2" />
-            Ajouter {selectedAmount}ml
-          </button>
-        </div>
+        <HydrationCustomInput
+          selectedAmount={selectedAmount}
+          onAmountChange={setSelectedAmount}
+          onAddWater={handleAddWater}
+        />
 
         {/* Message motivationnel */}
-        <div className="text-center mb-6">
-          <p className="text-gray-600 text-sm">
-            {getPersonalizedMessage()}
-          </p>
-        </div>
+        <HydrationMessage
+          message={getPersonalizedMessage()}
+        />
 
         {/* Coaching IA Modal */}
         <AIModal

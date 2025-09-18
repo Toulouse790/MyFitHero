@@ -13,5 +13,5 @@ export { default as WorkoutPage } from './pages/WorkoutPage';
 export { default as WorkoutDetailPage } from './pages/WorkoutDetailPage';
 export { default as ExercisesPage } from './pages/ExercisesPage';
 
-// Exports des composants (à implémenter)
-// export * from './components';
+// Exports des composants
+export * from './components';

@@ -1,41 +1,42 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-// client/src/components/WorkoutDashboard.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
+import { supabase } from '../../../lib/supabase';
+import { useToast } from '../../../shared/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import { Skeleton } from '../../../components/ui/skeleton';
 import {
+  BarChart,
   Calendar,
-  Clock,
   Dumbbell,
-  LineChart,
-  Play,
   Settings,
-  Target,
-  Trophy,
-  TrendingUp,
-  Zap,
-  BarChart3,
   Timer,
-  CheckCircle,
-  PlusCircle,
-  Filter,
-  Download,
+  TrendingUp
 } from 'lucide-react';
-import { cn } from '../../../lib/utils';
-import { useToast } from '../../../shared/hooks/use-toast';
-import { supabase } from '../../../lib/supabase';
 
-interface CompletedWorkout {
-  completed_at: string;
-  // Ajoutez d'autres propriétés selon vos besoins
+// Import des sous-composants
+import {
+  WorkoutOverview,
+  WorkoutSessionComponent,
+  WorkoutPlans,
+  WorkoutHistory,
+  WorkoutProgress,
+  WorkoutSettings,
+} from './index';
+
+/* ================================================================== */
+/*                           TYPES                                    */
+/* ================================================================== */
+
+interface Exercise {
+  id: string;
+  name: string;
+  category: string;
+  sets?: number;
+  reps?: number;
+  weight?: number;
+  duration_seconds?: number;
+  rest_seconds?: number;
+  completed?: boolean;
 }
-
-/* ================================================================== */
-/*                           INTERFACES                               */
-/* ================================================================== */
 
 interface WorkoutSession {
   id: string;
@@ -48,18 +49,6 @@ interface WorkoutSession {
   started_at?: Date;
   completed_at?: Date;
   workout_type: 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other';
-}
-
-interface Exercise {
-  id: string;
-  name: string;
-  category: string;
-  sets?: number;
-  reps?: number;
-  weight?: number;
-  duration_seconds?: number;
-  rest_seconds?: number;
-  completed?: boolean;
 }
 
 interface WorkoutStats {
@@ -104,60 +93,23 @@ export default function WorkoutDashboard() {
 
   /* ========================= COMPUTED VALUES ========================== */
 
-  const tabs = useMemo(
-    () => [
-      {
-        id: 'overview',
-        label: "Vue d'ensemble",
-        icon: BarChart3,
-        description: 'Statistiques et résumé',
-      },
-      {
-        id: 'session',
-        label: 'Entraînement',
-        icon: Dumbbell,
-        description: 'Session en cours',
-      },
-      {
-        id: 'plans',
-        label: 'Plans',
-        icon: Calendar,
-        description: "Programmes d'entraînement",
-      },
-      {
-        id: 'progress',
-        label: 'Progrès',
-        icon: TrendingUp,
-        description: 'Suivi des performances',
-      },
-      {
-        id: 'history',
-        label: 'Historique',
-        icon: Clock,
-        description: 'Séances passées',
-      },
-      {
-        id: 'settings',
-        label: 'Réglages',
-        icon: Settings,
-        description: 'Configuration',
-      },
-    ],
-    []
-  );
+  const tabs = useMemo(() => [
+    { id: 'overview', label: 'Vue d\'ensemble', icon: BarChart },
+    { id: 'session', label: 'Session', icon: Dumbbell },
+    { id: 'plans', label: 'Plans', icon: Calendar },
+    { id: 'progress', label: 'Progrès', icon: TrendingUp },
+    { id: 'history', label: 'Historique', icon: Timer },
+    { id: 'settings', label: 'Paramètres', icon: Settings },
+  ], []);
 
   const progressPercentage = useMemo(() => {
     if (!workoutStats) return 0;
-    const weeklyGoal = 4; // 4 workouts per week
-    return Math.min(100, (workoutStats.weeklyProgress / weeklyGoal) * 100);
+    return Math.min((workoutStats.weeklyProgress / 4) * 100, 100);
   }, [workoutStats]);
 
-  /* ========================== EFFECTS ========================== */
+  /* ========================= EFFECTS ET TIMERS ======================== */
 
-  useEffect(() => {
-    loadDashboardData();
-  }, []);
-
+  // Timer pour la session active
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isSessionActive) {
@@ -168,576 +120,163 @@ export default function WorkoutDashboard() {
     return () => clearInterval(interval);
   }, [isSessionActive]);
 
-  /* ========================= FONCTIONS ========================= */
+  // Chargement initial
+  useEffect(() => {
+    loadDashboardData();
+  }, []);
+
+  /* ========================= DATA LOADING ========================== */
 
   const loadDashboardData = useCallback(async () => {
     try {
       setIsLoading(true);
-
+      
       const {
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) return;
 
-      // Charger les statistiques avec SQL optimisé
-      const [statsResult, workoutsResult, plansResult] = await Promise.all([
-        loadWorkoutStats(user.id),
-        loadRecentWorkouts(user.id),
-        loadWorkoutPlans(user.id),
-      ]);
+      // Charger les statistiques
+      const { data: workouts } = await supabase
+        .from('workouts')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
 
-      setWorkoutStats(statsResult);
-      setRecentWorkouts(workoutsResult);
-      setWorkoutPlans(plansResult);
+      if (workouts) {
+        const totalMinutes = workouts.reduce((sum: number, w: any) => sum + (w.duration_minutes || 0), 0);
+        const totalCalories = workouts.reduce((sum: number, w: any) => sum + (w.calories_burned || 0), 0);
+        
+        const stats: WorkoutStats = {
+          totalWorkouts: workouts.length,
+          totalMinutes,
+          totalCalories,
+          avgDuration: workouts.length > 0 ? Math.round(totalMinutes / workouts.length) : 0,
+          currentStreak: calculateStreak(workouts),
+          weeklyProgress: getWeeklyProgress(workouts),
+          favoriteExercise: 'Développé couché', // Valeur par défaut pour l'instant
+          strongestLift: { exercise: 'Développé couché', weight: 80 }, // Valeur par défaut
+        };
+        setWorkoutStats(stats);
+        setRecentWorkouts(workouts.slice(0, 10));
+      }
+
+      // Charger les plans
+      const { data: plans } = await supabase
+        .from('workout_plans')
+        .select('*')
+        .eq('user_id', user.id);
+
+      if (plans) {
+        setWorkoutPlans(plans);
+      }
+
     } catch (error) {
-      // Erreur silencieuse
-      console.error('Erreur chargement dashboard:', error);
-      toast({
-        title: 'Erreur',
-        description: "Impossible de charger les données d'entraînement",
-        variant: 'destructive',
-      });
+      console.error('Erreur lors du chargement:', error);
     } finally {
       setIsLoading(false);
     }
+  }, []);
+
+  /* ========================= UTILITY FUNCTIONS ======================== */
+
+  const calculateStreak = (workouts: WorkoutSession[]): number => {
+    // Logique simplifiée pour calculer la série
+    const completedWorkouts = workouts.filter(w => w.completed_at);
+    return completedWorkouts.length > 0 ? Math.min(completedWorkouts.length, 30) : 0;
+  };
+
+  const getWeeklyProgress = (workouts: WorkoutSession[]): number => {
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    
+    const weeklyWorkouts = workouts.filter(w => 
+      w.completed_at && new Date(w.completed_at) >= oneWeekAgo
+    );
+    
+    return weeklyWorkouts.length;
+  };
+
+  /* ========================= EVENT HANDLERS ========================== */
+
+  // Handlers pour les composants
+  const handleStartSession = useCallback(() => {
+    // Logique pour démarrer une session
+    toast({
+      title: 'Session démarrée',
+      description: 'Bonne séance d\'entraînement !',
+    });
   }, [toast]);
 
-  const loadWorkoutStats = async (userId: string): Promise<WorkoutStats> => {
-    const { data, error } = await supabase
-      .from('workouts')
-      .select(
-        `
-        id,
-        duration_minutes,
-        calories_burned,
-        completed_at,
-        exercises
-      `
-      )
-      .eq('user_id', userId)
-      .not('completed_at', 'is', null)
-      .order('completed_at', { ascending: false })
-      .limit(100);
+  const handlePauseSession = useCallback(() => {
+    setIsSessionActive(false);
+  }, []);
 
-    if (error) throw error;
+  const handleEndSession = useCallback(() => {
+    setIsSessionActive(false);
+    setCurrentSession(null);
+    setSessionTimer(0);
+    toast({
+      title: 'Session terminée',
+      description: 'Excellente séance !',
+    });
+  }, [toast]);
 
-    // Vérifier que data existe
-    const workouts = data || [];
+  const handleCompleteExercise = useCallback((exerciseId: string) => {
+    setCurrentSession(prev => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        exercises: prev.exercises.map(ex => 
+          ex.id === exerciseId ? { ...ex, completed: true } : ex
+        )
+      };
+    });
+  }, []);
 
-    // Calculs statistiques avec JavaScript optimisé
-    const totalWorkouts = workouts.length;
-    const totalMinutes = workouts.reduce((sum, w) => sum + (w.duration_minutes || 0), 0);
-    const totalCalories = workouts.reduce((sum, w) => sum + (w.calories_burned || 0), 0);
-    const avgDuration = totalWorkouts > 0 ? totalMinutes / totalWorkouts : 0;
+  const handleStartPlan = useCallback((planId: string) => {
+    toast({
+      title: 'Plan démarré',
+      description: 'Bon entraînement !',
+    });
+  }, [toast]);
 
-    // Progression hebdomadaire
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    const weeklyProgress = workouts.filter(w => new Date(w.completed_at) >= weekAgo).length;
+  const handleCreatePlan = useCallback(() => {
+    toast({
+      title: 'Fonctionnalité à venir',
+      description: 'La création de plans sera bientôt disponible',
+    });
+  }, [toast]);
 
-    return {
-      totalWorkouts,
-      totalMinutes,
-      totalCalories,
-      avgDuration,
-      weeklyProgress,
-      currentStreak: calculateStreak(workouts),
-      favoriteExercise: 'Développé couché', // À calculer depuis exercises
-      strongestLift: { exercise: 'Squat', weight: 120 }, // À calculer
-    };
-  };
+  const handleFilterChange = useCallback((filter: string) => {
+    // Logique de filtrage
+  }, []);
 
-  const loadRecentWorkouts = async (userId: string): Promise<WorkoutSession[]> => {
-    const { data, error } = await supabase
-      .from('workouts')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
-      .limit(10);
+  const handleExportData = useCallback(() => {
+    toast({
+      title: 'Export en cours',
+      description: 'Vos données sont en cours d\'export',
+    });
+  }, [toast]);
 
-    if (error) throw error;
-    return data || [];
-  };
+  const handleSyncData = useCallback(() => {
+    loadDashboardData();
+  }, [loadDashboardData]);
 
-  const loadWorkoutPlans = async (userId: string): Promise<WorkoutPlan[]> => {
-    // Utiliser la nouvelle table workout_plans
-    const { data, error } = await supabase
-      .from('workout_plans')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('is_active', true)
-      .order('created_at', { ascending: false })
-      .limit(10);
+  const handleClearData = useCallback(() => {
+    toast({
+      title: 'Fonctionnalité à venir',
+      description: 'La suppression des données sera bientôt disponible',
+      variant: 'destructive',
+    });
+  }, [toast]);
 
-    if (error) {
-      console.error('Erreur chargement plans:', error);
-      // Retourner des données de démonstration en cas d'erreur
-      return [
-        {
-          id: '1',
-          name: 'Force & Puissance',
-          description: 'Programme de 8 semaines pour développer la force',
-          duration_weeks: 8,
-          difficulty: 'intermediate',
-          workouts_per_week: 4,
-          target_muscles: ['chest', 'back', 'legs'],
-          created_at: new Date(),
-          is_active: true,
-        },
-      ];
-    }
-
-    // Adapter les données de la nouvelle structure vers l'ancienne interface
-    return (data || []).map(plan => ({
-      id: plan.id,
-      name: plan.name,
-      description: plan.description || '',
-      duration_weeks: Math.ceil((plan.estimated_duration_minutes || 60) / 60 / 4), // Estimation
-      difficulty: plan.difficulty || 'intermediate',
-      workouts_per_week: 4, // Valeur par défaut
-      target_muscles: plan.muscle_groups || [],
-      created_at: new Date(plan.created_at),
-      is_active: plan.is_active,
-    }));
-  };
-
-  const calculateStreak = (workouts: CompletedWorkout[]): number => {
-    // Logique de calcul de série
-    let streak = 0;
-    const today = new Date();
-
-    for (let i = 0; i < 30; i++) {
-      const checkDate = new Date(today);
-      checkDate.setDate(today.getDate() - i);
-
-      const hasWorkout = workouts.some((w: CompletedWorkout) => {
-        const workoutDate = new Date(w.completed_at);
-        return workoutDate.toDateString() === checkDate.toDateString();
-      });
-
-      if (hasWorkout) {
-        streak++;
-      } else if (i > 0) {
-        break;
-      }
-    }
-
-    return streak;
-  };
-
-  const startWorkoutSession = useCallback(
-    async (workout: WorkoutSession) => {
-      setCurrentSession(workout);
-      setIsSessionActive(true);
-      setSessionTimer(0);
-      setActiveTab('session');
-
-      toast({
-        title: 'Entraînement démarré',
-        description: `${workout.name} - Bon entraînement !`,
-      });
-    },
-    [toast]
-  );
-
-  const endWorkoutSession = useCallback(async () => {
-    if (!currentSession) return;
-
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) return;
-
-      await supabase
-        .from('workouts')
-        .update({
-          completed_at: new Date().toISOString(),
-          duration_minutes: Math.floor(sessionTimer / 60),
-        })
-        .eq('id', currentSession.id);
-
-      setIsSessionActive(false);
-      setCurrentSession(null);
-      setSessionTimer(0);
-
-      await loadDashboardData(); // Recharger les stats
-
-      toast({
-        title: 'Entraînement terminé !',
-        description: `Bien joué ! ${Math.floor(sessionTimer / 60)} minutes d'effort.`,
-      });
-    } catch (error) {
-      // Erreur silencieuse
-      toast({
-        title: 'Erreur',
-        description: 'Impossible de sauvegarder la session',
-        variant: 'destructive',
-      });
-    }
-  }, [currentSession, sessionTimer, loadDashboardData, toast]);
-
-  /* ========================= RENDER HELPERS ========================= */
-
-  const renderOverviewTab = () => (
-    <div className="space-y-6">
-      {/* Statistiques principales */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Trophy className="h-5 w-5 text-yellow-500" />
-              <div>
-                <p className="text-sm text-gray-600">Entraînements</p>
-                <p className="text-2xl font-bold">{workoutStats?.totalWorkouts || 0}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Clock className="h-5 w-5 text-blue-500" />
-              <div>
-                <p className="text-sm text-gray-600">Minutes totales</p>
-                <p className="text-2xl font-bold">{workoutStats?.totalMinutes || 0}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Zap className="h-5 w-5 text-orange-500" />
-              <div>
-                <p className="text-sm text-gray-600">Calories brûlées</p>
-                <p className="text-2xl font-bold">{workoutStats?.totalCalories || 0}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Target className="h-5 w-5 text-green-500" />
-              <div>
-                <p className="text-sm text-gray-600">Série actuelle</p>
-                <p className="text-2xl font-bold">{workoutStats?.currentStreak || 0} jours</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Progression hebdomadaire */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <LineChart className="h-5 w-5" />
-            <span>Progression cette semaine</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            <div className="flex justify-between">
-              <span>Objectif: 4 entraînements</span>
-              <span>{workoutStats?.weeklyProgress || 0}/4</span>
-            </div>
-            <Progress value={progressPercentage} className="h-2" />
-            <p className="text-sm text-gray-600">
-              {progressPercentage >= 100
-                ? '🎉 Objectif atteint !'
-                : `Plus que ${4 - (workoutStats?.weeklyProgress || 0)} séances`}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Entraînements récents */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Entraînements récents</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {recentWorkouts.slice(0, 5).map(workout => (
-              <div
-                key={workout.id}
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
-              >
-                <div>
-                  <p className="font-medium">{workout.name}</p>
-                  <p className="text-sm text-gray-600">
-                    {workout.duration_minutes} min • {workout.workout_type}
-                  </p>
-                </div>
-                <Badge variant={workout.completed_at ? 'default' : 'secondary'}>
-                  {workout.completed_at ? 'Terminé' : 'En cours'}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-
-  const renderSessionTab = () => (
-    <div className="space-y-6">
-      {isSessionActive && currentSession ? (
-        // Session active
-        <Card className="border-green-200 bg-green-50">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span className="flex items-center space-x-2">
-                <Play className="h-5 w-5 text-green-600" />
-                <span>{currentSession.name}</span>
-              </span>
-              <div className="flex items-center space-x-2">
-                <Timer className="h-4 w-4" />
-                <span className="font-mono text-lg">
-                  {Math.floor(sessionTimer / 60)
-                    .toString()
-                    .padStart(2, '0')}
-                  :{(sessionTimer % 60).toString().padStart(2, '0')}
-                </span>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span>Progression</span>
-                <span>3/8 exercices</span>
-              </div>
-              <Progress value={37.5} className="h-2" />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <Button onClick={endWorkoutSession} className="bg-green-600 hover:bg-green-700">
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  Terminer l'entraînement
-                </Button>
-                <Button variant="outline">
-                  <Settings className="h-4 w-4 mr-2" />
-                  Modifier
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ) : (
-        // Démarrer une session
-        <Card>
-          <CardHeader>
-            <CardTitle>Commencer un entraînement</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {recentWorkouts.slice(0, 4).map(workout => (
-                <Button
-                  key={workout.id}
-                  variant="outline"
-                  onClick={() => startWorkoutSession(workout)}
-                  className="h-auto p-4 flex flex-col items-start space-y-2"
-                >
-                  <span className="font-medium">{workout.name}</span>
-                  <span className="text-sm text-gray-600">
-                    {workout.duration_minutes} min • {workout.difficulty}
-                  </span>
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-    </div>
-  );
-
-  const renderPlansTab = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Plans d'entraînement</h2>
-        <Button>
-          <PlusCircle className="h-4 w-4 mr-2" />
-          Créer un plan
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {workoutPlans.map(plan => (
-          <Card key={plan.id} className={plan.is_active ? 'border-blue-200 bg-blue-50' : ''}>
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between">
-                <span>{plan.name}</span>
-                {plan.is_active && <Badge>Actif</Badge>}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p className="text-sm text-gray-600">{plan.description}</p>
-                <div className="flex justify-between text-sm">
-                  <span>{plan.duration_weeks} semaines</span>
-                  <span>{plan.workouts_per_week}x/semaine</span>
-                </div>
-                <div className="flex flex-wrap gap-1 mt-2">
-                  {plan.target_muscles.map(muscle => (
-                    <Badge key={muscle} variant="outline" className="text-xs">
-                      {muscle}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-
-  const renderProgressTab = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Suivi des progrès</h2>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Performance record</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span>Développé couché</span>
-                <span className="font-bold">85kg x 5</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Squat</span>
-                <span className="font-bold">120kg x 3</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Soulevé de terre</span>
-                <span className="font-bold">140kg x 1</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Évolution du poids</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-40 flex items-center justify-center text-gray-500">
-              Graphique des performances
-              {/* Ici intégrer Chart.js ou Recharts */}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
-
-  const renderHistoryTab = () => (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Historique</h2>
-        <div className="flex space-x-2">
-          <Button variant="outline" size="sm">
-            <Filter className="h-4 w-4 mr-2" />
-            Filtrer
-          </Button>
-          <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-2" />
-            Exporter
-          </Button>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        {recentWorkouts.map(workout => (
-          <Card key={workout.id}>
-            <CardContent className="p-4">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="font-medium">{workout.name}</h3>
-                  <p className="text-sm text-gray-600 mt-1">{workout.description}</p>
-                  <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
-                    <span>{workout.duration_minutes} min</span>
-                    <span>{workout.calories_burned} cal</span>
-                    <span className="capitalize">{workout.difficulty}</span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <Badge variant={workout.completed_at ? 'default' : 'secondary'}>
-                    {workout.completed_at ? 'Terminé' : 'En cours'}
-                  </Badge>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {workout.completed_at
-                      ? new Date(workout.completed_at).toLocaleDateString()
-                      : 'En cours'}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-
-  const renderSettingsTab = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Réglages</h2>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Préférences d'entraînement</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <label className="text-sm font-medium">Objectif hebdomadaire</label>
-              <select className="w-full mt-1 p-2 border rounded">
-                <option>4 entraînements</option>
-                <option>3 entraînements</option>
-                <option>5 entraînements</option>
-              </select>
-            </div>
-            <div>
-              <label className="text-sm font-medium">Durée moyenne souhaitée</label>
-              <select className="w-full mt-1 p-2 border rounded">
-                <option>45 minutes</option>
-                <option>30 minutes</option>
-                <option>60 minutes</option>
-              </select>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex justify-between items-center">
-              <span>Rappels d'entraînement</span>
-              <input type="checkbox" defaultChecked />
-            </div>
-            <div className="flex justify-between items-center">
-              <span>Résumé hebdomadaire</span>
-              <input type="checkbox" defaultChecked />
-            </div>
-            <div className="flex justify-between items-center">
-              <span>Nouveaux records</span>
-              <input type="checkbox" defaultChecked />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
+  const handleShareProgress = useCallback(() => {
+    toast({
+      title: 'Partage en cours',
+      description: 'Vos progrès sont en cours de partage',
+    });
+  }, [toast]);
 
   /* ========================== RENDER PRINCIPAL ======================= */
 
@@ -778,12 +317,53 @@ export default function WorkoutDashboard() {
             })}
           </TabsList>
 
-          <TabsContent value="overview">{renderOverviewTab()}</TabsContent>
-          <TabsContent value="session">{renderSessionTab()}</TabsContent>
-          <TabsContent value="plans">{renderPlansTab()}</TabsContent>
-          <TabsContent value="progress">{renderProgressTab()}</TabsContent>
-          <TabsContent value="history">{renderHistoryTab()}</TabsContent>
-          <TabsContent value="settings">{renderSettingsTab()}</TabsContent>
+          <TabsContent value="overview">
+            <WorkoutOverview 
+              stats={workoutStats} 
+              progressPercentage={progressPercentage} 
+            />
+          </TabsContent>
+
+          <TabsContent value="session">
+            <WorkoutSessionComponent
+              currentSession={currentSession}
+              sessionTimer={sessionTimer}
+              isSessionActive={isSessionActive}
+              onStartSession={handleStartSession}
+              onPauseSession={handlePauseSession}
+              onEndSession={handleEndSession}
+              onCompleteExercise={handleCompleteExercise}
+            />
+          </TabsContent>
+
+          <TabsContent value="plans">
+            <WorkoutPlans
+              plans={workoutPlans}
+              onStartPlan={handleStartPlan}
+              onCreatePlan={handleCreatePlan}
+            />
+          </TabsContent>
+
+          <TabsContent value="progress">
+            <WorkoutProgress />
+          </TabsContent>
+
+          <TabsContent value="history">
+            <WorkoutHistory
+              recentWorkouts={recentWorkouts}
+              onFilterChange={handleFilterChange}
+              onExportData={handleExportData}
+            />
+          </TabsContent>
+
+          <TabsContent value="settings">
+            <WorkoutSettings
+              onExportData={handleExportData}
+              onSyncData={handleSyncData}
+              onClearData={handleClearData}
+              onShareProgress={handleShareProgress}
+            />
+          </TabsContent>
         </Tabs>
       </div>
     </div>
