@@ -1899,15 +1899,6 @@ const MyFitHeroIndex: React.FC = () => {
               </Route>
             ))}
 
-            {/* Routes spéciales */}
-            <Route path="/debug" nest>
-              {process.env.NODE_ENV === 'development' && (
-                <Route>
-                  <div />
-                </Route>
-              )}
-            </Route>
-
             {/* Route catch-all pour 404 */}
             <Route>
               <NotFoundPage />
