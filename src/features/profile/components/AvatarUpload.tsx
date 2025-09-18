@@ -2,7 +2,12 @@ import { X, Loader2 } from 'lucide-react';
 import React, { useState, useRef } from 'react';
 import { useToast } from '../../../shared/hooks/use-toast';
 import { supabase } from '../../../lib/supabase';
+import { toast } from 'sonner';
 import { appStore } from '../../../store/appStore';
+import { ProfileService } from '../../../core/api';
+import { FileWithPath, useDropzone } from 'react-dropzone';
+import { LoadingSpinner } from '../../../components/ui/LoadingSpinner';
+import { User, Camera } from 'lucide-react';
 
 interface AvatarUploadProps {
   currentAvatar?: string;
@@ -18,7 +23,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
   editable = true,
 }) => {
   const { toast } = useToast();
-  const { appStoreUser, updateAppStoreUserProfile } = appStore();
+  const { appStoreUser, updateUserProfile } = appStore();
   const [isUploading, setIsUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -111,7 +116,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
       }
 
       // Mettre à jour le store local
-      updateAppStoreUserProfile({
+      updateUserProfile({
         ...appStoreUser,
         avatar_url: avatarUrl,
       });
@@ -147,19 +152,19 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
       const { error: _error } = await (supabase as any)
         .from('user_profiles')
         .update({
-          avatar_url: null,
+          avatar_url: undefined,
           updated_at: new Date().toISOString(),
         })
         .eq('id', appStoreUser.id);
 
-      if (error) {
-        throw error;
+      if (_error) {
+        throw _error;
       }
 
       // Mettre à jour le store local
-      updateAppStoreUserProfile({
+      updateUserProfile({
         ...appStoreUser,
-        avatar_url: null,
+        avatar_url: undefined,
       });
 
       onAvatarChange?.('');

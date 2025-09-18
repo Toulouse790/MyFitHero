@@ -1,6 +1,6 @@
 // src/features/profile/components/settings/WearableSettings.tsx
 import React, { useState, useCallback } from 'react';
-import { Smartphone, Sync, Clock, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { Smartphone, RefreshCw, Clock, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
 import { Button } from '../../../../components/ui/button';
 import { Label } from '../../../../components/ui/label';
 import { Switch } from '../../../../components/ui/switch';
@@ -158,7 +158,7 @@ export const WearableSettings: React.FC<WearableSettingsProps> = ({
               {wearableLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                <Sync className="w-4 h-4" />
+                <RefreshCw className="w-4 h-4" />
               )}
             </Button>
           </div>
@@ -187,7 +187,7 @@ export const WearableSettings: React.FC<WearableSettingsProps> = ({
               {wearableLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                <Sync className="w-4 h-4" />
+                <RefreshCw className="w-4 h-4" />
               )}
             </Button>
           </div>
@@ -218,7 +218,7 @@ export const WearableSettings: React.FC<WearableSettingsProps> = ({
             </>
           ) : (
             <>
-              <Sync className="w-4 h-4 mr-2" />
+              <RefreshCw className="w-4 h-4 mr-2" />
               Synchroniser tout maintenant
             </>
           )}

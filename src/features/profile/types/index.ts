@@ -5,6 +5,57 @@ export * from './userProfile';
 // PROFILE TYPES
 // ========================================
 
+export interface UpdateProfileData {
+  first_name?: string;
+  last_name?: string;
+  display_name?: string;
+  bio?: string;
+  height?: number;
+  weight?: number;
+  date_of_birth?: string;
+  gender?: string;
+  activity_level?: string;
+  goals?: string[];
+}
+
+export interface AchievementData {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  progress: number;
+  total: number;
+  completed: boolean;
+  date_earned?: string;
+}
+
+export interface GoalData {
+  id: string;
+  title: string;
+  description: string;
+  target_value: number;
+  current_value: number;
+  unit: string;
+  deadline?: string;
+  created_at: string;
+}
+
+export interface CreateGoalData {
+  title: string;
+  description: string;
+  target_value: number;
+  unit: string;
+  deadline?: string;
+}
+
+export interface UpdateGoalData {
+  title?: string;
+  description?: string;
+  target_value?: number;
+  current_value?: number;
+  deadline?: string;
+}
+
 export interface UserProfile {
   id: string;
   user_id: string;
@@ -15,6 +66,7 @@ export interface UserProfile {
   display_name?: string;
   bio?: string;
   avatar_url?: string;
+  avatar?: string; // Alias pour avatar_url
   cover_image_url?: string;
   date_of_birth?: string;
   gender?: Gender;

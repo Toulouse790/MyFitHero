@@ -22,3 +22,12 @@ export const DialogHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 
 /** Titre du dialog. */
 export const DialogTitle = DialogPrimitive.Title;
+
+/** Description du dialog. */
+export const DialogDescription = DialogPrimitive.Description;
+
+/** Pied de page du dialog, simple wrapper <div>. */
+export const DialogFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => <div className={`flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 ${className || ''}`} {...props} />;

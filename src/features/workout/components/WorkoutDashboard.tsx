@@ -18,7 +18,7 @@ import {
   WorkoutSessionComponent,
   WorkoutPlans,
   WorkoutHistory,
-  WorkoutProgress,
+  WorkoutProgressCard,
   WorkoutSettings,
 } from './index';
 
@@ -345,7 +345,12 @@ export default function WorkoutDashboard() {
           </TabsContent>
 
           <TabsContent value="progress">
-            <WorkoutProgress />
+            <WorkoutProgressCard 
+              currentExercise={1}
+              totalExercises={5}
+              timeElapsed={600}
+              estimatedTimeRemaining={1200}
+            />
           </TabsContent>
 
           <TabsContent value="history">

@@ -222,7 +222,7 @@ export const AccountDeletion: React.FC<AccountDeletionProps> = ({
                 <Checkbox
                   id="read-warning"
                   checked={hasReadWarning}
-                  onCheckedChange={setHasReadWarning}
+                  onCheckedChange={(checked) => setHasReadWarning(checked === true)}
                   className="mt-1"
                 />
                 <Label htmlFor="read-warning" className="text-sm">
