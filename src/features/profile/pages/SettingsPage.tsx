@@ -1,103 +1,1280 @@
-import React, { useState, useEffect, useCallback } from 'react';
-// pages/settings.tsx
+import React, { useState, useEffect, useCallback } from 'react';import React, { useState, useEffect, useCallback } from 'react';import React, { useState, useEffect, useCallback } from 'react';
+
 import { useLocation } from 'wouter';
-import {
-  Settings as SettingsIcon,
-  User,
-  Bell,
-  Shield,
-  Smartphone,
-  Heart,
-  Moon,
-  Activity,
-  Clock,
-  AlertCircle,
-  CheckCircle,
-  RefreshCw,
-  Save,
-  Globe,
-  Palette,
-  ArrowLeft,
-  Trash2,
-  Eye,
-  EyeOff,
-} from 'lucide-react';
+
+import { Settings as SettingsIcon, User, Bell, Shield, Smartphone, Zap, AlertTriangle } from 'lucide-react';import { useLocation } from 'wouter';import { useLocation } from 'wouter';
+
 import { useWearableSync } from '@/features/wearables/hooks/useWearableSync';
-import { useToast } from '../../../shared/hooks/use-toast';
+
+import { useToast } from '../../../shared/hooks/use-toast';import { Settings as SettingsIcon, User, Bell, Shield, Smartphone, Zap, AlertTriangle } from 'lucide-react';import { Settings as SettingsIcon, User, Bell, Shield, Smartphone, Zap, AlertTriangle, ArrowLeft } from 'lucide-react';
+
 import { supabase } from '../../../lib/supabase';
-import { appStore } from '../../../store/appStore';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Input } from '../../../components/ui/input';
-import { Label } from '../../../components/ui/label';
-import { Switch } from '../../../components/ui/switch';
+
+import { appStore } from '../../../store/appStore';import { useWearableSync } from '@/features/wearables/hooks/useWearableSync';import { useWearableSync } from '@/features/wearables/hooks/useWearableSync';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
-import { Badge } from '../../../components/ui/badge';
-import { Separator } from '../../../components/ui/separator';
-import { Textarea } from '../../../components/ui/textarea';
-import { UniformHeader } from '@/features/profile/components/UniformHeader';
-import { AnalyticsService } from '../../../lib/analytics';
 
-interface NotificationSettings {
-  workout_reminders: boolean;
+import { UniformHeader } from '@/features/profile/components/UniformHeader';import { useToast } from '../../../shared/hooks/use-toast';import { useToast } from '../../../shared/hooks/use-toast';
+
+
+
+// Import modular settings componentsimport { supabase } from '../../../lib/supabase';import { supabase } from '../../../lib/supabase';
+
+import { ProfileSettings } from '../components/settings/ProfileSettings';
+
+import { NotificationSettings } from '../components/settings/NotificationSettings';import { appStore } from '../../../store/appStore';import { appStore } from '../../../store/appStore';
+
+import { WearableSettings } from '../components/settings/WearableSettings';
+
+import { PrivacySettings } from '../components/settings/PrivacySettings';import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';import { Button } from '../../../components/ui/button';
+
+import { PreferencesSettings } from '../components/settings/PreferencesSettings';
+
+import { AccountDeletion } from '../components/settings/AccountDeletion';import { UniformHeader } from '@/features/profile/components/UniformHeader';import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+
+
+
+// Types pour les interfaces de donnéesimport { UniformHeader } from '@/features/profile/components/UniformHeader';
+
+interface NotificationSettingsData {
+
+  workout_reminders: boolean;// Import modular settings componentsimport { AnalyticsService } from '../../../lib/analytics';
+
   hydration_reminders: boolean;
-  meal_reminders: boolean;
+
+  meal_reminders: boolean;import { ProfileSettings } from '../components/settings/ProfileSettings';
+
   sleep_reminders: boolean;
-  achievement_alerts: boolean;
+
+  achievement_alerts: boolean;import { NotificationSettings } from '../components/settings/NotificationSettings';// Import modular settings components
+
   weekly_summary: boolean;
-  marketing_emails: boolean;
+
+  marketing_emails: boolean;import { WearableSettings } from '../components/settings/WearableSettings';import { ProfileSettings } from '../components/settings/ProfileSettings';
+
 }
 
-interface PrivacySettings {
-  profile_public: boolean;
-  share_stats: boolean;
-  allow_friend_requests: boolean;
-  show_activity: boolean;
+import { PrivacySettings } from '../components/settings/PrivacySettings';import { NotificationSettings } from '../components/settings/NotificationSettings';
+
+interface PrivacySettingsData {
+
+  profileVisibility: 'public' | 'friends' | 'private';import { PreferencesSettings } from '../components/settings/PreferencesSettings';import { WearableSettings } from '../components/settings/WearableSettings';
+
+  workoutVisibility: 'public' | 'friends' | 'private';
+
+  allowFriendRequests: boolean;import { AccountDeletion } from '../components/settings/AccountDeletion';import { PrivacySettings } from '../components/settings/PrivacySettings';
+
+  showAchievements: boolean;
+
+  showStats: boolean;import { PreferencesSettings } from '../components/settings/PreferencesSettings';
+
+  analyticsEnabled: boolean;
+
+}// Types pour les interfaces de donnéesimport { AccountDeletion } from '../components/settings/AccountDeletion';
+
+
+
+interface PreferencesData {interface NotificationSettingsData {
+
+  language: string;
+
+  theme: 'light' | 'dark' | 'system';  workout_reminders: boolean;import React, { useState, useEffect, useCallback } from 'react';
+
+  units: 'metric' | 'imperial';
+
+  soundEnabled: boolean;  hydration_reminders: boolean;import { useLocation } from 'wouter';
+
+  vibrationEnabled: boolean;
+
+  autoStart: boolean;  meal_reminders: boolean;import { Settings as SettingsIcon, User, Bell, Shield, Smartphone, Zap, AlertTriangle, ArrowLeft } from 'lucide-react';
+
+  restTimerDuration: number;
+
+  motivationalQuotes: boolean;  sleep_reminders: boolean;import { useWearableSync } from '@/features/wearables/hooks/useWearableSync';
+
+  compactMode: boolean;
+
+  highContrast: boolean;  achievement_alerts: boolean;import { useToast } from '../../../shared/hooks/use-toast';
+
 }
+
+  weekly_summary: boolean;import { supabase } from '../../../lib/supabase';
 
 const Settings: React.FC = () => {
-  const [location, setLocation] = useLocation();
-  const { toast } = useToast();
-  const { appStoreUser, setAppStoreUser, clearStore } = appStore();
 
-  const {
+  const [location, setLocation] = useLocation();  marketing_emails: boolean;import { appStore } from '../../../store/appStore';
+
+  const { toast } = useToast();
+
+  const { appStoreUser } = appStore();}import { Button } from '../../../components/ui/button';
+
+
+
+  const {import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+
     isLoading: wearableLoading,
-    lastSyncTime,
+
+    lastSyncTime,interface PrivacySettingsData {import { UniformHeader } from '@/features/profile/components/UniformHeader';
+
     syncError,
-    isAppleHealthAvailable,
+
+    isAppleHealthAvailable,  profileVisibility: 'public' | 'friends' | 'private';import { AnalyticsService } from '../../../lib/analytics';
+
     isGoogleFitAvailable,
-    syncAppleHealth,
+
+    syncAppleHealth,  workoutVisibility: 'public' | 'friends' | 'private';
+
     syncGoogleFit,
-    syncAll,
-    scheduleSync,
-    getCachedData,
-    cacheData,
+
+    syncAll,  allowFriendRequests: boolean;// Import modular settings components
+
   } = useWearableSync();
 
-  const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState('profile');
-  const [autoSyncEnabled, setAutoSyncEnabled] = useState(false);
-  const [syncInterval, setSyncInterval] = useState(30);
-  const [lastCachedData, setLastCachedData] = useState<any>(null);
-  const [isDeleting, setIsDeleting] = useState(false);
+  showAchievements: boolean;import { ProfileSettings } from '../components/settings/ProfileSettings';
 
-  // Profile settings state
+  const [loading, setLoading] = useState(false);
+
+  const [activeTab, setActiveTab] = useState('profile');  showStats: boolean;import { NotificationSettings } from '../components/settings/NotificationSettings';
+
+  const [autoSyncEnabled, setAutoSyncEnabled] = useState(false);
+
+  const [syncInterval, setSyncInterval] = useState(30);  analyticsEnabled: boolean;import { WearableSettings } from '../components/settings/WearableSettings';
+
+
+
+  // Profile settings state}import { PrivacySettings } from '../components/settings/PrivacySettings';
+
   const [profileData, setProfileData] = useState({
-    full_name: appStoreUser?.full_name || '',
+
+    full_name: appStoreUser?.full_name || '',import { PreferencesSettings } from '../components/settings/PreferencesSettings';
+
     username: appStoreUser?.username || '',
-    email: appStoreUser?.email || '',
-    phone: appStoreUser?.phone || '',
-    bio: appStoreUser?.bio || '',
-    city: appStoreUser?.city || '',
-    country: appStoreUser?.country || '',
+
+    email: appStoreUser?.email || '',interface PreferencesData {import { AccountDeletion } from '../components/settings/AccountDeletion';
+
+    phone: '',
+
+    bio: '',  language: string;
+
+    city: '',
+
+    country: '',  theme: 'light' | 'dark' | 'system';// Types pour les interfaces de données
+
   });
 
+  units: 'metric' | 'imperial';interface NotificationSettingsData {
+
   // Notification settings state
-  const [notifications, setNotifications] = useState<NotificationSettings>({
+
+  const [notifications, setNotifications] = useState<NotificationSettingsData>({  soundEnabled: boolean;  workout_reminders: boolean;
+
     workout_reminders: true,
-    hydration_reminders: true,
+
+    hydration_reminders: true,  vibrationEnabled: boolean;  hydration_reminders: boolean;
+
     meal_reminders: true,
-    sleep_reminders: true,
+
+    sleep_reminders: true,  autoStart: boolean;  meal_reminders: boolean;
+
+    achievement_alerts: true,
+
+    weekly_summary: true,  restTimerDuration: number;  sleep_reminders: boolean;
+
+    marketing_emails: false,
+
+  });  motivationalQuotes: boolean;  achievement_alerts: boolean;
+
+
+
+  // Privacy settings state  compactMode: boolean;  weekly_summary: boolean;
+
+  const [privacy, setPrivacy] = useState<PrivacySettingsData>({
+
+    profileVisibility: 'friends',  highContrast: boolean;  marketing_emails: boolean;
+
+    workoutVisibility: 'friends',
+
+    allowFriendRequests: true,}}
+
+    showAchievements: true,
+
+    showStats: true,
+
+    analyticsEnabled: true,
+
+  });const Settings: React.FC = () => {interface PrivacySettingsData {
+
+
+
+  // Preferences state  const [location, setLocation] = useLocation();  profileVisibility: 'public' | 'friends' | 'private';
+
+  const [preferences, setPreferences] = useState<PreferencesData>({
+
+    language: 'fr',  const { toast } = useToast();  workoutVisibility: 'public' | 'friends' | 'private';
+
+    theme: 'system',
+
+    units: 'metric',  const { appStoreUser } = appStore();  allowFriendRequests: boolean;
+
+    soundEnabled: true,
+
+    vibrationEnabled: true,  showAchievements: boolean;
+
+    autoStart: false,
+
+    restTimerDuration: 90,  const {  showStats: boolean;
+
+    motivationalQuotes: true,
+
+    compactMode: false,    isLoading: wearableLoading,  analyticsEnabled: boolean;
+
+    highContrast: false,
+
+  });    lastSyncTime,}
+
+
+
+  // Load settings on component mount    syncError,
+
+  useEffect(() => {
+
+    if (appStoreUser?.id) {    isAppleHealthAvailable,interface PreferencesData {
+
+      loadSettings();
+
+    }    isGoogleFitAvailable,  language: string;
+
+  }, [appStoreUser?.id]);
+
+    syncAppleHealth,  theme: 'light' | 'dark' | 'system';
+
+  const loadSettings = useCallback(async () => {
+
+    if (!appStoreUser?.id) return;    syncGoogleFit,  units: 'metric' | 'imperial';
+
+
+
+    try {    syncAll,  soundEnabled: boolean;
+
+      const { data: prefs } = await supabase
+
+        .from('user_preferences')  } = useWearableSync();  vibrationEnabled: boolean;
+
+        .select('*')
+
+        .eq('user_id', appStoreUser.id)  autoStart: boolean;
+
+        .single();
+
+  const [loading, setLoading] = useState(false);  restTimerDuration: number;
+
+      if (prefs) {
+
+        setNotifications(prefs.notifications || notifications);  const [activeTab, setActiveTab] = useState('profile');  motivationalQuotes: boolean;
+
+        setPrivacy(prefs.privacy || privacy);
+
+        setPreferences(prefs.app_preferences || preferences);  const [autoSyncEnabled, setAutoSyncEnabled] = useState(false);  compactMode: boolean;
+
+      }
+
+  const [syncInterval, setSyncInterval] = useState(30);  highContrast: boolean;
+
+      const savedAutoSync = localStorage.getItem('autoSyncEnabled');
+
+      const savedInterval = localStorage.getItem('syncInterval');}
+
+
+
+      if (savedAutoSync) {  // Profile settings state
+
+        setAutoSyncEnabled(JSON.parse(savedAutoSync));
+
+      }  const [profileData, setProfileData] = useState({const Settings: React.FC = () => {
+
+      if (savedInterval) {
+
+        setSyncInterval(parseInt(savedInterval));    full_name: appStoreUser?.full_name || '',  const [location, setLocation] = useLocation();
+
+      }
+
+    } catch (error) {    username: appStoreUser?.username || '',  const { toast } = useToast();
+
+      console.error('Erreur chargement paramètres:', error);
+
+    }    email: appStoreUser?.email || '',  const { appStoreUser } = appStore();
+
+  }, [appStoreUser?.id]);
+
+    phone: '',
+
+  // Profile handlers
+
+  const handleProfileSave = useCallback(async (updatedData: any) => {    bio: '',  const {
+
+    if (!appStoreUser?.id) return;
+
+    city: '',    isLoading: wearableLoading,
+
+    setLoading(true);
+
+    try {    country: '',    lastSyncTime,
+
+      const { error } = await supabase
+
+        .from('user_profiles')  });    syncError,
+
+        .update({
+
+          ...updatedData,    isAppleHealthAvailable,
+
+          updated_at: new Date().toISOString(),
+
+        })  // Notification settings state    isGoogleFitAvailable,
+
+        .eq('id', appStoreUser.id);
+
+  const [notifications, setNotifications] = useState<NotificationSettingsData>({    syncAppleHealth,
+
+      if (error) throw error;
+
+    workout_reminders: true,    syncGoogleFit,
+
+      setProfileData(updatedData);
+
+      toast({    hydration_reminders: true,    syncAll,
+
+        title: 'Profil mis à jour',
+
+        description: 'Vos informations ont été sauvegardées avec succès.',    meal_reminders: true,  } = useWearableSync();
+
+      });
+
+    } catch (error) {    sleep_reminders: true,
+
+      console.error('Erreur sauvegarde profil:', error);
+
+      toast({    achievement_alerts: true,  const [loading, setLoading] = useState(false);
+
+        title: 'Erreur',
+
+        description: 'Impossible de sauvegarder le profil.',    weekly_summary: true,  const [activeTab, setActiveTab] = useState('profile');
+
+        variant: 'destructive',
+
+      });    marketing_emails: false,  const [autoSyncEnabled, setAutoSyncEnabled] = useState(false);
+
+    } finally {
+
+      setLoading(false);  });  const [syncInterval, setSyncInterval] = useState(30);
+
+    }
+
+  }, [appStoreUser?.id, toast]);
+
+
+
+  // Notification handlers  // Privacy settings state  // Profile settings state
+
+  const handleNotificationChange = useCallback((key: keyof NotificationSettingsData) => {
+
+    setNotifications(prev => ({ ...prev, [key]: !prev[key] }));  const [privacy, setPrivacy] = useState<PrivacySettingsData>({  const [profileData, setProfileData] = useState({
+
+  }, []);
+
+    profileVisibility: 'friends',    full_name: appStoreUser?.full_name || '',
+
+  const handleNotificationSave = useCallback(async () => {
+
+    if (!appStoreUser?.id) return;    workoutVisibility: 'friends',    username: appStoreUser?.username || '',
+
+
+
+    try {    allowFriendRequests: true,    email: appStoreUser?.email || '',
+
+      await supabase
+
+        .from('user_preferences')    showAchievements: true,    phone: '',
+
+        .upsert({
+
+          user_id: appStoreUser.id,    showStats: true,    bio: '',
+
+          notifications,
+
+          updated_at: new Date().toISOString(),    analyticsEnabled: true,    city: '',
+
+        });
+
+  });    country: '',
+
+      toast({
+
+        title: 'Notifications mises à jour',  });
+
+        description: 'Vos préférences de notification ont été sauvegardées.',
+
+      });  // Preferences state
+
+    } catch (error) {
+
+      console.error('Erreur sauvegarde notifications:', error);  const [preferences, setPreferences] = useState<PreferencesData>({  // Notification settings state
+
+    }
+
+  }, [appStoreUser?.id, notifications, toast]);    language: 'fr',  const [notifications, setNotifications] = useState<NotificationSettingsData>({
+
+
+
+  // Privacy handlers    theme: 'system',    workout_reminders: true,
+
+  const handlePrivacyChange = useCallback((key: keyof PrivacySettingsData, value: any) => {
+
+    setPrivacy(prev => ({ ...prev, [key]: value }));    units: 'metric',    hydration_reminders: true,
+
+  }, []);
+
+    soundEnabled: true,    meal_reminders: true,
+
+  const handleExportData = useCallback(async () => {
+
+    if (!appStoreUser?.id) return;    vibrationEnabled: true,    sleep_reminders: true,
+
+
+
+    const exportData = {    autoStart: false,    achievement_alerts: true,
+
+      profile: profileData,
+
+      notifications,    restTimerDuration: 90,    weekly_summary: true,
+
+      privacy,
+
+      preferences,    motivationalQuotes: true,    marketing_emails: false,
+
+      exportDate: new Date().toISOString(),
+
+    };    compactMode: false,  });
+
+
+
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });    highContrast: false,
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');  });  // Privacy settings state
+
+    a.href = url;
+
+    a.download = `myfithero-data-${new Date().toISOString().split('T')[0]}.json`;  const [privacy, setPrivacy] = useState<PrivacySettingsData>({
+
+    document.body.appendChild(a);
+
+    a.click();  // Load settings on component mount    profileVisibility: 'friends',
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);  useEffect(() => {    workoutVisibility: 'friends',
+
+  }, [appStoreUser?.id, profileData, notifications, privacy, preferences]);
+
+    if (appStoreUser?.id) {    allowFriendRequests: true,
+
+  const handleDeleteData = useCallback(async () => {
+
+    if (!appStoreUser?.id) return;      loadSettings();    showAchievements: true,
+
+
+
+    const userId = appStoreUser.id;    }    showStats: true,
+
+    const tablesToClean = [
+
+      'user_workouts',  }, [appStoreUser?.id]);    analyticsEnabled: true,
+
+      'user_nutrition',
+
+      'user_hydration',  });
+
+      'user_sleep',
+
+      'user_analytics',  const loadSettings = useCallback(async () => {
+
+      'user_preferences',
+
+    ];    if (!appStoreUser?.id) return;  // Preferences state
+
+
+
+    for (const table of tablesToClean) {  const [preferences, setPreferences] = useState<PreferencesData>({
+
+      await supabase.from(table).delete().eq('user_id', userId);
+
+    }    try {    language: 'fr',
+
+  }, [appStoreUser?.id]);
+
+      const { data: prefs } = await supabase    theme: 'system',
+
+  // Wearable handlers
+
+  const handleToggleAutoSync = useCallback(() => {        .from('user_preferences')    units: 'metric',
+
+    const newValue = !autoSyncEnabled;
+
+    setAutoSyncEnabled(newValue);        .select('*')    soundEnabled: true,
+
+    localStorage.setItem('autoSyncEnabled', JSON.stringify(newValue));
+
+  }, [autoSyncEnabled]);        .eq('user_id', appStoreUser.id)    vibrationEnabled: true,
+
+
+
+  const handleSyncIntervalChange = useCallback((interval: number) => {        .single();    autoStart: false,
+
+    setSyncInterval(interval);
+
+    localStorage.setItem('syncInterval', interval.toString());    restTimerDuration: 90,
+
+  }, []);
+
+      if (prefs) {    motivationalQuotes: true,
+
+  // Preferences handlers
+
+  const handlePreferenceChange = useCallback((key: keyof PreferencesData, value: any) => {        setNotifications(prefs.notifications || notifications);    compactMode: false,
+
+    setPreferences(prev => ({ ...prev, [key]: value }));
+
+  }, []);        setPrivacy(prefs.privacy || privacy);    highContrast: false,
+
+
+
+  const handleDeleteAccount = useCallback(async () => {        setPreferences(prefs.app_preferences || preferences);  });
+
+    if (!appStoreUser?.id) return;
+
+      }
+
+    try {
+
+      await supabase.auth.signOut();  // Load settings on component mount
+
+      localStorage.clear();
+
+      sessionStorage.clear();      const savedAutoSync = localStorage.getItem('autoSyncEnabled');  useEffect(() => {
+
+      setLocation('/');
+
+    } catch (error) {      const savedInterval = localStorage.getItem('syncInterval');    if (appStoreUser?.id) {
+
+      console.error('Erreur suppression compte:', error);
+
+    }      loadSettings();
+
+  }, [appStoreUser?.id, setLocation]);
+
+      if (savedAutoSync) {    }
+
+  return (
+
+    <div className="min-h-screen bg-gray-50">        setAutoSyncEnabled(JSON.parse(savedAutoSync));  }, [appStoreUser?.id]);
+
+      <UniformHeader
+
+        title="Paramètres"      }
+
+        icon={<SettingsIcon className="w-6 h-6" />}
+
+        showBackButton      if (savedInterval) {  const loadSettings = useCallback(async () => {
+
+        onBack={() => setLocation('/profile')}
+
+      />        setSyncInterval(parseInt(savedInterval));    if (!appStoreUser?.id) return;
+
+
+
+      <div className="max-w-4xl mx-auto px-4 py-6">      }
+
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+
+          <TabsList className="grid w-full grid-cols-6 mb-6">    } catch (error) {    try {
+
+            <TabsTrigger value="profile" className="flex items-center space-x-2">
+
+              <User className="w-4 h-4" />      console.error('Erreur chargement paramètres:', error);      const { data: prefs } = await supabase
+
+              <span className="hidden sm:inline">Profil</span>
+
+            </TabsTrigger>    }        .from('user_preferences')
+
+            <TabsTrigger value="notifications" className="flex items-center space-x-2">
+
+              <Bell className="w-4 h-4" />  }, [appStoreUser?.id]);        .select('*')
+
+              <span className="hidden sm:inline">Notifications</span>
+
+            </TabsTrigger>        .eq('user_id', appStoreUser.id)
+
+            <TabsTrigger value="wearables" className="flex items-center space-x-2">
+
+              <Smartphone className="w-4 h-4" />  // Profile handlers        .single();
+
+              <span className="hidden sm:inline">Appareils</span>
+
+            </TabsTrigger>  const handleProfileSave = useCallback(async (updatedData: any) => {
+
+            <TabsTrigger value="privacy" className="flex items-center space-x-2">
+
+              <Shield className="w-4 h-4" />    if (!appStoreUser?.id) return;      if (prefs) {
+
+              <span className="hidden sm:inline">Confidentialité</span>
+
+            </TabsTrigger>        setNotifications(prefs.notifications || notifications);
+
+            <TabsTrigger value="preferences" className="flex items-center space-x-2">
+
+              <Zap className="w-4 h-4" />    setLoading(true);        setPrivacy(prefs.privacy || privacy);
+
+              <span className="hidden sm:inline">Préférences</span>
+
+            </TabsTrigger>    try {        setPreferences(prefs.app_preferences || preferences);
+
+            <TabsTrigger value="account" className="flex items-center space-x-2">
+
+              <AlertTriangle className="w-4 h-4" />      const { error } = await supabase      }
+
+              <span className="hidden sm:inline">Compte</span>
+
+            </TabsTrigger>        .from('user_profiles')
+
+          </TabsList>
+
+        .update({      const savedAutoSync = localStorage.getItem('autoSyncEnabled');
+
+          <TabsContent value="profile" className="mt-6">
+
+            <ProfileSettings          ...updatedData,      const savedInterval = localStorage.getItem('syncInterval');
+
+              profileData={profileData}
+
+              loading={loading}          updated_at: new Date().toISOString(),
+
+              onSave={handleProfileSave}
+
+              onChange={setProfileData}        })      if (savedAutoSync) {
+
+            />
+
+          </TabsContent>        .eq('id', appStoreUser.id);        setAutoSyncEnabled(JSON.parse(savedAutoSync));
+
+
+
+          <TabsContent value="notifications" className="mt-6">      }
+
+            <NotificationSettings
+
+              notifications={notifications}      if (error) throw error;      if (savedInterval) {
+
+              onToggle={handleNotificationChange}
+
+              onSave={handleNotificationSave}        setSyncInterval(parseInt(savedInterval));
+
+            />
+
+          </TabsContent>      setProfileData(updatedData);      }
+
+
+
+          <TabsContent value="wearables" className="mt-6">      toast({    } catch (error) {
+
+            <WearableSettings
+
+              isAppleHealthAvailable={isAppleHealthAvailable}        title: 'Profil mis à jour',      console.error('Erreur chargement paramètres:', error);
+
+              isGoogleFitAvailable={isGoogleFitAvailable}
+
+              lastSyncTime={lastSyncTime}        description: 'Vos informations ont été sauvegardées avec succès.',    }
+
+              syncError={syncError}
+
+              wearableLoading={wearableLoading}      });  }, [appStoreUser?.id]);
+
+              onAppleHealthSync={syncAppleHealth}
+
+              onGoogleFitSync={syncGoogleFit}    } catch (error) {
+
+              onSyncAll={syncAll}
+
+              autoSyncEnabled={autoSyncEnabled}      console.error('Erreur sauvegarde profil:', error);  // Profile handlers
+
+              syncInterval={syncInterval}
+
+              onToggleAutoSync={handleToggleAutoSync}      toast({  const handleProfileSave = useCallback(async (updatedData: any) => {
+
+              onSyncIntervalChange={handleSyncIntervalChange}
+
+            />        title: 'Erreur',    if (!appStoreUser?.id) return;
+
+          </TabsContent>
+
+        description: 'Impossible de sauvegarder le profil.',
+
+          <TabsContent value="privacy" className="mt-6">
+
+            <PrivacySettings        variant: 'destructive',    setLoading(true);
+
+              profileVisibility={privacy.profileVisibility}
+
+              workoutVisibility={privacy.workoutVisibility}      });    try {
+
+              allowFriendRequests={privacy.allowFriendRequests}
+
+              showAchievements={privacy.showAchievements}    } finally {      const { error } = await supabase
+
+              showStats={privacy.showStats}
+
+              analyticsEnabled={privacy.analyticsEnabled}      setLoading(false);        .from('user_profiles')
+
+              onProfileVisibilityChange={(visibility) => handlePrivacyChange('profileVisibility', visibility)}
+
+              onWorkoutVisibilityChange={(visibility) => handlePrivacyChange('workoutVisibility', visibility)}    }        .update({
+
+              onToggleFriendRequests={() => handlePrivacyChange('allowFriendRequests', !privacy.allowFriendRequests)}
+
+              onToggleAchievements={() => handlePrivacyChange('showAchievements', !privacy.showAchievements)}  }, [appStoreUser?.id, toast]);          ...updatedData,
+
+              onToggleStats={() => handlePrivacyChange('showStats', !privacy.showStats)}
+
+              onToggleAnalytics={() => handlePrivacyChange('analyticsEnabled', !privacy.analyticsEnabled)}          updated_at: new Date().toISOString(),
+
+              onExportData={handleExportData}
+
+              onDeleteData={handleDeleteData}  // Notification handlers        })
+
+            />
+
+          </TabsContent>  const handleNotificationChange = useCallback((key: keyof NotificationSettingsData) => {        .eq('id', appStoreUser.id);
+
+
+
+          <TabsContent value="preferences" className="mt-6">    setNotifications(prev => ({ ...prev, [key]: !prev[key] }));
+
+            <PreferencesSettings
+
+              language={preferences.language}  }, []);      if (error) throw error;
+
+              theme={preferences.theme}
+
+              units={preferences.units}
+
+              soundEnabled={preferences.soundEnabled}
+
+              vibrationEnabled={preferences.vibrationEnabled}  const handleNotificationSave = useCallback(async () => {      setProfileData(updatedData);
+
+              autoStart={preferences.autoStart}
+
+              restTimerDuration={preferences.restTimerDuration}    if (!appStoreUser?.id) return;      toast({
+
+              motivationalQuotes={preferences.motivationalQuotes}
+
+              compactMode={preferences.compactMode}        title: 'Profil mis à jour',
+
+              highContrast={preferences.highContrast}
+
+              onLanguageChange={(language) => handlePreferenceChange('language', language)}    try {        description: 'Vos informations ont été sauvegardées avec succès.',
+
+              onThemeChange={(theme) => handlePreferenceChange('theme', theme)}
+
+              onUnitsChange={(units) => handlePreferenceChange('units', units)}      await supabase      });
+
+              onToggleSound={() => handlePreferenceChange('soundEnabled', !preferences.soundEnabled)}
+
+              onToggleVibration={() => handlePreferenceChange('vibrationEnabled', !preferences.vibrationEnabled)}        .from('user_preferences')    } catch (error) {
+
+              onToggleAutoStart={() => handlePreferenceChange('autoStart', !preferences.autoStart)}
+
+              onRestTimerChange={(duration) => handlePreferenceChange('restTimerDuration', duration)}        .upsert({      console.error('Erreur sauvegarde profil:', error);
+
+              onToggleMotivationalQuotes={() => handlePreferenceChange('motivationalQuotes', !preferences.motivationalQuotes)}
+
+              onToggleCompactMode={() => handlePreferenceChange('compactMode', !preferences.compactMode)}          user_id: appStoreUser.id,      toast({
+
+              onToggleHighContrast={() => handlePreferenceChange('highContrast', !preferences.highContrast)}
+
+            />          notifications,        title: 'Erreur',
+
+          </TabsContent>
+
+          updated_at: new Date().toISOString(),        description: 'Impossible de sauvegarder le profil.',
+
+          <TabsContent value="account" className="mt-6">
+
+            <AccountDeletion        });        variant: 'destructive',
+
+              userEmail={appStoreUser?.email || ''}
+
+              onDeleteAccount={handleDeleteAccount}      });
+
+              onExportData={handleExportData}
+
+            />      toast({    } finally {
+
+          </TabsContent>
+
+        </Tabs>        title: 'Notifications mises à jour',      setLoading(false);
+
+      </div>
+
+    </div>        description: 'Vos préférences de notification ont été sauvegardées.',    }
+
+  );
+
+};      });  }, [appStoreUser?.id, toast]);
+
+
+
+export default Settings;    } catch (error) {
+
+      console.error('Erreur sauvegarde notifications:', error);  // Notification handlers
+
+    }  const handleNotificationChange = useCallback((key: keyof NotificationSettingsData) => {
+
+  }, [appStoreUser?.id, notifications, toast]);    setNotifications(prev => ({ ...prev, [key]: !prev[key] }));
+
+  }, []);
+
+  // Privacy handlers
+
+  const handlePrivacyChange = useCallback((key: keyof PrivacySettingsData, value: any) => {  const handleNotificationSave = useCallback(async () => {
+
+    setPrivacy(prev => ({ ...prev, [key]: value }));    if (!appStoreUser?.id) return;
+
+  }, []);
+
+    try {
+
+  const handleExportData = useCallback(async () => {      await supabase
+
+    if (!appStoreUser?.id) return;        .from('user_preferences')
+
+        .upsert({
+
+    const exportData = {          user_id: appStoreUser.id,
+
+      profile: profileData,          notifications,
+
+      notifications,          updated_at: new Date().toISOString(),
+
+      privacy,        });
+
+      preferences,
+
+      exportDate: new Date().toISOString(),      toast({
+
+    };        title: 'Notifications mises à jour',
+
+        description: 'Vos préférences de notification ont été sauvegardées.',
+
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });      });
+
+    const url = URL.createObjectURL(blob);    } catch (error) {
+
+    const a = document.createElement('a');      console.error('Erreur sauvegarde notifications:', error);
+
+    a.href = url;    }
+
+    a.download = `myfithero-data-${new Date().toISOString().split('T')[0]}.json`;  }, [appStoreUser?.id, notifications, toast]);
+
+    document.body.appendChild(a);
+
+    a.click();  // Privacy handlers
+
+    document.body.removeChild(a);  const handlePrivacyChange = useCallback((key: keyof PrivacySettingsData, value: any) => {
+
+    URL.revokeObjectURL(url);    setPrivacy(prev => ({ ...prev, [key]: value }));
+
+  }, [appStoreUser?.id, profileData, notifications, privacy, preferences]);  }, []);
+
+
+
+  const handleDeleteData = useCallback(async () => {  const handleExportData = useCallback(async () => {
+
+    if (!appStoreUser?.id) return;    if (!appStoreUser?.id) return;
+
+
+
+    const userId = appStoreUser.id;    const exportData = {
+
+    const tablesToClean = [      profile: profileData,
+
+      'user_workouts',      notifications,
+
+      'user_nutrition',      privacy,
+
+      'user_hydration',      preferences,
+
+      'user_sleep',      exportDate: new Date().toISOString(),
+
+      'user_analytics',    };
+
+      'user_preferences',
+
+    ];    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+
+    const url = URL.createObjectURL(blob);
+
+    for (const table of tablesToClean) {    const a = document.createElement('a');
+
+      await supabase.from(table).delete().eq('user_id', userId);    a.href = url;
+
+    }    a.download = `myfithero-data-${new Date().toISOString().split('T')[0]}.json`;
+
+  }, [appStoreUser?.id]);    document.body.appendChild(a);
+
+    a.click();
+
+  // Wearable handlers    document.body.removeChild(a);
+
+  const handleToggleAutoSync = useCallback(() => {    URL.revokeObjectURL(url);
+
+    const newValue = !autoSyncEnabled;  }, [appStoreUser?.id, profileData, notifications, privacy, preferences]);
+
+    setAutoSyncEnabled(newValue);
+
+    localStorage.setItem('autoSyncEnabled', JSON.stringify(newValue));  const handleDeleteData = useCallback(async () => {
+
+  }, [autoSyncEnabled]);    if (!appStoreUser?.id) return;
+
+
+
+  const handleSyncIntervalChange = useCallback((interval: number) => {    const userId = appStoreUser.id;
+
+    setSyncInterval(interval);    const tablesToClean = [
+
+    localStorage.setItem('syncInterval', interval.toString());      'user_workouts',
+
+  }, []);      'user_nutrition',
+
+      'user_hydration',
+
+  // Preferences handlers      'user_sleep',
+
+  const handlePreferenceChange = useCallback((key: keyof PreferencesData, value: any) => {      'user_analytics',
+
+    setPreferences(prev => ({ ...prev, [key]: value }));      'user_preferences',
+
+  }, []);    ];
+
+
+
+  const handleDeleteAccount = useCallback(async () => {    for (const table of tablesToClean) {
+
+    if (!appStoreUser?.id) return;      await supabase.from(table).delete().eq('user_id', userId);
+
+    }
+
+    try {  }, [appStoreUser?.id]);
+
+      await supabase.auth.signOut();
+
+      localStorage.clear();  // Wearable handlers
+
+      sessionStorage.clear();  const handleToggleAutoSync = useCallback(() => {
+
+      setLocation('/');    const newValue = !autoSyncEnabled;
+
+    } catch (error) {    setAutoSyncEnabled(newValue);
+
+      console.error('Erreur suppression compte:', error);    localStorage.setItem('autoSyncEnabled', JSON.stringify(newValue));
+
+    }  }, [autoSyncEnabled]);
+
+  }, [appStoreUser?.id, setLocation]);
+
+  const handleSyncIntervalChange = useCallback((interval: number) => {
+
+  return (    setSyncInterval(interval);
+
+    <div className="min-h-screen bg-gray-50">    localStorage.setItem('syncInterval', interval.toString());
+
+      <UniformHeader  }, []);
+
+        title="Paramètres"
+
+        icon={<SettingsIcon className="w-6 h-6" />}  // Preferences handlers
+
+        showBackButton  const handlePreferenceChange = useCallback((key: keyof PreferencesData, value: any) => {
+
+        onBack={() => setLocation('/profile')}    setPreferences(prev => ({ ...prev, [key]: value }));
+
+      />  }, []);
+
+
+
+      <div className="max-w-4xl mx-auto px-4 py-6">  const handleDeleteAccount = useCallback(async () => {
+
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">    if (!appStoreUser?.id) return;
+
+          <TabsList className="grid w-full grid-cols-6 mb-6">
+
+            <TabsTrigger value="profile" className="flex items-center space-x-2">    try {
+
+              <User className="w-4 h-4" />      await supabase.auth.signOut();
+
+              <span className="hidden sm:inline">Profil</span>      localStorage.clear();
+
+            </TabsTrigger>      sessionStorage.clear();
+
+            <TabsTrigger value="notifications" className="flex items-center space-x-2">      setLocation('/');
+
+              <Bell className="w-4 h-4" />    } catch (error) {
+
+              <span className="hidden sm:inline">Notifications</span>      console.error('Erreur suppression compte:', error);
+
+            </TabsTrigger>    }
+
+            <TabsTrigger value="wearables" className="flex items-center space-x-2">  }, [appStoreUser?.id, setLocation]);
+
+              <Smartphone className="w-4 h-4" />
+
+              <span className="hidden sm:inline">Appareils</span>  return (
+
+            </TabsTrigger>    <div className="min-h-screen bg-gray-50">
+
+            <TabsTrigger value="privacy" className="flex items-center space-x-2">      <UniformHeader
+
+              <Shield className="w-4 h-4" />        title="Paramètres"
+
+              <span className="hidden sm:inline">Confidentialité</span>        icon={<SettingsIcon className="w-6 h-6" />}
+
+            </TabsTrigger>        showBackButton
+
+            <TabsTrigger value="preferences" className="flex items-center space-x-2">        onBack={() => setLocation('/profile')}
+
+              <Zap className="w-4 h-4" />      />
+
+              <span className="hidden sm:inline">Préférences</span>
+
+            </TabsTrigger>      <div className="max-w-4xl mx-auto px-4 py-6">
+
+            <TabsTrigger value="account" className="flex items-center space-x-2">        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+
+              <AlertTriangle className="w-4 h-4" />          <TabsList className="grid w-full grid-cols-6 mb-6">
+
+              <span className="hidden sm:inline">Compte</span>            <TabsTrigger value="profile" className="flex items-center space-x-2">
+
+            </TabsTrigger>              <User className="w-4 h-4" />
+
+          </TabsList>              <span className="hidden sm:inline">Profil</span>
+
+            </TabsTrigger>
+
+          <TabsContent value="profile" className="mt-6">            <TabsTrigger value="notifications" className="flex items-center space-x-2">
+
+            <ProfileSettings              <Bell className="w-4 h-4" />
+
+              profileData={profileData}              <span className="hidden sm:inline">Notifications</span>
+
+              loading={loading}            </TabsTrigger>
+
+              onSave={handleProfileSave}            <TabsTrigger value="wearables" className="flex items-center space-x-2">
+
+              onChange={setProfileData}              <Smartphone className="w-4 h-4" />
+
+            />              <span className="hidden sm:inline">Appareils</span>
+
+          </TabsContent>            </TabsTrigger>
+
+            <TabsTrigger value="privacy" className="flex items-center space-x-2">
+
+          <TabsContent value="notifications" className="mt-6">              <Shield className="w-4 h-4" />
+
+            <NotificationSettings              <span className="hidden sm:inline">Confidentialité</span>
+
+              notifications={notifications}            </TabsTrigger>
+
+              onToggle={handleNotificationChange}            <TabsTrigger value="preferences" className="flex items-center space-x-2">
+
+              onSave={handleNotificationSave}              <Zap className="w-4 h-4" />
+
+            />              <span className="hidden sm:inline">Préférences</span>
+
+          </TabsContent>            </TabsTrigger>
+
+            <TabsTrigger value="account" className="flex items-center space-x-2">
+
+          <TabsContent value="wearables" className="mt-6">              <AlertTriangle className="w-4 h-4" />
+
+            <WearableSettings              <span className="hidden sm:inline">Compte</span>
+
+              isAppleHealthAvailable={isAppleHealthAvailable}            </TabsTrigger>
+
+              isGoogleFitAvailable={isGoogleFitAvailable}          </TabsList>
+
+              lastSyncTime={lastSyncTime}
+
+              syncError={syncError}          <TabsContent value="profile" className="mt-6">
+
+              wearableLoading={wearableLoading}            <ProfileSettings
+
+              onAppleHealthSync={syncAppleHealth}              profileData={profileData}
+
+              onGoogleFitSync={syncGoogleFit}              loading={loading}
+
+              onSyncAll={syncAll}              onSave={handleProfileSave}
+
+              autoSyncEnabled={autoSyncEnabled}              onChange={setProfileData}
+
+              syncInterval={syncInterval}            />
+
+              onToggleAutoSync={handleToggleAutoSync}          </TabsContent>
+
+              onSyncIntervalChange={handleSyncIntervalChange}
+
+            />          <TabsContent value="notifications" className="mt-6">
+
+          </TabsContent>            <NotificationSettings
+
+              notifications={notifications}
+
+          <TabsContent value="privacy" className="mt-6">              onToggle={handleNotificationChange}
+
+            <PrivacySettings              onSave={handleNotificationSave}
+
+              profileVisibility={privacy.profileVisibility}            />
+
+              workoutVisibility={privacy.workoutVisibility}          </TabsContent>
+
+              allowFriendRequests={privacy.allowFriendRequests}
+
+              showAchievements={privacy.showAchievements}          <TabsContent value="wearables" className="mt-6">
+
+              showStats={privacy.showStats}            <WearableSettings
+
+              analyticsEnabled={privacy.analyticsEnabled}              isAppleHealthAvailable={isAppleHealthAvailable}
+
+              onProfileVisibilityChange={(visibility) => handlePrivacyChange('profileVisibility', visibility)}              isGoogleFitAvailable={isGoogleFitAvailable}
+
+              onWorkoutVisibilityChange={(visibility) => handlePrivacyChange('workoutVisibility', visibility)}              lastSyncTime={lastSyncTime}
+
+              onToggleFriendRequests={() => handlePrivacyChange('allowFriendRequests', !privacy.allowFriendRequests)}              syncError={syncError}
+
+              onToggleAchievements={() => handlePrivacyChange('showAchievements', !privacy.showAchievements)}              wearableLoading={wearableLoading}
+
+              onToggleStats={() => handlePrivacyChange('showStats', !privacy.showStats)}              onAppleHealthSync={syncAppleHealth}
+
+              onToggleAnalytics={() => handlePrivacyChange('analyticsEnabled', !privacy.analyticsEnabled)}              onGoogleFitSync={syncGoogleFit}
+
+              onExportData={handleExportData}              onSyncAll={syncAll}
+
+              onDeleteData={handleDeleteData}              autoSyncEnabled={autoSyncEnabled}
+
+            />              syncInterval={syncInterval}
+
+          </TabsContent>              onToggleAutoSync={handleToggleAutoSync}
+
+              onSyncIntervalChange={handleSyncIntervalChange}
+
+          <TabsContent value="preferences" className="mt-6">            />
+
+            <PreferencesSettings          </TabsContent>
+
+              language={preferences.language}
+
+              theme={preferences.theme}          <TabsContent value="privacy" className="mt-6">
+
+              units={preferences.units}            <PrivacySettings
+
+              soundEnabled={preferences.soundEnabled}              profileVisibility={privacy.profileVisibility}
+
+              vibrationEnabled={preferences.vibrationEnabled}              workoutVisibility={privacy.workoutVisibility}
+
+              autoStart={preferences.autoStart}              allowFriendRequests={privacy.allowFriendRequests}
+
+              restTimerDuration={preferences.restTimerDuration}              showAchievements={privacy.showAchievements}
+
+              motivationalQuotes={preferences.motivationalQuotes}              showStats={privacy.showStats}
+
+              compactMode={preferences.compactMode}              analyticsEnabled={privacy.analyticsEnabled}
+
+              highContrast={preferences.highContrast}              onProfileVisibilityChange={(visibility) => handlePrivacyChange('profileVisibility', visibility)}
+
+              onLanguageChange={(language) => handlePreferenceChange('language', language)}              onWorkoutVisibilityChange={(visibility) => handlePrivacyChange('workoutVisibility', visibility)}
+
+              onThemeChange={(theme) => handlePreferenceChange('theme', theme)}              onToggleFriendRequests={() => handlePrivacyChange('allowFriendRequests', !privacy.allowFriendRequests)}
+
+              onUnitsChange={(units) => handlePreferenceChange('units', units)}              onToggleAchievements={() => handlePrivacyChange('showAchievements', !privacy.showAchievements)}
+
+              onToggleSound={() => handlePreferenceChange('soundEnabled', !preferences.soundEnabled)}              onToggleStats={() => handlePrivacyChange('showStats', !privacy.showStats)}
+
+              onToggleVibration={() => handlePreferenceChange('vibrationEnabled', !preferences.vibrationEnabled)}              onToggleAnalytics={() => handlePrivacyChange('analyticsEnabled', !privacy.analyticsEnabled)}
+
+              onToggleAutoStart={() => handlePreferenceChange('autoStart', !preferences.autoStart)}              onExportData={handleExportData}
+
+              onRestTimerChange={(duration) => handlePreferenceChange('restTimerDuration', duration)}              onDeleteData={handleDeleteData}
+
+              onToggleMotivationalQuotes={() => handlePreferenceChange('motivationalQuotes', !preferences.motivationalQuotes)}            />
+
+              onToggleCompactMode={() => handlePreferenceChange('compactMode', !preferences.compactMode)}          </TabsContent>
+
+              onToggleHighContrast={() => handlePreferenceChange('highContrast', !preferences.highContrast)}
+
+            />          <TabsContent value="preferences" className="mt-6">
+
+          </TabsContent>            <PreferencesSettings
+
+              language={preferences.language}
+
+          <TabsContent value="account" className="mt-6">              theme={preferences.theme}
+
+            <AccountDeletion              units={preferences.units}
+
+              userEmail={appStoreUser?.email || ''}              soundEnabled={preferences.soundEnabled}
+
+              onDeleteAccount={handleDeleteAccount}              vibrationEnabled={preferences.vibrationEnabled}
+
+              onExportData={handleExportData}              autoStart={preferences.autoStart}
+
+            />              restTimerDuration={preferences.restTimerDuration}
+
+          </TabsContent>              motivationalQuotes={preferences.motivationalQuotes}
+
+        </Tabs>              compactMode={preferences.compactMode}
+
+      </div>              highContrast={preferences.highContrast}
+
+    </div>              onLanguageChange={(language) => handlePreferenceChange('language', language)}
+
+  );              onThemeChange={(theme) => handlePreferenceChange('theme', theme)}
+
+};              onUnitsChange={(units) => handlePreferenceChange('units', units)}
+
+              onToggleSound={() => handlePreferenceChange('soundEnabled', !preferences.soundEnabled)}
+
+export default Settings;              onToggleVibration={() => handlePreferenceChange('vibrationEnabled', !preferences.vibrationEnabled)}
+              onToggleAutoStart={() => handlePreferenceChange('autoStart', !preferences.autoStart)}
+              onRestTimerChange={(duration) => handlePreferenceChange('restTimerDuration', duration)}
+              onToggleMotivationalQuotes={() => handlePreferenceChange('motivationalQuotes', !preferences.motivationalQuotes)}
+              onToggleCompactMode={() => handlePreferenceChange('compactMode', !preferences.compactMode)}
+              onToggleHighContrast={() => handlePreferenceChange('highContrast', !preferences.highContrast)}
+            />
+          </TabsContent>
+
+          <TabsContent value="account" className="mt-6">
+            <AccountDeletion
+              userEmail={appStoreUser?.email || ''}
+              onDeleteAccount={handleDeleteAccount}
+              onExportData={handleExportData}
+            />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+};
+
+export default Settings;
     achievement_alerts: true,
     weekly_summary: true,
     marketing_emails: false,
