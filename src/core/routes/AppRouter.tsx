@@ -15,7 +15,6 @@ const AnalyticsPage = lazy(() => import('../../features/analytics/pages/Analytic
 
 // Pages statiques
 import NotFoundPage from '../../pages/NotFound.tsx';
-import DebugPage from '../../DebugPage';
 
 // Routes configuration
 export const ROUTES = {
@@ -24,7 +23,6 @@ export const ROUTES = {
   WORKOUT: '/workout',
   PROFILE: '/profile',
   ANALYTICS: '/analytics',
-  DEBUG: '/debug',
   AUTH: {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
@@ -37,7 +35,6 @@ function AppRouter() {
       <Switch>
         {/* Routes publiques */}
         <Route path={ROUTES.LANDING} component={LandingPage} />
-        <Route path={ROUTES.DEBUG} component={DebugPage} />
         
         {/* Routes protégées */}
         <Route path={ROUTES.WORKOUT}>
