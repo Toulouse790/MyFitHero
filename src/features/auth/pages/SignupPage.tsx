@@ -376,7 +376,14 @@ export const SignupPage: React.FC = () => {
               !formData.confirmPassword.trim() ||
               Object.keys(errors).some(key => key !== 'general' && errors[key as keyof ValidationErrors])
             }
-            className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="w-full bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border-2 border-primary-600"
+            style={{
+              backgroundColor: '#8B5CF6', // Violet MyFitHero en fallback
+              color: '#FFFFFF',
+              border: '2px solid #8B5CF6',
+              minHeight: '48px', // Force une hauteur minimale visible
+              fontSize: '16px'
+            }}
           >
             {isLoading ? (
               <div className="flex items-center justify-center">
@@ -387,6 +394,20 @@ export const SignupPage: React.FC = () => {
               'Créer mon compte'
             )}
           </button>
+
+          {/* Bouton de test visible pour debug */}
+          <div className="mt-2 p-2 bg-red-100 border border-red-300 rounded text-xs text-red-700">
+            Debug: Bouton {
+              (isLoading || 
+              !formData.firstName.trim() || 
+              !formData.lastName.trim() || 
+              !formData.email.trim() || 
+              !formData.password.trim() || 
+              !formData.confirmPassword.trim() ||
+              Object.keys(errors).some(key => key !== 'general' && errors[key as keyof ValidationErrors])) 
+              ? 'DÉSACTIVÉ' : 'ACTIVÉ'
+            } | Champs: {Object.values(formData).filter(v => v.trim()).length}/5
+          </div>
 
           {/* Login Link */}
           <div className="text-center">
