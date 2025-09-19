@@ -8,3 +8,14 @@ export { default as PackSelector } from './PackSelector';
 export { default as PersonalInfoForm } from './PersonalInfoForm';
 export { default as PositionSelector } from './PositionSelector';
 export { default as SportSelector } from './SportSelector';
+
+// Composants d'onboarding refactorisés
+export { OnboardingHeader } from './OnboardingHeader';
+export { OnboardingTips } from './OnboardingTips';
+export { OnboardingValidation } from './OnboardingValidation';
+export { OnboardingNavigation } from './OnboardingNavigation';
+export { OnboardingFormFields } from './OnboardingFormFields';
+export { ConversationalOnboardingRefactored } from './ConversationalOnboardingRefactored';
+
+// Hook d'état
+export { useOnboardingState } from '../hooks/useOnboardingState';
