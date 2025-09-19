@@ -1,22 +1,22 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-// Environment variables with fallbacks for development
+// Environment variables - strict validation required
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Validation des variables d'environnement
+// Validation stricte des variables d'environnement
 if (!supabaseUrl || supabaseUrl === 'https://your-project.supabase.co') {
-  console.error('❌ VITE_SUPABASE_URL manquante ou invalide');
+  throw new Error('❌ VITE_SUPABASE_URL est requise et doit être configurée dans le fichier .env');
 }
 
 if (!supabaseAnonKey || supabaseAnonKey === 'your-anon-key') {
-  console.error('❌ VITE_SUPABASE_ANON_KEY manquante ou invalide');
+  throw new Error('❌ VITE_SUPABASE_ANON_KEY est requise et doit être configurée dans le fichier .env');
 }
 
-// Create Supabase client
+// Create Supabase client with validated environment variables
 export const supabase: SupabaseClient = createClient(
-  supabaseUrl || 'https://your-project.supabase.co', 
-  supabaseAnonKey || 'your-anon-key', 
+  supabaseUrl, 
+  supabaseAnonKey, 
   {
   auth: {
     autoRefreshToken: true,
@@ -35,6 +35,23 @@ export const supabase: SupabaseClient = createClient(
     },
   },
 });
+
+// Fonction utilitaire pour vérifier la configuration Supabase
+export const validateSupabaseConfig = () => {
+  const config = {
+    url: supabaseUrl,
+    hasAnonKey: !!supabaseAnonKey,
+    isValidUrl: supabaseUrl?.startsWith('https://') && supabaseUrl.includes('.supabase.co'),
+  };
+  
+  console.log('🔧 Configuration Supabase:', {
+    url: config.url,
+    hasAnonKey: config.hasAnonKey,
+    isValidUrl: config.isValidUrl,
+  });
+  
+  return config;
+};
 
 // Database types (extend as needed)
 export interface Database {
