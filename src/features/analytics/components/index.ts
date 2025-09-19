@@ -10,3 +10,10 @@ export { default as USMarketDashboard } from './USMarketDashboard';
 export { default as SmartHealthDashboard } from './SmartHealthDashboard';
 export { default as AnalyticsDashboard } from './AnalyticsDashboard';
 export { default as WearableStats } from './WearableStats';
+
+// Composants SmartDashboard refactorisés
+export { DashboardHeader } from './DashboardHeader';
+export { DashboardStats } from './DashboardStats';
+export { SmartChat } from './SmartChat';
+export { PersonalizedWidgets } from './PersonalizedWidgets';
+export { SmartDashboardRefactored } from './SmartDashboardRefactored';
