@@ -2,16 +2,16 @@
 
 import React from 'react';
 import { Brain, ChevronRight } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
-import { Card, CardContent } from '../../../components/ui/card';
+import { Button } from '../../components/ui/button';
+import { Card, CardContent } from '../../components/ui/card';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../../../components/ui/dialog';
-import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
+} from '../../components/ui/dialog';
+import AIIntelligence from '../../features/ai-coach/components/AIIntelligence';
 
 interface AIModalProps {
   open: boolean;

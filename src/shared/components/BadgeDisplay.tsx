@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { Progress } from '../../components/ui/progress';
 import { Trophy, Star, Target, Award } from 'lucide-react';
-import { BadgeService, UserBadge, BadgeProgress } from '../../../lib/services/badgeService';
+import { BadgeService, UserBadge, BadgeProgress } from '../../lib/services/badgeService';
 
 interface BadgeDisplayProps {
   badges: UserBadge[];
