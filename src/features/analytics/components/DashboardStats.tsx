@@ -73,7 +73,7 @@ export const DashboardStats: React.FC<DashboardStatsProps> = ({
           isPositive: true,
           period: 'cette semaine'
         },
-        description: dailyStats.workouts_completed > 0 ? 'Objectif atteint !' : personalizedWorkout,
+        description: (dailyStats.workouts_completed ?? 0) > 0 ? 'Objectif atteint !' : personalizedWorkout,
         actionPath: '/workout'
       },
       {

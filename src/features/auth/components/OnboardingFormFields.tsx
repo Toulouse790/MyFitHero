@@ -43,7 +43,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
   }, [onResponseChange]);
 
   const renderField = () => {
-    switch (step.type) {
+    switch (step.inputType) {
       case 'text':
         return (
           <div className="space-y-2">
@@ -80,7 +80,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
           </div>
         );
 
-      case 'select':
+      case 'single-select':
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-medium">{step.question}</h3>
@@ -112,7 +112,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
           </div>
         );
 
-      case 'multiselect':
+      case 'multi-select':
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-medium">{step.question}</h3>
@@ -178,7 +178,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
           </div>
         );
 
-      case 'boolean':
+      case 'toggle':
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-medium">{step.question}</h3>
@@ -194,7 +194,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
           </div>
         );
 
-      case 'pack-selection':
+      case 'pack_selector':
         return (
           <PackSelectionField 
             step={step}
@@ -203,7 +203,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
           />
         );
 
-      case 'sport-selection':
+      case 'sport_selector':
         return (
           <SportSelectionField 
             step={step}
@@ -212,7 +212,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
           />
         );
 
-      case 'lifestyle-assessment':
+      case 'personal_info':
         return (
           <LifestyleAssessmentField 
             step={step}
@@ -224,7 +224,7 @@ export const OnboardingFormFields: React.FC<OnboardingFormFieldsProps> = ({
       default:
         return (
           <div className="text-center py-8 text-muted-foreground">
-            Type de champ non supporté: {step.type}
+            Type de champ non supporté: {step.inputType}
           </div>
         );
     }

@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import { 
   ArrowLeft, 
   ArrowRight, 
-  Skip, 
+  SkipForward, 
   Sparkles,
   CheckCircle2,
   Clock,
@@ -129,11 +129,10 @@ export const ConversationalOnboardingRefactored: React.FC<ConversationalOnboardi
     <div className={`min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 ${className}`}>
       {/* Header */}
       <OnboardingHeader
-        currentStep={currentStep}
-        progressPercentage={progressPercentage}
-        estimatedTimeLeft={estimatedTimeLeft}
-        stepHistory={state.stepHistory}
-        completedSteps={state.data.progress.completedSteps}
+        currentStep={state.data.progress.completedSteps.length + 1}
+        totalSteps={state.data.progress.totalSteps}
+        title={currentStep.title || 'Onboarding'}
+        subtitle={currentStep.subtitle}
       />
 
       {/* Contenu principal */}
@@ -182,14 +181,10 @@ export const ConversationalOnboardingRefactored: React.FC<ConversationalOnboardi
                           )}
                         </div>
 
-                        {/* Tags et métadonnées */}
-                        {currentStep.tags && currentStep.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mt-4">
-                            {currentStep.tags.map((tag) => (
-                              <Badge key={tag} variant="secondary" className="text-xs">
-                                {tag}
-                              </Badge>
-                            ))}
+                        {/* Illustration ou icône */}
+                        {currentStep.illustration && (
+                          <div className="flex justify-center mt-4">
+                            <div className="text-4xl">{currentStep.illustration}</div>
                           </div>
                         )}
                       </div>
@@ -207,16 +202,21 @@ export const ConversationalOnboardingRefactored: React.FC<ConversationalOnboardi
 
                       {/* Validation des erreurs */}
                       <OnboardingValidation
-                        errors={state.validationErrors}
-                        warnings={[]}
-                        step={currentStep}
+                        validationMessages={state.validationErrors.map((error, index) => ({
+                          id: `error-${index}`,
+                          type: 'error' as const,
+                          title: 'Erreur de validation',
+                          message: error
+                        }))}
                         className="mb-6"
                       />
 
                       {/* Navigation */}
                       <OnboardingNavigation
+                        currentStep={state.data.progress.completedSteps.length + 1}
+                        totalSteps={state.data.progress.totalSteps}
                         canGoBack={canGoBack}
-                        canProceed={canProceed}
+                        canGoNext={canProceed}
                         isLastStep={isLastStep}
                         isLoading={state.isLoading}
                         onBack={goToPreviousStep}
@@ -227,7 +227,6 @@ export const ConversationalOnboardingRefactored: React.FC<ConversationalOnboardi
                             goToNextStep();
                           }
                         }}
-                        onSkip={currentStep.skippable ? skipCurrentStep : undefined}
                         className="mt-8"
                       />
 
@@ -264,9 +263,8 @@ export const ConversationalOnboardingRefactored: React.FC<ConversationalOnboardi
                 
                 {/* Conseils contextuels */}
                 <OnboardingTips
-                  step={currentStep}
-                  isVisible={state.showTips}
-                  onToggle={toggleTips}
+                  currentStepType={currentStep.type}
+                  userLevel="beginner"
                   className="transition-all duration-300"
                 />
 

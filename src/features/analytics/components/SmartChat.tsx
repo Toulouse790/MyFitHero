@@ -81,6 +81,8 @@ export const SmartChat: React.FC<SmartChatProps> = ({
       inputElement.addEventListener('keydown', handleKeyDown);
       return () => inputElement.removeEventListener('keydown', handleKeyDown);
     }
+    
+    return undefined; // Return explicite pour tous les chemins
   }, [onSendMessage, onToggleListening]);
 
   // Synthèse vocale pour les réponses IA
@@ -256,7 +258,7 @@ export const SmartChat: React.FC<SmartChatProps> = ({
               <Input
                 ref={inputRef}
                 value={inputMessage}
-                onChange={(e) => onInputChange(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInputChange(e.target.value)}
                 placeholder="Pose-moi une question sur ton entraînement..."
                 disabled={isLoading}
                 className="pr-12"

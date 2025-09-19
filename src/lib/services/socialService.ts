@@ -141,12 +141,12 @@ class SocialService {
         .eq('status', 'accepted')
         .order('updated_at', { ascending: false });
 
-      if (error) throw error;
-      return data || [];
-    } catch {
+      if (_error) throw _error;
+      return _data || [];
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching friends:', error);
-      throw error;
+      console.error('Error fetching friends:', catchError);
+      throw catchError;
     }
   }
 
@@ -169,10 +169,10 @@ class SocialService {
         .neq('id', userId)
         .limit(20);
 
-      if (error) throw error;
+      if (_error) throw _error;
 
       // Formatage des résultats pour correspondre à UserConnection
-      return (data || []).map(user => ({
+      return (_data || []).map((user: any) => ({
         id: '',
         user_id: userId,
         friend_id: user.id,
@@ -188,10 +188,10 @@ class SocialService {
           is_online: user.is_online,
         },
       }));
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error searching users:', error);
-      throw error;
+      console.error('Error searching users:', catchError);
+      throw catchError;
     }
   }
 
@@ -205,9 +205,9 @@ class SocialService {
 
       if (error) throw error;
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error sending friend request:', error);
+      console.error('Error sending friend request:', catchError);
       return false;
     }
   }
@@ -221,9 +221,9 @@ class SocialService {
 
       if (error) throw error;
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error accepting friend request:', error);
+      console.error('Error accepting friend request:', catchError);
       return false;
     }
   }
@@ -257,30 +257,30 @@ class SocialService {
       if (type) query = query.eq('challenge_type', type);
 
       const { data: _data, error: _error } = await query;
-      if (error) throw error;
-      return data || [];
-    } catch {
+      if (_error) throw _error;
+      return _data || [];
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching challenges:', error);
-      throw error;
+      console.error('Error fetching challenges:', catchError);
+      throw catchError;
     }
   }
 
   async joinChallenge(challengeId: string, userId: string): Promise<boolean> {
     try {
-      const { error } = await supabase.from('challenge_participations').insert({
+      const { error } = await supabase.from('challenge_participants').insert({
         challenge_id: challengeId,
         user_id: userId,
-        current_progress: 0,
+        joined_at: new Date().toISOString(),
         completion_percentage: 0,
         points_earned: 0,
       });
 
       if (error) throw error;
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error joining challenge:', error);
+      console.error('Error joining challenge:', catchError);
       return false;
     }
   }
@@ -298,15 +298,15 @@ class SocialService {
         .select('id')
         .single();
 
-      if (error) throw error;
+      if (_error) throw _error;
 
       // Auto-joindre le créateur au défi
-      await this.joinChallenge(data.id, userId);
+      await this.joinChallenge(_data.id, userId);
 
-      return data.id;
-    } catch {
+      return _data.id;
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error creating challenge:', error);
+      console.error('Error creating challenge:', catchError);
       return null;
     }
   }
@@ -334,13 +334,13 @@ class SocialService {
         .eq('user_id', userId)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (_error) throw _error;
 
-      const participations = data || [];
+      const participations = _data || [];
       const active: (Challenge & ChallengeParticipation)[] = [];
       const completed: (Challenge & ChallengeParticipation)[] = [];
 
-      participations.forEach(participation => {
+      participations.forEach((participation: any) => {
         const challenge = participation.challenge;
         const combined = { ...challenge, ...participation };
 
@@ -352,9 +352,9 @@ class SocialService {
       });
 
       return { active, completed };
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching user challenges:', error);
+      console.error('Error fetching user challenges:', catchError);
       return { active: [], completed: [] };
     }
   }
@@ -422,9 +422,9 @@ class SocialService {
       }
 
       return mockLeaderboard.slice(0, limit);
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching leaderboard:', error);
+      console.error('Error fetching leaderboard:', catchError);
       return [];
     }
   }
@@ -491,9 +491,9 @@ class SocialService {
       ];
 
       return mockPosts.slice(0, limit);
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching social feed:', error);
+      console.error('Error fetching social feed:', catchError);
       return [];
     }
   }
@@ -512,11 +512,11 @@ class SocialService {
         .select('id')
         .single();
 
-      if (error) throw error;
-      return data.id;
-    } catch {
+      if (_error) throw _error;
+      return _data.id;
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error creating post:', error);
+      console.error('Error creating post:', catchError);
       return null;
     }
   }
@@ -530,9 +530,9 @@ class SocialService {
 
       if (error) throw error;
       return true;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error liking post:', error);
+      console.error('Error liking post:', catchError);
       return false;
     }
   }
@@ -555,10 +555,10 @@ class SocialService {
       };
 
       return mockStats;
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching social stats:', error);
-      throw error;
+      console.error('Error fetching social stats:', catchError);
+      throw catchError;
     }
   }
 
@@ -607,10 +607,10 @@ class SocialService {
         friends_stats: friendsStats,
         user_rank: 2,
       };
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching friends comparison:', error);
-      throw error;
+      console.error('Error fetching friends comparison:', catchError);
+      throw catchError;
     }
   }
 
@@ -629,9 +629,9 @@ class SocialService {
         mentions: [],
         achievements: [],
       };
-    } catch {
+    } catch (catchError) {
       // Erreur silencieuse
-      console.error('Error fetching social notifications:', error);
+      console.error('Error fetching social notifications:', catchError);
       return {
         friend_requests: [],
         challenge_invites: [],
