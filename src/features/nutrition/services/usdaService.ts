@@ -72,7 +72,7 @@ export const USDA_NUTRIENT_IDS = {
  * Service principal pour l'intégration USDA
  */
 export class USDANutritionService {
-  private static readonly API_KEY = process.env.USDA_API_KEY || 'DEMO_KEY';
+  private static readonly API_KEY = import.meta.env.VITE_USDA_API_KEY || 'DEMO_KEY';
   private static readonly BASE_URL = 'https://api.nal.usda.gov/fdc/v1';
   
   /**

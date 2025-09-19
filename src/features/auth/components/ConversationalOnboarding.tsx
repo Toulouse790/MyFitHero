@@ -429,6 +429,7 @@ export default function ConversationalOnboarding({
 
         const upsertData = {
           id: user.id,
+          email: user.email, // Inclure l'email requis
           first_name: data.firstName || null,
           age: data.age || undefined,
           gender: data.gender || undefined,

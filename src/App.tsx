@@ -326,6 +326,7 @@ function useAuthState(): AuthState & {
         .from('user_profiles')
         .upsert({
           id: authState.user.id,
+          email: authState.user.email, // Inclure l'email requis
           ...supabasePayload,
           updated_at: new Date().toISOString(),
         });

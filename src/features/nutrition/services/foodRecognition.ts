@@ -37,9 +37,9 @@ export interface FoodAnalysisResult {
 export class FoodRecognitionService {
   private static readonly API_ENDPOINTS = {
     // API de reconnaissance d'images (ex: Clarifai, Google Vision, Azure Computer Vision)
-    FOOD_RECOGNITION: process.env.VITE_FOOD_RECOGNITION_API || 'https://api.example-food-recognition.com',
+    FOOD_RECOGNITION: import.meta.env.VITE_FOOD_RECOGNITION_API || 'https://api.example-food-recognition.com',
     // API nutritionnelle (ex: Edamam, Spoonacular, USDA)
-    NUTRITION_API: process.env.VITE_NUTRITION_API || 'https://api.example-nutrition.com'
+    NUTRITION_API: import.meta.env.VITE_NUTRITION_API || 'https://api.example-nutrition.com'
   };
 
   /**
@@ -162,7 +162,7 @@ export class FoodRecognitionService {
       const response = await fetch(`${this.API_ENDPOINTS.FOOD_RECOGNITION}/analyze`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.VITE_FOOD_RECOGNITION_API_KEY}`,
+          'Authorization': `Bearer ${import.meta.env.VITE_FOOD_RECOGNITION_API_KEY}`,
         },
         body: formData
       });
