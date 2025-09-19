@@ -1,7 +1,7 @@
 // src/features/landing/components/hero/HeroVideo.tsx
 import React, { useState, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
+import { Button } from '../../../components/ui/button';
 
 interface HeroVideoProps {
   videoSrc: string;

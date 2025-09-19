@@ -1,9 +1,9 @@
 // src/features/nutrition/components/NutritionAnalysis.tsx
 import React, { useState } from 'react';
 import { TrendingUp, Calendar, BarChart3, PieChart, Target, Award } from 'lucide-react';
-import { Card, CardContent } from '../../../components/ui/card';
-import { Progress } from '../../../components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+import { Card, CardContent } from '../../components/ui/card';
+import { Progress } from '../../components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 
 interface WeeklyData {
   day: string;

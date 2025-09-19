@@ -1,8 +1,8 @@
 import { Moon, Clock, Globe, Sun, Monitor, Settings, Calendar, DollarSign } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { useUserPreferences } from '@/features/ai-coach/hooks/useUserPreferences';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Button } from '../../components/ui/button';
 import { UnitSystem } from '../../../shared/utils/unitConversion';
 
 interface PreferencesSettingsProps {

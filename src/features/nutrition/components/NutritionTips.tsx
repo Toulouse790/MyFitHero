@@ -1,7 +1,7 @@
 // src/features/nutrition/components/NutritionTips.tsx
 import React, { useState } from 'react';
 import { Lightbulb, ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import { Card, CardContent } from '../../../components/ui/card';
+import { Card, CardContent } from '../../components/ui/card';
 
 interface TipCategory {
   name: string;

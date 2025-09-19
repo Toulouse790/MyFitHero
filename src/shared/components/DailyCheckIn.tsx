@@ -48,26 +48,38 @@ const DailyCheckIn: React.FC<DailyCheckInProps> = ({
 
     setIsLoading(true);
     try {
-      const newCheckin: DailyCheckin = {
-        id: Date.now().toString(),
-        userId,
-        date: new Date().toISOString().split('T')[0],
-        responses: answers,
-        completedAt: new Date().toISOString(),
+      const today = new Date().toISOString().split('T')[0];
+      const newCheckin = {
+        user_id: userId,
+        date: today,
+        workout_completed: answers.exercised || false,
+        nutrition_logged: answers.ate_healthy || false,
+        sleep_tracked: answers.slept_well || false,
+        hydration_logged: answers.hydrated || false,
+        mood_score: answers.good_energy ? 5 : 3,
+        energy_level: answers.good_energy ? 5 : 3,
+        notes: '',
       };
 
-      await UserDataService.saveDailyCheckin(newCheckin);
-      setCheckin(newCheckin);
-      setHasCheckedToday(true);
+      const success = await UserDataService.saveOrUpdateDailyCheckin(newCheckin);
+      if (success) {
+        const savedCheckin = await UserDataService.getDailyCheckin(userId, today);
+        if (savedCheckin) {
+          setCheckin(savedCheckin);
+          setHasCheckedToday(true);
 
-      // Award badge for check-in
-      await BadgeService.checkAndAwardBadge(userId, 'daily_checkin');
+          // Award badges for check-in
+          await BadgeService.checkAndAwardBadges(userId);
 
-      toast.success('Check-in complété !', 'Bravo pour votre régularité');
-      onCheckInComplete?.(newCheckin);
+          toast({ title: 'Check-in complété !', description: 'Bravo pour votre régularité' });
+          onCheckInComplete?.(savedCheckin);
+        }
+      } else {
+        throw new Error('Échec de la sauvegarde');
+      }
     } catch (error) {
       console.error('Erreur sauvegarde check-in:', error);
-      toast.error('Erreur', 'Impossible de sauvegarder le check-in');
+      toast({ title: 'Erreur', description: 'Impossible de sauvegarder le check-in', variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -95,19 +107,45 @@ const DailyCheckIn: React.FC<DailyCheckInProps> = ({
         <CardContent>
           <div className="space-y-2">
             <p className="text-sm text-gray-600">
-              Check-in effectué à {new Date(checkin.completedAt).toLocaleTimeString('fr-FR')}
+              Check-in effectué le {new Date(checkin.date).toLocaleDateString('fr-FR')}
             </p>
             <div className="grid grid-cols-2 gap-2 mt-4">
-              {questions.map((question) => (
-                <div key={question.key} className="flex items-center space-x-2">
-                  {checkin.responses[question.key] ? (
-                    <Check className="w-4 h-4 text-green-500" />
-                  ) : (
-                    <X className="w-4 h-4 text-red-500" />
-                  )}
-                  <span className="text-xs">{question.text}</span>
-                </div>
-              ))}
+              <div className="flex items-center space-x-2">
+                {checkin.workout_completed ? (
+                  <Check className="w-4 h-4 text-green-500" />
+                ) : (
+                  <X className="w-4 h-4 text-red-500" />
+                )}
+                <span className="text-xs">Exercice fait</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                {checkin.nutrition_logged ? (
+                  <Check className="w-4 h-4 text-green-500" />
+                ) : (
+                  <X className="w-4 h-4 text-red-500" />
+                )}
+                <span className="text-xs">Nutrition saine</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                {checkin.sleep_tracked ? (
+                  <Check className="w-4 h-4 text-green-500" />
+                ) : (
+                  <X className="w-4 h-4 text-red-500" />
+                )}
+                <span className="text-xs">Bien dormi</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                {checkin.hydration_logged ? (
+                  <Check className="w-4 h-4 text-green-500" />
+                ) : (
+                  <X className="w-4 h-4 text-red-500" />
+                )}
+                <span className="text-xs">Bien hydraté</span>
+              </div>
+            </div>
+            <div className="mt-3 text-sm">
+              <p>Humeur: {checkin.mood_score}/5 ⭐</p>
+              <p>Énergie: {checkin.energy_level}/5 ⚡</p>
             </div>
           </div>
         </CardContent>

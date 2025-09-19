@@ -1,7 +1,7 @@
 // src/features/nutrition/components/NutritionActions.tsx
 import React from 'react';
 import { Camera, Share2, Download, Settings, Calendar, TrendingUp } from 'lucide-react';
-import { Card, CardContent } from '../../../components/ui/card';
+import { Card, CardContent } from '../../components/ui/card';
 
 interface NutritionActionsProps {
   onPhotoScan: () => void;

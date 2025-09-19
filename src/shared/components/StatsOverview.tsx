@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 import { Progress } from '../../components/ui/progress';
-import { TrendingUp, TrendingDown, Activity, Target, Calendar } from 'lucide-react';
+import { Activity, Target, Zap, Heart } from 'lucide-react';
 import { UserDataService, UserStats } from '../../lib/services/userDataService';
 import { BadgeService } from '../../lib/services/badgeService';
 
@@ -35,7 +35,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({
 
     setIsLoading(true);
     try {
-      const userStats = await UserDataService.getUserStats(userId, timeframe);
+      const userStats = await UserDataService.getUserStats(userId);
       setStats(userStats);
     } catch (error) {
       console.error('Erreur chargement stats:', error);
@@ -70,21 +70,6 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({
       default:
         return 'Période';
     }
-  };
-
-  const getTrendIcon = (trend: number) => {
-    if (trend > 0) {
-      return <TrendingUp className="w-4 h-4 text-green-500" />;
-    } else if (trend < 0) {
-      return <TrendingDown className="w-4 h-4 text-red-500" />;
-    }
-    return <Activity className="w-4 h-4 text-gray-500" />;
-  };
-
-  const formatTrend = (trend: number) => {
-    const absValue = Math.abs(trend);
-    const sign = trend > 0 ? '+' : trend < 0 ? '-' : '';
-    return `${sign}${absValue.toFixed(1)}%`;
   };
 
   if (isLoading) {
@@ -137,44 +122,49 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium">Activité physique</span>
-              {getTrendIcon(stats.workoutTrend || 0)}
+              <Activity className="w-4 h-4 text-green-500" />
             </div>
-            <div className="text-2xl font-bold">{stats.totalWorkouts || 0}</div>
+            <div className="text-2xl font-bold">{stats.total_workouts || 0}</div>
             <div className="text-xs text-gray-600">
-              séances ({formatTrend(stats.workoutTrend || 0)})
+              séances d'entraînement
             </div>
           </div>
 
-          {/* Objectifs atteints */}
+          {/* Nutrition */}
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium">Objectifs atteints</span>
+              <span className="text-sm font-medium">Nutrition</span>
               <Target className="w-4 h-4 text-blue-500" />
             </div>
-            <div className="text-2xl font-bold">{stats.goalsAchieved || 0}</div>
+            <div className="text-2xl font-bold">{stats.total_nutrition_logs || 0}</div>
             <div className="text-xs text-gray-600">
-              sur {stats.totalGoals || 0} objectifs
+              journaux nutrition
             </div>
           </div>
 
-          {/* Constance */}
+          {/* Sommeil */}
+          {/* Sommeil */}
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium">Constance</span>
-              <Calendar className="w-4 h-4 text-purple-500" />
+              <Zap className="w-4 h-4 text-orange-500" />
             </div>
-            <div className="text-2xl font-bold">{stats.consistencyScore || 0}%</div>
-            <div className="text-xs text-gray-600">score de régularité</div>
+            <div className="text-2xl font-bold">{stats.current_streak || 0}</div>
+            <div className="text-xs text-gray-600">
+              jours consécutifs
+            </div>
           </div>
 
-          {/* Progression générale */}
+          {/* Motivation */}
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium">Progression</span>
-              {getTrendIcon(stats.overallProgress || 0)}
+              <span className="text-sm font-medium">Motivation</span>
+              <Heart className="w-4 h-4 text-red-500" />
             </div>
-            <div className="text-2xl font-bold">{stats.overallProgress || 0}%</div>
-            <div className="text-xs text-gray-600">progression globale</div>
+            <div className="text-2xl font-bold">{stats.badges_earned || 0}</div>
+            <div className="text-xs text-gray-600">
+              badges gagnés
+            </div>
           </div>
         </div>
 
@@ -186,33 +176,33 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({
             <div>
               <div className="flex justify-between text-sm mb-1">
                 <span>Entraînement</span>
-                <span>{stats.workoutProgress || 0}%</span>
+                <span>{Math.min(((stats.total_workouts || 0) / 30) * 100, 100).toFixed(0)}%</span>
               </div>
-              <Progress value={stats.workoutProgress || 0} className="h-2" />
+              <Progress value={Math.min(((stats.total_workouts || 0) / 30) * 100, 100)} className="h-2" />
             </div>
 
             <div>
               <div className="flex justify-between text-sm mb-1">
                 <span>Nutrition</span>
-                <span>{stats.nutritionProgress || 0}%</span>
+                <span>{Math.min(((stats.total_nutrition_logs || 0) / 30) * 100, 100).toFixed(0)}%</span>
               </div>
-              <Progress value={stats.nutritionProgress || 0} className="h-2" />
+              <Progress value={Math.min(((stats.total_nutrition_logs || 0) / 30) * 100, 100)} className="h-2" />
             </div>
 
             <div>
               <div className="flex justify-between text-sm mb-1">
                 <span>Sommeil</span>
-                <span>{stats.sleepProgress || 0}%</span>
+                <span>{Math.min(((stats.total_sleep_hours || 0) / 240) * 100, 100).toFixed(0)}%</span>
               </div>
-              <Progress value={stats.sleepProgress || 0} className="h-2" />
+              <Progress value={Math.min(((stats.total_sleep_hours || 0) / 240) * 100, 100)} className="h-2" />
             </div>
 
             <div>
               <div className="flex justify-between text-sm mb-1">
                 <span>Hydratation</span>
-                <span>{stats.hydrationProgress || 0}%</span>
+                <span>{Math.min(((stats.total_hydration_logs || 0) / 30) * 100, 100).toFixed(0)}%</span>
               </div>
-              <Progress value={stats.hydrationProgress || 0} className="h-2" />
+              <Progress value={Math.min(((stats.total_hydration_logs || 0) / 30) * 100, 100)} className="h-2" />
             </div>
           </div>
         </div>

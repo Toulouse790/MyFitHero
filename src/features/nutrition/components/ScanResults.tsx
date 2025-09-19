@@ -1,9 +1,9 @@
 // src/features/nutrition/components/ScanResults.tsx
 import React from 'react';
 import { CheckCircle, RotateCw, Plus, Edit } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../components/ui/button';
+import { Badge } from '../../components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 
 interface FoodScanResult {
   name: string;

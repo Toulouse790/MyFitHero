@@ -1,7 +1,7 @@
 // src/features/landing/components/hero/HeroCTA.tsx
 import React from 'react';
 import { ArrowRight, Zap } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
+import { Button } from '../../../components/ui/button';
 
 interface HeroCTAProps {
   text: string;
