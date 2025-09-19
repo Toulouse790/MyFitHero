@@ -33,19 +33,48 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 4;
 
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<OnboardingFormData>({
+  const { register, handleSubmit, formState: { errors }, watch, setValue, trigger } = useForm<OnboardingFormData>({
     resolver: zodResolver(onboardingSchema),
     defaultValues: {
       goals: [],
     },
   });
 
-  const watchedGoals = watch('goals', []);
+  // Watch des valeurs pour les passer aux composants
+  const watchedValues = {
+    sport: watch('sport'),
+    level: watch('level'),
+    goals: watch('goals', []),
+    gender: watch('gender'),
+    lifestyle: watch('lifestyle'),
+  };
 
-  const nextStep = () => {
-    if (currentStep < totalSteps) {
+  const nextStep = async () => {
+    // Validation des champs requis pour l'étape courante
+    let fieldsToValidate: (keyof OnboardingFormData)[] = [];
+    
+    switch (currentStep) {
+      case 1:
+        fieldsToValidate = ['sport', 'level'];
+        break;
+      case 2:
+        fieldsToValidate = ['goals'];
+        break;
+      case 3:
+        fieldsToValidate = ['age', 'weight', 'height', 'gender'];
+        break;
+      case 4:
+        fieldsToValidate = ['lifestyle'];
+        break;
+    }
+
+    // Déclencher la validation pour les champs de l'étape
+    const isValid = await trigger(fieldsToValidate);
+    
+    if (isValid && currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     }
+    // Si invalid, les erreurs s'affichent automatiquement
   };
 
   const prevStep = () => {
@@ -55,11 +84,28 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
   };
 
   const handleGoalToggle = (goal: string) => {
-    const currentGoals = watchedGoals;
+    const currentGoals = watchedValues.goals;
     const newGoals = currentGoals.includes(goal)
       ? currentGoals.filter(g => g !== goal)
       : [...currentGoals, goal];
-    setValue('goals', newGoals);
+    setValue('goals', newGoals, { shouldValidate: true });
+  };
+
+  // Handlers pour les setValue avec validation
+  const handleSportChange = (value: string) => {
+    setValue('sport', value, { shouldValidate: true });
+  };
+
+  const handleLevelChange = (value: string) => {
+    setValue('level', value, { shouldValidate: true });
+  };
+
+  const handleGenderChange = (value: 'male' | 'female' | 'other') => {
+    setValue('gender', value, { shouldValidate: true });
+  };
+
+  const handleLifestyleChange = (value: string) => {
+    setValue('lifestyle', value, { shouldValidate: true });
   };
 
   const onSubmit = async (data: OnboardingFormData) => {
@@ -72,15 +118,17 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
         return (
           <WelcomeStep
             errors={errors}
-            onSportChange={(value) => setValue('sport', value)}
-            onLevelChange={(value) => setValue('level', value)}
+            sportValue={watchedValues.sport}
+            levelValue={watchedValues.level}
+            onSportChange={handleSportChange}
+            onLevelChange={handleLevelChange}
           />
         );
 
       case 2:
         return (
           <GoalsStep
-            selectedGoals={watchedGoals}
+            selectedGoals={watchedValues.goals}
             errors={errors}
             onGoalToggle={handleGoalToggle}
           />
@@ -91,7 +139,8 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
           <PersonalInfoStep
             register={register}
             errors={errors}
-            onGenderChange={(value) => setValue('gender', value)}
+            genderValue={watchedValues.gender}
+            onGenderChange={handleGenderChange}
           />
         );
 
@@ -99,7 +148,8 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
         return (
           <FinalStep
             errors={errors}
-            onLifestyleChange={(value) => setValue('lifestyle', value)}
+            lifestyleValue={watchedValues.lifestyle}
+            onLifestyleChange={handleLifestyleChange}
           />
         );
 

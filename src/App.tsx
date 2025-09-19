@@ -77,38 +77,75 @@ function useAuthState(): AuthState & {
   const toSupabasePayload = (data: Partial<User>): any => {
     const payload: any = {};
     
-    if (data.firstName !== undefined) payload.first_name = data.firstName;
-    if (data.lastName !== undefined) payload.last_name = data.lastName;
+    // Combiner firstName et lastName en full_name
+    if (data.firstName !== undefined || data.lastName !== undefined) {
+      const firstName = data.firstName || '';
+      const lastName = data.lastName || '';
+      payload.full_name = `${firstName} ${lastName}`.trim() || null;
+    }
+    
     if (data.onboardingCompleted !== undefined) payload.onboarding_completed = data.onboardingCompleted;
     if (data.username !== undefined) payload.username = data.username;
-    if (data.sport !== undefined) payload.sport = data.sport;
-    if (data.level !== undefined) payload.level = data.level;
+    
+    // Mapper sport vers preferred_sports (array)
+    if (data.sport !== undefined) payload.preferred_sports = data.sport ? [data.sport] : null;
+    
+    // Mapper level vers activity_level (mapper les valeurs si nécessaire)
+    if (data.level !== undefined) {
+      const levelMapping: Record<string, string> = {
+        'beginner': 'lightly_active',
+        'intermediate': 'moderately_active', 
+        'advanced': 'very_active',
+        'expert': 'extremely_active'
+      };
+      payload.activity_level = levelMapping[data.level] || 'moderately_active';
+    }
+    
+    // Mapper lifestyle vers activity_level
+    if (data.lifestyle !== undefined) {
+      payload.activity_level = data.lifestyle;
+    }
+    
     if (data.goals !== undefined) payload.goals = data.goals;
     if (data.age !== undefined) payload.age = data.age;
     if (data.weight !== undefined) payload.weight = data.weight;
     if (data.height !== undefined) payload.height = data.height;
     if (data.gender !== undefined) payload.gender = data.gender;
-    if (data.lifestyle !== undefined) payload.lifestyle = data.lifestyle;
     
     return payload;
   };
 
   // Fonction pour formater l'utilisateur depuis Supabase
   const formatUser = (supabaseUser: any, profile: any = null): User => {
+    // Séparer full_name en firstName et lastName
+    const fullName = profile?.full_name || '';
+    const nameParts = fullName.split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+    
+    // Mapper activity_level vers level et lifestyle 
+    const activityToLevel: Record<string, string> = {
+      'lightly_active': 'beginner',
+      'moderately_active': 'intermediate',
+      'very_active': 'advanced', 
+      'extremely_active': 'expert',
+      'sedentary': 'beginner'
+    };
+    
     return {
       id: supabaseUser.id,
       email: supabaseUser.email,
       username: profile?.username || supabaseUser.user_metadata?.username,
-      firstName: profile?.first_name || supabaseUser.user_metadata?.firstName,
-      lastName: profile?.last_name || supabaseUser.user_metadata?.lastName,
-      sport: profile?.sport,
-      level: profile?.level,
+      firstName: firstName || supabaseUser.user_metadata?.firstName,
+      lastName: lastName || supabaseUser.user_metadata?.lastName,
+      sport: profile?.preferred_sports?.[0] || null, // Premier sport de la liste
+      level: activityToLevel[profile?.activity_level] || 'intermediate',
       goals: profile?.goals || [],
       age: profile?.age,
       weight: profile?.weight,
       height: profile?.height,
       gender: profile?.gender,
-      lifestyle: profile?.lifestyle,
+      lifestyle: profile?.activity_level || 'moderately_active',
       onboardingCompleted: profile?.onboarding_completed || false,
       createdAt: supabaseUser.created_at,
       updatedAt: supabaseUser.updated_at,
@@ -129,7 +166,7 @@ function useAuthState(): AuthState & {
         if (session && mounted) {
           // Récupérer le profil utilisateur
           const { data: profile } = await supabase
-            .from('profiles')
+            .from('user_profiles')
             .select('*')
             .eq('id', session.user.id)
             .single();
@@ -173,7 +210,7 @@ function useAuthState(): AuthState & {
 
         if (event === 'SIGNED_IN' && session) {
           const { data: profile } = await supabase
-            .from('profiles')
+            .from('user_profiles')
             .select('*')
             .eq('id', session.user.id)
             .single();
@@ -286,7 +323,7 @@ function useAuthState(): AuthState & {
       const supabasePayload = toSupabasePayload(data);
 
       const { error } = await supabase
-        .from('profiles')
+        .from('user_profiles')
         .upsert({
           id: authState.user.id,
           ...supabasePayload,

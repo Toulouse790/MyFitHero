@@ -8,12 +8,16 @@ interface WelcomeStepProps {
     sport?: { message?: string };
     level?: { message?: string };
   };
+  sportValue?: string;
+  levelValue?: string;
   onSportChange: (value: string) => void;
   onLevelChange: (value: string) => void;
 }
 
 export const WelcomeStep: React.FC<WelcomeStepProps> = ({
   errors,
+  sportValue,
+  levelValue,
   onSportChange,
   onLevelChange,
 }) => {
@@ -29,7 +33,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({
       <div className="space-y-4">
         <div>
           <Label htmlFor="sport">Quel est votre sport principal ?</Label>
-          <Select onValueChange={onSportChange}>
+          <Select onValueChange={onSportChange} value={sportValue}>
             <SelectTrigger>
               <SelectValue placeholder="Sélectionnez votre sport" />
             </SelectTrigger>
@@ -51,7 +55,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({
 
         <div>
           <Label htmlFor="level">Votre niveau</Label>
-          <Select onValueChange={onLevelChange}>
+          <Select onValueChange={onLevelChange} value={levelValue}>
             <SelectTrigger>
               <SelectValue placeholder="Sélectionnez votre niveau" />
             </SelectTrigger>

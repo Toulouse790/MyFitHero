@@ -8,12 +8,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 interface PersonalInfoStepProps {
   register: UseFormRegister<any>;
   errors: FieldErrors<any>;
+  genderValue?: 'male' | 'female' | 'other';
   onGenderChange: (value: 'male' | 'female' | 'other') => void;
 }
 
 export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
   register,
   errors,
+  genderValue,
   onGenderChange,
 }) => {
   // Helper pour extraire le message d'erreur
@@ -48,7 +50,7 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
 
         <div>
           <Label htmlFor="gender">Genre</Label>
-          <Select onValueChange={onGenderChange}>
+          <Select onValueChange={onGenderChange} value={genderValue}>
             <SelectTrigger>
               <SelectValue placeholder="Sélectionnez votre genre" />
             </SelectTrigger>

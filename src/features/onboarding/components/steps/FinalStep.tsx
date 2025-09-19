@@ -7,11 +7,13 @@ interface FinalStepProps {
   errors: {
     lifestyle?: { message?: string };
   };
+  lifestyleValue?: string;
   onLifestyleChange: (value: string) => void;
 }
 
 export const FinalStep: React.FC<FinalStepProps> = ({
   errors,
+  lifestyleValue,
   onLifestyleChange,
 }) => {
   return (
@@ -25,7 +27,7 @@ export const FinalStep: React.FC<FinalStepProps> = ({
       
       <div>
         <Label htmlFor="lifestyle">Style de vie</Label>
-        <Select onValueChange={onLifestyleChange}>
+        <Select onValueChange={onLifestyleChange} value={lifestyleValue}>
           <SelectTrigger>
             <SelectValue placeholder="Décrivez votre activité quotidienne" />
           </SelectTrigger>

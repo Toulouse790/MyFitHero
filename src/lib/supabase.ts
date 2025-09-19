@@ -40,7 +40,7 @@ export const supabase: SupabaseClient = createClient(
 export interface Database {
   public: {
     Tables: {
-      profiles: {
+      user_profiles: {
         Row: {
           id: string;
           email: string;
@@ -272,7 +272,7 @@ export const supabaseHelpers = {
   // Get user profile
   getUserProfile: async (userId: string) => {
     const { data, error } = await supabase
-      .from('profiles')
+      .from('user_profiles')
       .select('*')
       .eq('id', userId)
       .single();
@@ -285,9 +285,9 @@ export const supabaseHelpers = {
   },
 
   // Update user profile
-  updateUserProfile: async (userId: string, updates: Database['public']['Tables']['profiles']['Update']) => {
+  updateUserProfile: async (userId: string, updates: Database['public']['Tables']['user_profiles']['Update']) => {
     const { data, error } = await supabase
-      .from('profiles')
+      .from('user_profiles')
       .update({ ...updates, updated_at: new Date().toISOString() })
       .eq('id', userId)
       .select()
