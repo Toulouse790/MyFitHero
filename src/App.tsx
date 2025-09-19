@@ -223,8 +223,11 @@ function useAuthState(): AuthState & {
       toast.success('Connexion réussie !');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Erreur de connexion';
-      setAuthState(prev => ({ ...prev, isLoading: false, error: message }));
+      setAuthState(prev => ({ ...prev, error: message }));
       throw error;
+    } finally {
+      // S'assurer que isLoading est remis à false dans tous les cas
+      setAuthState(prev => ({ ...prev, isLoading: false }));
     }
   };
 
@@ -246,8 +249,11 @@ function useAuthState(): AuthState & {
       toast.success('Inscription réussie ! Vérifiez votre email.');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Erreur d\'inscription';
-      setAuthState(prev => ({ ...prev, isLoading: false, error: message }));
+      setAuthState(prev => ({ ...prev, error: message }));
       throw error;
+    } finally {
+      // S'assurer que isLoading est remis à false dans tous les cas
+      setAuthState(prev => ({ ...prev, isLoading: false }));
     }
   };
 
@@ -265,6 +271,9 @@ function useAuthState(): AuthState & {
       const message = error instanceof Error ? error.message : 'Erreur de déconnexion';
       setAuthState(prev => ({ ...prev, error: message }));
       throw error;
+    } finally {
+      // S'assurer que isLoading est remis à false dans tous les cas
+      setAuthState(prev => ({ ...prev, isLoading: false }));
     }
   };
 
