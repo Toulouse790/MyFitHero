@@ -1,4 +1,4 @@
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '../supabase';
 import { subDays } from 'date-fns';
 
 // Types pour les fonctionnalités sociales

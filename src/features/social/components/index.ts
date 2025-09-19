@@ -4,3 +4,8 @@ export { default as PrivacyManager } from './PrivacyManager';
 export { default as BadgeNotification } from './BadgeNotification';
 export { default as FriendsComparison } from './FriendsComparison';
 export { default as SocialDashboard } from './SocialDashboard';
+
+// New modular components
+export { SocialHeader } from './SocialHeader';
+export { SocialFeed } from './SocialFeed';
+export { SocialChallenges } from './SocialChallenges';

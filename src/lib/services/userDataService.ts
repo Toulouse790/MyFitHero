@@ -1,5 +1,5 @@
 // client/src/services/userDataService.ts
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '../supabase';
 
 export interface UserPillarData {
   id: string;

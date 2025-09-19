@@ -319,3 +319,105 @@ export interface FeedFilter {
   time_range?: 'today' | 'week' | 'month';
   include_groups?: boolean;
 }
+
+export interface UserStats {
+  friends_count: number;
+  active_challenges: number;
+  global_rank: number;
+  total_points: number;
+  streak_days: number;
+  achievements_count: number;
+}
+
+export interface Friend {
+  id: string;
+  name: string;
+  username: string;
+  avatar_url?: string;
+  sport: string;
+  level: number;
+  is_online: boolean;
+  mutual_friends: number;
+  last_activity: string;
+}
+
+export interface CreatePostData {
+  content: string;
+  post_type: 'general' | 'achievement' | 'workout' | 'progress';
+  media_files: File[];
+  achievements: unknown[];
+  location?: string;
+}
+
+export interface CreateChallengeData {
+  title: string;
+  description: string;
+  pillar: 'workout' | 'nutrition' | 'hydration' | 'sleep' | 'general';
+  challenge_type: 'individual' | 'team' | 'community';
+  target_value: number;
+  target_unit: string;
+  duration_days: number;
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  reward_points: number;
+}
+
+export type SocialTab = 'feed' | 'challenges' | 'leaderboard' | 'friends';
+export type FeedFilterType = 'all' | 'friends' | 'sport';
+export type ChallengeFilterType = 'all' | 'active' | 'available';
+
+// Legacy types for backward compatibility with SocialPage
+export interface SocialPost {
+  id: string;
+  user_id: string;
+  content: string;
+  post_type: 'general' | 'achievement' | 'workout' | 'progress' | 'challenge';
+  media_urls: string[];
+  likes_count: number;
+  comments_count: number;
+  shares_count: number;
+  is_liked: boolean;
+  is_bookmarked: boolean;
+  created_at: string;
+  user: {
+    id: string;
+    name: string;
+    username: string;
+    avatar_url?: string;
+    sport: string;
+    level: number;
+  };
+  achievements?: unknown[];
+  workout_data?: any;
+  comments?: SocialComment[];
+}
+
+export interface SocialComment {
+  id: string;
+  post_id: string;
+  user_id: string;
+  content: string;
+  created_at: string;
+  user: {
+    name: string;
+    username: string;
+    avatar_url?: string;
+  };
+}
+
+// Extended Challenge interface for the new components
+export interface ExtendedChallenge extends Challenge {
+  pillar?: 'workout' | 'nutrition' | 'hydration' | 'sleep' | 'general';
+  target_value?: number;
+  target_unit?: string;
+  reward_points?: number;
+  is_participating?: boolean;
+  progress_percentage?: number;
+  creator: SocialUser & {
+    name?: string; // For backward compatibility
+  };
+}
+
+// Extended SocialUser for backward compatibility
+export interface ExtendedSocialUser extends SocialUser {
+  name?: string; // Alias for display_name
+}
