@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
-import { Progress } from '../../components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { Trophy, Star, Target, Award } from 'lucide-react';
 import { BadgeService, UserBadge, BadgeProgress } from '../../lib/services/badgeService';
 
@@ -60,20 +60,20 @@ const BadgeDisplay: React.FC<BadgeDisplayProps> = ({
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {badges.map((badge) => (
-              <div key={badge.id} className="flex items-center space-x-3 p-3 border rounded-lg">
-                <div className={`w-12 h-12 rounded-full ${getBadgeColor(badge.rarity)} flex items-center justify-center text-white`}>
-                  {getBadgeIcon(badge.category)}
+            {badges.map((userBadge) => (
+              <div key={userBadge.id} className="flex items-center space-x-3 p-3 border rounded-lg">
+                <div className={`w-12 h-12 rounded-full ${getBadgeColor(userBadge.badge?.rarity || 'common')} flex items-center justify-center text-white`}>
+                  {getBadgeIcon(userBadge.badge?.category || 'achievement')}
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium">{badge.name}</h4>
-                  <p className="text-sm text-gray-600">{badge.description}</p>
+                  <h4 className="font-medium">{userBadge.badge?.name || 'Badge'}</h4>
+                  <p className="text-sm text-gray-600">{userBadge.badge?.description || ''}</p>
                   <div className="flex items-center space-x-2 mt-1">
                     <Badge variant="outline" className="text-xs">
-                      {badge.rarity}
+                      {userBadge.badge?.rarity || 'common'}
                     </Badge>
                     <span className="text-xs text-gray-500">
-                      Obtenu le {new Date(badge.earnedAt).toLocaleDateString('fr-FR')}
+                      Obtenu le {new Date(userBadge.earned_at).toLocaleDateString('fr-FR')}
                     </span>
                   </div>
                 </div>
@@ -85,15 +85,15 @@ const BadgeDisplay: React.FC<BadgeDisplayProps> = ({
                 <h4 className="font-medium mb-3">Progression vers nouveaux badges</h4>
                 <div className="space-y-3">
                   {progress.map((prog) => (
-                    <div key={prog.badgeId} className="p-3 border rounded-lg">
+                    <div key={prog.badge.id} className="p-3 border rounded-lg">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium">{prog.badgeName}</span>
+                        <span className="font-medium">{prog.badge.name}</span>
                         <span className="text-sm text-gray-600">
-                          {prog.current}/{prog.target}
+                          {prog.progress}/{prog.badge.condition_value}
                         </span>
                       </div>
-                      <Progress value={(prog.current / prog.target) * 100} className="h-2" />
-                      <p className="text-xs text-gray-600 mt-1">{prog.description}</p>
+                      <Progress value={(prog.progress / prog.badge.condition_value) * 100} className="h-2" />
+                      <p className="text-xs text-gray-600 mt-1">{prog.badge.description}</p>
                     </div>
                   ))}
                 </div>
@@ -116,14 +116,14 @@ const BadgeDisplay: React.FC<BadgeDisplayProps> = ({
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {badges.map((badge) => (
-            <div key={badge.id} className="text-center">
-              <div className={`w-16 h-16 mx-auto rounded-full ${getBadgeColor(badge.rarity)} flex items-center justify-center text-white mb-2`}>
-                {getBadgeIcon(badge.category)}
+          {badges.map((userBadge) => (
+            <div key={userBadge.id} className="text-center">
+              <div className={`w-16 h-16 mx-auto rounded-full ${getBadgeColor(userBadge.badge?.rarity || 'common')} flex items-center justify-center text-white mb-2`}>
+                {getBadgeIcon(userBadge.badge?.category || 'achievement')}
               </div>
-              <h4 className="font-medium text-sm">{badge.name}</h4>
+              <h4 className="font-medium text-sm">{userBadge.badge?.name || 'Badge'}</h4>
               <Badge variant="outline" className="text-xs mt-1">
-                {badge.rarity}
+                {userBadge.badge?.rarity || 'common'}
               </Badge>
             </div>
           ))}
@@ -134,14 +134,14 @@ const BadgeDisplay: React.FC<BadgeDisplayProps> = ({
             <h4 className="font-medium mb-3">Prochains badges</h4>
             <div className="space-y-2">
               {progress.slice(0, 3).map((prog) => (
-                <div key={prog.badgeId}>
+                <div key={prog.badge.id}>
                   <div className="flex items-center justify-between text-sm mb-1">
-                    <span>{prog.badgeName}</span>
+                    <span>{prog.badge.name}</span>
                     <span className="text-gray-600">
-                      {prog.current}/{prog.target}
+                      {prog.progress}/{prog.badge.condition_value}
                     </span>
                   </div>
-                  <Progress value={(prog.current / prog.target) * 100} className="h-1" />
+                  <Progress value={(prog.progress / prog.badge.condition_value) * 100} className="h-1" />
                 </div>
               ))}
             </div>

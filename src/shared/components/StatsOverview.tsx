@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
-import { Progress } from '../../components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { Activity, Target, Zap, Heart } from 'lucide-react';
 import { UserDataService, UserStats } from '../../lib/services/userDataService';
-import { BadgeService } from '../../lib/services/badgeService';
+import { BadgeService, UserBadge } from '../../lib/services/badgeService';
 
 interface StatsOverviewProps {
   userId?: string;
@@ -21,7 +21,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({
 }) => {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [badges, setBadges] = useState<any[]>([]);
+  const [badges, setBadges] = useState<UserBadge[]>([]);
 
   useEffect(() => {
     loadStats();
@@ -51,7 +51,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({
       const userBadges = await BadgeService.getUserBadges(userId);
       // Prendre les 3 badges les plus récents
       const recentBadges = userBadges
-        .sort((a, b) => new Date(b.earnedAt).getTime() - new Date(a.earnedAt).getTime())
+        .sort((a, b) => new Date(b.earned_at).getTime() - new Date(a.earned_at).getTime())
         .slice(0, 3);
       setBadges(recentBadges);
     } catch (error) {
@@ -212,12 +212,12 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({
           <div className="pt-4 border-t">
             <h4 className="font-medium mb-3">Badges récents</h4>
             <div className="flex space-x-2">
-              {badges.map((badge) => (
-                <div key={badge.id} className="text-center">
+              {badges.map((userBadge) => (
+                <div key={userBadge.id} className="text-center">
                   <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white mb-1">
                     🏆
                   </div>
-                  <span className="text-xs">{badge.name}</span>
+                  <span className="text-xs">{userBadge.badge?.name || 'Badge'}</span>
                 </div>
               ))}
             </div>
