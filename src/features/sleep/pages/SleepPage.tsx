@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 // client/src/components/Sleep.tsx
 import {
   Moon,
@@ -339,7 +339,7 @@ const sportsSleepData: Record<SportCategory, SportSleepConfig> = {
 
 const Sleep: React.FC = () => {
   // --- HOOKS ET STATE ---
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
   const { appStoreUser } = appStore();
   const { toast } = useToast();
 

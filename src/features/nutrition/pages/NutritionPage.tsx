@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { GtagEvent } from '../../../shared/types/gtag';
 
 import { appStore } from '../../../store/appStore';
@@ -50,7 +50,7 @@ interface Meal {
 
 const Nutrition: React.FC = () => {
   // --- HOOKS ET STATE ---
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
   const { toast } = useToast();
   const { appStoreUser } = appStore();
 

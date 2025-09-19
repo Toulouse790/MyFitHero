@@ -30,8 +30,8 @@ import {
   Brain,
   Package,
 } from 'lucide-react';
-import { supabase } from '../../../src/lib/supabase';
-import { useToast } from '../../../src/shared/hooks/use-toast';
+import { supabase } from '../../../lib/supabase';
+import { useToast } from '../../../shared/hooks/use-toast';
 import {
   ConversationalStep,
   OnboardingData,

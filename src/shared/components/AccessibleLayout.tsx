@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { SkipLink, AccessibleButton, AccessibleLink } from './AccessibleComponents';
 import { useFocusManagement, useKeyboardShortcuts, useAnnounce } from '../hooks/useAccessibility';
-import { cn } from '../../../lib/utils';
+import { cn } from '../../lib/utils';
 
 interface NavigationItem {
   id: string;
@@ -30,8 +30,7 @@ export const AccessibleLayout: React.FC<AccessibleLayoutProps> = ({
   currentUser,
   onNavigate
 }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [pathname, navigate] = useLocation();
   const { announce } = useAnnounce();
   const { moveFocusToContent, moveFocusToHeading } = useFocusManagement();
   const mainContentRef = useRef<HTMLElement>(null);
@@ -59,7 +58,7 @@ export const AccessibleLayout: React.FC<AccessibleLayoutProps> = ({
 
   // Annoncer les changements de page
   useEffect(() => {
-    const currentItem = navigation.find(item => item.href === location.pathname);
+    const currentItem = navigation.find(item => item.href === pathname);
     if (currentItem) {
       announce(`Navigation vers ${currentItem.label}`, 'polite');
       
@@ -68,7 +67,7 @@ export const AccessibleLayout: React.FC<AccessibleLayoutProps> = ({
         moveFocusToContent();
       }, 100);
     }
-  }, [location.pathname, navigation, announce, moveFocusToContent]);
+  }, [pathname, navigation, announce, moveFocusToContent]);
 
   const handleNavigation = (href: string, label: string) => {
     if (onNavigate) {
@@ -122,7 +121,7 @@ export const AccessibleLayout: React.FC<AccessibleLayoutProps> = ({
             >
               <ul role="menubar" className="flex space-x-1">
                 {navigation.map((item) => {
-                  const isCurrent = location.pathname === item.href;
+                  const isCurrent = pathname === item.href;
                   return (
                     <li key={item.id} role="none">
                       <AccessibleButton
@@ -238,7 +237,7 @@ export const AccessibleLayout: React.FC<AccessibleLayoutProps> = ({
           >
             <ul className="flex space-x-1 overflow-x-auto">
               {navigation.map((item) => {
-                const isCurrent = location.pathname === item.href;
+                const isCurrent = pathname === item.href;
                 return (
                   <li key={`mobile-${item.id}`} role="none">
                     <AccessibleButton

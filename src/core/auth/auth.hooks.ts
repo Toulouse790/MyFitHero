@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { useAuthStore } from './auth.store';
 import { SignUpData, SignInData, UpdateProfileData } from './auth.types';
 
 // Hook principal pour l'authentification
 export const useAuth = () => {
   const authStore = useAuthStore();
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     // Vérifier l'authentification au chargement
@@ -79,7 +79,7 @@ export const useIsAuthenticated = () => {
 // Hook pour protéger les routes
 export const useRequireAuth = (redirectTo = '/login') => {
   const { isAuthenticated, isLoading } = useAuthStore();
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -93,7 +93,7 @@ export const useRequireAuth = (redirectTo = '/login') => {
 // Hook pour les pages publiques (redirection si déjà connecté)
 export const usePublicRoute = (redirectTo = '/dashboard') => {
   const { isAuthenticated, isLoading } = useAuthStore();
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {

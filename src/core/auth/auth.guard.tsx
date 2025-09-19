@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation, Redirect } from 'wouter';
 import { useAuthStore } from './auth.store';
 
 interface AuthGuardProps {
@@ -14,7 +14,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
   requireProfile = false,
 }) => {
   const { isAuthenticated, isLoading, user } = useAuthStore();
-  const location = useLocation();
+  const [location] = useLocation();
 
   if (isLoading) {
     return (
@@ -25,14 +25,14 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
   }
 
   if (!isAuthenticated) {
-    return <Navigate to={redirectTo} state={{ from: location }} replace />;
+    return <Redirect to={redirectTo} />;
   }
 
   // Vérifier si le profil est complet si nécessaire
   if (requireProfile && user) {
     const profileComplete = user.sport && user.weight && user.height && user.age;
     if (!profileComplete) {
-      return <Navigate to="/onboarding" replace />;
+      return <Redirect to="/onboarding" />;
     }
   }
 
@@ -52,7 +52,7 @@ export const PublicGuard: React.FC<{ children: React.ReactNode }> = ({ children 
   }
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Redirect to="/dashboard" />;
   }
 
   return <>{children}</>;

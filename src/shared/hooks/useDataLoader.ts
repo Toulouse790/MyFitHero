@@ -1,7 +1,5 @@
-import React, { useState, useCallback } from 'react';
-// src/shared/hooks/useDataLoader.ts
-
 import { useState, useCallback } from 'react';
+// src/shared/hooks/useDataLoader.ts
 
 interface LoaderConfig {
   onError?: (title: string, description?: string) => void;

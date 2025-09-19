@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import {
   Droplets,
   Plus,
@@ -213,7 +213,7 @@ const sportsHydrationData: Record<HydrationSportCategory, SportHydrationConfig> 
 // --- COMPOSANT PRINCIPAL ---
 const Hydration: React.FC = () => {
   // --- HOOKS ET STATE ---
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
   const { appStoreUser } = appStore();
   const { toast } = useToast();
   const { isLoading, withLoader, setIsLoading } = useDataLoader({
@@ -455,7 +455,7 @@ const Hydration: React.FC = () => {
     pillar: 'hydration',
     onUpdate: payload => {
       if (
-        payload.userId !== appStoreUser?.id &&
+        payload.userId === appStoreUser?.id &&
         (payload.eventType === 'INSERT' || payload.eventType === 'UPDATE')
       ) {
         loadHydrationData();
