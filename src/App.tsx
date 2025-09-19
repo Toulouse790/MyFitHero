@@ -73,6 +73,26 @@ function useAuthState(): AuthState & {
     error: null,
   });
 
+  // Fonction pour convertir camelCase vers snake_case pour Supabase
+  const toSupabasePayload = (data: Partial<User>): any => {
+    const payload: any = {};
+    
+    if (data.firstName !== undefined) payload.first_name = data.firstName;
+    if (data.lastName !== undefined) payload.last_name = data.lastName;
+    if (data.onboardingCompleted !== undefined) payload.onboarding_completed = data.onboardingCompleted;
+    if (data.username !== undefined) payload.username = data.username;
+    if (data.sport !== undefined) payload.sport = data.sport;
+    if (data.level !== undefined) payload.level = data.level;
+    if (data.goals !== undefined) payload.goals = data.goals;
+    if (data.age !== undefined) payload.age = data.age;
+    if (data.weight !== undefined) payload.weight = data.weight;
+    if (data.height !== undefined) payload.height = data.height;
+    if (data.gender !== undefined) payload.gender = data.gender;
+    if (data.lifestyle !== undefined) payload.lifestyle = data.lifestyle;
+    
+    return payload;
+  };
+
   // Fonction pour formater l'utilisateur depuis Supabase
   const formatUser = (supabaseUser: any, profile: any = null): User => {
     return {
@@ -253,16 +273,20 @@ function useAuthState(): AuthState & {
     try {
       if (!authState.user) throw new Error('Utilisateur non connecté');
 
+      // Convertir les données camelCase vers snake_case pour Supabase
+      const supabasePayload = toSupabasePayload(data);
+
       const { error } = await supabase
         .from('profiles')
         .upsert({
           id: authState.user.id,
-          ...data,
+          ...supabasePayload,
           updated_at: new Date().toISOString(),
         });
 
       if (error) throw error;
 
+      // Mettre à jour l'état local avec les données camelCase originales
       setAuthState(prev => ({
         ...prev,
         user: prev.user ? { ...prev.user, ...data } : null,
@@ -374,7 +398,7 @@ function App() {
                 ) : !auth.user?.onboardingCompleted ? (
                   <Redirect to="/onboarding" />
                 ) : (
-                  <Dashboard user={auth.user} onLogout={auth.signOut} />
+                  <Dashboard />
                 )}
               </Route>
 
