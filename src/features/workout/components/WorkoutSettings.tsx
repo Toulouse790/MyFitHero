@@ -1,9 +1,9 @@
 // src/features/workout/components/WorkoutSettings.tsx
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/features/components/ui/card';
-import { Button } from '@/features/components/ui/button';
-import { Switch } from '@/features/components/ui/switch';
-import { Label } from '@/features/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { 
   Settings, 
   Bell, 

@@ -29,6 +29,7 @@ export const useAuthStatus = (): AuthStatus => {
       } catch (error) {
       // Erreur silencieuse
         console.error('Error checking user:', error);
+        setSession(null);
         setUser(null);
       } finally {
         setLoading(false);

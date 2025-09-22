@@ -6,11 +6,11 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const { initialize, isLoading } = useAuthStore();
+  const { checkAuth, isLoading } = useAuthStore();
 
   useEffect(() => {
-    initialize();
-  }, [initialize]);
+    checkAuth();
+  }, [checkAuth]);
 
   if (isLoading) {
     return (

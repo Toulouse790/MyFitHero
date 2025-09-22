@@ -1,4 +1,4 @@
-import { Clock, Users } from 'lucide-react';
+import { Clock, Users, Trophy } from 'lucide-react';
 import React from 'react';
 
 interface WorkoutSessionHeaderProps {

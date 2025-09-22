@@ -1,4 +1,4 @@
-import { Clock, Star, Users } from 'lucide-react';
+import { Clock, Star, Users, Dumbbell, Play } from 'lucide-react';
 import React from 'react';
 
 interface WorkoutStartScreenProps {

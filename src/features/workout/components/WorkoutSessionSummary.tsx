@@ -1,4 +1,4 @@
-import { CheckCircle, Clock, Download, Star, Check } from 'lucide-react';
+import { CheckCircle, Clock, Download, Star, Check, Share } from 'lucide-react';
 import React from 'react';
 
 interface WorkoutSessionSummaryProps {

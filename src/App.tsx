@@ -16,6 +16,7 @@ import LoadingScreen from './components/LoadingScreen';
 
 // Lazy loading des composants principaux
 const AuthPage = lazy(() => import('./features/auth/pages/AuthPage'));
+const ResetPasswordPage = lazy(() => import('./features/auth/pages/ResetPasswordPage'));
 const OnboardingFlow = lazy(() => import('./features/onboarding/pages/OnboardingFlow'));
 const Dashboard = lazy(() => import('./features/dashboard/pages/Dashboard'));
 
@@ -471,6 +472,16 @@ function App() {
                 ) : (
                   <AuthPage />
                 )}
+              </Route>
+
+              {/* Route reset password */}
+              <Route path="/reset-password">
+                <ResetPasswordPage />
+              </Route>
+
+              {/* Route auth/reset-password */}
+              <Route path="/auth/reset-password">
+                <ResetPasswordPage />
               </Route>
 
               {/* Route onboarding - protégée */}
