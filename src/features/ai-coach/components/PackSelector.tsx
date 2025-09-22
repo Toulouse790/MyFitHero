@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { SMART_PACKS, getEstimatedTimeForPack, SmartPack, SmartPackModule } from '@/data/smartPacks';
+import { smartPacks as SMART_PACKS, SmartPack, getPackById, getEstimatedTimeForPack } from '@/features/auth/data/packs';
 import { cn } from '@/lib/utils';
 
 interface PackSelectorProps {

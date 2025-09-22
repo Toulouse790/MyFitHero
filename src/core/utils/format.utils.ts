@@ -87,7 +87,7 @@ export const truncate = (text: string, maxLength: number = 50): string => {
 
 // Formatage du nom complet
 export const formatFullName = (firstName?: string, lastName?: string): string => {
-  const parts = [firstName, lastName].filter(Boolean);
+  const parts = [firstName, lastName].filter((part): part is string => Boolean(part));
   return parts.map(capitalize).join(' ');
 };
 

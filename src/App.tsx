@@ -171,10 +171,10 @@ function useAuthState(): AuthState & {
       height: user.height,
       gender: user.gender,
       activity_level: user.lifestyle as any,
-      goals: user.goals,
+      primary_goals: user.goals,
       preferred_sports: user.sport ? [user.sport] : undefined,
       sport: user.sport,
-      fitness_experience: user.level,
+      fitness_experience: typeof user.level === 'string' ? user.level as 'beginner' | 'intermediate' | 'advanced' | 'expert' : undefined,
     };
   };
 

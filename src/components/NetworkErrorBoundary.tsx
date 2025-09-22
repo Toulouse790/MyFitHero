@@ -41,12 +41,12 @@ export class NetworkErrorBoundary extends Component<NetworkErrorBoundaryProps, N
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  override componentDidCatch(error: Error, errorInfo: any) {
     console.error('🔴 Network Error Boundary caught an error:', error, errorInfo);
     this.props.onError?.(error, errorInfo);
   }
 
-  componentWillUnmount() {
+  override componentWillUnmount() {
     if (this.retryTimeout) {
       clearTimeout(this.retryTimeout);
     }
@@ -76,7 +76,7 @@ export class NetworkErrorBoundary extends Component<NetworkErrorBoundaryProps, N
     }, delay);
   };
 
-  render() {
+  override render() {
     if (this.state.hasError && this.state.error) {
       if (this.props.fallback) {
         return this.props.fallback(this.state.error, this.handleRetry);

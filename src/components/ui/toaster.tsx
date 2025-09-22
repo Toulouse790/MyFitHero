@@ -18,10 +18,7 @@ export function Toaster() {
       {toasts.map(function (toast) {
         const { id, title, description, action, variant, ...props } = toast;
         // Mapping des variants pour compatibilité avec le composant Toast
-        const toastVariant = variant === 'success' ? 'default' : 
-                            variant === 'warning' ? 'default' : 
-                            variant === 'error' ? 'destructive' : 
-                            'default';
+        const toastVariant = variant === 'destructive' ? 'destructive' : 'default';
         
         return (
           <Toast key={id} variant={toastVariant} {...props}>

@@ -1,25 +1,6 @@
 import React, { useState, useEffect, useCallback, ReactNode } from 'react';
 import { supabase } from '@/lib/supabase';
-
-export interface UserProfile {
-  id: string;
-  username?: string | null;
-  full_name?: string | null;
-  first_name?: string | null;
-  email?: string;
-  avatar_url?: string | null;
-  age?: number | null;
-  height?: number | null;
-  weight?: number | null;
-  gender?: 'male' | 'female' | 'other' | null;
-  activity_level?: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | null;
-  fitness_goal?: string | null;
-  onboarding_completed?: boolean | null;
-  onboarding_completed_at?: string | null;
-  role?: 'user' | 'admin' | 'coach' | 'moderator';
-  created_at?: string | null;
-  updated_at?: string | null;
-}
+import type { UserProfile } from '@/shared/types/userProfile';
 
 export interface UseAuthResult {
   user: UserProfile | null;

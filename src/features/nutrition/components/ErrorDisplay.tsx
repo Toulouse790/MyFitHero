@@ -1,11 +1,12 @@
 // src/features/nutrition/components/ErrorDisplay.tsx
 import React from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';
-import { Button } from '@/features/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 interface ScanError {
   message: string;
   type: 'network' | 'analysis' | 'upload' | 'camera';
+  details?: string;
 }
 
 interface ErrorDisplayProps {
