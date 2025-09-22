@@ -22,6 +22,7 @@ import {
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
 import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';
 import type { WorkoutExercise, ExerciseSet } from '@/features/workout/types/supabase';
+import type { SessionExercise } from '@/features/workout/types/WorkoutTypes';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -151,11 +152,11 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
     const savedWeights = JSON.parse(localStorage.getItem('preferredWeights') || '{}');
     
     // Appliquer les poids préférés aux exercices
-    const exercisesWithPreferredWeights = exercisesToAdd.map((exercise: WorkoutExercise) => ({
+    const exercisesWithPreferredWeights = exercisesToAdd.map((exercise: SessionExercise) => ({
       ...exercise,
-      sets: exercise.sets.map((set: ExerciseSet) => ({
+      sets: exercise.sets.map((set) => ({
         ...set,
-        weight: savedWeights[exercise.name] || set.weight
+        weight: savedWeights[exercise.exerciseId] || set.weight
       }))
     }));
 
@@ -179,7 +180,9 @@ const WorkoutPage: React.FC<WorkoutPageProps> = () => {
 
     // Ouvrir le premier exercice par défaut
     if (finalExercises.length > 0) {
-      setExpandedExercise(finalExercises[0].id || finalExercises[0].name);
+      const firstExercise = finalExercises[0];
+      const exerciseId = 'id' in firstExercise ? firstExercise.id : firstExercise.exerciseId;
+      setExpandedExercise(exerciseId);
     }
   };
 

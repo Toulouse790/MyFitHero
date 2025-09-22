@@ -12,6 +12,7 @@ import {
   RefreshTokenResponse,
   UserStatsResponse,
   SessionInfo,
+  SessionValidation,
   OAuthCredentials,
 } from '@/features/auth/types/index';
 
@@ -412,7 +413,7 @@ export class AuthService {
   // === GESTION DES SESSIONS ===
 
   // Information sur la session
-  static async getSessionInfo(): Promise<SessionInfo> {
+  static async getSessionInfo(): Promise<SessionValidation> {
     try {
       const token = this.getAccessToken();
       if (!token) {
@@ -504,83 +505,25 @@ export class AuthService {
     return {
       id: 'mock_user_' + Date.now(),
       email: 'user@example.com',
-      username: 'mockuser',
-      firstName: 'John',
-      lastName: 'Doe',
-      avatar: 'https://via.placeholder.com/150',
-      phone: '+33 6 12 34 56 78',
-      dateOfBirth: '1990-01-01',
-      gender: 'male',
-      preferences: {
-        language: 'fr',
-        timezone: 'Europe/Paris',
-        units: 'metric',
-        notifications: {
-          email: true,
-          push: true,
-          sms: false,
-          workoutReminders: true,
-          nutritionReminders: true,
-          recoveryAlerts: true,
-          achievementNotifications: true,
-          weeklyReports: true,
-          friendsActivity: true,
-        },
-        privacy: {
-          profileVisibility: 'friends',
-          workoutVisibility: 'friends',
-          statsVisibility: 'private',
-          allowFriendRequests: true,
-          allowCoachRequests: false,
-          dataSharing: false,
-        },
-        accessibility: {
-          highContrast: false,
-          largeText: false,
-          reducedMotion: false,
-          screenReader: false,
-          colorBlindMode: 'none',
-        },
-      },
+      created_at: '2024-01-01T00:00:00Z',
+      updated_at: new Date().toISOString(),
+      onboarding_completed: true,
       profile: {
+        id: 'user-123',
+        user_id: 'user-123',
+        email: 'demo@myfithero.com',
+        first_name: 'Demo',
+        last_name: 'User',
+        date_of_birth: '1990-01-01',
+        gender: 'prefer_not_to_say',
         height: 180,
         weight: 75,
-        targetWeight: 70,
-        activityLevel: 'moderate',
-        fitnessGoals: [
-          {
-            id: '1',
-            type: 'weight_loss',
-            target: 70,
-            unit: 'kg',
-            deadline: '2024-12-31',
-            isActive: true,
-            progress: 67,
-            createdAt: '2024-01-01T00:00:00Z',
-          },
-        ],
-        medicalConditions: [],
-        allergies: ['peanuts'],
-        emergencyContact: {
-          name: 'Jane Doe',
-          relationship: 'spouse',
-          phone: '+33 6 87 65 43 21',
-          email: 'jane@example.com',
-        },
+        activity_level: 'moderately_active',
+        fitness_goals: ['weight_loss', 'muscle_gain'],
+        onboarding_completed: true,
+        created_at: '2024-01-01T00:00:00Z',
+        updated_at: new Date().toISOString(),
       },
-      subscription: {
-        plan: 'premium',
-        status: 'active',
-        startDate: '2024-01-01T00:00:00Z',
-        endDate: '2024-12-31T23:59:59Z',
-        features: ['advanced_analytics', 'custom_workouts', 'nutrition_tracking', 'coach_support'],
-      },
-      createdAt: '2024-01-01T00:00:00Z',
-      updatedAt: new Date().toISOString(),
-      lastLoginAt: new Date().toISOString(),
-      isEmailVerified: true,
-      isPhoneVerified: false,
-      isActive: true,
     };
   }
 

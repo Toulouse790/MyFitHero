@@ -43,6 +43,7 @@ export interface AuthState {
 export interface LoginCredentials {
   email: string;
   password: string;
+  rememberMe?: boolean;
 }
 
 export interface RegisterCredentials {
@@ -97,6 +98,23 @@ export interface OnboardingProgress {
 // SESSION & SECURITY TYPES
 // ========================================
 
+export interface SessionValidation {
+  isValid: boolean;
+  expiresIn: number;
+  user: User | null;
+  permissions: string[];
+  lastActivity: string;
+}
+
+export interface SessionInfo {
+  deviceId: string;
+  platform: string;
+  osVersion: string;
+  appVersion: string;
+  lastSeen: string;
+  isActive: boolean;
+}
+
 export interface Session {
   access_token: string;
   refresh_token: string;
@@ -118,4 +136,107 @@ export interface PasswordReset {
 export interface EmailVerification {
   token: string;
   email: string;
+}
+
+// ========================================
+// ADDITIONAL MISSING TYPES
+// ========================================
+
+export interface RegisterData {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+  username?: string;
+}
+
+export interface ResetPasswordData {
+  email: string;
+}
+
+export interface ChangePasswordData {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface UpdateProfileData {
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say';
+  height?: number;
+  weight?: number;
+  activityLevel?: ActivityLevel;
+  fitnessGoals?: FitnessGoal[];
+}
+
+export interface UpdatePreferencesData {
+  language?: string;
+  timezone?: string;
+  units?: 'metric' | 'imperial';
+  notifications?: {
+    email?: boolean;
+    push?: boolean;
+    sms?: boolean;
+  };
+}
+
+export interface UpdateUserProfileData {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  username?: string;
+  avatar?: string;
+}
+
+export interface LoginResponse {
+  session: {
+    user: User;
+    accessToken: string;
+    refreshToken: string;
+    expiresAt: string;
+    deviceInfo?: {
+      deviceId: string;
+      platform: string;
+      osVersion: string;
+      appVersion: string;
+      lastSeen: string;
+      isActive: boolean;
+    };
+  };
+  isFirstLogin: boolean;
+  requiresTwoFactor: boolean;
+  twoFactorMethods: string[];
+}
+
+export interface RefreshTokenResponse {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: string;
+}
+
+export interface UserStatsResponse {
+  totalWorkouts: number;
+  totalCaloriesBurned: number;
+  averageWorkoutDuration: number;
+  currentStreak: number;
+  longestStreak: number;
+  lastWorkout: string;
+  joinedDaysAgo: number;
+}
+
+export interface SessionInfo {
+  deviceId: string;
+  platform: string;
+  osVersion: string;
+  appVersion: string;
+  lastSeen: string;
+  isActive: boolean;
+}
+
+export interface OAuthCredentials {
+  provider: 'google' | 'facebook' | 'apple';
+  token: string;
+  email?: string;
 }
