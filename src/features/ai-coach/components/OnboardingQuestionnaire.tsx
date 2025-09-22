@@ -6,7 +6,7 @@ import { OnboardingData } from '@/shared/types/conversationalOnboarding';
 
 interface OnboardingQuestionnaireProps {
   user: any;
-  onComplete: () => void;
+  onComplete: (data?: any) => void; // Rendre data optionnel car déjà sauvegardé
 }
 
 const OnboardingQuestionnaire: React.FC<OnboardingQuestionnaireProps> = ({ user, onComplete }) => {

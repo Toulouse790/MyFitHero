@@ -14,11 +14,16 @@ import { appStore } from './store/appStore';
 import { UserProfile } from './shared/types/user';
 import LoadingScreen from './components/LoadingScreen';
 
-// Lazy loading des composants principaux
+// Imports des composants avec lazy loading
+const LandingPage = lazy(() => import('./features/landing/pages/LandingPage'));
 const AuthPage = lazy(() => import('./features/auth/pages/AuthPage'));
 const ResetPasswordPage = lazy(() => import('./features/auth/pages/ResetPasswordPage'));
-const OnboardingFlow = lazy(() => import('./features/onboarding/pages/OnboardingFlow'));
 const Dashboard = lazy(() => import('./features/dashboard/pages/Dashboard'));
+const OnboardingQuestionnaire = lazy(() => import('./features/ai-coach/components/OnboardingQuestionnaire'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const SupportPage = lazy(() => import('./pages/SupportPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Types
 interface User {
@@ -426,9 +431,14 @@ function App() {
   const [, setLocation] = useLocation();
 
   // Handler pour la completion de l'onboarding
-  const handleOnboardingComplete = async (data: any) => {
+  const handleOnboardingComplete = async (data?: any) => {
     try {
-      await auth.completeOnboarding(data);
+      // Si des données sont fournies, les sauvegarder (OnboardingFlow)
+      if (data) {
+        await auth.completeOnboarding(data);
+      }
+      // Sinon, les données sont déjà sauvegardées (OnboardingQuestionnaire)
+      
       // Rediriger vers le dashboard après completion
       setLocation('/dashboard');
     } catch (error) {
@@ -491,7 +501,10 @@ function App() {
                 ) : auth.user?.onboardingCompleted ? (
                   <Redirect to="/dashboard" />
                 ) : (
-                  <OnboardingFlow onComplete={handleOnboardingComplete} />
+                  <OnboardingQuestionnaire 
+                    user={auth.user} 
+                    onComplete={handleOnboardingComplete} 
+                  />
                 )}
               </Route>
 
