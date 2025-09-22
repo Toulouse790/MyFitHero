@@ -14,7 +14,7 @@ import {
   Target,
 } from 'lucide-react';
 import { socialService } from '@/lib/services/socialService';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 
 interface FriendsComparisonProps {
   userId: string;

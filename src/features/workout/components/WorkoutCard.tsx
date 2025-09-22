@@ -5,7 +5,7 @@ import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Badge } from '../../components/ui/badge';
 import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 
 export interface WorkoutInterface {
   id: number;

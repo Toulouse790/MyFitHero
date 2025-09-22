@@ -1,7 +1,7 @@
 // src/features/sleep/components/SleepDurationDisplay.tsx
 import React from 'react';
 import { Clock, AlertTriangle } from 'lucide-react';
-import { Badge } from '../../../components/ui/badge';
+import { Badge } from '@/components/ui/badge';
 
 interface SleepDurationDisplayProps {
   duration: number;

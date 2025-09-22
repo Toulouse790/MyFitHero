@@ -7,9 +7,9 @@ import {
   DailyProgramDisplay, 
   DailyStats, 
   Exercise 
-} from '../../../shared/types/dashboard';
+} from '@/shared/types/dashboard';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
-import { UserProfile } from '../../../shared/types/user';
+import { UserProfile } from '@/shared/types/user';
 
 // Types locaux
 interface ChatMessage {

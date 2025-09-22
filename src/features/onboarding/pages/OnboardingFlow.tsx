@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '../../../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Progress } from '../../../components/ui/progress';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import { WelcomeStep, GoalsStep, PersonalInfoStep, FinalStep } from '../components/steps';
 
 const onboardingSchema = z.object({

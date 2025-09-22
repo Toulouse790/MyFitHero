@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { UserProfile } from '../shared/types/user';
+import { UserProfile } from '@/shared/types/user';
 
 export interface Notification {
   id: string;

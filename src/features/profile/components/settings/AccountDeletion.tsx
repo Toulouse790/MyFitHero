@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Label } from '../../../../components/ui/label';
 import { Input } from '../../../../components/ui/input';
 import { Checkbox } from '../../../../components/ui/checkbox';
-import { useToast } from '../../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 
 interface AccountDeletionProps {
   userEmail: string;

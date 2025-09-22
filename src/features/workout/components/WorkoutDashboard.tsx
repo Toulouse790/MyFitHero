@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { Skeleton } from '../../components/ui/skeleton';
 import {

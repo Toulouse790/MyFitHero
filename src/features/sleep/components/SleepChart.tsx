@@ -1,6 +1,6 @@
 import { Info, Moon, TrendingUp, BarChart3 } from 'lucide-react';
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { SleepStats, SleepDayData } from '../types';
 import { formatDuration, getSleepQualityLabel } from '../utils/sleepConfig';
 

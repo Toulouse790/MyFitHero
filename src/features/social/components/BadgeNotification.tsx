@@ -14,9 +14,9 @@ import {
   Crown,
   Gem
 } from 'lucide-react';
-import { Card, CardContent } from '../../../components/ui/card';
-import { Badge } from '../../../components/ui/badge';
-import { Button } from '../../../components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 // Types pour les badges MyFitHero
 export type BadgeRarity = 'common' | 'rare' | 'epic' | 'legendary' | 'mythic';

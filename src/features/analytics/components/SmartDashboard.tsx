@@ -22,14 +22,14 @@ import {
   AlertCircle,
   ArrowRight,
 } from 'lucide-react';
-import { supabase } from '../../../src/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { useLocation } from 'wouter';
-import { appStore } from '../../../src/store/appStore';
-import { SmartDashboardContext, DailyProgramDisplay, Exercise, DailyStats, Json } from '../../../src/shared/types/dashboard';
+import { appStore } from '@/store/appStore';
+import { SmartDashboardContext, DailyProgramDisplay, Exercise, DailyStats, Json } from '@/shared/types/dashboard';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
-import { UserProfile } from '../../../src/shared/types/user';
-import { useAnimateOnMount, useHaptic } from '../../../src/shared/hooks/useAnimations';
-import { useAdaptiveColors } from '../../../src/shared/components/ThemeProvider';
+import { UserProfile } from '@/shared/types/user';
+import { useAnimateOnMount, useHaptic } from '@/shared/hooks/useAnimations';
+import { useAdaptiveColors } from '@/shared/components/ThemeProvider';
 import AIIntelligence from '../../ai-coach/components/AIIntelligence';
 
 // Types locaux
@@ -47,9 +47,9 @@ interface DailyStatsLocal {
 
 // Interface pour Json (remplace import manquant)
 // type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
-import { DailyCheckIn } from '../../../src/shared/components/DailyCheckIn';
-import { BadgeDisplay } from '../../../src/shared/components/BadgeDisplay';
-import { StatsOverview } from '../../../src/shared/components/StatsOverview';
+import { DailyCheckIn } from '@/shared/components/DailyCheckIn';
+import { BadgeDisplay } from '@/shared/components/BadgeDisplay';
+import { StatsOverview } from '@/shared/components/StatsOverview';
 
 interface SmartDashboardProps {
   userProfile?: SupabaseAuthUserType;

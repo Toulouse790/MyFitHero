@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { SleepService } from '../services/sleep.service';
-import { SleepEntry } from '../../../shared/types/sleep.types';
+import { SleepEntry } from '@/shared/types/sleep.types';
 
 export interface UseSleepReturn {
   data: SleepEntry | null;

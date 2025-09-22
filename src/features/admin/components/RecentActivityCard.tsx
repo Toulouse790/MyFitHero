@@ -1,6 +1,6 @@
 // client/src/features/admin/components/RecentActivityCard.tsx
 import React from 'react';
-import { Card } from '../../../components/ui/card';
+import { Card } from '@/components/ui/card';
 
 interface ActivityItem {
   type: 'info' | 'success' | 'warning';

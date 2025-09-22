@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Activity, Target, Zap, Heart } from 'lucide-react';
-import { UserDataService, UserStats } from '../../lib/services/userDataService';
-import { BadgeService, UserBadge } from '../../lib/services/badgeService';
+import { UserDataService, UserStats } from '@/lib/services/userDataService';
+import { BadgeService, UserBadge } from '@/lib/services/badgeService';
 
 interface StatsOverviewProps {
   userId?: string;

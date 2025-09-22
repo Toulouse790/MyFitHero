@@ -34,23 +34,23 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { appStore } from '@/store/appStore';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 import AIIntelligence from '../../ai-coach/components/AIIntelligence';
 import { UniformHeader } from '../../profile/components/UniformHeader';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
-import { Skeleton } from '../../../components/ui/skeleton';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../../../components/ui/dialog';
+} from '@/components/ui/dialog';
 import { supabase } from '@/lib/supabase';
 
 // Import des composants refactorisés

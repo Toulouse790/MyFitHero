@@ -15,7 +15,7 @@ import {
   CheckCircle,
   XCircle,
 } from 'lucide-react';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 import { appStore } from '@/store/appStore';
 

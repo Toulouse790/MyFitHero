@@ -1,7 +1,7 @@
 // src/features/sleep/components/SleepRecommendation.tsx
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Badge } from '../../../components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Clock, Lightbulb, Coffee } from 'lucide-react';
 
 interface SleepSession {

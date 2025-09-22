@@ -1,7 +1,7 @@
 import { Info, Heart, TrendingUp, Clock, Target, BarChart3, TrendingDown } from 'lucide-react';
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Badge } from '../../../components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useSleepStore } from '../hooks/useSleepStore';
 import { formatDuration, getSleepQualityLabel } from '../utils/sleepConfig';
 

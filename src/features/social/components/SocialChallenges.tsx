@@ -1,11 +1,11 @@
 // src/features/social/components/SocialChallenges.tsx
 import React from 'react';
 import { Target, Trophy, Users, Calendar, Star, CheckCircle } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
-import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ExtendedChallenge as Challenge } from '../types';
 
 interface SocialChallengesProps {

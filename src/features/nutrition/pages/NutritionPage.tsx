@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useLocation } from 'wouter';
-import { GtagEvent } from '../../../shared/types/gtag';
+import { GtagEvent } from '@/shared/types/gtag';
 
 import { appStore } from '@/store/appStore';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 import { UniformHeader } from '../../profile/components/UniformHeader';
-import { getNutritionPersonalizedMessage } from '../../../shared/utils/personalizedMessages';
-import { AIModal } from '../../../shared/components/AIModal';
+import { getNutritionPersonalizedMessage } from '@/shared/utils/personalizedMessages';
+import { AIModal } from '@/shared/components/AIModal';
 import { supabase } from '@/lib/supabase';
 import { PhotoNutritionAnalyzer } from '../components/PhotoNutritionAnalyzer';
 import { RecognizedFood } from '../services/foodRecognition';

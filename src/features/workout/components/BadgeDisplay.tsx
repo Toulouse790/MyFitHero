@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 import { BadgeService, UserBadge, BadgeProgress } from '@/lib/services/badgeService';
 import { supabase } from '@/lib/supabase';
-import { RARITY_CONFIGS, type BadgeRarity } from '../../../shared/utils/badgeConfig';
+import { RARITY_CONFIGS, type BadgeRarity } from '@/shared/utils/badgeConfig';
 
 interface BadgeDisplayProps {
   className?: string;

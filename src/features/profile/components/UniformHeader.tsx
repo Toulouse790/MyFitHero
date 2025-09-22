@@ -1,8 +1,8 @@
 import { TrendingUp, Bell, ArrowLeft, Settings, Trophy, User } from 'lucide-react';
 // client/src/components/UniformHeader.tsx
 import React from 'react';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { useLocation } from 'wouter';
 
 interface UniformHeaderProps {

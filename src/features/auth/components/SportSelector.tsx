@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Input } from '../../../components/ui/input';
-import { Badge } from '../../../components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { Search, Star, TrendingUp, Users } from 'lucide-react';
 import { AVAILABLE_SPORTS, getSportsByCategory, getPopularSports, searchSports, SportOption } from '../data/onboardingData';
 

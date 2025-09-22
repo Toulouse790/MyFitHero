@@ -1,9 +1,9 @@
 // src/features/social/pages/SocialPageRefactored.tsx
 import React, { useState } from 'react';
 import { Plus, Filter } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useToast } from '@/shared/hooks/use-toast';
 
 // Import our new modular components and hooks
 import { SocialHeader, SocialFeed, SocialChallenges } from '../components';

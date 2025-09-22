@@ -1,8 +1,8 @@
 // src/features/sleep/components/SleepStats.tsx
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { TrendingUp, BarChart3, Target, Clock } from 'lucide-react';
 
 interface SleepStats {

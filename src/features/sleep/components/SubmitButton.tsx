@@ -1,7 +1,7 @@
 // src/features/sleep/components/SubmitButton.tsx
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
+import { Button } from '@/components/ui/button';
 
 interface SubmitButtonProps {
   isLoading: boolean;

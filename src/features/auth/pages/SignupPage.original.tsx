@@ -1,5 +1,5 @@
 import React from 'react';
-import NetworkErrorBoundary from '../../../components/NetworkErrorBoundary';
+import NetworkErrorBoundary from '@/components/NetworkErrorBoundary';
 import { useSignupForm } from '../hooks/useSignupForm';
 import { useSignupValidation } from '../hooks/useSignupValidation';
 import { useRetryMechanism } from '../hooks/useRetryMechanism';

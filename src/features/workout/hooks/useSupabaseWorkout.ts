@@ -14,7 +14,7 @@ import {
   dbToWorkoutSet,
   workoutSessionToDb,
   workoutSetToDb
-} from '../../../shared/types/database-mapping';
+} from '@/shared/types/database-mapping';
 
 // ============================================================================
 // HOOKS POUR WORKOUT SESSIONS

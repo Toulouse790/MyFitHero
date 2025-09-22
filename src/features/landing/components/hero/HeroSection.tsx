@@ -1,7 +1,7 @@
 // src/features/landing/components/hero/HeroSection.tsx
 import React from 'react';
 import { ArrowRight, Play } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
+import { Button } from '@/components/ui/button';
 import { HeroCTA } from './HeroCTA';
 import { HeroVideo } from './HeroVideo';
 

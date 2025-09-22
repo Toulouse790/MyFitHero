@@ -1,7 +1,7 @@
 // src/features/nutrition/hooks/useFoodPhotoAnalysis.ts
 import { useState, useCallback } from 'react';
 import { FoodRecognitionService, FoodAnalysisResult, RecognizedFood } from '../services/foodRecognition';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 
 export interface FoodPhotoAnalysisState {
   isAnalyzing: boolean;

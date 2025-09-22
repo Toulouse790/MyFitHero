@@ -1,7 +1,7 @@
 // client/src/features/admin/components/UserProfileCard.tsx
 import React from 'react';
-import { Card } from '../../../components/ui/card';
-import { Badge } from '../../../components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface UserProfileCardProps {
   userProfile: {

@@ -1,9 +1,9 @@
 // src/features/sleep/components/SleepSummary.tsx
 import React from 'react';
-import { Card, CardContent } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { Moon, Eye, EyeOff, TimerIcon, Play } from 'lucide-react';
 
 interface SleepSession {

@@ -1,7 +1,7 @@
 import { CheckCircle, Plus } from 'lucide-react';
 import React, { useState, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/shared/hooks/use-toast';
 import { useSleepStore } from '../hooks/useSleepStore';
 import { defaultSleepFactors, calculateSleepDuration } from '../utils/sleepConfig';
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 // hooks/workout/useWorkoutSessionCore.ts
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 import { appStore } from '@/store/appStore';
 import { supabase } from '@/lib/supabase';
-import type { WorkoutSession, WorkoutExercise, ExerciseSet } from '../../../shared/types/workout.types';
+import type { WorkoutSession, WorkoutExercise, ExerciseSet } from '@/shared/types/workout.types';
 
 export interface UseWorkoutSessionCoreReturn {
   currentSession: WorkoutSession | null;

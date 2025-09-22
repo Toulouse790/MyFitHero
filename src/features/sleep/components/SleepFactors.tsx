@@ -1,8 +1,8 @@
 // src/features/sleep/components/SleepFactors.tsx
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
-import { Label } from '../../../components/ui/label';
-import { Badge } from '../../../components/ui/badge';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
 import { defaultSleepFactors } from '../utils/sleepConfig';
 
 interface SleepFactorsProps {

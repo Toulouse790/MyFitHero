@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 
 // Types locaux temporaires jusqu'à ce que les types soient correctement exportés
 interface ExerciseSet {

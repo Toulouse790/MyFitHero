@@ -26,28 +26,28 @@ import {
   Info,
 } from 'lucide-react';
 import { appStore } from '@/store/appStore';
-import { useToast } from '../../../shared/hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 import { useRealtimeSync } from '../../workout/hooks/useRealtimeSync';
 import UniformHeader from '../../profile/components/UniformHeader';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
-import { Progress } from '../../../components/ui/progress';
-import { Skeleton } from '../../../components/ui/skeleton';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../../../components/ui/dialog';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
+} from '@/components/ui/dialog';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Database } from '../../workout/types/database';
-import { getSportCategoryForHydration, HydrationSportCategory } from '../../../shared/utils/sportMapping';
-import { getHydrationPersonalizedMessage } from '../../../shared/utils/personalizedMessages';
-import { useDataLoader } from '../../../shared/hooks/useDataLoader';
-import { AIModal } from '../../../shared/components/AIModal';
+import { getSportCategoryForHydration, HydrationSportCategory } from '@/shared/utils/sportMapping';
+import { getHydrationPersonalizedMessage } from '@/shared/utils/personalizedMessages';
+import { useDataLoader } from '@/shared/hooks/useDataLoader';
+import { AIModal } from '@/shared/components/AIModal';
 
 // Import des sous-composants
 import {

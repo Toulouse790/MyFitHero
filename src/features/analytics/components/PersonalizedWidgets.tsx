@@ -24,7 +24,7 @@ import {
   Trophy,
   Zap
 } from 'lucide-react';
-import { Exercise } from '../../../shared/types/dashboard';
+import { Exercise } from '@/shared/types/dashboard';
 
 interface PersonalizedWidget {
   id: string;

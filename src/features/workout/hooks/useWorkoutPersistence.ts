@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 // hooks/workout/useWorkoutPersistence.ts
 import { useSupabaseQuery } from '../use-supabase-query';
-import { WorkoutSession, Set } from '../../../shared/types/workout';
+import { WorkoutSession, Set } from '@/shared/types/workout';
 
 export interface UseWorkoutPersistenceReturn {
   saveSession: (session: WorkoutSession) => Promise<void>;

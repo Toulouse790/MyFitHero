@@ -1,10 +1,10 @@
 // src/features/social/components/SocialFeed.tsx
 import React, { useState } from 'react';
 import { Heart, MessageCircle, Share2, Bookmark } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '../../../components/ui/avatar';
-import { Badge } from '../../../components/ui/badge';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { SocialPost } from '../types';
 
 interface SocialFeedProps {

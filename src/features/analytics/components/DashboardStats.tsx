@@ -20,7 +20,7 @@ import {
   Award,
   ArrowRight
 } from 'lucide-react';
-import { DailyStats } from '../../../shared/types/dashboard';
+import { DailyStats } from '@/shared/types/dashboard';
 
 interface StatCard {
   id: string;

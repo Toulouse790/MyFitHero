@@ -27,7 +27,7 @@ import {
   WorkoutSet, 
   WorkoutSession, 
   Exercise 
-} from '../../../shared/types/database-mapping';
+} from '@/shared/types/database-mapping';
 import { useWorkoutSession, useWorkoutSets } from '@/features/workout/hooks/useSupabaseWorkout';
 import { supabase } from '@/lib/supabase';
 import { AdvancedSessionTimer } from './AdvancedSessionTimer';

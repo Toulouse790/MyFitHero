@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Activity, Heart, Moon, Zap, TrendingUp, Clock } from 'lucide-react';
 // Import temporaire depuis le chemin racine features/
 import { useWearableSync, WearableData } from '../../../features/wearables/hooks/useWearableSync';

@@ -1,8 +1,8 @@
 // src/features/social/components/SocialHeader.tsx
 import React from 'react';
 import { Users, Trophy, Target, Medal } from 'lucide-react';
-import { Card, CardContent } from '../../../components/ui/card';
-import { Badge } from '../../../components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { UniformHeader } from '../../profile/components/UniformHeader';
 import { UserStats } from '../types';
 

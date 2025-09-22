@@ -1,7 +1,7 @@
 // src/features/onboarding/components/OnboardingProgress.tsx
 import React from 'react';
-import { Progress } from '../../../components/ui/progress';
-import { Button } from '../../../components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
 
 interface OnboardingProgressProps {
   currentStep: number;
