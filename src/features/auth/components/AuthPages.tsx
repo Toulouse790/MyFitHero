@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // client/src/components/AuthPages.tsx
 import { authClient } from '@/lib/auth';
 import { useToast } from '@/shared/hooks/use-toast';
+import { Mail, User, Lock, Eye, EyeOff } from 'lucide-react';
 
 interface AuthPagesProps {
   onAuthSuccess: (user: any, isNewUser?: boolean) => void;
