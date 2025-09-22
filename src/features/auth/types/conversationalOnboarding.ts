@@ -1,6 +1,6 @@
 // client/src/types/conversationalOnboarding.ts
 import React from 'react';
-import type { ModuleId } from '../data/packs';
+import type { ModuleId } from '@/features/auth/data/packs';
 
 /* ================================================================== */
 /*                     INTERFACES PRINCIPALES                          */

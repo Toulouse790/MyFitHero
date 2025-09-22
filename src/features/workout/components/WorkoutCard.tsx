@@ -1,9 +1,9 @@
 import { Clock, Star, Users, Plus, ChevronRight } from 'lucide-react';
 import React, { useState } from 'react';
 // client/src/components/WorkoutCard.tsx
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Badge } from '../../components/ui/badge';
+import { Button } from '@/features/components/ui/button';
+import { Input } from '@/features/components/ui/input';
+import { Badge } from '@/features/components/ui/badge';
 import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';
 import { useToast } from '@/shared/hooks/use-toast';
 

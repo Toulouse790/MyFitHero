@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { WearablesService } from '../services/wearables.service';
+import { WearablesService } from '@/features/wearables/services/wearables.service';
 
 export interface UseWearablesReturn {
   data: any;

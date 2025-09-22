@@ -1,5 +1,5 @@
 import { Heart, Zap, Clock, Star, Target } from 'lucide-react';
-import type { SportSleepConfig, SleepFactor } from '../types';
+import type { SportSleepConfig, SleepFactor } from '@/features/sleep/types';
 
 // Configuration du sommeil par sport
 export const sportSleepConfigs: Record<string, SportSleepConfig> = {

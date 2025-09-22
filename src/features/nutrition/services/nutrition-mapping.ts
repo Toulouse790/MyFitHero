@@ -1,4 +1,4 @@
-import { NutritionData, MealAnalysis, DbNutritionData, DbMealAnalysis } from '../types';
+import { NutritionData, MealAnalysis, DbNutritionData, DbMealAnalysis } from '@/features/nutrition/types';
 
 /**
  * Mapping sophistiqué pour les données nutrition entre Database (snake_case) et TypeScript (camelCase)

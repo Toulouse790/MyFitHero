@@ -1,6 +1,6 @@
 // src/features/social/hooks/useSocialModals.ts
 import { useState } from 'react';
-import { CreatePostData, CreateChallengeData } from '../types';
+import { CreatePostData, CreateChallengeData } from '@/features/social/types';
 
 export interface UseSocialModalsReturn {
   // Modal states

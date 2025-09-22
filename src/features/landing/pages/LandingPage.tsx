@@ -5,8 +5,8 @@ import {
   TestimonialsSection,
   PricingSection,
   CTASection
-} from '../components';
-import { useLandingContent, useLandingAnalytics } from '../hooks';
+} from '@/features/landing/components';
+import { useLandingContent, useLandingAnalytics } from '@/features/landing/hooks';
 import { Dumbbell, TrendingUp, Users, Award, Shield, Zap } from 'lucide-react';
 
 const LandingPage: React.FC = () => {

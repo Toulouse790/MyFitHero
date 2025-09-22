@@ -1,10 +1,10 @@
 // src/features/profile/components/settings/PreferencesSettings.tsx
 import React from 'react';
 import { Globe, Palette, Zap, Volume2, Vibrate, Clock } from 'lucide-react';
-import { Label } from '../../../../components/ui/label';
-import { Switch } from '../../../../components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../../components/ui/select';
-import { Slider } from '../../../../components/ui/slider';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
 
 interface PreferencesSettingsProps {
   language: string;

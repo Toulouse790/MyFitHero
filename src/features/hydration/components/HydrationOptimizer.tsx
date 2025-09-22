@@ -35,14 +35,14 @@ import {
   WeeklyHydrationSummary,
   HydrationGoals,
   FluidIntakeEvent
-} from '../types';
+} from '@/features/hydration/types';
 import { 
   dbToHydrationData, 
   hydrationDataToDb, 
   calculateHydrationScores, 
   generateHydrationAIInsights,
   calculateDehydrationRisk
-} from '../utils/hydration-mapping';
+} from '@/features/hydration/utils/hydration-mapping';
 
 // Types pour le state machine React
 interface HydrationState {

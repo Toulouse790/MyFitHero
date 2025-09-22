@@ -1,12 +1,12 @@
 // src/features/profile/components/settings/PrivacySettings.tsx
 import React, { useState } from 'react';
 import { Shield, Eye, Users, Download, Trash2, AlertTriangle } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
-import { Label } from '../../../../components/ui/label';
-import { Switch } from '../../../../components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../../components/ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../../../../components/ui/dialog';
-import { useToast } from '../../../../shared/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useToast } from '@/shared/hooks/use-toast';
 
 interface PrivacySettingsProps {
   profileVisibility: 'public' | 'friends' | 'private';

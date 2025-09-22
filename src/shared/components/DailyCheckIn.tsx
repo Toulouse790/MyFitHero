@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Check, X, Calendar, Clock } from 'lucide-react';
 import { UserDataService, DailyCheckin } from '@/lib/services/userDataService';
 import { BadgeService } from '@/lib/services/badgeService';
-import { useToast } from '../hooks/use-toast';
+import { useToast } from '@/shared/hooks/use-toast';
 
 interface DailyCheckInProps {
   userId?: string;

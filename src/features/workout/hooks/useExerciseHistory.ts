@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 // hooks/workout/useExerciseHistory.ts
 import { appStore } from '@/store/appStore';
 import { supabase } from '@/lib/supabase';
-import type { SessionExercise } from '../types/WorkoutTypes';
+import type { SessionExercise } from '@/features/workout/types/WorkoutTypes';
 
 export interface UseExerciseHistoryReturn {
   getLastWeightForExercise: (exerciseName: string) => number | null;

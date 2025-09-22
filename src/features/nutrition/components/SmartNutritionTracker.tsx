@@ -12,7 +12,7 @@ import {
   NutritionTrackingState, 
   FoodSearchResult,
   DailyNutritionSummary 
-} from '../types';
+} from '@/features/nutrition/types';
 import { 
   calculateNutritionScores, 
   generateNutritionRecommendations,
@@ -20,7 +20,7 @@ import {
   nutritionDataToDb,
   dbToMealAnalysis,
   mealAnalysisToDb
-} from '../services/nutrition-mapping';
+} from '@/features/nutrition/services/nutrition-mapping';
 
 // =====================================
 // STATE MANAGEMENT (à la façon Workout)

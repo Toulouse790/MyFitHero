@@ -30,7 +30,7 @@ import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
 import { UserProfile } from '@/shared/types/user';
 import { useAnimateOnMount, useHaptic } from '@/shared/hooks/useAnimations';
 import { useAdaptiveColors } from '@/shared/components/ThemeProvider';
-import AIIntelligence from '../../ai-coach/components/AIIntelligence';
+import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
 
 // Types locaux
 interface DailyStatsLocal {

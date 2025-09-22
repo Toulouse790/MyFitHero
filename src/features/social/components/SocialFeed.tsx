@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { SocialPost } from '../types';
+import { SocialPost } from '@/features/social/types';
 
 interface SocialFeedProps {
   posts: SocialPost[];

@@ -18,4 +18,4 @@ export { OnboardingFormFields } from './OnboardingFormFields';
 export { ConversationalOnboardingRefactored } from './ConversationalOnboardingRefactored';
 
 // Hook d'état
-export { useOnboardingState } from '../hooks/useOnboardingState';
+export { useOnboardingState } from '@/features/auth/hooks/useOnboardingState';

@@ -13,7 +13,7 @@ import {
   UserStatsResponse,
   SessionInfo,
   OAuthCredentials,
-} from '../types/index';
+} from '@/features/auth/types/index';
 
 export class AuthService {
   private static readonly BASE_URL = '/api/auth';

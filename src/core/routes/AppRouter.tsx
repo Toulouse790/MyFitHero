@@ -2,19 +2,19 @@ import { Route, Switch } from 'wouter';
 import { Suspense, lazy } from 'react';
 
 // Import des guards
-import { AuthGuard } from '../auth/auth.guard';
+import { AuthGuard } from '@/core/auth/auth.guard';
 
 // Import des pages principales
-import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 // Lazy loading des features
-const LandingPage = lazy(() => import('../../features/landing/pages/LandingPage'));
-const WorkoutPage = lazy(() => import('../../features/workout/pages/WorkoutPage'));
-const ProfilePage = lazy(() => import('../../features/profile/pages/ProfilePage'));
-const AnalyticsPage = lazy(() => import('../../features/analytics/pages/AnalyticsPage'));
+const LandingPage = lazy(() => import('@/features/landing/pages/LandingPage'));
+const WorkoutPage = lazy(() => import('@/features/workout/pages/WorkoutPage'));
+const ProfilePage = lazy(() => import('@/features/profile/pages/ProfilePage'));
+const AnalyticsPage = lazy(() => import('@/features/analytics/pages/AnalyticsPage'));
 
 // Pages statiques
-import NotFoundPage from '../../pages/NotFound.tsx';
+import NotFoundPage from '@/pages/NotFound.tsx';
 
 // Routes configuration
 export const ROUTES = {

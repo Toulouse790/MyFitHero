@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ProfileService } from '../services/profile.service';
+import { ProfileService } from '@/features/profile/services/profile.service';
 import type {
   UserProfile,
   UpdateProfileData,
@@ -8,7 +8,7 @@ import type {
   GoalData,
   CreateGoalData,
   UpdateGoalData,
-} from '../types/index';
+} from '@/features/profile/types/index';
 
 export interface UseProfileReturn {
   // État

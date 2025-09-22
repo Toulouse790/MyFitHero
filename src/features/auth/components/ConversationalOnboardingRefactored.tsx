@@ -23,8 +23,8 @@ import { OnboardingNavigation } from './OnboardingNavigation';
 import { OnboardingFormFields } from './OnboardingFormFields';
 
 // Hook et types
-import { useOnboardingState } from '../hooks/useOnboardingState';
-import { OnboardingData } from '../types/conversationalOnboarding';
+import { useOnboardingState } from '@/features/auth/hooks/useOnboardingState';
+import { OnboardingData } from '@/features/auth/types/conversationalOnboarding';
 
 interface ConversationalOnboardingRefactoredProps {
   onComplete: (data: OnboardingData) => void;

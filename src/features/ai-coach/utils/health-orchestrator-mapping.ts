@@ -1,4 +1,4 @@
-import { HealthData, HealthAnalysis, DbHealthData, DbHealthAnalysis } from '../types/health-orchestrator';
+import { HealthData, HealthAnalysis, DbHealthData, DbHealthAnalysis } from '@/features/ai-coach/types/health-orchestrator';
 
 /**
  * Conversion des données Health de snake_case (DB) vers camelCase (App)

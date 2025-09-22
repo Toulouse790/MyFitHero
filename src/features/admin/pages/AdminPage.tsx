@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // client/src/pages/Admin.tsx
 import { useLocation } from 'wouter';
-import { AdminDashboard } from '../components';
+import { AdminDashboard } from '@/features/admin/components';
 import { useAuthStatus } from '@/features/auth/hooks/useAuthStatus';
 import { supabase } from '@/lib/supabase';
 import { useToast } from '@/shared/hooks/use-toast';

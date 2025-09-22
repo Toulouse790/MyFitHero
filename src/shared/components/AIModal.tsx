@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import AIIntelligence from '../../features/ai-coach/components/AIIntelligence';
+import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
 
 interface AIModalProps {
   open: boolean;

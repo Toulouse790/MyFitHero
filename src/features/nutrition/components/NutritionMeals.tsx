@@ -1,7 +1,7 @@
 // src/features/nutrition/components/NutritionMeals.tsx
 import React from 'react';
 import { Clock, Plus, Trash2 } from 'lucide-react';
-import { Card, CardContent } from '../../components/ui/card';
+import { Card, CardContent } from '@/features/components/ui/card';
 
 interface Meal {
   id: string;

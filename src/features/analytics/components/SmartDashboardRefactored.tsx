@@ -9,7 +9,7 @@ import { SmartChat } from './SmartChat';
 import { PersonalizedWidgets } from './PersonalizedWidgets';
 
 // Hook personnalisé
-import { useSmartDashboard } from '../hooks/useSmartDashboard';
+import { useSmartDashboard } from '@/features/analytics/hooks/useSmartDashboard';
 
 interface SmartDashboardRefactoredProps {
   userProfile?: SupabaseAuthUserType;

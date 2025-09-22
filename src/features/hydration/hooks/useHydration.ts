@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { HydrationService } from '../services/hydration.service';
+import { HydrationService } from '@/features/hydration/services/hydration.service';
 
 export interface UseHydrationReturn {
   data: any;

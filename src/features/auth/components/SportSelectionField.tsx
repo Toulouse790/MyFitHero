@@ -11,7 +11,7 @@ import {
   Heart,
   Check
 } from 'lucide-react';
-import { ConversationalStep } from '../types/conversationalOnboarding';
+import { ConversationalStep } from '@/features/auth/types/conversationalOnboarding';
 
 interface SportSelectionFieldProps {
   step: ConversationalStep;

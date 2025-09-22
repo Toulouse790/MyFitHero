@@ -1,5 +1,5 @@
 import { Info } from 'lucide-react';
-import { ConversationalStep } from '../types/conversationalOnboarding';
+import { ConversationalStep } from '@/features/auth/types/conversationalOnboarding';
 
 export interface ConversationalStep {
   id: string;

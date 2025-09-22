@@ -3,8 +3,8 @@ import React from 'react';
 import { Users, Trophy, Target, Medal } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { UniformHeader } from '../../profile/components/UniformHeader';
-import { UserStats } from '../types';
+import { UniformHeader } from '@/features/profile/components/UniformHeader';
+import { UserStats } from '@/features/social/types';
 
 interface SocialHeaderProps {
   userStats: UserStats | null;

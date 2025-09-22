@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { SocialService } from '../services/social.service';
+import { SocialService } from '@/features/social/services/social.service';
 
 export interface UseSocialReturn {
   data: any;

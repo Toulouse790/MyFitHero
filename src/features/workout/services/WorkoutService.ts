@@ -11,7 +11,7 @@ import type {
   WorkoutProgress,
   WorkoutFilters,
   WorkoutSearchQuery,
-} from '../types/WorkoutTypes';
+} from '@/features/workout/types/WorkoutTypes';
 
 export class WorkoutService {
   private static readonly BASE_URL = '/api/workouts';

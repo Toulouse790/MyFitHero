@@ -1,9 +1,9 @@
 // src/features/onboarding/components/steps/PersonalInfoStep.tsx
 import React from 'react';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import { Label } from '../../../../components/ui/label';
-import { Input } from '../../../../components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../../components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface PersonalInfoStepProps {
   register: UseFormRegister<any>;

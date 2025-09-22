@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react';
 import React, { useState, useCallback } from 'react';
-import type { CoachingSession, Message, Recommendation } from '../types';
+import type { CoachingSession, Message, Recommendation } from '@/features/ai-coach/types';
 
 export const useAICoach = () => {
   const [session, setSession] = useState<CoachingSession | null>(null);

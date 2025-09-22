@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { env } from '../config/env.config';
+import { env } from '@/core/config/env.config';
 
 // Types pour Supabase (à adapter selon ton schéma)
 export interface Database {

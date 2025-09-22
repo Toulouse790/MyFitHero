@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { WorkoutService } from '../services/WorkoutService';
+import { WorkoutService } from '@/features/workout/services/WorkoutService';
 import type {
   Workout,
   WorkoutSession,
@@ -7,7 +7,7 @@ import type {
   CreateWorkoutData,
   UpdateWorkoutData,
   WorkoutStats,
-} from '../types/WorkoutTypes';
+} from '@/features/workout/types/WorkoutTypes';
 
 export interface UseWorkoutReturn {
   // État

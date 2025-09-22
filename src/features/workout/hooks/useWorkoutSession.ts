@@ -44,4 +44,4 @@ export const useWorkoutSession = () => {
 };
 
 // Export des types pour réutilisation
-export type { WorkoutExercise, ExerciseSet } from '../types/supabase';
+export type { WorkoutExercise, ExerciseSet } from '@/features/workout/types/supabase';

@@ -1,7 +1,7 @@
 // src/features/auth/components/onboarding/OnboardingValidation.tsx
 import React from 'react';
 import { AlertCircle, CheckCircle } from 'lucide-react';
-import { Card, CardContent } from '../../../../components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface OnboardingValidationProps {
   errors: string[];

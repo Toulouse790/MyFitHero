@@ -1,11 +1,11 @@
 // src/features/profile/components/settings/WearableSettings.tsx
 import React, { useState, useCallback } from 'react';
 import { Smartphone, RefreshCw, Clock, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
-import { Label } from '../../../../components/ui/label';
-import { Switch } from '../../../../components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../../components/ui/select';
-import { useToast } from '../../../../shared/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/shared/hooks/use-toast';
 
 interface WearableSettingsProps {
   isAppleHealthAvailable: boolean;

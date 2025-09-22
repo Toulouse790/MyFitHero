@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import { Button } from '../../components/ui/button';
-import { Badge } from '../../components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
-import { FoodScanner } from '../components/FoodScanner';
-import { useFoodScanner } from '../hooks/useFoodScanner';
+import { Card, CardContent, CardHeader, CardTitle } from '@/features/components/ui/card';
+import { Button } from '@/features/components/ui/button';
+import { Badge } from '@/features/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/features/components/ui/tabs';
+import { FoodScanner } from '@/features/nutrition/components/FoodScanner';
+import { useFoodScanner } from '@/features/nutrition/hooks/useFoodScanner';
 import { Camera, Utensils, TrendingUp, History, Star } from 'lucide-react';
 
 /**

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle, AlertCircle } from 'lucide-react';
-import { ValidationErrors } from '../hooks/useSignupValidation';
+import { ValidationErrors } from '@/features/auth/hooks/useSignupValidation';
 
 interface StatusMessagesProps {
   errors: ValidationErrors;

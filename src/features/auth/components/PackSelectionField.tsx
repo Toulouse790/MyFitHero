@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check } from 'lucide-react';
-import { ConversationalStep } from '../types/conversationalOnboarding';
+import { ConversationalStep } from '@/features/auth/types/conversationalOnboarding';
 
 interface PackSelectionFieldProps {
   step: ConversationalStep;

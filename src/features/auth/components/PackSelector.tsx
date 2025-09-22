@@ -19,7 +19,7 @@ import {
   getRecommendedPacks, 
   getPopularPacks, 
   SmartPack 
-} from '../data/smartPacks';
+} from '@/features/auth/data/smartPacks';
 
 interface UserProfile {
   age?: number;

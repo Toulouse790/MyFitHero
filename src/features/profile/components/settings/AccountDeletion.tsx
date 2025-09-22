@@ -1,11 +1,11 @@
 // src/features/profile/components/settings/AccountDeletion.tsx
 import React, { useState } from 'react';
 import { AlertTriangle, Trash2, Shield, Download, CheckCircle } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../../../../components/ui/dialog';
-import { Label } from '../../../../components/ui/label';
-import { Input } from '../../../../components/ui/input';
-import { Checkbox } from '../../../../components/ui/checkbox';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/shared/hooks/use-toast';
 
 interface AccountDeletionProps {

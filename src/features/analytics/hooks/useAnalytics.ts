@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import type { AnalyticsData, DateRange } from '../types';
+import type { AnalyticsData, DateRange } from '@/features/analytics/types';
 
 export const useAnalytics = () => {
   const [data, setData] = useState<AnalyticsData | null>(null);

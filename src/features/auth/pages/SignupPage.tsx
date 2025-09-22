@@ -1,11 +1,11 @@
 import React from 'react';
 import NetworkErrorBoundary from '@/components/NetworkErrorBoundary';
-import { useSignupForm } from '../hooks/useSignupForm';
-import { useSignupValidation } from '../hooks/useSignupValidation';
-import { useRetryMechanism } from '../hooks/useRetryMechanism';
-import { SignupFormFields } from '../components/SignupFormFields';
-import { SignupSubmitButton } from '../components/SignupSubmitButton';
-import { StatusMessages } from '../components/StatusMessages';
+import { useSignupForm } from '@/features/auth/hooks/useSignupForm';
+import { useSignupValidation } from '@/features/auth/hooks/useSignupValidation';
+import { useRetryMechanism } from '@/features/auth/hooks/useRetryMechanism';
+import { SignupFormFields } from '@/features/auth/components/SignupFormFields';
+import { SignupSubmitButton } from '@/features/auth/components/SignupSubmitButton';
+import { StatusMessages } from '@/features/auth/components/StatusMessages';
 
 export const SignupPageComponent: React.FC = () => {
   // Hooks pour la gestion d'état

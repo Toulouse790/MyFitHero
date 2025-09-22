@@ -1,4 +1,4 @@
-import { SleepData, SleepAnalysis, DbSleepData, DbSleepAnalysis } from '../types';
+import { SleepData, SleepAnalysis, DbSleepData, DbSleepAnalysis } from '@/features/sleep/types';
 
 /**
  * Conversion des données Sleep de snake_case (DB) vers camelCase (App)

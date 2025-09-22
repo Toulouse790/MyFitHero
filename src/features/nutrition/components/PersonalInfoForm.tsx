@@ -1,11 +1,11 @@
 import { Info, X, Clock, Star, Check } from 'lucide-react';
 import React, { useState } from 'react';
 // client/src/components/PersonalInfoForm.tsx
-import { Card, CardContent } from '../../components/ui/card';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Slider } from '../../components/ui/slider';
-import { Badge } from '../../components/ui/badge';
+import { Card, CardContent } from '@/features/components/ui/card';
+import { Button } from '@/features/components/ui/button';
+import { Input } from '@/features/components/ui/input';
+import { Slider } from '@/features/components/ui/slider';
+import { Badge } from '@/features/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { LIFESTYLE_OPTIONS } from '@/data/onboardingData';
 

@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Dumbbell, Activity, Apple, Droplets, Moon, Users, Zap, Target, TrendingUp } from 'lucide-react';
 import { featureGradients } from '@/shared/theme';
-import { useAuth } from '../../auth/hooks/useAuth';
+import { useAuth } from '@/features/auth/hooks/useAuth';
 import { useLocation } from 'wouter';
 
 const Dashboard: React.FC = () => {

@@ -12,7 +12,7 @@ import {
   UpdateNutritionGoalsDTO,
   FoodSearchQuery,
   NutritionInsight,
-} from '../types/index';
+} from '@/features/nutrition/types/index';
 
 export class NutritionService {
   private static readonly BASE_URL = '/api/nutrition';

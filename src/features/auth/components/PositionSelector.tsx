@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Info, MapPin, Target, TrendingUp } from 'lucide-react';
-import { getSportById, getPositionsForSport } from '../data/onboardingData';
+import { getSportById, getPositionsForSport } from '@/features/auth/data/onboardingData';
 
 interface PositionSelectorProps {
   sport: string;

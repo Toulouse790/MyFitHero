@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
 import { SkipLink, AccessibleButton, AccessibleLink } from './AccessibleComponents';
-import { useFocusManagement, useKeyboardShortcuts, useAnnounce } from '../hooks/useAccessibility';
+import { useFocusManagement, useKeyboardShortcuts, useAnnounce } from '@/shared/hooks/useAccessibility';
 import { cn } from '@/lib/utils';
 
 interface NavigationItem {

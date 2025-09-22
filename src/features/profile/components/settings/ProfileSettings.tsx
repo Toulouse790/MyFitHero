@@ -1,10 +1,10 @@
 // src/features/profile/components/settings/ProfileSettings.tsx
 import React, { useState, useCallback } from 'react';
 import { User, Save, Loader2 } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
-import { Input } from '../../../../components/ui/input';
-import { Label } from '../../../../components/ui/label';
-import { Textarea } from '../../../../components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/shared/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 

@@ -1,8 +1,8 @@
 // src/features/workout/components/WorkoutHistory.tsx
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
-import { Button } from '../../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/features/components/ui/card';
+import { Badge } from '@/features/components/ui/badge';
+import { Button } from '@/features/components/ui/button';
 import { 
   Clock, 
   Calendar, 

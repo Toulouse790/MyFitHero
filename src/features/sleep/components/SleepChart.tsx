@@ -1,8 +1,8 @@
 import { Info, Moon, TrendingUp, BarChart3 } from 'lucide-react';
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { SleepStats, SleepDayData } from '../types';
-import { formatDuration, getSleepQualityLabel } from '../utils/sleepConfig';
+import type { SleepStats, SleepDayData } from '@/features/sleep/types';
+import { formatDuration, getSleepQualityLabel } from '@/features/sleep/utils/sleepConfig';
 
 interface SleepChartProps {
   stats: SleepStats;

@@ -1,7 +1,7 @@
 // src/features/profile/components/profile/UserProfileHeader.tsx
 import React from 'react';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import AvatarUpload from '../AvatarUpload';
+import AvatarUpload from '@/features/profile/components/AvatarUpload';
 
 interface UserProfileHeaderProps {
   userProfile: any;

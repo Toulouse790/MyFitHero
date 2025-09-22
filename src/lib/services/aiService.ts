@@ -1,4 +1,4 @@
-import { supabase } from '../supabase';
+import { supabase } from '@/lib/supabase';
 
 // Types pour l'intelligence artificielle
 export interface AIAnalysis {

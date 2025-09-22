@@ -1,5 +1,5 @@
 import React, { forwardRef, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
-import { AriaUtils } from '../hooks/useAccessibility';
+import { AriaUtils } from '@/shared/hooks/useAccessibility';
 import { cn } from '@/lib/utils';
 
 // 🎯 Types pour l'accessibilité

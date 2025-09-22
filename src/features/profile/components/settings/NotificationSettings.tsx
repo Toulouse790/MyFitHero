@@ -1,11 +1,11 @@
 // src/features/profile/components/settings/NotificationSettings.tsx
 import React, { useState, useCallback } from 'react';
 import { Bell, Save, Loader2 } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
-import { Label } from '../../../../components/ui/label';
-import { Switch } from '../../../../components/ui/switch';
-import { useToast } from '../../../../shared/hooks/use-toast';
-import { supabase } from '../../../../lib/supabase';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { useToast } from '@/shared/hooks/use-toast';
+import { supabase } from '@/lib/supabase';
 
 interface NotificationPreferences {
   workout_reminders: boolean;

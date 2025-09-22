@@ -1,7 +1,7 @@
 import { Info, Loader2, TrendingUp, Search, Star, Target, Users, Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect, useMemo } from 'react';
-import { SportOption } from '../types/onboarding';
+import { SportOption } from '@/features/ai-coach/types/onboarding';
 
 interface Position {
   id: string;

@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { WelcomeStep, GoalsStep, PersonalInfoStep, FinalStep } from '../components/steps';
+import { WelcomeStep, GoalsStep, PersonalInfoStep, FinalStep } from '@/features/onboarding/components/steps';
 
 const onboardingSchema = z.object({
   sport: z.string().min(1, 'Sélectionnez votre sport principal'),

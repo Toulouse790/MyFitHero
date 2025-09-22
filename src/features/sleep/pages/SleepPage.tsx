@@ -35,8 +35,8 @@ import {
 } from 'lucide-react';
 import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
-import AIIntelligence from '../../ai-coach/components/AIIntelligence';
-import { UniformHeader } from '../../profile/components/UniformHeader';
+import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
+import { UniformHeader } from '@/features/profile/components/UniformHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -62,7 +62,7 @@ import {
   SleepBenefits,
   SleepTips,
   SleepActions
-} from '../components';
+} from '@/features/sleep/components';
 
 // --- TYPES ---
 type SportCategory = 'contact' | 'endurance' | 'precision' | 'team';

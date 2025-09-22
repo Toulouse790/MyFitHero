@@ -1,5 +1,5 @@
 // src/features/profile/components/avatar/AvatarUploadService.tsx
-import { supabase } from '../../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 export interface UploadResult {
   success: boolean;

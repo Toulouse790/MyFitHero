@@ -4,15 +4,15 @@ import {
   ConversationalStep, 
   OnboardingData, 
   ValidationRule 
-} from '../types/conversationalOnboarding';
+} from '@/features/auth/types/conversationalOnboarding';
 import { 
   CONVERSATIONAL_ONBOARDING_FLOW,
   getConditionalNextStep 
-} from '../data/conversationalFlow';
+} from '@/features/auth/data/conversationalFlow';
 import { 
   getQuestionsForPack, 
   getEstimatedTimeForPack 
-} from '../data/smartPacks';
+} from '@/features/auth/data/smartPacks';
 
 interface OnboardingState {
   currentStepId: string;

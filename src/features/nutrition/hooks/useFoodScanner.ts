@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
-import { FoodVisionService } from '../services/foodVisionService';
-import { USDANutritionService } from '../services/usdaService';
+import { FoodVisionService } from '@/features/nutrition/services/foodVisionService';
+import { USDANutritionService } from '@/features/nutrition/services/usdaService';
 import { supabase } from '@/lib/supabase';
 
 // Types pour le hook de scan photo

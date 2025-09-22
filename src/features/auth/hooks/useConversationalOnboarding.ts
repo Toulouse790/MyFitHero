@@ -7,13 +7,13 @@ import {
   OnboardingData,
   ConversationalStep,
   OnboardingProgress,
-} from '../types/conversationalOnboarding';
+} from '@/features/auth/types/conversationalOnboarding';
 import {
   CONVERSATIONAL_ONBOARDING_FLOW,
   getConditionalNextStep,
   calculateEstimatedTime,
-} from '../data/conversationalFlow';
-import { getQuestionsForPack, SMART_PACKS } from '../data/smartPacks';
+} from '@/features/auth/data/conversationalFlow';
+import { getQuestionsForPack, SMART_PACKS } from '@/features/auth/data/smartPacks';
 
 interface UseConversationalOnboardingOptions {
   initialData?: Partial<OnboardingData>;

@@ -37,12 +37,12 @@ import {
   OnboardingData,
   ValidationRule,
   QuestionOption,
-} from '../types/conversationalOnboarding';
+} from '@/features/auth/types/conversationalOnboarding';
 import {
   CONVERSATIONAL_ONBOARDING_FLOW,
   getConditionalNextStep,
   calculateEstimatedTime,
-} from '../data/conversationalFlow';
+} from '@/features/auth/data/conversationalFlow';
 import {
   AVAILABLE_SPORTS,
   MAIN_OBJECTIVES,
@@ -57,20 +57,20 @@ import {
   SEASON_PERIODS,
   TRAINING_AVAILABILITY,
   HEALTH_CONDITIONS,
-} from '../data/onboardingData';
+} from '@/features/auth/data/onboardingData';
 import {
   SMART_PACKS,
   getQuestionsForPack,
   shouldAskQuestion,
   getRecommendedPacks,
   getEstimatedTimeForPack,
-} from '../data/smartPacks';
+} from '@/features/auth/data/smartPacks';
 import SportSelector from './SportSelector';
 import PositionSelector from './PositionSelector';
 import PersonalInfoForm from './PersonalInfoForm';
 import PackSelector from './PackSelector';
-import { useSports } from '../services/sportsService';
-import { SportOption } from '../types/onboarding';
+import { useSports } from '@/features/auth/services/sportsService';
+import { SportOption } from '@/features/auth/types/onboarding';
 
 // Utility function to combine classNames
 const cn = (...classes: (string | boolean | undefined)[]) => {

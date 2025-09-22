@@ -6,7 +6,7 @@ import {
   searchSports,
   getPositionsForSport,
   SportOption 
-} from '../data/onboardingData';
+} from '@/features/auth/data/onboardingData';
 
 export interface UserProfile {
   age?: number;

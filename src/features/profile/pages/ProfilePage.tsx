@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
-import AvatarUpload from '../components/AvatarUpload';
-import UserProfileTabs from '../components/UserProfileTabs';
-import UserProfileHeader from '../components/profile/UserProfileHeader';
-import PhysicalDataForm from '../components/profile/PhysicalDataForm';
-import ConnectedScales from '../components/profile/ConnectedScales';
-import WeightHistory from '../components/profile/WeightHistory';
-import { useProfileStats } from '../components/profile/ProfileStats';
+import AvatarUpload from '@/features/profile/components/AvatarUpload';
+import UserProfileTabs from '@/features/profile/components/UserProfileTabs';
+import UserProfileHeader from '@/features/profile/components/profile/UserProfileHeader';
+import PhysicalDataForm from '@/features/profile/components/profile/PhysicalDataForm';
+import ConnectedScales from '@/features/profile/components/profile/ConnectedScales';
+import WeightHistory from '@/features/profile/components/profile/WeightHistory';
+import { useProfileStats } from '@/features/profile/components/profile/ProfileStats';
 
 const ProfilePage: React.FC = () => {
   const { toast } = useToast();

@@ -1,4 +1,4 @@
-import { HydrationData, HydrationAnalysis, DbHydrationData, DbHydrationAnalysis } from '../types';
+import { HydrationData, HydrationAnalysis, DbHydrationData, DbHydrationAnalysis } from '@/features/hydration/types';
 
 /**
  * Conversion des données Hydration de snake_case (DB) vers camelCase (App)

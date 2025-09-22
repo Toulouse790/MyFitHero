@@ -1,7 +1,7 @@
 // src/features/auth/components/onboarding/OnboardingNavigation.tsx
 import React from 'react';
 import { ChevronRight, ChevronLeft, Check, Clock } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
+import { Button } from '@/components/ui/button';
 
 interface OnboardingNavigationProps {
   canGoBack: boolean;

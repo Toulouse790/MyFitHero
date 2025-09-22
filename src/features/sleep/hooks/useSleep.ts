@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { SleepService } from '../services/sleep.service';
+import { SleepService } from '@/features/sleep/services/sleep.service';
 import { SleepEntry } from '@/shared/types/sleep.types';
 
 export interface UseSleepReturn {

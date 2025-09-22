@@ -20,7 +20,7 @@ import {
 import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
-import UniformHeader from '../../profile/components/UniformHeader';
+import UniformHeader from '@/features/profile/components/UniformHeader';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -33,7 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import AIIntelligence from '../../ai-coach/components/AIIntelligence';
+import AIIntelligence from '@/features/ai-coach/components/AIIntelligence';
 
 interface AnalyticsData {
   consistency_rate: number;

@@ -4,12 +4,12 @@ import { GtagEvent } from '@/shared/types/gtag';
 
 import { appStore } from '@/store/appStore';
 import { useToast } from '@/shared/hooks/use-toast';
-import { UniformHeader } from '../../profile/components/UniformHeader';
+import { UniformHeader } from '@/features/profile/components/UniformHeader';
 import { getNutritionPersonalizedMessage } from '@/shared/utils/personalizedMessages';
 import { AIModal } from '@/shared/components/AIModal';
 import { supabase } from '@/lib/supabase';
-import { PhotoNutritionAnalyzer } from '../components/PhotoNutritionAnalyzer';
-import { RecognizedFood } from '../services/foodRecognition';
+import { PhotoNutritionAnalyzer } from '@/features/nutrition/components/PhotoNutritionAnalyzer';
+import { RecognizedFood } from '@/features/nutrition/services/foodRecognition';
 
 // Import des nouveaux composants modulaires
 import {
@@ -20,7 +20,7 @@ import {
   NutritionTips,
   NutritionActions,
   NutritionAnalysis,
-} from '../components';
+} from '@/features/nutrition/components';
 
 // Types & Interfaces simplifiées
 interface NutritionGoals {

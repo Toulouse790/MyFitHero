@@ -6,9 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/shared/hooks/use-toast';
 
 // Import our new modular components and hooks
-import { SocialHeader, SocialFeed, SocialChallenges } from '../components';
-import { useSocialData, useSocialModals } from '../hooks';
-import { SocialTab, FeedFilterType, ChallengeFilterType } from '../types';
+import { SocialHeader, SocialFeed, SocialChallenges } from '@/features/social/components';
+import { useSocialData, useSocialModals } from '@/features/social/hooks';
+import { SocialTab, FeedFilterType, ChallengeFilterType } from '@/features/social/types';
 
 const SocialPageRefactored: React.FC = () => {
   const { toast } = useToast();

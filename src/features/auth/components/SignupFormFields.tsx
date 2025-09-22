@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
-import { SignupFormData, ValidationErrors } from '../hooks/useSignupValidation';
+import { SignupFormData, ValidationErrors } from '@/features/auth/hooks/useSignupValidation';
 
 interface FormFieldProps {
   type: string;

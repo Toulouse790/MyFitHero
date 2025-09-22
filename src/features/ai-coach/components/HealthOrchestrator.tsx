@@ -37,7 +37,7 @@ import {
   WeeklyHealthSummary,
   HealthGoals,
   PillarStatus
-} from '../types/health-orchestrator';
+} from '@/features/ai-coach/types/health-orchestrator';
 import { 
   dbToHealthData, 
   healthDataToDb, 
@@ -46,7 +46,7 @@ import {
   calculatePerformanceMetrics,
   evaluateHealthRisks,
   generatePredictiveMetrics
-} from '../utils/health-orchestrator-mapping';
+} from '@/features/ai-coach/utils/health-orchestrator-mapping';
 
 // Types pour le state machine React
 interface HealthOrchestratorState {

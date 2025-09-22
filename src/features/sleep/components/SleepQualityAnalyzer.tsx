@@ -30,13 +30,13 @@ import {
   SleepTrackingState, 
   WeeklySleepSummary,
   SleepGoals
-} from '../types';
+} from '@/features/sleep/types';
 import { 
   dbToSleepData, 
   sleepDataToDb, 
   calculateSleepScores, 
   generateSleepAIInsights 
-} from '../utils/sleep-mapping';
+} from '@/features/sleep/utils/sleep-mapping';
 
 // Types pour le state machine React
 interface SleepState {

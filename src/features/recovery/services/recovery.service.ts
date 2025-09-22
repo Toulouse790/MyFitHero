@@ -5,7 +5,7 @@ import {
   RecoveryActivity,
   RecoveryRecommendation,
   RecoveryTrendData,
-} from '../types';
+} from '@/features/recovery/types';
 
 export class RecoveryService {
   private static readonly BASE_URL = '/api/recovery';

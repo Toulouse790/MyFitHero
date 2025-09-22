@@ -18,7 +18,7 @@ import {
   Moon,
   CheckCircle2
 } from 'lucide-react';
-import { ConversationalStep, OnboardingData } from '../types/conversationalOnboarding';
+import { ConversationalStep, OnboardingData } from '@/features/auth/types/conversationalOnboarding';
 
 interface OnboardingFormFieldsProps {
   step: ConversationalStep;

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Camera } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/features/components/ui/card';
 
 // Import des composants modulaires
 import { CameraCaptureMode } from './CameraCaptureMode';

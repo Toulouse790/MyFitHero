@@ -1,8 +1,8 @@
 // src/features/nutrition/components/NutritionCalories.tsx
 import React from 'react';
 import { Target, Plus, Camera } from 'lucide-react';
-import { Card, CardContent } from '../../components/ui/card';
-import { Progress } from '../../components/ui/progress';
+import { Card, CardContent } from '@/features/components/ui/card';
+import { Progress } from '@/features/components/ui/progress';
 
 interface NutritionCaloriesProps {
   currentCalories: number;

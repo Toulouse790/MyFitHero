@@ -1,7 +1,7 @@
 // src/features/workout/components/WorkoutProgress.tsx
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
-import { Progress } from '../../components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '@/features/components/ui/card';
+import { Progress } from '@/features/components/ui/progress';
 import { 
   TrendingUp, 
   Target, 

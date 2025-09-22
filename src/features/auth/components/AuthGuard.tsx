@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '@/features/auth/hooks/useAuth';
 
 interface AuthGuardProps {
   children: React.ReactNode;

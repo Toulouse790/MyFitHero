@@ -6,8 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/shared/hooks/use-toast';
-import { useSleepStore } from '../hooks/useSleepStore';
-import { formatDuration } from '../utils/sleepConfig';
+import { useSleepStore } from '@/features/sleep/hooks/useSleepStore';
+import { formatDuration } from '@/features/sleep/utils/sleepConfig';
 
 interface SleepGoalsProps {
   className?: string;

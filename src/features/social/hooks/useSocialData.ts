@@ -8,7 +8,7 @@ import {
   UserStats, 
   FeedFilterType, 
   ChallengeFilterType 
-} from '../types';
+} from '@/features/social/types';
 
 export interface UseSocialDataReturn {
   // States

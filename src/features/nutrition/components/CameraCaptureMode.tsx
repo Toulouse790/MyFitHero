@@ -1,7 +1,7 @@
 // src/features/nutrition/components/CameraCaptureMode.tsx
 import React, { useRef, useState, useEffect } from 'react';
 import { Camera, X } from 'lucide-react';
-import { Button } from '../../components/ui/button';
+import { Button } from '@/features/components/ui/button';
 
 interface CameraCaptureModeProps {
   isCapturing: boolean;

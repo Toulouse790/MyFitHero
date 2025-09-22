@@ -1,6 +1,6 @@
 import { Search, Target } from 'lucide-react';
 import React, { useState, useEffect, useCallback } from 'react';
-import { NutritionService } from '../services/nutrition.service';
+import { NutritionService } from '@/features/nutrition/services/nutrition.service';
 import type {
   NutritionData,
   Meal,
@@ -14,7 +14,7 @@ import type {
   UpdateNutritionGoalsDTO,
   FoodSearchQuery,
   NutritionInsight,
-} from '../types/index';
+} from '@/features/nutrition/types/index';
 
 type NutritionMealInput = {
   type: 'breakfast' | 'lunch' | 'dinner' | 'snack';

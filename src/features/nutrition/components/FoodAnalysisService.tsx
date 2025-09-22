@@ -1,6 +1,6 @@
 // src/features/nutrition/components/FoodAnalysisService.tsx
 import React from 'react';
-import { MockFoodVisionService } from '../services/mockFoodVisionService';
+import { MockFoodVisionService } from '@/features/nutrition/services/mockFoodVisionService';
 
 // Types pour le service d'analyse
 interface FoodScanResult {

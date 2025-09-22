@@ -14,7 +14,7 @@ import {
   AlertTriangle,
   Check
 } from 'lucide-react';
-import { ConversationalStep } from '../types/conversationalOnboarding';
+import { ConversationalStep } from '@/features/auth/types/conversationalOnboarding';
 
 interface NutritionPreferencesFieldProps {
   step: ConversationalStep;
