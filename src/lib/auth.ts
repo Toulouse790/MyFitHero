@@ -26,7 +26,7 @@ export const authClient = {
       if (data.user) {
         // Create user profile in profiles table
         const { error: profileError } = await supabase
-          .from('profiles')
+          .from('user_profiles')
           .insert([{
             id: data.user.id,
             email: data.user.email,

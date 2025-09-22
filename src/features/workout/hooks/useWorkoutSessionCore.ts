@@ -60,11 +60,11 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
 
   const calculateCalories = useCallback(
     (minutes: number) => {
-      const w = appStoreUser?.weight_kg || 70;
+      const w = appStoreUser?.weight || 70;
       const MET = 6;
       return Math.round((w * MET * minutes) / 60);
     },
-    [appStoreUser?.weight_kg]
+    [appStoreUser?.weight]
   );
 
   const persistToSupabase = async (session: WorkoutSession) => {

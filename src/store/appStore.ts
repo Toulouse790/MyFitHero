@@ -175,7 +175,7 @@ export const appStore = create<AppStoreState>()(
           
           // Update user in database
           const { data, error } = await supabase
-            .from('profiles')
+            .from('user_profiles')
             .update({ active_modules: updatedModules })
             .eq('id', currentUser.id)
             .select()

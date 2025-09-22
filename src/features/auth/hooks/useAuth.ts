@@ -9,8 +9,8 @@ export interface UserProfile {
   email?: string;
   avatar_url?: string | null;
   age?: number | null;
-  height_cm?: number | null;
-  weight_kg?: number | null;
+  height?: number | null;
+  weight?: number | null;
   gender?: 'male' | 'female' | 'other' | null;
   activity_level?: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | null;
   fitness_goal?: string | null;
