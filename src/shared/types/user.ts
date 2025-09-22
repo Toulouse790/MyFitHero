@@ -37,6 +37,10 @@ export interface UserProfile {
   language?: string;
   notifications_enabled?: boolean;
   onboarding_completed?: boolean;
+  
+  // Module management
+  active_modules?: string[];
+  profile_type?: string;
 }
 
 // Types Supabase Auth

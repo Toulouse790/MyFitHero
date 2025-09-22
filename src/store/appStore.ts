@@ -48,6 +48,9 @@ interface AppStoreState {
   removeNotification: (id: string) => void;
   clearAllNotifications: () => void;
   
+  // Module actions
+  activateModule: (moduleId: string) => Promise<boolean>;
+  
   // App actions
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
   toggleSidebar: () => void;
@@ -147,6 +150,55 @@ export const appStore = create<AppStoreState>()(
         notifications: [], 
         unreadCount: 0 
       }),
+      
+      // Module actions
+      activateModule: async (moduleId: string) => {
+        const state = get();
+        const currentUser = state.appStoreUser;
+        
+        if (!currentUser?.id) {
+          console.error('No user found for module activation');
+          return false;
+        }
+        
+        try {
+          // Import supabase dynamically to avoid circular dependencies
+          const { supabase } = await import('@/lib/supabase');
+          
+          // Get current active modules or empty array
+          const currentModules = currentUser.active_modules || [];
+          
+          // Add the new module if not already present
+          const updatedModules = currentModules.includes(moduleId) 
+            ? currentModules 
+            : [...currentModules, moduleId];
+          
+          // Update user in database
+          const { data, error } = await supabase
+            .from('profiles')
+            .update({ active_modules: updatedModules })
+            .eq('id', currentUser.id)
+            .select()
+            .single();
+          
+          if (error) {
+            console.error('Error activating module:', error);
+            return false;
+          }
+          
+          // Update local store
+          set((state) => ({
+            appStoreUser: state.appStoreUser 
+              ? { ...state.appStoreUser, active_modules: updatedModules }
+              : null
+          }));
+          
+          return true;
+        } catch (error) {
+          console.error('Error activating module:', error);
+          return false;
+        }
+      },
       
       // App actions
       setTheme: (theme) => set({ theme }),
