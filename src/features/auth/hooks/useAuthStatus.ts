@@ -50,7 +50,7 @@ export const useAuthStatus = (): AuthStatus => {
 
   const signOut = async () => {
     try {
-      const { error: _error } = await supabase.auth.signOut();
+      const { error } = await supabase.auth.signOut();
       if (error) throw error;
       setUser(null);
     } catch (error) {

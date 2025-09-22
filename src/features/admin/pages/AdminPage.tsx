@@ -23,7 +23,7 @@ const Admin: React.FC = () => {
   // Récupérer le profil utilisateur avec le rôle
   const fetchUserProfile = async (userId: string) => {
     try {
-      const { data: _data, error: _error } = await supabase
+      const { data, error } = await supabase
         .from('user_profiles')
         .select('id, role')
         .eq('id', userId)
@@ -46,9 +46,9 @@ const Admin: React.FC = () => {
       // Si pas encore chargé, on attend
       if (loading) return;
 
-      // Si pas authentifié, redirection vers login
+      // Si pas authentifié, redirection vers auth
       if (!isAuthenticated || !session?.user) {
-        setLocation('/login');
+        setLocation('/auth');
         return;
       }
 

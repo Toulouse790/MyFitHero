@@ -54,8 +54,8 @@ export class AuthService {
     } catch (error) {
       // Erreur silencieuse
       console.error('Erreur lors de la connexion:', error);
-      // Données de mock pour le développement
-      return this.getMockLoginResponse(credentials.email);
+      // Ne pas retourner de mock en cas d'erreur - laisser l'erreur remonter
+      throw error;
     }
   }
 
@@ -261,7 +261,8 @@ export class AuthService {
     } catch (error) {
       // Erreur silencieuse
       console.error('Erreur récupération profil:', error);
-      return this.getMockUser();
+      // Ne pas retourner de mock en cas d'erreur - retourner null pour forcer une nouvelle authentification
+      return null;
     }
   }
 
