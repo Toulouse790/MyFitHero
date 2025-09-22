@@ -47,8 +47,13 @@ const Admin: React.FC = () => {
       if (loading) return;
 
       // Si pas authentifié, redirection vers auth
-      if (!isAuthenticated || !session?.user) {
+      if (!isAuthenticated) {
         setLocation('/auth');
+        return;
+      }
+
+      // Si authentifié mais pas de session encore (état transitoire), on attend
+      if (!session?.user) {
         return;
       }
 

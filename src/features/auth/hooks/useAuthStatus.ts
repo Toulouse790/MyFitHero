@@ -41,6 +41,7 @@ export const useAuthStatus = (): AuthStatus => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
     });
@@ -52,6 +53,7 @@ export const useAuthStatus = (): AuthStatus => {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
+      setSession(null);
       setUser(null);
     } catch (error) {
       // Erreur silencieuse
