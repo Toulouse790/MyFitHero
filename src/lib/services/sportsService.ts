@@ -1,20 +1,24 @@
 // client/src/services/sportsService.ts
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { SportOption } from '@/shared/types/onboarding';
 import { useToast } from '@/shared/hooks/use-toast';
-import { useQuery, useQueryClient } from '@tanstack/react-query'; // facultatif
-import React from 'react';
-
-/* ------------------------------------------------------------------ */
-/*                          CONFIG SUPABASE                           */
-/* ------------------------------------------------------------------ */
-
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { supabase } from '@/lib/supabase';
 
 /* ------------------------------------------------------------------ */
 /*                            TYPES                                   */
 /* ------------------------------------------------------------------ */
+
+export interface SportOption {
+  id: string;
+  name: string;
+  emoji?: string;
+  icon?: string;
+  category?: string;
+  positions?: string[];
+  isPopular?: boolean;
+  userCount?: number;
+}
 
 export interface SportRow {
   id: string;
@@ -59,15 +63,15 @@ async function fetchAllSports(): Promise<SportRow[]> {
   // 2. Cache sessionStorage (pour F5)
   const cached = sessionStorage.getItem(MEMO_KEY);
   if (cached) {
-    const { data, expiry } = JSON.parse(cached) as typeof memoryCache;
-    if (expiry > Date.now()) {
-      memoryCache = { data, expiry };
-      return data;
+    const parsed = JSON.parse(cached) as { data: SportRow[]; expiry: number };
+    if (parsed.expiry > Date.now()) {
+      memoryCache = parsed;
+      return parsed.data;
     }
   }
 
   // 3. Requête Supabase
-  const { data: _data, error: _error } = await supabase
+  const { data, error } = await supabase
     .from('sports_library')
     .select('id, name, emoji, icon, category, positions, is_popular, user_count, updated_at')
     .order('name', { ascending: true });
@@ -86,12 +90,16 @@ async function fetchAllSports(): Promise<SportRow[]> {
 }
 
 /** Conversion SQL → SportOption (côté UI) */
-function mapRow(row: SportRow): SportOption {
+function mapRow(row: SportRow | Partial<SportRow>): SportOption {
   return {
-    id: row.id,
-    name: row.name,
-    emoji: row.emoji ?? '🏃‍♂️',
-    positions: row.positions ?? [],
+    id: row.id || '',
+    name: row.name || '',
+    emoji: row.emoji || '🏃‍♂️',
+    icon: row.icon || undefined,
+    category: row.category || undefined,
+    positions: row.positions || [],
+    isPopular: (row as SportRow).is_popular || false,
+    userCount: (row as SportRow).user_count || 0,
   };
 }
 
@@ -126,8 +134,8 @@ export const SportsService = {
 
     if (localRows.length > 0) return localRows.map(mapRow);
 
-    // Recherche SQL ILIKE
-    const { data: _data, error: _error } = await supabase
+        // Recherche SQL ILIKE
+    const { data, error } = await supabase
       .from('sports_library')
       .select('id, name, emoji, icon, category, positions')
       .ilike('name', `%${query}%`)
@@ -141,9 +149,9 @@ export const SportsService = {
     return (data ?? []).map(mapRow);
   },
 
-  /** Détails d’un sport */
+  /** Détails d'un sport */
   async getSportById(id: string): Promise<SportOption | null> {
-    const { data: _data, error: _error } = await supabase
+    const { data, error } = await supabase
       .from('sports_library')
       .select('id, name, emoji, icon, category, positions')
       .eq('id', id)
@@ -193,27 +201,32 @@ export function useSports(options?: { enabled?: boolean }) {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
-  const query = useQuery(['sports', 'all'], () => SportsService.getSports(), {
+  const query = useQuery({
+    queryKey: ['sports', 'all'],
+    queryFn: () => SportsService.getSports(),
     staleTime: CACHE_TTL,
-    cacheTime: CACHE_TTL * 2,
+    gcTime: CACHE_TTL * 2,
     enabled: options?.enabled ?? true,
-    onError: err => {
-      console.error(err);
-      toast({
-        title: 'Erreur',
-        description: 'Impossible de charger la liste des sports',
-        variant: 'destructive',
-      });
-    },
   });
 
+  const { data: sports = [], isLoading, error } = query;
+
+  if (error) {
+    console.error(error);
+    toast({
+      title: 'Erreur',
+      description: 'Impossible de charger la liste des sports',
+      variant: 'destructive',
+    });
+  }
+
   return {
-    sports: query.data ?? [],
-    loading: query.isLoading,
-    error: query.isError ? 'Erreur de chargement' : null,
+    sports,
+    loading: isLoading,
+    error: error ? 'Erreur de chargement' : null,
     refreshSports: () => {
       SportsService.clearCache();
-      queryClient.invalidateQueries(['sports', 'all']);
+      queryClient.invalidateQueries({ queryKey: ['sports', 'all'] });
     },
   };
 }
