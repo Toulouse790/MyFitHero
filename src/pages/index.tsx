@@ -1784,7 +1784,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
 
   // Vérification d'authentification
   if (requiresAuth && !isAuthenticated) {
-    setLocation('/login');
+    setLocation('/auth');
     return null;
   }
 

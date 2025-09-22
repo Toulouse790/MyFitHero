@@ -34,7 +34,7 @@ export const useAuth = () => {
   const signOut = async () => {
     try {
       await authStore.signOut();
-      navigate('/login'); // Redirection vers login après déconnexion
+      navigate('/auth'); // Redirection vers auth après déconnexion
     } catch (error) {
       console.error('Erreur déconnexion:', error);
     }
@@ -77,7 +77,7 @@ export const useIsAuthenticated = () => {
 };
 
 // Hook pour protéger les routes
-export const useRequireAuth = (redirectTo = '/login') => {
+export const useRequireAuth = (redirectTo = '/auth') => {
   const { isAuthenticated, isLoading } = useAuthStore();
   const [, navigate] = useLocation();
 

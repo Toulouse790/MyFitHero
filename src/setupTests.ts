@@ -1,5 +1,17 @@
 import '@testing-library/jest-dom';
 
+// Mock pour env.config.ts qui utilise import.meta.env
+jest.mock('@/core/config/env.config', () => ({
+  env: {
+    SUPABASE_URL: 'https://test.supabase.co',
+    SUPABASE_ANON_KEY: 'test-anon-key',
+    NODE_ENV: 'test',
+    isProd: false,
+    isDev: false,
+    isTest: true,
+  },
+}));
+
 // Configuration globale pour les tests
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),

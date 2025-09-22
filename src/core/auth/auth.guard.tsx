@@ -10,7 +10,7 @@ interface AuthGuardProps {
 
 export const AuthGuard: React.FC<AuthGuardProps> = ({
   children,
-  redirectTo = '/login',
+  redirectTo = '/auth',
   requireProfile = false,
 }) => {
   const { isAuthenticated, isLoading, user } = useAuthStore();
