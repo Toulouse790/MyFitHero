@@ -64,7 +64,9 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout, onStartWorkou
   // Start workout with configured exercises
   const handleStartCustomWorkout = () => {
     // Start session
-    startSession(workout.title, workout.duration);
+    startSession(workout.title, {
+      targetDuration: workout.duration,
+    });
 
     // Add exercises with configured sets
     workout.exerciseList.forEach(exerciseName => {
@@ -74,7 +76,8 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout, onStartWorkou
         name: exerciseName,
         sets: Array(config.sets)
           .fill(null)
-          .map(() => ({
+          .map((_, index) => ({
+            id: `${exerciseName}-set-${index + 1}`,
             reps: config.reps,
             weight: config.weight,
             completed: false,
