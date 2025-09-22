@@ -10,6 +10,8 @@ import { toast } from 'sonner';
 // Configuration et services core
 import { env } from './core/config/env.config';
 import { supabase } from './lib/supabase';
+import { appStore } from './store/appStore';
+import { UserProfile } from './shared/types/user';
 import LoadingScreen from './components/LoadingScreen';
 
 // Lazy loading des composants principaux
@@ -152,6 +154,29 @@ function useAuthState(): AuthState & {
     };
   };
 
+  // Fonction pour convertir User vers UserProfile pour appStore
+  const convertToUserProfile = (user: User): UserProfile => {
+    return {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      full_name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : undefined,
+      first_name: user.firstName,
+      avatar_url: undefined,
+      created_at: user.createdAt,
+      updated_at: user.updatedAt,
+      age: user.age,
+      weight: user.weight,
+      height: user.height,
+      gender: user.gender,
+      activity_level: user.lifestyle as any,
+      goals: user.goals,
+      preferred_sports: user.sport ? [user.sport] : undefined,
+      sport: user.sport,
+      fitness_experience: user.level,
+    };
+  };
+
   // Initialisation de l'état d'authentification
   useEffect(() => {
     let mounted = true;
@@ -180,12 +205,19 @@ function useAuthState(): AuthState & {
             isAuthenticated: true,
             error: null,
           });
+          
+          // Synchroniser avec appStore
+          const userProfile = convertToUserProfile(user);
+          appStore.getState().setUser(userProfile);
         } else if (mounted) {
           setAuthState(prev => ({
             ...prev,
             isLoading: false,
             isAuthenticated: false,
           }));
+          
+          // Nettoyer appStore si pas d'utilisateur
+          appStore.getState().setUser(null);
         }
       } catch (error) {
         console.error('Erreur lors de la récupération de la session:', error);
@@ -224,6 +256,10 @@ function useAuthState(): AuthState & {
             isAuthenticated: true,
             error: null,
           });
+          
+          // Synchroniser avec appStore
+          const userProfile = convertToUserProfile(user);
+          appStore.getState().setUser(userProfile);
 
           // Redirection après connexion/inscription
           // Note: La redirection sera gérée par le composant Router
@@ -235,6 +271,9 @@ function useAuthState(): AuthState & {
             isAuthenticated: false,
             error: null,
           });
+          
+          // Nettoyer appStore lors de la déconnexion
+          appStore.getState().setUser(null);
         }
       }
     );
@@ -338,6 +377,13 @@ function useAuthState(): AuthState & {
         ...prev,
         user: prev.user ? { ...prev.user, ...data } : null,
       }));
+      
+      // Synchroniser avec appStore
+      if (authState.user) {
+        const updatedUser = { ...authState.user, ...data };
+        const userProfile = convertToUserProfile(updatedUser);
+        appStore.getState().setUser(userProfile);
+      }
 
       toast.success('Profil mis à jour');
     } catch (error) {
