@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useLocation } from 'wouter';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { SignupFormData } from './useSignupValidation';
 
 export const useSignupForm = () => {

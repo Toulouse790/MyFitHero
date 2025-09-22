@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useToast } from '../../../shared/hooks/use-toast';
-import { appStore } from '../../../store/appStore';
+import { appStore } from '@/store/appStore';
 import { AvatarPreview, AvatarControls, FileValidation, AvatarUploadService } from './avatar';
 
 interface AvatarUploadProps {

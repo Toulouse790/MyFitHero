@@ -26,7 +26,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 // Types pour les statistiques utilisateur MyFitHero
 interface UserStats {

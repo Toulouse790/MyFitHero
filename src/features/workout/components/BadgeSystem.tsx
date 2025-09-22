@@ -13,8 +13,8 @@ import {
   Unlock,
   Moon,
 } from 'lucide-react';
-import { appStore } from '../../../store/appStore';
-import { supabase } from '../../../lib/supabase';
+import { appStore } from '@/store/appStore';
+import { supabase } from '@/lib/supabase';
 
 interface Badge {
   id: string;

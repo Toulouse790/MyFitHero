@@ -1,7 +1,7 @@
 import { Star, Target } from 'lucide-react';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import type { HydrationStore, HydrationEntry, HydrationGoal, HydrationStats } from '../types';
 
 export const useHydrationStore = create<HydrationStore>()(

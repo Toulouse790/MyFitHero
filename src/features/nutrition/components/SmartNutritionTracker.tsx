@@ -5,7 +5,7 @@ import {
   BarChart3, Utensils, Scale, Timer, Award
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { 
   NutritionData, 
   MealAnalysis, 

@@ -4,8 +4,8 @@ import {
   type AIAnalysis,
   type CoachingResponse,
   type ContextualRecommendation,
-} from '../../../lib/services/aiService';
-import { appStore } from '../../../store/appStore';
+} from '@/lib/services/aiService';
+import { appStore } from '@/store/appStore';
 import { useAnimateOnMount } from '../../../shared/hooks/useAnimations';
 import { useAdaptiveColors } from '../../../shared/components/ThemeProvider';
 

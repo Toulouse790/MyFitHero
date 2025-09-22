@@ -25,9 +25,9 @@ import {
   Brain,
   Info,
 } from 'lucide-react';
-import { appStore } from '../../../store/appStore';
+import { appStore } from '@/store/appStore';
 import { useToast } from '../../../shared/hooks/use-toast';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { useRealtimeSync } from '../../workout/hooks/useRealtimeSync';
 import UniformHeader from '../../profile/components/UniformHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';

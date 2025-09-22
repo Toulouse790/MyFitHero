@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 // client/src/hooks/useRealtimeSync.ts
-import { supabase } from '../../../lib/supabase';
-import { appStore } from '../../../store/appStore';
+import { supabase } from '@/lib/supabase';
+import { appStore } from '@/store/appStore';
 
 interface RealtimeSyncOptions {
   pillar: 'hydration' | 'nutrition' | 'sleep' | 'workout';

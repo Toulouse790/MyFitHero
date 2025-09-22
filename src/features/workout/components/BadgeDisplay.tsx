@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/ca
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { useToast } from '../../../shared/hooks/use-toast';
-import { BadgeService, UserBadge, BadgeProgress } from '../../../lib/services/badgeService';
-import { supabase } from '../../../lib/supabase';
+import { BadgeService, UserBadge, BadgeProgress } from '@/lib/services/badgeService';
+import { supabase } from '@/lib/supabase';
 import { RARITY_CONFIGS, type BadgeRarity } from '../../../shared/utils/badgeConfig';
 
 interface BadgeDisplayProps {

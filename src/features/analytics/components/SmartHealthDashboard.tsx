@@ -17,7 +17,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { useWearableSync } from '@/features/wearables/hooks/useWearableSync';
-import { WearableAnalyzer } from '../../../lib/wearableUtils';
+import { WearableAnalyzer } from '@/lib/wearableUtils';
 import { useToast } from '../../../shared/hooks/use-toast';
 
 const SmartHealthDashboard: React.FC = () => {

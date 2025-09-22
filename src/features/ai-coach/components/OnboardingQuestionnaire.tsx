@@ -1,6 +1,6 @@
 import React from 'react';
 import { useToast } from '../../../shared/hooks/use-toast';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import ConversationalOnboarding from './ConversationalOnboarding';
 import { OnboardingData } from '../../../shared/types/conversationalOnboarding';
 

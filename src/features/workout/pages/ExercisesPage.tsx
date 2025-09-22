@@ -1,7 +1,7 @@
 import { X, Heart, Search, Check } from 'lucide-react';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 // src/pages/ExercisesPage.tsx
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { debounce } from 'lodash-es';

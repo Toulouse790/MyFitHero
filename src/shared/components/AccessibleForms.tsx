@@ -1,7 +1,7 @@
 import React, { forwardRef, InputHTMLAttributes, TextareaHTMLAttributes, SelectHTMLAttributes, useState, useEffect } from 'react';
 import { AccessibleAlert } from './AccessibleComponents';
 import { useAnnounce, AriaUtils } from '../hooks/useAccessibility';
-import { cn } from '../../../lib/utils';
+import { cn } from '@/lib/utils';
 
 // 🎯 Types pour les formulaires accessibles
 interface BaseFieldProps {

@@ -15,7 +15,7 @@ import {
   Users,
   Flame
 } from 'lucide-react';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 // Types pour les analytics volumétriques avancés
 interface WorkoutSet {

@@ -29,7 +29,7 @@ import {
   Exercise 
 } from '../../../shared/types/database-mapping';
 import { useWorkoutSession, useWorkoutSets } from '@/features/workout/hooks/useSupabaseWorkout';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { AdvancedSessionTimer } from './AdvancedSessionTimer';
 import { SmartRestTimer } from './SmartRestTimer';
 import VolumeAnalyticsEngine from './VolumeAnalyticsEngine';

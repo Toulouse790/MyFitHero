@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { appStore } from '../../../store/appStore';
+import { appStore } from '@/store/appStore';
 import { useToast } from '../../../shared/hooks/use-toast';
 import AvatarUpload from '../components/AvatarUpload';
 import UserProfileTabs from '../components/UserProfileTabs';

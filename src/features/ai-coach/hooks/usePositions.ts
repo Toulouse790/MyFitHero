@@ -1,5 +1,5 @@
 // client/src/services/usePositions.ts
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '../../../shared/hooks/use-toast';
 

@@ -1,6 +1,6 @@
 // src/features/social/hooks/useSocialData.ts
 import { useState, useCallback, useEffect } from 'react';
-import { appStore } from '../../../store/appStore';
+import { appStore } from '@/store/appStore';
 import { 
   SocialPost, 
   ExtendedChallenge as Challenge, 

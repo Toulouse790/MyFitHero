@@ -33,7 +33,7 @@ import {
   Sparkles,
   ChevronRight,
 } from 'lucide-react';
-import { appStore } from '../../../store/appStore';
+import { appStore } from '@/store/appStore';
 import { useToast } from '../../../shared/hooks/use-toast';
 import AIIntelligence from '../../ai-coach/components/AIIntelligence';
 import { UniformHeader } from '../../profile/components/UniformHeader';
@@ -51,7 +51,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../../../components/ui/dialog';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 // Import des composants refactorisés
 import {

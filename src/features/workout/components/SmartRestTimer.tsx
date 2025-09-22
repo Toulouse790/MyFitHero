@@ -16,7 +16,7 @@ import {
   Activity,
   Target
 } from 'lucide-react';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 
 // Types pour le système de repos intelligent

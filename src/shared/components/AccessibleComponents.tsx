@@ -1,6 +1,6 @@
 import React, { forwardRef, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react';
 import { AriaUtils } from '../hooks/useAccessibility';
-import { cn } from '../../../lib/utils';
+import { cn } from '@/lib/utils';
 
 // 🎯 Types pour l'accessibilité
 interface AccessibleButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -17,9 +17,9 @@ import {
   Filter,
   Trophy,
 } from 'lucide-react';
-import { appStore } from '../../../store/appStore';
+import { appStore } from '@/store/appStore';
 import { useToast } from '../../../shared/hooks/use-toast';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import UniformHeader from '../../profile/components/UniformHeader';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';

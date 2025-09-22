@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode, useId } from 'react';
-import { cn } from '../../../lib/utils';
+import { cn } from '@/lib/utils';
 
 interface FormFieldProps {
   label: string;

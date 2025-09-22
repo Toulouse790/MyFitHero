@@ -16,7 +16,7 @@ import {
   BarChart3,
   Activity
 } from 'lucide-react';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 
 // Types avancés pour le timer de session

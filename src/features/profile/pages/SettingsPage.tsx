@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'wouter';
 import { Settings as SettingsIcon, User, Bell, Shield, Smartphone, Zap, AlertTriangle, ArrowLeft } from 'lucide-react';
 import { useToast } from '../../../shared/hooks/use-toast';
-import { supabase } from '../../../lib/supabase';
-import { appStore } from '../../../store/appStore';
+import { supabase } from '@/lib/supabase';
+import { appStore } from '@/store/appStore';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import { Button } from '../../../components/ui/button';
 

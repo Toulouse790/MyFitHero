@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
 import { useToast } from '../../../shared/hooks/use-toast';
-import { UserDataService, DailyCheckin } from '../../../lib/services/userDataService';
-import { BadgeService } from '../../../lib/services/badgeService';
-import { supabase } from '../../../lib/supabase';
+import { UserDataService, DailyCheckin } from '@/lib/services/userDataService';
+import { BadgeService } from '@/lib/services/badgeService';
+import { supabase } from '@/lib/supabase';
 
 interface DailyCheckInProps {
   className?: string;

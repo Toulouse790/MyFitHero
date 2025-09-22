@@ -1,5 +1,5 @@
 // src/features/nutrition/services/foodRecognition.ts
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 export interface FoodItem {
   id: string;

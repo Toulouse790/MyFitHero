@@ -1,5 +1,5 @@
 // client/src/services/positionService.ts
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 const CACHE_TTL = 5 * 60_000;
 const __MEMO_KEY = 'positions-cache-v1';
