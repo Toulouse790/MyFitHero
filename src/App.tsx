@@ -20,6 +20,8 @@ const AuthPage = lazy(() => import('./features/auth/pages/AuthPage'));
 const ResetPasswordPage = lazy(() => import('./features/auth/pages/ResetPasswordPage'));
 const Dashboard = lazy(() => import('./features/dashboard/pages/Dashboard'));
 const OnboardingQuestionnaire = lazy(() => import('./features/ai-coach/components/OnboardingQuestionnaire'));
+const ProfilePage = lazy(() => import('./features/profile/pages/ProfilePage'));
+const SettingsPage = lazy(() => import('./features/profile/pages/SettingsPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
@@ -373,8 +375,12 @@ function useAuthState(): AuthState & {
     try {
       if (!authState.user) throw new Error('Utilisateur non connecté');
 
+      console.log('🔄 UpdateProfile - Data to update:', data);
+      console.log('🔄 UpdateProfile - Current authState.user:', authState.user);
+
       // Convertir les données camelCase vers snake_case pour Supabase
       const supabasePayload = toSupabasePayload(data);
+      console.log('📤 UpdateProfile - Supabase payload:', supabasePayload);
 
       const { error } = await supabase
         .from('user_profiles')
@@ -397,12 +403,15 @@ function useAuthState(): AuthState & {
       if (authState.user) {
         const updatedUser = { ...authState.user, ...data };
         const userProfile = convertToUserProfile(updatedUser);
+        console.log('📤 UpdateProfile - Syncing with appStore:', userProfile);
         appStore.getState().setUser(userProfile);
+        console.log('✅ UpdateProfile - AppStore updated successfully');
       }
 
       toast.success('Profil mis à jour');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Erreur de mise à jour';
+      console.error('❌ UpdateProfile error:', error);
       toast.error(message);
       throw error;
     }
@@ -413,13 +422,21 @@ function useAuthState(): AuthState & {
     try {
       if (!authState.user) throw new Error('Utilisateur non connecté');
 
+      console.log('🔄 CompleteOnboarding - Data received:', data);
+      console.log('🔄 CompleteOnboarding - Current user before update:', authState.user);
+
       await updateProfile({
         ...data,
         onboardingCompleted: true,
       });
 
+      // Vérifier que appStore a bien été mis à jour
+      const currentAppStoreUser = appStore.getState().appStoreUser;
+      console.log('✅ CompleteOnboarding - AppStore user after update:', currentAppStoreUser);
+
       toast.success('Configuration terminée ! Bienvenue dans MyFitHero 🎉');
     } catch (error) {
+      console.error('❌ CompleteOnboarding error:', error);
       throw error;
     }
   };
@@ -525,6 +542,28 @@ function App() {
                   <Redirect to="/onboarding" />
                 ) : (
                   <Dashboard />
+                )}
+              </Route>
+
+              {/* Route profile - protégée et onboarding requis */}
+              <Route path="/profile">
+                {!auth.isAuthenticated ? (
+                  <Redirect to="/" />
+                ) : !auth.user?.onboardingCompleted ? (
+                  <Redirect to="/onboarding" />
+                ) : (
+                  <ProfilePage />
+                )}
+              </Route>
+
+              {/* Route settings - protégée et onboarding requis */}
+              <Route path="/settings">
+                {!auth.isAuthenticated ? (
+                  <Redirect to="/" />
+                ) : !auth.user?.onboardingCompleted ? (
+                  <Redirect to="/onboarding" />
+                ) : (
+                  <SettingsPage />
                 )}
               </Route>
 
