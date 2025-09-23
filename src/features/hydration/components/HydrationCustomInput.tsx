@@ -1,7 +1,7 @@
 // src/features/hydration/components/HydrationCustomInput.tsx
 import React from 'react';
 import { Droplets, Plus, Minus } from 'lucide-react';
-import { Database } from '@/features/workout/types/database';
+import { Database } from '@/lib/types/database';
 
 type DrinkType = Database['public']['Tables']['hydration_logs']['Row']['drink_type'];
 type HydrationContext = Database['public']['Tables']['hydration_logs']['Row']['hydration_context'];

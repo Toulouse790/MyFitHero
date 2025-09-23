@@ -2,8 +2,8 @@
 // IMPORTANT: Certains types sont dupliqués entre ces fichiers
 // Priorité: database.ts > WorkoutTypes.ts pour éviter les conflits
 
-// Base principale (types Supabase) - source de vérité
-export * from './database';
+// Base principale (types Supabase) - source de vérité centralisée
+export * from '@/lib/types/database';
 
 // Types métier (renommage nécessaire pour éviter conflicts)
 export type {

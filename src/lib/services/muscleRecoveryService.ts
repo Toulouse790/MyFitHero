@@ -14,7 +14,7 @@ import type {
   Workout,
   SleepSession,
   DailyStats,
-} from '@/features/workout/types/database';
+} from '@/lib/types/database';
 
 export class MuscleRecoveryService {
   // === CONSTANTES DE RÉCUPÉRATION ===

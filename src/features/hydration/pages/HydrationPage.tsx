@@ -43,7 +43,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Database } from '@/features/workout/types/database';
+import { Database, HydrationLog as SupabaseHydrationLog, HydrationLogInsert } from '@/lib/types/database';
 import { getSportCategoryForHydration, HydrationSportCategory } from '@/shared/utils/sportMapping';
 import { getHydrationPersonalizedMessage } from '@/shared/utils/personalizedMessages';
 import { useDataLoader } from '@/shared/hooks/useDataLoader';
@@ -83,7 +83,7 @@ interface SportHydrationConfig {
   }[];
 }
 
-type HydrationLog = Database['public']['Tables']['hydration_logs']['Row'];
+type HydrationLog = SupabaseHydrationLog;
 type DailyStats = Database['public']['Tables']['daily_stats']['Row'];
 
 // --- CONFIGURATION HYDRATATION PAR SPORT ---
