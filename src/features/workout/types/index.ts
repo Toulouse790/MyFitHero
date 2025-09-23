@@ -1,14 +1,13 @@
 // Export des types de la feature workout
 // IMPORTANT: Certains types sont dupliqués entre ces fichiers
-// Priorité: database.ts > WorkoutTypes.ts > supabase.ts > api.ts > common.ts > muscleRecovery.ts
+// Priorité: database.ts > WorkoutTypes.ts pour éviter les conflits
 
-// Base principale (types Supabase)
+// Base principale (types Supabase) - source de vérité
 export * from './database';
 
 // Types métier (renommage nécessaire pour éviter conflicts)
 export type {
   Workout as WorkoutInterface,
-  WorkoutSession,
   WorkoutStats,
   WeeklyWorkoutStats,
   MonthlyWorkoutStats,
@@ -22,8 +21,11 @@ export type {
   WorkoutSearchQuery
 } from './WorkoutTypes';
 
-// Types complémentaires (sans doublons)
-// export * from './supabase';
-// export * from './api';
-// export * from './muscleRecovery';
-// export * from './common';
+// Types spécialisés sans conflits (mais en conflit avec database.ts)
+// Note: MuscleRecoveryData et UserRecoveryProfile sont aussi dans database.ts
+export type {
+  MuscleGroup,
+  RecoveryStatus,
+  RecoveryRecommendation,
+  GlobalRecoveryMetrics
+} from './muscleRecovery';

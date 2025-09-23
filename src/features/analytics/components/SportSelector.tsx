@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSports } from '@/lib/services/sportsService';
-import { SportOption } from '@/features/auth/types/onboarding';
+import { SportOption } from '@/core/config/sports.config';
 import { useToast } from '@/shared/hooks/use-toast';
 import { useDebounce } from '@/features/ai-coach/hooks/use-debounce';
 
@@ -41,14 +41,16 @@ interface SportSelectorProps {
   locale?: 'fr' | 'en';
 }
 
-interface SportWithMetadata extends SportOption {
-  popularity?: number;
-  isRecommended?: boolean;
-  isTrending?: boolean;
-  category?: string;
-  searchScore?: number;
-  userCount?: number;
-  lastUpdated?: Date;
+// Interface simplifiée pour éviter les conflits de types
+interface SportWithMetadata {
+  id: string;
+  name: string;
+  category: string;
+  emoji: string;
+  description: string;
+  positions?: string[];
+  isRecommended: boolean;
+  popularity: number;
 }
 
 interface SearchState {
