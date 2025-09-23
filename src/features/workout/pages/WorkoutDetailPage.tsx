@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { ArrowLeft, Play, Pause, RotateCcw, Clock, Target, TrendingUp, MessageSquare, Plus, Edit3 } from 'lucide-react';
+import { ArrowLeft, Play, Pause, RotateCcw, Clock, Target, TrendingUp, MessageSquare, Plus, Edit3, Minus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -47,6 +47,7 @@ const WorkoutDetailPage = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [restTimer, setRestTimer] = useState(0);
+  const [adjustedRestTime, setAdjustedRestTime] = useState<number | null>(null);
   const [workoutNotes, setWorkoutNotes] = useState('');
   const [showNotes, setShowNotes] = useState(false);
 
@@ -182,10 +183,12 @@ const WorkoutDetailPage = () => {
     if (currentSet < currentExercise.sets) {
       // Passer à la série suivante
       setCurrentSet(prev => prev + 1);
-      setRestTimer(currentExercise.restTime);
+      const restTime = adjustedRestTime ?? currentExercise.restTime;
+      setRestTimer(restTime);
+      setAdjustedRestTime(null); // Reset pour la prochaine série
       toast({
         title: `Série ${currentSet} terminée !`,
-        description: `Repos: ${currentExercise.restTime}s avant la série ${currentSet + 1}`,
+        description: `Repos: ${restTime}s avant la série ${currentSet + 1}`,
         variant: "default",
       });
     } else {
@@ -225,6 +228,7 @@ const WorkoutDetailPage = () => {
     setCurrentSet(1);
     setTimeElapsed(0);
     setRestTimer(0);
+    setAdjustedRestTime(null);
     setIsTimerRunning(false);
     
     const resetExercises = workout.exercises.map(ex => ({ ...ex, completed: false }));
@@ -233,6 +237,22 @@ const WorkoutDetailPage = () => {
       exercises: resetExercises,
       completedSets: 0
     }));
+  };
+
+  const adjustRestTime = (increment: number) => {
+    if (restTimer > 0) {
+      const currentExercise = getCurrentExercise();
+      const baseTime = adjustedRestTime ?? currentExercise.restTime;
+      const newTime = Math.max(15, baseTime + increment); // Minimum 15 secondes
+      setAdjustedRestTime(newTime);
+      setRestTimer(newTime);
+      
+      toast({
+        title: `Temps de repos ajusté`,
+        description: `Nouveau temps: ${newTime}s (${increment > 0 ? '+' : ''}${increment}s)`,
+        variant: "default",
+      });
+    }
   };
 
   const goBack = () => {
@@ -280,6 +300,26 @@ const WorkoutDetailPage = () => {
             <div>
               <div className="text-2xl font-bold text-purple-600">{restTimer}</div>
               <div className="text-xs text-gray-600">Repos (s)</div>
+              {restTimer > 0 && (
+                <div className="flex gap-1 mt-1 justify-center">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => adjustRestTime(-15)}
+                    className="h-6 w-6 p-0"
+                  >
+                    <Minus className="h-3 w-3" />
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => adjustRestTime(15)}
+                    className="h-6 w-6 p-0"
+                  >
+                    <Plus className="h-3 w-3" />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </CardContent>
