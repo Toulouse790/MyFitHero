@@ -16,7 +16,7 @@ export const useAuth = () => {
   const signUp = async (data: SignUpData) => {
     try {
       await authStore.signUp(data);
-      navigate('/onboarding'); // Redirection vers l'onboarding après inscription
+      navigate('/dashboard'); // Redirection vers le dashboard après inscription
     } catch (error) {
       console.error('Erreur inscription:', error);
     }

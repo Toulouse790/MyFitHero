@@ -76,7 +76,7 @@ export const useSignupForm = () => {
     
     // Redirection après 3 secondes
     setTimeout(() => {
-      setLocation('/onboarding');
+      setLocation('/dashboard');
     }, 3000);
   }, [formData, setLocation]);
 

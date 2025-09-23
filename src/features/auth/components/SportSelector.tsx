@@ -117,11 +117,11 @@ const SportSelector: React.FC<SportSelectorProps> = ({
                 onClick={() => handleSportSelect(sport)}
                 className="h-auto p-4 flex flex-col items-center space-y-2"
               >
-                <span className="text-2xl">{sport.icon}</span>
+                <span className="text-2xl">{sport.emoji}</span>
                 <span className="text-sm font-medium">{sport.name}</span>
                 <div className="flex items-center gap-1">
                   <TrendingUp className="w-3 h-3 text-green-500" />
-                  <span className="text-xs text-gray-500">{sport.popularity}%</span>
+                  <span className="text-xs text-gray-500">{sport.popularity || 0}%</span>
                 </div>
               </Button>
             ))}
@@ -176,7 +176,7 @@ const SportSelector: React.FC<SportSelectorProps> = ({
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{sport.icon}</span>
+                    <span className="text-2xl">{sport.emoji}</span>
                     <div>
                       <CardTitle className="text-base">{sport.name}</CardTitle>
                       <p className="text-xs text-gray-500 capitalize">
@@ -184,7 +184,7 @@ const SportSelector: React.FC<SportSelectorProps> = ({
                       </p>
                     </div>
                   </div>
-                  {sport.popularity >= 80 && (
+                  {sport.popularity && sport.popularity >= 80 && (
                     <Badge variant="secondary" className="text-xs">
                       <TrendingUp className="w-3 h-3 mr-1" />
                       Populaire

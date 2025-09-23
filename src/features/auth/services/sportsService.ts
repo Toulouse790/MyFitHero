@@ -1,12 +1,12 @@
 import { 
-  AVAILABLE_SPORTS, 
-  getSportById, 
-  getSportsByCategory, 
-  getPopularSports, 
+  AVAILABLE_SPORTS,
+  getSportsByCategory,
+  getPopularSports,
   searchSports,
+  getSportById,
   getPositionsForSport,
-  SportOption 
-} from '@/features/auth/data/onboardingData';
+  type SportOption 
+} from '@/core/config/sports.config';
 
 export interface UserProfile {
   age?: number;
@@ -207,7 +207,7 @@ export class SportsService {
         }
 
         // Bonus popularité
-        score += sport.popularity * 0.1;
+        score += (sport.popularity || 0) * 0.1;
 
         // Ne garder que les sports avec un score significatif
         if (score > 10) {
@@ -536,5 +536,5 @@ export function useSports() {
   };
 }
 
-export { SportOption };
+export type { SportOption };
 export default SportsService;

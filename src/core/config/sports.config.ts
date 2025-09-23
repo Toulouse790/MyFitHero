@@ -294,8 +294,9 @@ export const getSportsByCategory = (category: string): SportOption[] => {
   return AVAILABLE_SPORTS.filter(sport => sport.category === category);
 };
 
-export const getPopularSports = (): SportOption[] => {
-  return AVAILABLE_SPORTS.filter(sport => (sport.popularity || 0) >= 70);
+export const getPopularSports = (limit?: number): SportOption[] => {
+  const popularSports = AVAILABLE_SPORTS.filter(sport => (sport.popularity || 0) >= 70);
+  return limit ? popularSports.slice(0, limit) : popularSports;
 };
 
 export const searchSports = (query: string): SportOption[] => {
@@ -304,6 +305,15 @@ export const searchSports = (query: string): SportOption[] => {
     sport.name.toLowerCase().includes(lowerQuery) ||
     sport.description.toLowerCase().includes(lowerQuery)
   );
+};
+
+export const getSportById = (id: string): SportOption | undefined => {
+  return AVAILABLE_SPORTS.find(sport => sport.id === id);
+};
+
+export const getPositionsForSport = (sportId: string): string[] => {
+  const sport = getSportById(sportId);
+  return sport?.positions || ['all'];
 };
 
 export default sportsConfig;

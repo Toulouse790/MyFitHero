@@ -1,537 +1,138 @@
-import { Activity } from 'lucide-react';
-import React, { useState, useEffect, useCallback } from 'react';
-// hooks/onboarding/useConversationalOnboarding.ts
-import { supabase } from '@/lib/supabase';
-import { useToast } from '@/shared/hooks/use-toast';
-import {
-  OnboardingData,
-  ConversationalStep,
-  OnboardingProgress,
-} from '@/features/auth/types/conversationalOnboarding';
-import {
-  CONVERSATIONAL_ONBOARDING_FLOW,
-  getConditionalNextStep,
-  calculateEstimatedTime,
-} from '@/features/auth/data/conversationalFlow';
-import { getQuestionsForPack, SMART_PACKS } from '@/features/auth/data/smartPacks';
+// Hook simplifié pour l'onboarding conversationnel
+import { useState, useCallback } from 'react';
+import { OnboardingData } from '@/features/auth/types/conversationalOnboarding';
 
-interface UseConversationalOnboardingOptions {
-  initialData?: Partial<OnboardingData>;
-  autoSave?: boolean;
-  debug?: boolean;
-}
-
-interface ConversationalOnboardingState {
-  currentStepId: string;
+export interface UseConversationalOnboardingReturn {
   data: OnboardingData;
-  currentResponse: any;
+  currentStep: string;
+  progress: number;
   isLoading: boolean;
-  error: string | null;
-  availableSteps?: string[];
-  stepHistory: string[];
+  errors: string[];
+  updateData: (updates: Partial<OnboardingData>) => void;
+  nextStep: () => void;
+  previousStep: () => void;
+  complete: () => Promise<void>;
 }
 
-export const useConversationalOnboarding = ({
-  initialData = {},
-  autoSave = true,
-  debug = false,
-}: UseConversationalOnboardingOptions = {}) => {
-  const { toast } = useToast();
-
-  // État initial
-  const [state, setState] = useState<ConversationalOnboardingState>({
-    isLoading: false,
-    error: null,
-    currentStepId: CONVERSATIONAL_ONBOARDING_FLOW[0]?.id || 'welcome',
-    currentResponse: null,
-    data: {
-      version: '2.0.0',
-      progress: {
-        currentStep: CONVERSATIONAL_ONBOARDING_FLOW[0]?.id || 'welcome',
-        completedSteps: [],
-        skippedSteps: [],
-        totalSteps: CONVERSATIONAL_ONBOARDING_FLOW.length,
-        estimatedTimeLeft: 0,
-        timeSpent: 0,
-        startedAt: new Date(),
-        lastActivity: new Date(),
-        averageTimePerStep: 0,
-        skipCount: 0,
-        backCount: 0,
-        errorCount: 0,
-        helpViewCount: 0,
-        moduleSpecificSteps: {},
-        userPreferences: {
-          preferredInputTypes: [],
-          skipsTendency: 0,
-          detailLevel: 'standard',
-          pace: 'normal',
-        },
-        completionQuality: 0,
-        validationScore: 1,
-        consistencyScore: 1,
-      },
+export function useConversationalOnboarding(
+  initialData?: Partial<OnboardingData>
+): UseConversationalOnboardingReturn {
+  const [data, setData] = useState<OnboardingData>({
+    version: '1.0',
+    startedAt: new Date(),
+    lastUpdated: new Date(),
+    selectedModules: [],
+    firstName: '',
+    fitnessGoals: [],
+    sport: '',
+    foodAllergies: [],
+    dietaryRestrictions: [],
+    averageSleepHours: 8,
+    sleepDifficulties: [],
+    hydrationGoal: 2.5,
+    hydrationReminders: true,
+    healthConditions: [],
+    availableTimePerDay: 60,
+    privacyConsent: false,
+    marketingConsent: false,
+    progress: {
+      currentStep: 'welcome',
+      completedSteps: [],
+      skippedSteps: [],
+      totalSteps: 7,
+      estimatedTimeLeft: 15,
+      timeSpent: 0,
       startedAt: new Date(),
-      lastUpdated: new Date(),
-      selectedModules: initialData.selectedModules || [],
-      // Ajout des propriétés manquantes avec des valeurs par défaut
-      firstName: initialData.firstName || undefined,
-      age: initialData.age || undefined,
-      gender: initialData.gender || undefined,
-      lifestyle: initialData.lifestyle || undefined,
-      mainObjective: initialData.mainObjective || undefined,
-      sport: initialData.sport || undefined,
-      sportPosition: initialData.sportPosition || undefined,
-      sportLevel: initialData.sportLevel || undefined,
-      seasonPeriod: initialData.seasonPeriod || undefined,
-      trainingFrequency: initialData.trainingFrequency || undefined,
-      equipmentLevel: initialData.equipmentLevel || undefined,
-      strengthObjective: initialData.strengthObjective || undefined,
-      strengthExperience: initialData.strengthExperience || undefined,
-      dietaryPreference: initialData.dietaryPreference || undefined,
-      foodAllergies: initialData.foodAllergies || [],
-      nutritionObjective: initialData.nutritionObjective || undefined,
-      dietaryRestrictions: initialData.dietaryRestrictions || [],
-      averageSleepHours: initialData.averageSleepHours || undefined,
-      sleepDifficulties: initialData.sleepDifficulties || [],
-      hydrationGoal: initialData.hydrationGoal || undefined,
-      hydrationReminders: initialData.hydrationReminders || undefined,
-      motivation: initialData.motivation || undefined,
-      availableTimePerDay: initialData.availableTimePerDay || undefined,
-      privacyConsent: initialData.privacyConsent || false,
-      marketingConsent: initialData.marketingConsent || false,
-      healthConditions: initialData.healthConditions || [],
-      fitnessGoals: initialData.fitnessGoals || [],
-      currentWeight: initialData.currentWeight || undefined,
-      targetWeight: initialData.targetWeight || undefined,
-      height: initialData.height || undefined,
-      selectedPack: initialData.selectedPack || undefined,
+      lastActivity: new Date(),
+      averageTimePerStep: 0,
+      skipCount: 0,
+      backCount: 0,
+      errorCount: 0,
+      helpViewCount: 0,
+      moduleSpecificSteps: {
+        sport: { steps: [], completed: [], skipped: [], timeSpent: 0 },
+        strength: { steps: [], completed: [], skipped: [], timeSpent: 0 },
+        nutrition: { steps: [], completed: [], skipped: [], timeSpent: 0 },
+        hydration: { steps: [], completed: [], skipped: [], timeSpent: 0 },
+        sleep: { steps: [], completed: [], skipped: [], timeSpent: 0 },
+        wellness: { steps: [], completed: [], skipped: [], timeSpent: 0 },
+      },
+      userPreferences: {
+        preferredInputTypes: [],
+        skipsTendency: 0,
+        detailLevel: 'standard',
+        pace: 'normal',
+      },
+      completionQuality: 0,
+      validationScore: 100,
+      consistencyScore: 100,
     },
-    stepHistory: [],
+    ...initialData,
   });
 
-  // Mise à jour des étapes disponibles selon le pack
-  useEffect(() => {
-    if (state.data.selectedPack) {
-      const steps = getQuestionsForPack(state.data.selectedPack);
-      setState(prev => ({
-        ...prev,
-        availableSteps: steps,
-        data: {
-          ...prev.data,
-          progress: {
-            ...prev.data.progress,
-            totalSteps: steps.length,
-          },
-        },
-      }));
-    }
-  }, [state.data.selectedPack, state.data.selectedModules]);
+  const [currentStep, setCurrentStep] = useState('welcome');
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
 
-  // Étape courante
-  const currentStep = CONVERSATIONAL_ONBOARDING_FLOW.find(
-    (step: ConversationalStep) => step.id === state.currentStepId
-  );
-
-  // Calcul du pourcentage de progression
-  const progressPercentage = Math.round(
-    (state.data.progress.completedSteps.length / state.data.progress.totalSteps) * 100
-  );
-
-  // Validation des réponses
-  const validateResponse = useCallback(
-    (step: ConversationalStep, response: any): string[] => {
-      const errors: string[] = [];
-
-      if (!step.validation) return errors;
-
-      step.validation.forEach(rule => {
-        switch (rule.type) {
-          case 'required':
-            if (
-              !response ||
-              (Array.isArray(response) && response.length === 0) ||
-              (typeof response === 'string' && response.trim() === '')
-            ) {
-              errors.push(rule.message);
-            }
-            break;
-
-          case 'min':
-            if (typeof response === 'string' && response.length < rule.value) {
-              errors.push(rule.message);
-            } else if (typeof response === 'number' && response < rule.value) {
-              errors.push(rule.message);
-            } else if (Array.isArray(response) && response.length < rule.value) {
-              errors.push(rule.message);
-            }
-            break;
-
-          case 'max':
-            if (typeof response === 'string' && response.length > rule.value) {
-              errors.push(rule.message);
-            } else if (typeof response === 'number' && response > rule.value) {
-              errors.push(rule.message);
-            } else if (Array.isArray(response) && response.length > rule.value) {
-              errors.push(rule.message);
-            }
-            break;
-
-          case 'email':
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (typeof response === 'string' && !emailRegex.test(response)) {
-              errors.push(rule.message);
-            }
-            break;
-
-          case 'range':
-            if (typeof response === 'number' && (response < rule.min || response > rule.max)) {
-              errors.push(rule.message);
-            }
-            break;
-
-          case 'custom':
-            if (rule.validator && !rule.validator(response, state.data)) {
-              errors.push(rule.message);
-            }
-            break;
-        }
-      });
-
-      return errors;
-    },
-    [state.data]
-  );
-
-  // Sauvegarde des données
-  const saveProgress = useCallback(
-    async (data: OnboardingData) => {
-      if (!autoSave) return;
-
-      try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (!user) return;
-
-        const upsertData = {
-          id: user.id,
-          email: user.email, // Inclure l'email requis
-          first_name: data.firstName || null,
-          age: data.age || null,
-          gender: data.gender || null,
-          height: data.height || null,
-          current_weight: data.currentWeight || null,
-          target_weight: data.targetWeight || null,
-          lifestyle: data.lifestyle || null,
-          fitness_goal: data.mainObjective || null,
-          fitness_goals: data.fitnessGoals || [],
-          modules: data.selectedModules || [],
-          active_modules: data.selectedModules || [],
-          sport: data.sport || null,
-          sport_position: data.sportPosition || null,
-          sport_level: data.sportLevel || null,
-          season_period: data.seasonPeriod || null,
-          training_frequency: data.trainingFrequency || null,
-          available_time_per_day: data.availableTimePerDay || 60,
-          equipment_level: data.equipmentLevel || null,
-          strength_objective: data.strengthObjective || null,
-          strength_experience: data.strengthExperience || null,
-          dietary_preference: data.dietaryPreference || null,
-          food_allergies: data.foodAllergies || [],
-          nutrition_objective: data.nutritionObjective || null,
-          dietary_restrictions: data.dietaryRestrictions || [],
-          sleep_hours_average: data.averageSleepHours || 8,
-          sleep_difficulties: data.sleepDifficulties || [],
-          water_intake_goal: data.hydrationGoal || 2.5,
-          hydration_reminders:
-            data.hydrationReminders !== undefined ? data.hydrationReminders : true,
-          health_conditions: data.healthConditions || [],
-          motivation: data.motivation || null,
-          privacy_consent: data.privacyConsent || false,
-          marketing_consent: data.marketingConsent || false,
-          onboarding_completed: false,
-          updated_at: new Date().toISOString(),
-        };
-
-        await supabase.from('user_profiles').upsert(upsertData, { onConflict: 'id' });
-      } catch (error) {
-      // Erreur silencieuse
-        console.error('Erreur sauvegarde:', error);
-        if (debug) {
-          toast({
-            title: 'Erreur de sauvegarde',
-            description: 'Impossible de sauvegarder automatiquement.',
-            variant: 'destructive',
-          });
-        }
-      }
-    },
-    [autoSave, debug, toast]
-  );
-
-  // Mise à jour de la réponse courante
-  const setCurrentResponse = useCallback((response: any) => {
-    setState(prev => ({
+  const updateData = useCallback((updates: Partial<OnboardingData>) => {
+    setData(prev => ({
       ...prev,
-      currentResponse: response,
-      validationErrors: [], // Clear errors when user types
+      ...updates,
+      lastUpdated: new Date(),
     }));
   }, []);
 
-  // Navigation vers l'étape suivante
-  const goToNextStep = useCallback(async () => {
-    if (!currentStep) return;
+  const nextStep = useCallback(() => {
+    // Logique simplifiée pour passer à l'étape suivante
+    setCurrentStep(prev => {
+      switch (prev) {
+        case 'welcome': return 'main_objective';
+        case 'main_objective': return 'pack_selection';
+        case 'pack_selection': return 'personal_info';
+        case 'personal_info': return 'sport_selection';
+        case 'sport_selection': return 'completion';
+        default: return 'completion';
+      }
+    });
+  }, []);
 
-    // Validation
-    const errors = validateResponse(currentStep, state.currentResponse);
-    if (errors.length > 0) {
-      setState(prev => ({ ...prev, validationErrors: errors }));
-      return;
-    }
+  const previousStep = useCallback(() => {
+    // Logique pour revenir en arrière
+    setCurrentStep(prev => {
+      switch (prev) {
+        case 'main_objective': return 'welcome';
+        case 'pack_selection': return 'main_objective';
+        case 'personal_info': return 'pack_selection';
+        case 'sport_selection': return 'personal_info';
+        case 'completion': return 'sport_selection';
+        default: return 'welcome';
+      }
+    });
+  }, []);
 
-    setState(prev => ({ ...prev, validationErrors: [], isLoading: true }));
-
+  const complete = useCallback(async () => {
+    setIsLoading(true);
     try {
-      // Mise à jour des données
-      const dataKey = (currentStep as any).dataKey || 'firstName';
-      const updatedData = {
-        ...state.data,
-        [dataKey]: state.currentResponse,
-        lastUpdated: new Date(),
-        progress: {
-          ...state.data.progress,
-          completedSteps: [...state.data.progress.completedSteps, currentStep.id],
-          currentStep: currentStep.id,
-          lastActivity: new Date(),
-        },
-      };
-
-      // Logique spéciale pour certaines étapes
-      if (currentStep.id === 'pack_selection') {
-        updatedData.selectedPack = state.currentResponse;
-        const selectedPack = SMART_PACKS.find(p => p.id === state.currentResponse);
-        if (selectedPack && selectedPack.id !== 'custom') {
-          updatedData.selectedModules = selectedPack.modules;
-        }
-      }
-
-      if (currentStep.id === 'module_selection') {
-        updatedData.selectedModules = state.currentResponse;
-        updatedData.progress.estimatedTimeLeft = 5; // Placeholder - will be calculated properly later
-      }
-
-      if (currentStep.id === 'personal_info' && typeof state.currentResponse === 'object') {
-        Object.assign(updatedData, state.currentResponse);
-      }
-
-      // Détermination de l'étape suivante
-      let nextStepId: string;
-
-      if (state.data.selectedPack && state.data.selectedPack !== 'custom') {
-        const packSteps = state.availableSteps;
-        if (packSteps) {
-          const currentIndex = packSteps.indexOf(currentStep.id);
-
-          if (currentIndex !== -1 && currentIndex < packSteps.length - 1) {
-            nextStepId = packSteps[currentIndex + 1];
-          } else {
-            nextStepId = 'completion';
-          }
-        } else {
-          nextStepId = 'completion';
-        }
-      } else {
-        if (typeof currentStep.nextStep === 'function') {
-          const nextStepResult = currentStep.nextStep(state.currentResponse, updatedData);
-          nextStepId = typeof nextStepResult === 'string' ? nextStepResult : await nextStepResult;
-        } else {
-          nextStepId = currentStep.nextStep || 'completion';
-        }
-
-        nextStepId =
-          getConditionalNextStep(currentStep.id, state.currentResponse, updatedData) || nextStepId;
-      }
-
-      setState(prev => ({
-        ...prev,
-        data: updatedData,
-        currentStepId: nextStepId,
-        currentResponse: null,
-        stepHistory: [...prev.stepHistory, currentStep.id],
-      }));
-
-      // Sauvegarde automatique
-      const importantSteps = [
-        'pack_selection',
-        'module_selection',
-        'sport_selection',
-        'personal_info',
-      ];
-      if (importantSteps.includes(currentStep.id)) {
-        await saveProgress(updatedData);
-      }
+      // Logique de finalisation
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulation
     } catch (error) {
-      // Erreur silencieuse
-      console.error('Erreur navigation:', error);
-      toast({
-        title: 'Erreur',
-        description: 'Une erreur est survenue. Veuillez réessayer.',
-        variant: 'destructive',
-      });
+      setErrors(['Erreur lors de la finalisation']);
     } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
+      setIsLoading(false);
     }
-  }, [currentStep, state, validateResponse, saveProgress, toast]);
+  }, []);
 
-  // Navigation vers l'étape précédente
-  const goToPreviousStep = useCallback(() => {
-    if (state.stepHistory.length === 0) return;
-
-    const previousStepId = state.stepHistory[state.stepHistory.length - 1];
-    const newHistory = state.stepHistory.slice(0, -1);
-
-    setState(prev => ({
-      ...prev,
-      currentStepId: previousStepId,
-      stepHistory: newHistory,
-      currentResponse: null,
-      validationErrors: [],
-      data: {
-        ...prev.data,
-        progress: {
-          ...prev.data.progress,
-          completedSteps: prev.data.progress.completedSteps.filter(id => id !== prev.currentStepId),
-          backCount: prev.data.progress.backCount + 1,
-        },
-      },
-    }));
-  }, [state.stepHistory]);
-
-  // Ignorer l'étape courante
-  const skipCurrentStep = useCallback(() => {
-    if (!currentStep || !currentStep.skippable) return;
-
-    setState(prev => ({
-      ...prev,
-      data: {
-        ...prev.data,
-        progress: {
-          ...prev.data.progress,
-          skipCount: prev.data.progress.skipCount + 1,
-          skippedSteps: [...prev.data.progress.skippedSteps, currentStep.id],
-        },
-      },
-      currentResponse: currentStep.defaultValue || null,
-    }));
-
-    goToNextStep();
-  }, [currentStep, goToNextStep]);
-
-  // Finalisation de l'onboarding
-  const completeOnboarding = useCallback(async () => {
-    try {
-      setState(prev => ({ ...prev, isLoading: true }));
-
-      const finalData = {
-        ...state.data,
-        completedAt: new Date(),
-        progress: {
-          ...state.data.progress,
-          completedSteps: [...state.data.progress.completedSteps, 'completion'],
-        },
-      };
-
-      await saveProgress(finalData);
-
-      // Marquer comme terminé
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        await supabase
-          .from('user_profiles')
-          .update({ onboarding_completed: true })
-          .eq('id', user.id);
-      }
-
-      return finalData;
-    } catch (error) {
-      // Erreur silencieuse
-      console.error('Erreur finalisation:', error);
-      throw error;
-    } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
-    }
-  }, [state.data, saveProgress]);
-
-  // Reset de l'onboarding
-  const resetOnboarding = useCallback(() => {
-    setState(prev => ({
-      ...prev,
-      currentStepId: CONVERSATIONAL_ONBOARDING_FLOW[0]?.id || 'welcome',
-      currentResponse: null,
-      validationErrors: [],
-      stepHistory: [],
-      startTime: new Date(),
-      data: {
-        ...initialData,
-        progress: {
-          currentStep: CONVERSATIONAL_ONBOARDING_FLOW[0]?.id || 'welcome',
-          completedSteps: [],
-          skippedSteps: [],
-          totalSteps: CONVERSATIONAL_ONBOARDING_FLOW.length,
-          estimatedTimeLeft: 15,
-          timeSpent: 0,
-          startedAt: new Date(),
-          lastActivity: new Date(),
-          averageTimePerStep: 0,
-          skipCount: 0,
-          backCount: 0,
-          errorCount: 0,
-          helpViewCount: 0,
-          moduleSpecificSteps: {},
-          userPreferences: {
-            preferredInputTypes: [],
-            skipsTendency: 0,
-            detailLevel: 'standard',
-            pace: 'normal',
-          },
-          completionQuality: 0,
-          validationScore: 100,
-          consistencyScore: 100,
-        },
-        version: '1.0',
-        startedAt: new Date(),
-        lastUpdated: new Date(),
-      } as OnboardingData,
-    }));
-  }, [initialData]);
+  const progress = Math.round((data.progress.completedSteps.length / data.progress.totalSteps) * 100);
 
   return {
-    // État
+    data,
     currentStep,
-    currentStepId: state.currentStepId,
-    data: state.data,
-    currentResponse: state.currentResponse,
-    isLoading: state.isLoading,
-    progressPercentage,
-    canGoBack: state.stepHistory.length > 0,
-    canSkip: currentStep?.skippable || false,
-
-    // Actions
-    setCurrentResponse,
-    goToNextStep,
-    goToPreviousStep,
-    skipCurrentStep,
-    completeOnboarding,
-    resetOnboarding,
-    saveProgress: () => saveProgress(state.data),
-
-    // Utilitaires
-    validateResponse: (response: any) =>
-      currentStep ? validateResponse(currentStep, response) : [],
-    getEstimatedTimeLeft: () => state.data.progress.estimatedTimeLeft,
-    getCompletionPercentage: () => progressPercentage,
+    progress,
+    isLoading,
+    errors,
+    updateData,
+    nextStep,
+    previousStep,
+    complete,
   };
-};
+}
