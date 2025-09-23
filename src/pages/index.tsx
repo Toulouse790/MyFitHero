@@ -11,10 +11,11 @@ import React, {
   ReactNode,
 } from 'react';
 import { Router, Route, useLocation } from 'wouter';
-import { createClient } from '@supabase/supabase-js';
 import { create } from 'zustand';
 import { persist, subscribeWithSelector } from 'zustand/middleware';
 import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
+import { supabase } from '@/lib/supabase'; // Utiliser l'instance centralisée
+import type { UserProfile } from '@/shared/types/userProfile'; // Utiliser le type standard
 
 // ====================================================================
 // Configuration et Types de Base
@@ -27,52 +28,9 @@ interface GeolocationContext {
   text?: string;
 }
 
-// Configuration Supabase optimisée pour le marché US
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
-
-// Instance Supabase pour usage interne - pour export, voir /lib/supabase.ts
-const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: true,
-    storageKey: 'myfithero-auth',
-    storage: window.localStorage,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-  },
-  realtime: {
-    params: {
-      eventsPerSecond: 10,
-    },
-  },
-  global: {
-    headers: {
-      'X-Client-Info': 'myfithero@1.0.0',
-    },
-  },
-});
-
 // Types TypeScript complets pour l'application
-interface User {
-  id: string;
-  email: string;
-  username?: string;
-  avatar_url?: string;
-  full_name?: string;
-  created_at: string;
-  updated_at: string;
-  onboarding_completed: boolean;
-  // Profil US-spécifique
-  preferred_units: 'imperial' | 'metric';
-  timezone: string;
-  location?: {
-    state: string;
-    city: string;
-    zip_code: string;
-  };
-  fitness_profile?: FitnessProfile;
-  subscription_tier: 'free' | 'premium' | 'elite';
-}
+// Utilisation du type UserProfile standard pour la cohérence
+type User = UserProfile;
 
 interface FitnessProfile {
   // Données anthropométriques (US units par défaut)
@@ -80,7 +38,7 @@ interface FitnessProfile {
   height_ft: number;
   height_in: number;
   age: number;
-  gender: 'male' | 'female' | 'null';
+  gender: 'male' | 'female' | null; // Aligné avec Supabase
   body_fat_percentage?: number;
 
   // Sports US populaires
@@ -1755,7 +1713,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event: string, session: any) => {
       if (event === 'SIGNED_IN' && session) {
         // Utilisateur connecté
         const { data: userData } = await supabase
