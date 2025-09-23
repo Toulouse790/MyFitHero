@@ -11,6 +11,7 @@ export * from './hooks/useIntelligentPreloading';
 // Pages
 export { default as WorkoutPage } from './pages/WorkoutPage';
 export { default as WorkoutDetailPage } from './pages/WorkoutDetailPage';
+export { default as ExerciseDetailPage } from './pages/ExerciseDetailPage';
 export { default as ExercisesPage } from './pages/ExercisesPage';
 
 // Exports des composants
