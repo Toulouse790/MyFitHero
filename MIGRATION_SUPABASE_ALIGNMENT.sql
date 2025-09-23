@@ -147,7 +147,7 @@ BEGIN
     FROM workout_sets ws
     WHERE ws.user_id = p_user_id 
     AND ws.exercise_id = p_exercise_id
-    AND ws.created_at >= CURRENT_DATE - INTERVAL '%s days' % p_days_back
+    AND ws.created_at >= CURRENT_DATE - (p_days_back || ' days')::INTERVAL
     AND ws.is_completed = true
     GROUP BY ws.created_at::DATE
     ORDER BY session_date DESC;
@@ -180,12 +180,21 @@ USING (auth.uid() = user_id);
 
 -- Insertion d'exercices de base si la table est vide
 INSERT INTO exercises_library (name, description, category, muscle_groups, equipment, difficulty, instructions)
-SELECT * FROM (VALUES
+SELECT 
+    exercise_data.name,
+    exercise_data.description,
+    exercise_data.category,
+    exercise_data.muscle_groups,
+    exercise_data.equipment,
+    exercise_data.difficulty,
+    exercise_data.instructions
+FROM (
+    VALUES
     ('Développé couché', 'Exercice fondamental pour les pectoraux', 'chest', ARRAY['pectoraux', 'triceps'], 'barbell', 'intermediate', 'Allongez-vous sur le banc, saisissez la barre...'),
     ('Squat', 'Exercice roi pour les jambes', 'legs', ARRAY['quadriceps', 'fessiers'], 'barbell', 'intermediate', 'Placez la barre sur vos épaules...'),
     ('Tractions', 'Exercice pour le dos et les biceps', 'back', ARRAY['dorsaux', 'biceps'], 'bodyweight', 'intermediate', 'Suspendez-vous à la barre...')
-) AS v(name, description, category, muscle_groups, equipment, difficulty, instructions)
-WHERE NOT EXISTS (SELECT 1 FROM exercises_library);
+) AS exercise_data(name, description, category, muscle_groups, equipment, difficulty, instructions)
+WHERE NOT EXISTS (SELECT 1 FROM exercises_library WHERE exercises_library.name = exercise_data.name);
 
 -- =============================================================================
 -- VALIDATION DE LA MIGRATION
@@ -202,15 +211,22 @@ AND constraint_type = 'CHECK';
 
 -- Vérifier les index créés
 SELECT 
-    indexname, 
-    tablename 
+    schemaname,
+    tablename,
+    indexname
 FROM pg_indexes 
-WHERE tablename IN ('workout_sessions', 'workout_sets', 'exercises_library', 'session_metrics', 'daily_stats');
+WHERE tablename IN ('workout_sessions', 'workout_sets', 'exercises_library', 'session_metrics', 'daily_stats')
+AND schemaname = 'public';
 
 -- Compter les exercices disponibles
 SELECT COUNT(*) as total_exercises FROM exercises_library;
 
 -- Vérifier les vues créées
-SELECT viewname FROM pg_views WHERE schemaname = 'public';
+SELECT 
+    schemaname,
+    viewname 
+FROM pg_views 
+WHERE schemaname = 'public'
+AND viewname IN ('exercise_details_with_history', 'workout_sessions_with_metrics', 'user_complete_stats');
 
 COMMIT;
