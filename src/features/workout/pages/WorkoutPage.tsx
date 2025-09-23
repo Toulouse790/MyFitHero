@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { User as SupabaseAuthUserType } from '@supabase/supabase-js';
 import { useWorkoutSession } from '@/features/workout/hooks/useWorkoutSession';
-import type { WorkoutExercise, ExerciseSet } from '@/features/workout/types/supabase';
+import type { WorkoutExercise, ExerciseSet } from '@/features/workout/types';
 import type { SessionExercise } from '@/features/workout/types/WorkoutTypes';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

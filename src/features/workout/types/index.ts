@@ -8,6 +8,8 @@ export * from './database';
 // Types métier (renommage nécessaire pour éviter conflicts)
 export type {
   Workout as WorkoutInterface,
+  Exercise as WorkoutExercise,
+  ExerciseSet,
   WorkoutStats,
   WeeklyWorkoutStats,
   MonthlyWorkoutStats,
