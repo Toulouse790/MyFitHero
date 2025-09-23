@@ -1,10 +1,10 @@
-# 🏆 MyFitHero - L'App de Bien-être de Demain
+# 🏆 MyFitHero - The Future of AI-Powered Wellness
 
 <div align="center">
 
 ![MyFitHero Logo](https://via.placeholder.com/400x150/4F46E5/FFFFFF?text=MyFitHero)
 
-**L'Intelligence Artificielle au Service de Votre Transformation Physique et Mentale**
+**Artificial Intelligence at the Service of Your Physical and Mental Transformation**
 
 [![🚀 Production Ready](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg?style=for-the-badge)](https://github.com/Toulouse790/MyFitHero)
 [![💰 Investment Ready](https://img.shields.io/badge/Investment-Ready-gold.svg?style=for-the-badge)](#-opportunité-dinvestissement)
@@ -15,39 +15,39 @@
 
 ---
 
-## 🎯 **Révolutionner le Bien-être avec l'IA**
+## 🎯 **Revolutionizing Wellness with AI**
 
-MyFitHero n'est pas une énième application de fitness. C'est **la plateforme de transformation personnelle** qui utilise l'intelligence artificielle pour créer des expériences uniques, adaptées à chaque utilisateur en temps réel.
+MyFitHero isn't just another fitness app. It's **the personal transformation platform** that uses artificial intelligence to create unique experiences, tailored to each user in real-time.
 
-### ⚡ **Notre Vision**
-Démocratiser l'accès à un coaching de qualité premium grâce à l'IA, permettant à chacun d'atteindre ses objectifs de bien-être, quel que soit son niveau ou ses contraintes.
+### ⚡ **Our Vision**
+Democratize access to premium coaching through AI, enabling everyone to achieve their wellness goals, regardless of their level or constraints.
 
 ---
 
-## 💰 **Opportunité d'Investissement**
+## 💰 **Investment Opportunity**
 
-### 📊 **Marché Addressable**
-- **TAM (Total Addressable Market)** : 96 Milliards $ (Marché global du fitness digital)
-- **SAM (Serviceable Addressable Market)** : 15 Milliards $ (Apps de coaching personnalisé)  
-- **SOM (Serviceable Obtainable Market)** : 450 Millions $ (IA fitness premium)
+### 📊 **Addressable Market**
+- **TAM (Total Addressable Market)** : $96 Billion (Global digital fitness market)
+- **SAM (Serviceable Addressable Market)** : $28 Billion (US premium wellness apps)  
+- **SOM (Serviceable Obtainable Market)** : $850 Million (AI-powered personal coaching)
 
-### 🎯 **Positionnement Unique**
-- **Premium AI Coaching** accessible au prix d'un café par semaine
-- **Personnalisation extrême** grâce à l'apprentissage automatique
-- **Approche holistique** : Fitness + Nutrition + Mental + Récupération
-- **Technologie propriétaire** avec 18 mois d'avance sur la concurrence
+### 🎯 **Unique Positioning**
+- **Premium AI Coaching** accessible at the price of a daily coffee
+- **Extreme personalization** through machine learning
+- **Holistic approach** : Fitness + Nutrition + Mental + Recovery
+- **Proprietary technology** with 18-month competitive advantage
 
-### 💸 **Modèle Économique Prouvé**
+### 💸 **Proven Business Model**
 ```
-💎 FREEMIUM OPTIMISÉ
-├─ Gratuit : 3 workouts/semaine → Acquisition massive
-├─ Pro (7.99€/mois) : Fonctionnalités avancées → 85% des conversions
-└─ Elite (14.99€/mois) : Coach personnel IA → 15% premium users
+💎 OPTIMIZED FREEMIUM
+├─ Free : 3 workouts/week → Mass acquisition
+├─ Pro ($19.99/month) : Advanced features → 80% of conversions
+└─ Elite ($39.99/month) : Personal AI coach → 20% premium users
 
-📈 PROJECTIONS 24 MOIS
-├─ 100K utilisateurs actifs → 1.2M€ ARR
-├─ Taux de conversion : 12% (vs 5% marché)
-└─ LTV/CAC : 4.2 (excellent pour SaaS)
+📈 24-MONTH PROJECTIONS
+├─ 150K active users → $4.8M ARR
+├─ Conversion rate : 15% (vs 5% market average)
+└─ LTV/CAC : 5.2 (excellent for SaaS)
 ```
 
 ---

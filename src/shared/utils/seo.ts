@@ -99,7 +99,7 @@ export const structuredDataWebApp = {
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "EUR"
+    "priceCurrency": "USD"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
