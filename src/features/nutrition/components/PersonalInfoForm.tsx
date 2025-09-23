@@ -1,13 +1,40 @@
-import { Info, X, Clock, Star, Check } from 'lucide-react';
+import { Info, X, Clock, Star, Check, Calendar, User, Weight, Briefcase } from 'lucide-react';
 import React, { useState } from 'react';
 // client/src/components/PersonalInfoForm.tsx
-import { Card, CardContent } from '@/features/components/ui/card';
-import { Button } from '@/features/components/ui/button';
-import { Input } from '@/features/components/ui/input';
-import { Slider } from '@/features/components/ui/slider';
-import { Badge } from '@/features/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Slider } from '@/components/ui/slider';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { LIFESTYLE_OPTIONS } from '@/data/onboardingData';
+
+// Définition des options de lifestyle
+const LIFESTYLE_OPTIONS = [
+  { 
+    id: 'student', 
+    label: 'Étudiant(e)', 
+    description: 'Emploi du temps flexible, activités variables',
+    icon: '📚'
+  },
+  { 
+    id: 'office_worker', 
+    label: 'Travail de bureau', 
+    description: 'Travail sédentaire, horaires réguliers',
+    icon: '💼'
+  },
+  { 
+    id: 'physical_job', 
+    label: 'Travail physique', 
+    description: 'Activité physique régulière au travail',
+    icon: '🔧'
+  },
+  { 
+    id: 'retired', 
+    label: 'Retraité(e)', 
+    description: 'Temps libre, rythme personnel',
+    icon: '🌅'
+  }
+] as const;
 
 interface PersonalInfo {
   age: number;
@@ -389,7 +416,7 @@ export default function PersonalInfoForm({ onComplete, initialData }: PersonalIn
                 >
                   <div className="flex items-center space-x-3">
                     <div className="flex-1">
-                      <div className="font-semibold">{option.name}</div>
+                      <div className="font-semibold">{option.label}</div>
                       <div className="text-sm text-gray-600">{option.description}</div>
                     </div>
                     {formData.lifestyle === option.id && (

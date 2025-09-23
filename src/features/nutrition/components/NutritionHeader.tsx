@@ -1,7 +1,7 @@
 // src/features/nutrition/components/NutritionHeader.tsx
 import React from 'react';
 import { Apple, AlertTriangle, Brain } from 'lucide-react';
-import { Button } from '@/features/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 interface NutritionHeaderProps {
   sportEmoji: string;

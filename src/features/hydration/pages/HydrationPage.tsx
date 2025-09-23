@@ -261,8 +261,8 @@ const Hydration: React.FC = () => {
     }
 
     const activityLevel = appStoreUser?.activity_level;
-    if (activityLevel === 'extremely_active') adjustments += 500;
-    else if (activityLevel === 'moderately_active') adjustments += 300;
+    if (activityLevel === 'very_active') adjustments += 500;
+    else if (activityLevel === 'active') adjustments += 300;
 
     return Math.round(baseGoalMl + adjustments);
   }, [appStoreUser, sportConfig.goalModifierMl]);

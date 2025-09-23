@@ -1,8 +1,8 @@
 // src/features/nutrition/components/ScanModeSelector.tsx
 import React, { useRef } from 'react';
 import { Camera, Upload, Zap } from 'lucide-react';
-import { Button } from '@/features/components/ui/button';
-// import { Alert, AlertDescription } from '@/features/components/ui/alert';
+import { Button } from '@/components/ui/button';
+// import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface ScanModeSelectorProps {
   onCameraMode: () => void;

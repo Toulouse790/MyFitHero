@@ -1,7 +1,7 @@
 // src/features/nutrition/components/NutritionMacros.tsx
 import React from 'react';
-import { Progress } from '@/features/components/ui/progress';
-import { Card, CardContent } from '@/features/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface MacroData {
   current: number;
