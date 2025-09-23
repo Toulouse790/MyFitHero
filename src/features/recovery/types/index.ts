@@ -4,6 +4,36 @@
 // RECOVERY TYPES
 // ========================================
 
+export interface RecoveryData {
+  user_id: string;
+  current_metrics: RecoveryMetrics;
+  recent_activities: RecoveryActivity[];
+  trends: RecoveryTrendData[];
+  overall_score: number;
+  last_updated: Date;
+}
+
+export interface RecoveryActivity {
+  id: string;
+  user_id: string;
+  type: RecoveryType;
+  duration: number; // in minutes
+  intensity?: number; // 1-5
+  notes?: string;
+  started_at: Date;
+  completed_at?: Date;
+  effectiveness_rating?: number; // 1-5
+}
+
+export interface RecoveryTrendData {
+  date: string;
+  overall: number;
+  sleep: number;
+  stress: number;
+  energy: number;
+  hrv: number;
+}
+
 export interface RecoverySession {
   id: string;
   user_id: string;
@@ -158,15 +188,64 @@ export interface PlannedRecoveryActivity {
 
 export interface RecoveryRecommendation {
   id: string;
-  user_id: string;
+  user_id?: string;
+  type: RecoveryType;
   title: string;
   description: string;
-  recovery_type: RecoveryType;
+  action: string;
+  recovery_type?: RecoveryType;
   priority: 'low' | 'medium' | 'high';
   duration: number;
+  timeToComplete: number; // minutes
+  estimatedBenefit: string;
+  difficulty: 'easy' | 'medium' | 'hard';
   reason: string;
-  created_at: Date;
+  created_at?: Date;
   expires_at?: Date;
+}
+
+// Types IA avancés pour les nouvelles fonctionnalités
+export interface AIInsight {
+  id: string;
+  type: 'pattern' | 'correlation' | 'risk' | 'opportunity';
+  title: string;
+  description: string;
+  confidence: number; // 0-1
+  impact: 'low' | 'medium' | 'high';
+  timeframe: string;
+  data_points: number;
+}
+
+export interface RecoveryPrediction {
+  date: string;
+  predicted_score: number;
+  confidence: number;
+  factors: PredictionFactor[];
+  recommendation: string;
+}
+
+export interface PredictionFactor {
+  name: string;
+  impact: number; // percentage
+  trend: 'positive' | 'negative' | 'neutral';
+  current_value: number;
+}
+
+export interface RecoveryPattern {
+  pattern_type: 'weekly' | 'monthly' | 'seasonal';
+  description: string;
+  strength: number; // 0-1
+  detected_at: Date;
+  recommendations: string[];
+}
+
+export interface BiometricTrend {
+  metric: string;
+  current_value: number;
+  trend_7d: number;
+  trend_30d: number;
+  percentile: number; // compared to user's history
+  status: 'improving' | 'stable' | 'declining';
 }
 
 export interface RecoveryProgress {

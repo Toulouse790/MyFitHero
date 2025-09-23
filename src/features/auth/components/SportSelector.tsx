@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Search, Star, TrendingUp, Users } from 'lucide-react';
-import { AVAILABLE_SPORTS, getSportsByCategory, getPopularSports, searchSports, SportOption } from '@/features/auth/data/onboardingData';
+import { AVAILABLE_SPORTS, getSportsByCategory, getPopularSports, searchSports, SportOption } from '@/core/config/sports.config';
 
 interface SportSelectorProps {
   selectedSport?: string;

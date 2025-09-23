@@ -1,6 +1,5 @@
 // Export des types de la feature auth
 export * from './conversationalOnboarding';
-export * from './onboarding-types';
 
 // ========================================
 // AUTH CORE TYPES

@@ -25,3 +25,6 @@ export type { PricingPlan } from './pricing/PricingSection';
 export { CTASection } from './cta/CTASection';
 export { CTAButton } from './cta/CTAButton';
 export type { CTAData } from './cta/CTASection';
+
+// Analytics Dashboard
+export { default as LandingAnalyticsDashboard } from './LandingAnalyticsDashboard';
