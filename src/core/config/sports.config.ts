@@ -12,6 +12,17 @@ export type Sport =
   | 'martial_arts'
   | 'yoga';
 
+export interface SportOption {
+  id: string;
+  name: string;
+  category: string;
+  emoji: string;
+  description: string;
+  popularity?: number;
+  positions?: string[];
+  muscles?: string[];
+}
+
 export interface SportConfig {
   id: Sport;
   name: string;
@@ -264,6 +275,35 @@ export const sportsConfig: Record<Sport, SportConfig> = {
     },
     workoutTypes: ['hatha', 'vinyasa', 'restorative', 'meditation'],
   },
+};
+
+// Convert to AVAILABLE_SPORTS format for compatibility
+export const AVAILABLE_SPORTS: SportOption[] = Object.values(sportsConfig).map(sport => ({
+  id: sport.id,
+  name: sport.name,
+  category: sport.category,
+  emoji: sport.emoji,
+  description: sport.description,
+  popularity: 75, // Default popularity
+  positions: ['all'], // Default positions
+  muscles: ['all'] // Default muscles
+}));
+
+// Helper functions for compatibility
+export const getSportsByCategory = (category: string): SportOption[] => {
+  return AVAILABLE_SPORTS.filter(sport => sport.category === category);
+};
+
+export const getPopularSports = (): SportOption[] => {
+  return AVAILABLE_SPORTS.filter(sport => (sport.popularity || 0) >= 70);
+};
+
+export const searchSports = (query: string): SportOption[] => {
+  const lowerQuery = query.toLowerCase();
+  return AVAILABLE_SPORTS.filter(sport => 
+    sport.name.toLowerCase().includes(lowerQuery) ||
+    sport.description.toLowerCase().includes(lowerQuery)
+  );
 };
 
 export default sportsConfig;
