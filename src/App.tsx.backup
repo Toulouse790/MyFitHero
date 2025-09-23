@@ -38,7 +38,7 @@ interface User {
   age?: number;
   weight?: number;
   height?: number;
-  gender?: 'male' | 'female';
+  gender?: 'male' | 'female' | 'other';
   lifestyle?: string;
   onboardingCompleted?: boolean;
   createdAt: string;
@@ -189,6 +189,7 @@ function useAuthState(): AuthState & {
       // ✅ PROPAGATION DES MODULES VERS LE STORE
       active_modules: user.active_modules || [],
       profile_type: (user.profile_type as 'complete' | 'wellness' | 'sport_only' | 'sleep_focus') || undefined,
+    };
     };
   };
 

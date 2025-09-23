@@ -15,7 +15,7 @@ const onboardingSchema = z.object({
   age: z.number().min(16, 'Vous devez avoir au moins 16 ans').max(100, 'Âge invalide'),
   weight: z.number().min(30, 'Poids minimum: 30kg').max(300, 'Poids maximum: 300kg'),
   height: z.number().min(100, 'Taille minimum: 100cm').max(250, 'Taille maximum: 250cm'),
-  gender: z.enum(['male', 'female', 'other'], { required_error: 'Sélectionnez votre genre' }),
+  gender: z.enum(['male', 'female'], { required_error: 'Sélectionnez votre genre' }),
   lifestyle: z.string().min(1, 'Sélectionnez votre style de vie'),
 });
 
@@ -100,7 +100,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({
     setValue('level', value, { shouldValidate: true });
   };
 
-  const handleGenderChange = (value: 'male' | 'female' | 'other') => {
+  const handleGenderChange = (value: 'male' | 'female') => {
     setValue('gender', value, { shouldValidate: true });
   };
 

@@ -134,7 +134,7 @@ export interface SocialProfile {
 // ENUMS & TYPES
 // ========================================
 
-export type Gender = 'male' | 'female' | 'other' | 'prefer_not_to_say';
+export type Gender = 'male' | 'female'; // Removed 'other' for better AI advice
 
 export type ActivityLevel = 
   | 'sedentary'        // Little to no exercise

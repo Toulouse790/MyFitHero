@@ -22,7 +22,7 @@ export interface UserProfile {
   first_name?: string;
   last_name?: string;
   date_of_birth?: string;
-  gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say';
+  gender?: 'male' | 'female'; // Removed 'other' for better AI advice
   height?: number;
   weight?: number;
   activity_level?: ActivityLevel;
@@ -164,7 +164,7 @@ export interface UpdateProfileData {
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
-  gender?: 'male' | 'female' | 'other' | 'prefer_not_to_say';
+  gender?: 'male' | 'female'; // Removed 'other' for better AI advice
   height?: number;
   weight?: number;
   activityLevel?: ActivityLevel;

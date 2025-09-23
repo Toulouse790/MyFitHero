@@ -18,7 +18,7 @@ export interface UserProfile {
   age?: number | null;
   height?: number | null;  // Using consistent naming
   weight?: number | null;  // Using consistent naming
-  gender?: 'male' | 'female' | 'other' | null;
+  gender?: 'male' | 'female' | null; // Removed 'other' for better AI nutrition/sport advice
 
   // Location for nutrition personalization (CRITICAL for global market)
   city?: string | null;

@@ -8,8 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 interface PersonalInfoStepProps {
   register: UseFormRegister<any>;
   errors: FieldErrors<any>;
-  genderValue?: 'male' | 'female' | 'other';
-  onGenderChange: (value: 'male' | 'female' | 'other') => void;
+  genderValue?: 'male' | 'female';
+  onGenderChange: (value: 'male' | 'female') => void;
 }
 
 export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({

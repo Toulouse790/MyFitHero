@@ -17,7 +17,7 @@ export interface UserProfile {
   last_name: string | null;
   date_of_birth: string | null;
   age: number | null;
-  gender: 'male' | 'female' | 'other' | null;
+  gender: 'male' | 'female' | null;
   height: number | null;
   weight: number | null;
   activity_level:
