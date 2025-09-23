@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useAuthStore } from './auth.store';
 import { SignUpData, SignInData, UpdateProfileData } from './auth.types';
+import { supabase } from '@/lib/supabase';
 
 // Hook principal pour l'authentification
 export const useAuth = () => {
@@ -16,7 +17,8 @@ export const useAuth = () => {
   const signUp = async (data: SignUpData) => {
     try {
       await authStore.signUp(data);
-      navigate('/dashboard'); // Redirection vers le dashboard après inscription
+      // Redirection vers l'onboarding conversationnel après inscription
+      navigate('/onboarding');
     } catch (error) {
       console.error('Erreur inscription:', error);
     }
@@ -25,7 +27,23 @@ export const useAuth = () => {
   const signIn = async (data: SignInData) => {
     try {
       await authStore.signIn(data);
-      navigate('/dashboard'); // Redirection vers le dashboard après connexion
+      
+      // Vérifier si l'utilisateur a terminé l'onboarding
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('user_profiles')
+          .select('onboarding_completed')
+          .eq('id', user.id)
+          .single();
+        
+        // Redirection conditionnelle
+        if (profile?.onboarding_completed) {
+          navigate('/dashboard');
+        } else {
+          navigate('/onboarding');
+        }
+      }
     } catch (error) {
       console.error('Erreur connexion:', error);
     }
