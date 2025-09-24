@@ -7,6 +7,14 @@ export interface WorkoutSession {
   exercises: any[];
   created_at: string;
   updated_at: string;
+  status: 'active' | 'paused' | 'completed' | 'cancelled';
+  workout_type: 'strength' | 'cardio' | 'mixed' | 'flexibility' | 'sports';
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  startTime: string;
+  endTime?: string;
+  duration?: number;
+  caloriesBurned?: number;
+  target_duration?: number;
 }
 
 export interface Set {

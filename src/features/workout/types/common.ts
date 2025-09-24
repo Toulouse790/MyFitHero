@@ -46,7 +46,7 @@ export interface FormFieldError {
 // ===== TYPES DE FORMULAIRES UNIFIÉS =====
 
 export interface BaseFormData {
-  [key: string]: string | number | boolean | undefined | undefined;
+  [key: string]: string | number | boolean | undefined;
 }
 
 export interface FormState {

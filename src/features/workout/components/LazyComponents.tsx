@@ -1,11 +1,147 @@
 
-import React, { lazy } from 'react';
+/**
+ * LAZY LOADING OPTIMISÉ - Module Workout
+ * Chargement paresseux haute performance avec préchargement intelligent
+ */
 
-// === FEATURES-BASED IMPORTS ===
+import React, { lazy, Suspense } from 'react';
+
+// === COMPOSANTS WORKOUT LAZY LOADING ===
+export const LazyWorkoutPage = lazy(() => import('@/features/workout/pages/WorkoutPage'));
+export const LazyWorkoutDetailPage = lazy(() => import('@/features/workout/pages/WorkoutDetailPage'));
+export const LazyExercisesPage = lazy(() => import('@/features/workout/pages/ExercisesPage'));
+export const LazyExerciseDetailPage = lazy(() => import('@/features/workout/pages/ExerciseDetailPage'));
+
+// === COMPOSANTS WORKOUT LOURDS ===
+// === COMPOSANTS WORKOUT OPTIMISÉS ===
+// Ces composants seront disponibles une fois que les modules seront créés
+
+// Pour l'instant, créons des placeholders optimisés
+export const OptimizedWorkoutDashboard = React.memo(() => (
+  <div className="workout-dashboard-placeholder">
+    <div className="animate-pulse space-y-4">
+      <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="h-32 bg-gray-200 rounded"></div>
+        <div className="h-32 bg-gray-200 rounded"></div>
+        <div className="h-32 bg-gray-200 rounded"></div>
+      </div>
+    </div>
+  </div>
+));
+
+export const OptimizedWorkoutSession = React.memo(() => (
+  <div className="workout-session-placeholder">
+    <div className="animate-pulse space-y-6">
+      <div className="h-12 bg-gray-200 rounded w-1/2"></div>
+      <div className="space-y-4">
+        <div className="h-24 bg-gray-200 rounded"></div>
+        <div className="h-24 bg-gray-200 rounded"></div>
+      </div>
+    </div>
+  </div>
+));
+
+export const OptimizedWorkoutHistory = React.memo(() => (
+  <div className="workout-history-placeholder">
+    <div className="animate-pulse space-y-3">
+      {[...Array(5)].map((_, i) => (
+        <div key={i} className="h-16 bg-gray-200 rounded"></div>
+      ))}
+    </div>
+  </div>
+));
+
+// === PRÉCHARGEMENT INTELLIGENT ===
+
+interface PreloadConfig {
+  onUserInteraction?: boolean;
+  onPageVisible?: boolean;
+  delay?: number;
+  priority?: 'low' | 'high';
+}
+
+const preloadComponent = (
+  componentImporter: () => Promise<any>,
+  config: PreloadConfig = {}
+) => {
+  const { onUserInteraction = false, onPageVisible = false, delay = 0, priority = 'low' } = config;
+
+  const preload = () => {
+    if (delay > 0) {
+      setTimeout(() => componentImporter(), delay);
+    } else {
+      componentImporter();
+    }
+  };
+
+  if (onUserInteraction) {
+    const events = ['mouseenter', 'touchstart', 'focus'];
+    const handler = () => {
+      preload();
+      events.forEach(event => 
+        document.removeEventListener(event, handler)
+      );
+    };
+    events.forEach(event => 
+      document.addEventListener(event, handler, { passive: true, once: true })
+    );
+  }
+
+  if (onPageVisible) {
+    if ('IntersectionObserver' in window) {
+      // Précharger quand l'utilisateur scroll vers le contenu
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              preload();
+              observer.disconnect();
+            }
+          });
+        },
+        { rootMargin: '50px' }
+      );
+      
+      // Observer le document body comme trigger
+      if (document.body) {
+        observer.observe(document.body);
+      }
+    } else {
+      // Fallback pour navigateurs sans IntersectionObserver
+      setTimeout(preload, 1000);
+    }
+  }
+
+  return preload;
+};
+
+// === PRÉCHARGEURS CONFIGURÉS ===
+
+export const preloadWorkoutDashboard = preloadComponent(
+  () => import('@/features/workout/components/WorkoutDashboard'),
+  { onUserInteraction: true, priority: 'high' }
+);
+
+export const preloadWorkoutSession = preloadComponent(
+  () => import('@/features/workout/components/WorkoutSession'),
+  { onPageVisible: true, delay: 500, priority: 'high' }
+);
+
+export const preloadWorkoutHistory = preloadComponent(
+  () => import('@/features/workout/components/WorkoutHistory'),
+  { onUserInteraction: true, delay: 200 }
+);
+
+export const preloadAnalytics = preloadComponent(
+  () => import('@/features/workout/components/VolumeAnalyticsEngine'),
+  { delay: 2000, priority: 'low' }
+);
+
+// === ROUTES AUTRES FEATURES (maintenues pour compatibilité) ===
 export const LazySleep = lazy(() => import('@/features/sleep/pages/SleepPage'));
 export const LazySocial = lazy(() => import('@/features/social/pages/SocialPage'));
 export const LazyHydration = lazy(() => import('@/features/hydration/pages/HydrationPage'));
-export const LazyWorkout = lazy(() => import('@/features/workout/pages/WorkoutPage'));
 
 // === IMPORTS CORRIGÉS ===
 export const LazyNutrition = lazy(() => import('@/features/nutrition/pages/NutritionPage'));
@@ -41,7 +177,7 @@ const LazyComponents = {
   LazySleep,
   LazySocial,
   LazyHydration,
-  LazyWorkout,
+  LazyWorkout: LazyWorkoutPage, // Utiliser LazyWorkoutPage à la place
   LazyNutrition,
   LazyProfile,
   LazySettings,

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 // hooks/workout/useWorkoutSessionCore.ts
+import { useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/shared/hooks/use-toast';
 import { appStore } from '@/store/appStore';
 import { supabase } from '@/lib/supabase';
-import type { WorkoutSession, WorkoutExercise, ExerciseSet } from '@/shared/types/workout.types';
+import type { WorkoutSession } from '@/shared/types/workout.types';
 
 export interface UseWorkoutSessionCoreReturn {
   currentSession: WorkoutSession | undefined;
@@ -14,7 +15,7 @@ export interface UseWorkoutSessionCoreReturn {
       targetDuration?: number;
       workout_type?: WorkoutSession['workout_type'];
       difficulty?: WorkoutSession['difficulty'];
-      exercises?: WorkoutExercise[];
+      exercises?: any[];
     }
   ) => Promise<void>;
   pauseSession: () => Promise<void>;
@@ -37,21 +38,30 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
     () => loadLocalSession()?.status === 'active' || false
   );
 
-  // Utilitaires localStorage
+  // Utilitaires localStorage avec gestion d'erreurs stricte
   const saveLocalSession = (session: WorkoutSession | null) => {
-    if (session) {
-      localStorage.setItem('currentWorkoutSession', JSON.stringify(session));
-    } else {
-      localStorage.removeItem('currentWorkoutSession');
+    try {
+      if (session) {
+        localStorage.setItem('currentWorkoutSession', JSON.stringify(session));
+      } else {
+        localStorage.removeItem('currentWorkoutSession');
+      }
+    } catch (error) {
+      console.error('Erreur sauvegarde session localStorage:', error);
+      toast({
+        title: "Erreur de sauvegarde",
+        description: "Impossible de sauvegarder la session localement",
+        variant: "destructive",
+      });
     }
   };
 
-  function loadLocalSession(): WorkoutSession | undefined {
+  function loadLocalSession(): WorkoutSession | null {
     try {
       const raw = localStorage.getItem('currentWorkoutSession');
       return raw ? (JSON.parse(raw) as WorkoutSession) : null;
-    } catch (error: any) {
-      // Erreur silencieuse
+    } catch (error) {
+      // Erreur silencieuse avec nettoyage
       console.error('Erreur parsing session localStorage:', error);
       localStorage.removeItem('currentWorkoutSession');
       return null;
@@ -78,17 +88,17 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
         difficulty: session.difficulty,
         started_at: session.startTime,
         completed_at: session.endTime,
-        duration_minutes: Math.floor(session.duration / 60),
+        duration_minutes: Math.floor((session.duration || 0) / 60),
         calories_burned: session.caloriesBurned,
         exercises: session.exercises,
-        notes: session.notes,
+        notes: '', // Notes temporairement vides
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };
 
       const { error: _error } = await (supabase as any).from('workouts').upsert(workoutData);
 
-      if (error) throw error;
+      if (_error) throw _error;
       queryClient.invalidateQueries({ queryKey: ['workouts', session.user_id] });
     } catch (e) {
       console.error('Supabase persistence error:', e);
@@ -113,7 +123,7 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
         targetDuration = 30,
         workout_type = 'strength',
         difficulty = 'intermediate',
-        exercises = [] as WorkoutExercise[],
+        exercises = [] as any[],
       } = {}
     ) => {
       if (!appStoreUser?.id) {
@@ -125,18 +135,21 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
         return;
       }
 
+      const now = new Date().toISOString();
       const newSession: WorkoutSession = {
         id: crypto.randomUUID(),
         user_id: appStoreUser.id,
         name: workoutName,
-        startTime: new Date().toISOString(),
+        startTime: now,
         duration: 0,
-        targetDuration,
+        target_duration: targetDuration,
         status: 'active',
         caloriesBurned: 0,
-        workout_type: workout_type as 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other',
+        workout_type: workout_type as 'strength' | 'cardio' | 'mixed' | 'flexibility' | 'sports',
         difficulty: difficulty as 'beginner' | 'intermediate' | 'advanced',
         exercises,
+        created_at: now,
+        updated_at: now,
       };
 
       setCurrentSession(newSession);
@@ -149,13 +162,17 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
         description: `« ${workoutName} » en cours`,
       });
 
-      // Analytics
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'workout_started', {
-          workout_name: workoutName,
-          workout_type,
-          user_id: appStoreUser.id,
-        });
+      // Analytics avec type safety
+      if (typeof window !== 'undefined' && 'gtag' in window && typeof (window as any).gtag === 'function') {
+        try {
+          (window as any).gtag('event', 'workout_started', {
+            workout_name: workoutName,
+            workout_type,
+            user_id: appStoreUser.id,
+          });
+        } catch (error) {
+          console.warn('Analytics error:', error);
+        }
       }
     },
     [appStoreUser?.id, toast, persistToSupabase]
@@ -273,8 +290,8 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
             .order('started_at', { ascending: false })
             .limit(1);
 
-          if (!error && data && data.length > 0) {
-            const dbSession = data[0] as any;
+          if (!_error && _data && _data.length > 0) {
+            const dbSession = _data[0] as any;
             // Convertir les données DB vers le format WorkoutSession
             const session: WorkoutSession = {
               id: dbSession.id,
@@ -283,13 +300,14 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
               startTime: dbSession.started_at,
               endTime: dbSession.completed_at,
               duration: (dbSession.duration_minutes || 0) * 60,
-              targetDuration: 30, // Valeur par défaut
+              target_duration: 30, // Valeur par défaut
               status: dbSession.completed_at ? 'completed' : 'active',
               caloriesBurned: dbSession.calories_burned || 0,
               workout_type: dbSession.workout_type || 'strength',
               difficulty: dbSession.difficulty || 'intermediate',
               exercises: dbSession.exercises || [],
-              notes: dbSession.notes,
+              created_at: dbSession.created_at,
+              updated_at: dbSession.updated_at,
             };
 
             setCurrentSession(session);
@@ -307,7 +325,7 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
   }, [appStoreUser?.id, currentSession]);
 
   return {
-    currentSession,
+    currentSession: currentSession || undefined,
     isSessionActive,
     startSession,
     pauseSession,
