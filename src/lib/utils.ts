@@ -106,7 +106,7 @@ export const isValidUrl = (url: string) => {
   try {
     new URL(url);
     return true;
-  } catch (error) {
+  } catch (error: any) {
     return false;
   }
 };
@@ -114,7 +114,7 @@ export const isValidUrl = (url: string) => {
 export const getInitials = (name: string) => {
   return name
     .split(' ')
-    .map(part => part.charAt(0))
+    .map((part, index) => part.charAt(0))
     .join('')
     .toUpperCase()
     .slice(0, 2);
@@ -124,7 +124,7 @@ export const copyToClipboard = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text);
     return true;
-  } catch (error) {
+  } catch (error: any) {
     // Fallback for older browsers
     const textArea = document.createElement('textarea');
     textArea.value = text;

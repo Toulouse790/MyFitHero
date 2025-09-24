@@ -17,7 +17,7 @@ class ApiService {
         success: true,
         data: { user: null, tokens: null }
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         success: false,
         error: error instanceof Error ? error.message : 'Login failed',
@@ -28,7 +28,7 @@ class ApiService {
   async signOut(): Promise<void> {
     try {
       // TODO: Implement with Supabase
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Logout error:', error);
     }
   }
@@ -36,7 +36,7 @@ class ApiService {
   async healthCheck(): Promise<boolean> {
     try {
       return true;
-    } catch (error) {
+    } catch (error: any) {
       return false;
     }
   }

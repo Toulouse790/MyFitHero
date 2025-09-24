@@ -46,7 +46,7 @@ export interface FormFieldError {
 // ===== TYPES DE FORMULAIRES UNIFIÉS =====
 
 export interface BaseFormData {
-  [key: string]: string | number | boolean | null | undefined;
+  [key: string]: string | number | boolean | undefined | undefined;
 }
 
 export interface FormState {
@@ -87,12 +87,12 @@ export interface PaginatedResponse<T = unknown> {
 
 export interface LoadingState {
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
 export interface AsyncState<T = unknown> extends LoadingState {
-  data: T | null;
-  lastUpdated: string | null;
+  data: T | undefined;
+  lastUpdated: string | undefined;
 }
 
 // ===== TYPES UTILISATEUR UNIFIÉS =====
@@ -107,7 +107,7 @@ export interface User {
   created_at: string;
   updated_at: string;
   email_verified: boolean;
-  last_sign_in: string | null;
+  last_sign_in: string | undefined;
 }
 
 export interface UserPreferences {
@@ -174,8 +174,8 @@ export interface StatsSummary {
 
 export interface BaseStoreState {
   isLoading: boolean;
-  error: string | null;
-  lastUpdated: string | null;
+  error: string | undefined;
+  lastUpdated: string | undefined;
 }
 
 export interface BaseStoreActions {

@@ -32,7 +32,7 @@ export const useSleepStore = create<SleepStore>()(
             updatedAt: new Date(),
           } as Omit<SleepEntry, 'id'>;
 
-          const { data, error } = await supabase
+          const { data, error }: any = await supabase
             .from('sleep_entries')
             .insert([newEntry])
             .select()
@@ -65,7 +65,7 @@ export const useSleepStore = create<SleepStore>()(
             updated_at: new Date().toISOString(),
           };
 
-          const { data, error } = await supabase
+          const { data, error }: any = await supabase
             .from('sleep_entries')
             .update(updatedData)
             .eq('id', id)
@@ -75,7 +75,7 @@ export const useSleepStore = create<SleepStore>()(
           if (error) throw error;
 
           set(state => ({
-            entries: state.entries.map(entry => (entry.id === id ? { ...entry, ...data } : entry)),
+            entries: state.entries.map((entry, index) => (entry.id === id ? { ...entry, ...data } : entry)),
             currentEntry:
               state.currentEntry?.id === id
                 ? { ...state.currentEntry, ...data }
@@ -126,7 +126,7 @@ export const useSleepStore = create<SleepStore>()(
           } = await supabase.auth.getUser();
           if (!user) throw new Error('Utilisateur non authentifié');
 
-          const { data, error } = await supabase
+          const { data, error }: any = await supabase
             .from('sleep_entries')
             .select('*')
             .eq('userId', user.id)
@@ -170,7 +170,7 @@ export const useSleepStore = create<SleepStore>()(
             updatedAt: new Date(),
           };
 
-          const { data, error } = await supabase
+          const { data, error }: any = await supabase
             .from('sleep_goals')
             .insert([newGoal])
             .select()
@@ -179,7 +179,7 @@ export const useSleepStore = create<SleepStore>()(
           if (error) throw error;
 
           set(state => ({
-            goals: [...state.goals.map(g => ({ ...g, isActive: false })), data],
+            goals: [...state.goals.map((g, index) => ({ ...g, isActive: false })), data],
             currentGoal: data,
             isLoading: false,
           }));
@@ -200,7 +200,7 @@ export const useSleepStore = create<SleepStore>()(
             updated_at: new Date().toISOString(),
           };
 
-          const { data, error } = await supabase
+          const { data, error }: any = await supabase
             .from('sleep_goals')
             .update(updatedData)
             .eq('id', id)
@@ -210,7 +210,7 @@ export const useSleepStore = create<SleepStore>()(
           if (error) throw error;
 
           set(state => ({
-            goals: state.goals.map(goal => (goal.id === id ? { ...goal, ...data } : goal)),
+            goals: state.goals.map((goal, index) => (goal.id === id ? { ...goal, ...data } : goal)),
             currentGoal:
               state.currentGoal?.id === id ? { ...state.currentGoal, ...data } : state.currentGoal,
             isLoading: false,
@@ -253,7 +253,7 @@ export const useSleepStore = create<SleepStore>()(
           } = await supabase.auth.getUser();
           if (!user) throw new Error('Utilisateur non authentifié');
 
-          const { data, error } = await supabase
+          const { data, error }: any = await supabase
             .from('sleep_goals')
             .select('*')
             .eq('userId', user.id)
@@ -261,7 +261,7 @@ export const useSleepStore = create<SleepStore>()(
 
           if (error) throw error;
 
-          const activeGoal = data?.find(goal => goal.isActive) || null;
+          const activeGoal = data?.find(goal => goal.isActive) || undefined;
 
           set({
             goals: data || [],
@@ -294,7 +294,7 @@ export const useSleepStore = create<SleepStore>()(
           const averageQuality = totalQuality / entries.length;
 
           // Calcul de la consistance des heures de coucher
-          const bedtimes = entries.map(entry => {
+          const bedtimes = entries.map((entry, index) => {
             const time = new Date(`2000-01-01T${entry.bedtime}`);
             return time.getHours() * 60 + time.getMinutes();
           });
@@ -337,7 +337,7 @@ export const useSleepStore = create<SleepStore>()(
           };
 
           // Données hebdomadaires pour les graphiques
-          const weeklyData: SleepDayData[] = entries.slice(0, 7).map(entry => ({
+          const weeklyData: SleepDayData[] = entries.slice(0, 7).map((entry, index) => ({
             date: entry.createdAt.toISOString().split('T')[0],
             duration: entry.duration,
             quality: entry.quality,

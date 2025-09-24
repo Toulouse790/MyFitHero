@@ -10,7 +10,7 @@ interface ScanError {
 }
 
 interface ErrorDisplayProps {
-  error: ScanError | null;
+  error: ScanError | undefined;
   onRetry?: () => void;
   onDismiss?: () => void;
 }

@@ -51,7 +51,7 @@ export const useIntelligentPreloading = () => {
               await import('@/pages/index'); // ✅ Corrigé: chemin relatif correct
               break;
           }
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
         }
       });

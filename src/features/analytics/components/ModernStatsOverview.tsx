@@ -43,7 +43,7 @@ interface UserStats {
   totalXP: number;
   level: number;
   healthScore: number;
-  lastActivityDate: Date | null;
+  lastActivityDate: Date | undefined;
   joinDate: Date;
   updatedAt: Date;
 }

@@ -91,7 +91,7 @@ export function getConditionalNextStep(
   currentStepId: string,
   response: any,
   data: OnboardingData
-): string | null {
+): string | undefined {
   switch (currentStepId) {
     case 'pack_selection':
       return response === 'custom' ? 'module_selection' : 'personal_info';

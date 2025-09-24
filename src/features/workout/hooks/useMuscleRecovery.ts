@@ -11,17 +11,17 @@ import type {
 interface UseMuscleRecoveryReturn {
   // État
   muscleRecoveryData: MuscleRecoveryData[];
-  recoveryProfile: UserRecoveryProfile | null;
+  recoveryProfile: UserRecoveryProfile | undefined;
   recommendations: RecoveryRecommendation[];
-  globalMetrics: GlobalRecoveryMetrics | null;
+  globalMetrics: GlobalRecoveryMetrics | undefined;
   isLoading: boolean;
-  error: string | null;
-  lastUpdated: string | null;
+  error: string | undefined;
+  lastUpdated: string | undefined;
 
   // Actions
   refreshRecoveryData: () => Promise<void>;
   updateRecoveryProfile: () => Promise<void>;
-  getMuscleRecovery: (muscleGroup: MuscleGroup) => MuscleRecoveryData | null;
+  getMuscleRecovery: (muscleGroup: MuscleGroup) => MuscleRecoveryData | undefined;
   getRecoveryScore: () => number;
   isReadyForWorkout: (muscleGroups: MuscleGroup[]) => boolean;
   getOptimalWorkoutType: () => string;
@@ -93,8 +93,8 @@ export const useMuscleRecovery = (): UseMuscleRecoveryReturn => {
 
   // Fonctions utilitaires
   const getMuscleRecovery = useCallback(
-    (muscleGroup: MuscleGroup): MuscleRecoveryData | null => {
-      return muscleRecoveryData.find(data => data.muscle_group === muscleGroup) || null;
+    (muscleGroup: MuscleGroup): MuscleRecoveryData | undefined => {
+      return muscleRecoveryData.find(data => data.muscle_group === muscleGroup) || undefined;
     },
     [muscleRecoveryData]
   );

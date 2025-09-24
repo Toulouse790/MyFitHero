@@ -132,7 +132,7 @@ export const PositionSelector: React.FC<PositionSelectorProps> = ({
   // Recommandations IA
   const aiRecommendations = useMemo(() => {
     return positions
-      .filter(p => p.aiRecommendation && p.aiRecommendation.score > 80)
+      .filter((p: any) => p.aiRecommendation && p.aiRecommendation.score > 80)
       .sort((a, b) => (b.aiRecommendation?.score || 0) - (a.aiRecommendation?.score || 0))
       .slice(0, 2);
   }, [positions]);
@@ -201,7 +201,7 @@ export const PositionSelector: React.FC<PositionSelectorProps> = ({
             <h3 className="font-semibold text-gray-900">Recommandations IA pour vous</h3>
           </div>
           <div className="space-y-2">
-            {aiRecommendations.map(position => (
+            {aiRecommendations.map((position, index) => (
               <div
                 key={position.id}
                 className="flex items-center justify-between p-3 bg-white rounded-lg border border-blue-100"
@@ -234,7 +234,7 @@ export const PositionSelector: React.FC<PositionSelectorProps> = ({
 
       {/* Liste des positions */}
       <div className="grid gap-3">
-        {filteredPositions.map(position => {
+        {filteredPositions.map((position, index) => {
           const isSelected = selectedPositions.includes(position.id);
           const isMaxReached = selectedPositions.length >= maxSelections && !isSelected;
 

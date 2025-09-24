@@ -133,7 +133,7 @@ const WearableNotificationCenter: React.FC = () => {
 
     // Ajouter les nouvelles notifications
     setNotifications(prev => {
-      const existingIds = prev.map(n => n.id);
+      const existingIds = prev.map((n, index) => n.id);
       const uniqueNew = newNotifications.filter(n => !existingIds.includes(n.id));
       return [...prev, ...uniqueNew];
     });
@@ -151,7 +151,7 @@ const WearableNotificationCenter: React.FC = () => {
   };
 
   const markAsRead = (id: string) => {
-    setNotifications(prev => prev.map(n => (n.id === id ? { ...n, read: true } : n)));
+    setNotifications(prev => prev.map((n, index) => (n.id === id ? { ...n, read: true } : n)));
   };
 
   const clearAllNotifications = () => {
@@ -347,7 +347,7 @@ const WearableNotificationCenter: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-3">
-              {notifications.slice(0, 10).map(notification => {
+              {notifications.slice(0, 10).map((notification, index) => {
                 const IconComponent = getNotificationIcon(notification.type);
                 return (
                   <div

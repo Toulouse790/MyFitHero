@@ -40,7 +40,7 @@ export class BadgeService {
    */
   static async getAllBadges(): Promise<Badge[]> {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('badges')
         .select('*')
         .eq('is_active', true)
@@ -64,7 +64,7 @@ export class BadgeService {
    */
   static async getUserBadges(userId: string): Promise<UserBadge[]> {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_badges')
         .select(
           `
@@ -98,9 +98,9 @@ export class BadgeService {
         this.getUserBadges(userId),
       ]);
 
-      const userBadgeMap = new Map(userBadges.map(ub => [ub.badge_id, ub]));
+      const userBadgeMap = new Map(userBadges.map((ub, index) => [ub.badge_id, ub]));
 
-      const progress: BadgeProgress[] = allBadges.map(badge => {
+      const progress: BadgeProgress[] = allBadges.map((badge, index) => {
         const userBadge = userBadgeMap.get(badge.id);
 
         return {
@@ -143,7 +143,7 @@ export class BadgeService {
 
       const allBadges = await this.getAllBadges();
       const userBadges = await this.getUserBadges(userId);
-      const earnedBadgeIds = new Set(userBadges.map(ub => ub.badge_id));
+      const earnedBadgeIds = new Set(userBadges.map((ub, index) => ub.badge_id));
 
       const newBadges: UserBadge[] = [];
 
@@ -334,7 +334,7 @@ export class BadgeService {
    */
   static async getUnnotifiedBadges(userId: string): Promise<UserBadge[]> {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_badges')
         .select(
           `
@@ -364,7 +364,7 @@ export class BadgeService {
    */
   static async getBadgesByCategory(category: string): Promise<Badge[]> {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('badges')
         .select('*')
         .eq('category', category)

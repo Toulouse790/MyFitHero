@@ -97,7 +97,7 @@ export const SignupPageComponent: React.FC = () => {
     try {
       await fn();
       setRetryCount(0); // Reset retry count on success
-    } catch (error) {
+    } catch (error: any) {
       if (attempt < MAX_RETRIES) {
         const delay = Math.pow(2, attempt) * 1000; // 1s, 2s, 4s
         
@@ -176,7 +176,7 @@ export const SignupPageComponent: React.FC = () => {
 
     try {
       await retryWithBackoff(performSignup);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur inscription:', error);
       
       // Gestion spécifique des erreurs réseau

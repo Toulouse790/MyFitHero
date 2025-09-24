@@ -24,17 +24,17 @@ type NutritionMealInput = {
 
 export interface UseNutritionReturn {
   // État
-  nutritionData: NutritionData | null;
+  nutritionData: NutritionData | undefined;
   meals: Meal[];
-  goals: NutritionGoals | null;
-  analysis: NutritionAnalysis | null;
+  goals: NutritionGoals | undefined;
+  analysis: NutritionAnalysis | undefined;
   recipes: Recipe[];
   mealPlans: MealPlan[];
-  trends: NutritionTrend | null;
+  trends: NutritionTrend | undefined;
   insights: NutritionInsight[];
   searchResults: FoodItem[];
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
 
   // Actions
   addMeal: (meal: NutritionMealInput) => Promise<void>;

@@ -124,7 +124,7 @@ class AnalyticsService {
           },
         ],
       };
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error fetching multi-pillar data:', error);
       throw error;
@@ -143,7 +143,7 @@ class AnalyticsService {
       }
 
       return progressData.sort((a, b) => b.progress_percentage - a.progress_percentage);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error fetching pillar progress:', error);
       throw error;
@@ -169,7 +169,7 @@ class AnalyticsService {
         challenges_completed: activities.challenges,
         level_progress: consistency.level_progress,
       };
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error fetching performance metrics:', error);
       throw error;
@@ -222,7 +222,7 @@ class AnalyticsService {
         },
         improvement,
       };
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error fetching comparison data:', error);
       throw error;
@@ -320,7 +320,7 @@ class AnalyticsService {
         const priorityOrder = { high: 3, medium: 2, low: 1 };
         return priorityOrder[b.priority] - priorityOrder[a.priority];
       });
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error generating insights:', error);
       throw error;

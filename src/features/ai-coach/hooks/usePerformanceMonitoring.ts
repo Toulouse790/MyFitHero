@@ -116,7 +116,7 @@ export const usePerformanceMonitoring = (): UsePerformanceMonitoringReturn => {
           networkRequests: getNetworkRequests(),
           bundleSize: getBundleSize(),
         }));
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.warn('Performance monitoring not supported:', error);
       }

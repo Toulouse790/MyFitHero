@@ -1,4 +1,4 @@
-import { TrendingUp, Target } from 'lucide-react';
+import { TrendingUp, Target, Droplets, Dumbbell, Flame, Trophy, Flag } from 'lucide-react';
 // client/src/components/USMarketDashboard.tsx
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -71,10 +71,10 @@ export const USMarketDashboard: React.FC<USMarketDashboardProps> = ({ className 
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-blue-600">
-              <UnitDisplay value={70} type="weight" />
+              <UnitDisplay value={70} unit="kg" />
             </div>
             <p className="text-xs text-gray-500">
-              Goal: <UnitDisplay value={65} type="weight" />
+              Goal: <UnitDisplay value={65} unit="kg" />
             </p>
           </CardContent>
         </Card>
@@ -89,7 +89,7 @@ export const USMarketDashboard: React.FC<USMarketDashboardProps> = ({ className 
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-600">
-              <UnitDisplay value={175} type="height" />
+              <UnitDisplay value={175} unit="cm" />
             </div>
             <p className="text-xs text-gray-500">BMI: 22.9 (Normal)</p>
           </CardContent>
@@ -105,10 +105,10 @@ export const USMarketDashboard: React.FC<USMarketDashboardProps> = ({ className 
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-cyan-600">
-              <UnitDisplay value={1420} type="liquid" />
+              <UnitDisplay value={1420} unit="ml" />
             </div>
             <p className="text-xs text-gray-500">
-              Goal: <UnitDisplay value={1900} type="liquid" />
+              Goal: <UnitDisplay value={1900} unit="ml" />
             </p>
             <Progress value={(1420 / 1900) * 100} className="mt-2 h-1" />
           </CardContent>

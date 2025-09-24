@@ -112,7 +112,7 @@ const generateSrcSet = (src: string, supportsWebP: boolean, quality: number): st
   const widths = [320, 480, 768, 1024, 1280, 1920];
   
   return widths
-    .map(width => {
+    .map((width, index) => {
       const optimizedSrc = getOptimizedSrc(src, supportsWebP, quality);
       try {
         const url = new URL(optimizedSrc);

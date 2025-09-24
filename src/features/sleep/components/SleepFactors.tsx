@@ -28,7 +28,7 @@ export const SleepFactors: React.FC<SleepFactorsProps> = ({
     <div className="space-y-3">
       <Label>Facteurs ayant influencé votre sommeil</Label>
       <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto">
-        {defaultSleepFactors.map(factor => {
+        {defaultSleepFactors.map((factor, index) => {
           const isSelected = selectedFactors.includes(factor.id);
           
           return (

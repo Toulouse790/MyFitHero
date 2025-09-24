@@ -44,7 +44,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
 
       // Upload du fichier
       await uploadAvatar(file);
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de traiter l\'image.',
@@ -78,7 +78,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
       } else {
         throw new Error(result.error);
       }
-    } catch (error) {
+    } catch (error: any) {
       setPreviewUrl(null);
       toast({
         title: 'Erreur',
@@ -114,7 +114,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
       } else {
         throw new Error(result.error);
       }
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de supprimer votre photo.',

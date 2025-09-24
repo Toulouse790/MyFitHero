@@ -54,7 +54,7 @@ const SocialPageRefactored: React.FC = () => {
         title: 'Post liké !',
         description: 'Votre like a été enregistré.',
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de liker ce post.',
@@ -70,7 +70,7 @@ const SocialPageRefactored: React.FC = () => {
         title: 'Post sauvegardé !',
         description: 'Ce post a été ajouté à vos favoris.',
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de sauvegarder ce post.',
@@ -86,7 +86,7 @@ const SocialPageRefactored: React.FC = () => {
         title: 'Post partagé !',
         description: 'Ce post a été partagé avec vos amis.',
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de partager ce post.',
@@ -102,7 +102,7 @@ const SocialPageRefactored: React.FC = () => {
         title: 'Défi rejoint !',
         description: 'Vous participez maintenant à ce défi.',
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de rejoindre ce défi.',
@@ -118,7 +118,7 @@ const SocialPageRefactored: React.FC = () => {
         title: 'Défi quitté',
         description: 'Vous ne participez plus à ce défi.',
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de quitter ce défi.',

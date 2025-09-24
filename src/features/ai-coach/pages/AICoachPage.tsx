@@ -201,7 +201,7 @@ const QuickActions: FC<QuickActionsProps> = ({ onAction }) => (
 
 interface VideoAnalyserProps {
   videoRef: React.RefObject<HTMLVideoElement>;
-  exerciseAnalysis: ExerciseAnalysisResult | null;
+  exerciseAnalysis: ExerciseAnalysisResult | undefined;
   isLiveCoaching: boolean;
 }
 const VideoAnalyser: FC<VideoAnalyserProps> = ({ videoRef, exerciseAnalysis, isLiveCoaching }) => (
@@ -260,7 +260,7 @@ const useAICoachLogic = () => {
       try {
         const response = await fetchAICoachResponse({ messages: [...messages, newUserMsg] });
         setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         toast.error('Erreur communication IA.');
       } finally {
@@ -299,7 +299,7 @@ const useAICoachLogic = () => {
         const plan = await fetchPersonalizedPlan();
         setPersonalPlan(plan);
         toast.success('Plan personnalisé généré.');
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         toast.error('Erreur lors génération plan.');
       }
@@ -314,7 +314,7 @@ const useAICoachLogic = () => {
         const analysis = await fetchExerciseAnalysis(videoRef.current);
         setExerciseAnalysis(analysis);
         toast.success('Analyse forme terminée.');
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         toast.error('Erreur analyse video.');
       }
@@ -323,14 +323,14 @@ const useAICoachLogic = () => {
 
   // Live coaching - cycle analyse vidéo continu
   useEffect(() => {
-    let animationId: number | null = null;
+    let animationId: number | undefined = null;
 
     const analyseLoop = async () => {
       if (!videoRef.current) return;
       try {
         const analysis = await fetchExerciseAnalysis(videoRef.current);
         setExerciseAnalysis(analysis);
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         // Silence error buffering
       }

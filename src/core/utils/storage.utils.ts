@@ -22,13 +22,13 @@ export class Storage {
         `${this.prefix}${key}`,
         JSON.stringify(item)
       );
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Erreur lors de la sauvegarde de ${key}:`, error);
     }
   }
 
   // Récupérer une donnée
-  static get<T>(key: string): T | null {
+  static get<T>(key: string): T | undefined {
     try {
       const storedData = localStorage.getItem(`${this.prefix}${key}`);
       if (!storedData) return null;
@@ -42,7 +42,7 @@ export class Storage {
       }
 
       return item.value;
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Erreur lors de la récupération de ${key}:`, error);
       return null;
     }
@@ -52,7 +52,7 @@ export class Storage {
   static remove(key: string): void {
     try {
       localStorage.removeItem(`${this.prefix}${key}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Erreur lors de la suppression de ${key}:`, error);
     }
   }
@@ -64,7 +64,7 @@ export class Storage {
         key.startsWith(this.prefix)
       );
       keys.forEach(key => localStorage.removeItem(key));
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors du vidage du storage:', error);
     }
   }

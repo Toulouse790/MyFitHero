@@ -115,7 +115,7 @@ export function useConversationalOnboarding(
     try {
       // Logique de finalisation
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulation
-    } catch (error) {
+    } catch (error: any) {
       setErrors(['Erreur lors de la finalisation']);
     } finally {
       setIsLoading(false);

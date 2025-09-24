@@ -25,7 +25,7 @@ export const useUnitPreferences = () => {
     if (stored) {
       try {
         setPreferences(JSON.parse(stored));
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error loading unit preferences:', error);
       }
     }

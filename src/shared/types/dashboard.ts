@@ -2,7 +2,7 @@ import { Activity, Target } from 'lucide-react';
 // Dashboard types
 
 // Type for JSON data from Supabase
-export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+export type Json = string | number | boolean | undefined | { [key: string]: Json | undefined } | Json[];
 
 // Interface for daily statistics
 export interface DailyStats {
@@ -34,7 +34,7 @@ export interface SmartDashboardContext {
     season_period?: string;
     injuries?: string[];
   };
-  dailyStats: DailyStats | null;
+  dailyStats: DailyStats | undefined;
   currentDate: string;
   currentTime: string;
   isWeekend: boolean;

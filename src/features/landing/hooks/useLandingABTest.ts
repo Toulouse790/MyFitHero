@@ -18,7 +18,7 @@ export const useLandingABTest = (): UseLandingABTestReturn => {
         // Mock A/B test setup
         await new Promise(resolve => setTimeout(resolve, 1000));
         return true;
-      } catch (error) {
+      } catch (error: any) {
         console.error('Failed to start A/B test:', error);
         return false;
       }
@@ -39,7 +39,7 @@ export const useLandingABTest = (): UseLandingABTestReturn => {
         };
 
         return mockResults;
-      } catch (error) {
+      } catch (error: any) {
         console.error('Failed to get A/B test result:', error);
         return null;
       }

@@ -37,7 +37,7 @@ export const ConnectedScales: React.FC<ConnectedScalesProps> = ({
 
       {connectedScales.length > 0 ? (
         <div className="space-y-4">
-          {connectedScales.map(scale => (
+          {connectedScales.map((scale, index) => (
             <div key={scale.id} className="border border-gray-200 rounded-lg p-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">

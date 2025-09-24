@@ -65,14 +65,14 @@ export interface LandingContent {
 
 export interface UseLandingReturn {
   // Content
-  content: LandingContent | null;
+  content: LandingContent | undefined;
   contentLoading: boolean;
-  contentError: string | null;
+  contentError: string | undefined;
 
   // Analytics
-  metrics: LandingMetrics | null;
+  metrics: LandingMetrics | undefined;
   metricsLoading: boolean;
-  metricsError: string | null;
+  metricsError: string | undefined;
 
   // CTA tracking
   ctaStats: CTAStats[];
@@ -253,7 +253,7 @@ export const useLanding = (): UseLandingReturn => {
       await new Promise(resolve => setTimeout(resolve, 800));
 
       setContent(mockContent);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       setContentError(error instanceof Error ? error.message : 'Failed to load content');
     } finally {
@@ -281,7 +281,7 @@ export const useLanding = (): UseLandingReturn => {
       await new Promise(resolve => setTimeout(resolve, 600));
 
       setMetrics(mockMetrics);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       setMetricsError(error instanceof Error ? error.message : 'Failed to load metrics');
     } finally {
@@ -326,7 +326,7 @@ export const useLanding = (): UseLandingReturn => {
       await new Promise(resolve => setTimeout(resolve, 500));
 
       setCTAStats(mockCTAStats);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Failed to load CTA stats:', error);
     } finally {
@@ -353,7 +353,7 @@ export const useLanding = (): UseLandingReturn => {
         );
 
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to update content:', error);
         return false;
@@ -369,7 +369,7 @@ export const useLanding = (): UseLandingReturn => {
       await new Promise(resolve => setTimeout(resolve, 100));
 
       setCTAStats(prev =>
-        prev.map(stat =>
+        prev.map((stat, index) =>
           stat.section === section
             ? {
                 ...stat,
@@ -379,7 +379,7 @@ export const useLanding = (): UseLandingReturn => {
             : stat
         )
       );
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Failed to track CTA click:', error);
     }
@@ -399,7 +399,7 @@ export const useLanding = (): UseLandingReturn => {
             }
           : null
       );
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Failed to track page view:', error);
     }
@@ -412,7 +412,7 @@ export const useLanding = (): UseLandingReturn => {
         // Mock A/B test setup
         await new Promise(resolve => setTimeout(resolve, 1000));
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to start A/B test:', error);
         return false;
@@ -435,7 +435,7 @@ export const useLanding = (): UseLandingReturn => {
         };
 
         return mockResults;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to get A/B test result:', error);
         return null;
@@ -450,7 +450,7 @@ export const useLanding = (): UseLandingReturn => {
       // Mock image optimization
       await new Promise(resolve => setTimeout(resolve, 2000));
       return true;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Failed to optimize images:', error);
       return false;
@@ -463,7 +463,7 @@ export const useLanding = (): UseLandingReturn => {
       // Mock sitemap generation
       await new Promise(resolve => setTimeout(resolve, 1500));
       return true;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Failed to generate sitemap:', error);
       return false;

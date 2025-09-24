@@ -68,7 +68,7 @@ const PrivacyManager: React.FC = () => {
       if (data) {
         setSettings(data);
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur chargement paramètres:', error);
     }
@@ -96,7 +96,7 @@ const PrivacyManager: React.FC = () => {
         title: 'Paramètres mis à jour',
         description: 'Vos préférences de confidentialité ont été sauvegardées.',
       });
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur sauvegarde paramètres:', error);
       toast({
@@ -162,7 +162,7 @@ const PrivacyManager: React.FC = () => {
         title: 'Export terminé',
         description: 'Vos données ont été exportées avec succès.',
       });
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur export données:', error);
       toast({
@@ -201,7 +201,7 @@ const PrivacyManager: React.FC = () => {
 
       // Déconnexion
       await supabase.auth.signOut();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur suppression compte:', error);
       toast({
@@ -256,7 +256,7 @@ const PrivacyManager: React.FC = () => {
       <div className="mb-8">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Visibilité du profil</h3>
         <div className="space-y-3">
-          {(['public', 'friends', 'private'] as const).map(visibility => {
+          {(['public', 'friends', 'private'] as const).map((visibility, index) => {
             const Icon = getVisibilityIcon(visibility);
             return (
               <div

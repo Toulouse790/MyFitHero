@@ -97,7 +97,7 @@ export const WorkoutSessionSummary: React.FC<WorkoutSessionSummaryProps> = ({
           Comment s'est passée votre séance ?
         </h3>
         <div className="flex gap-1">
-          {[1, 2, 3, 4, 5].map(rating => (
+          {[1, 2, 3, 4, 5].map((rating, index) => (
             <button
               key={rating}
               onClick={() => onRate?.(rating)}

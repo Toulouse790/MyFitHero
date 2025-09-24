@@ -1,3 +1,4 @@
+import React from 'react';
 import { Check } from 'lucide-react';
 // components/PreWorkoutRecoveryCheck.tsx
 import { useMuscleRecovery } from '@/features/workout/hooks/useMuscleRecovery';

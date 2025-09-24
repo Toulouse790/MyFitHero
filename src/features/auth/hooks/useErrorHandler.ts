@@ -33,10 +33,10 @@ export interface UseErrorHandlerOptions {
 }
 
 export interface UseErrorHandlerReturn {
-  error: string | null;
+  error: string | undefined;
   clearError: () => void;
   handleError: (error: unknown, context?: string) => AppError;
-  handleApiError: (error: unknown) => ApiError | null;
+  handleApiError: (error: unknown) => ApiError | undefined;
   handleValidationErrors: (errors: ValidationError[]) => string;
   wrapAsync: <T>(asyncFn: () => Promise<T>) => Promise<T | null>;
   createError: (code: string, message: string, details?: any) => AppError;
@@ -105,7 +105,7 @@ export function useErrorHandler(options: UseErrorHandlerOptions = {}): UseErrorH
   );
 
   // Gère spécifiquement les erreurs d'API
-  const handleApiError = useCallback((error: unknown): ApiError | null => {
+  const handleApiError = useCallback((error: unknown): ApiError | undefined => {
     try {
       // Erreur Fetch
       if (error instanceof Response) {
@@ -141,7 +141,7 @@ export function useErrorHandler(options: UseErrorHandlerOptions = {}): UseErrorH
       }
 
       return null;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       return null;
     }
@@ -155,7 +155,7 @@ export function useErrorHandler(options: UseErrorHandlerOptions = {}): UseErrorH
       return `${errors[0].field}: ${errors[0].message}`;
     }
 
-    return `Erreurs de validation: ${errors.map(e => e.field).join(', ')}`;
+    return `Erreurs de validation: ${errors.map((e, index) => e.field).join(', ')}`;
   }, []);
 
   // Wrapper pour les fonctions async
@@ -164,7 +164,7 @@ export function useErrorHandler(options: UseErrorHandlerOptions = {}): UseErrorH
       try {
         clearError();
         return await asyncFn();
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         handleError(error);
         return null;

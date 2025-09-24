@@ -262,7 +262,7 @@ class MarketingAnalyticsService {
       });
 
       // Log for development
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Failed to track marketing event:', error);
       // Store in localStorage as fallback
       this.storeEventLocally(eventData);
@@ -281,7 +281,7 @@ class MarketingAnalyticsService {
       }
       
       localStorage.setItem('myfithero_analytics', JSON.stringify(events));
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Failed to store event locally:', error);
     }
   }
@@ -290,7 +290,7 @@ class MarketingAnalyticsService {
     try {
       const stored = localStorage.getItem('myfithero_analytics') || '[]';
       return JSON.parse(stored);
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Failed to get stored events:', error);
       return [];
     }
@@ -300,7 +300,7 @@ class MarketingAnalyticsService {
     try {
       const response = await fetch('/api/analytics/landing-metrics');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Failed to get landing metrics:', error);
       // Return mock data for development
       return {

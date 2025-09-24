@@ -1,3 +1,4 @@
+import React from 'react';
 // components/DashboardRecoveryWidget.tsx
 import { useMuscleRecovery } from '@/features/workout/hooks/useMuscleRecovery';
 

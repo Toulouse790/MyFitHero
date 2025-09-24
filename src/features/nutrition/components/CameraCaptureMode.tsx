@@ -52,7 +52,7 @@ export const CameraCaptureMode: React.FC<CameraCaptureModeProps> = ({
         videoRef.current.srcObject = mediaStream;
         videoRef.current.play();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Camera error:', error);
       onError({
         message: 'Impossible d\'accéder à la caméra',

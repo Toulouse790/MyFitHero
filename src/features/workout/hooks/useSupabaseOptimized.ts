@@ -19,7 +19,7 @@ export function useWorkoutSessionDetail(sessionId: string | undefined) {
     queryFn: async () => {
       if (!sessionId) throw new Error('Session ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('workout_sessions_with_metrics') // Vue avec métriques
         .select('*')
         .eq('id', sessionId)
@@ -42,7 +42,7 @@ export function useWorkoutSets(sessionId: string | undefined) {
     queryFn: async () => {
       if (!sessionId) throw new Error('Session ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('workout_sets')
         .select(`
           *,
@@ -70,7 +70,7 @@ export function useUpdateWorkoutSession() {
       sessionId: string; 
       updates: Partial<any> 
     }) => {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('workout_sessions')
         .update(updates)
         .eq('id', sessionId)
@@ -95,7 +95,7 @@ export function useUpsertWorkoutSet() {
   
   return useMutation({
     mutationFn: async (setData: any) => {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('workout_sets')
         .upsert(setData)
         .select()
@@ -123,7 +123,7 @@ export function useExerciseDetail(exerciseId: string | undefined) {
     queryFn: async () => {
       if (!exerciseId) throw new Error('Exercise ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('exercise_details_with_history') // Vue avec historique
         .select('*')
         .eq('id', exerciseId)
@@ -150,7 +150,7 @@ export function useExercisePersonalHistory(
     queryFn: async () => {
       if (!exerciseId || !userId) throw new Error('Exercise ID and User ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('workout_sets')
         .select(`
           *,
@@ -181,14 +181,14 @@ export function useExercisePersonalRecords(
     queryFn: async () => {
       if (!exerciseId || !userId) throw new Error('Exercise ID and User ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .rpc('get_exercise_personal_records', {
           p_user_id: userId,
           p_exercise_id: exerciseId
         });
       
       if (error) throw error;
-      return data?.[0] || null;
+      return data?.[0] || undefined;
     },
     enabled: !!exerciseId && !!userId,
     staleTime: 300000, // 5 minutes
@@ -208,7 +208,7 @@ export function useExerciseProgression(
     queryFn: async () => {
       if (!exerciseId || !userId) throw new Error('Exercise ID and User ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .rpc('get_exercise_progression', {
           p_user_id: userId,
           p_exercise_id: exerciseId,
@@ -241,7 +241,7 @@ export function useExerciseVariants(exerciseId: string | undefined) {
       if (mainError) throw mainError;
       
       // Trouver des exercices similaires
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('exercises_library')
         .select('*')
         .eq('category', mainExercise.category)
@@ -269,7 +269,7 @@ export function useSessionMetrics(sessionId: string | undefined) {
     queryFn: async () => {
       if (!sessionId) throw new Error('Session ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('session_metrics')
         .select('*')
         .eq('session_id', sessionId)
@@ -293,7 +293,7 @@ export function useDailyStats(userId: string | undefined, date?: string) {
     queryFn: async () => {
       if (!userId) throw new Error('User ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('daily_stats')
         .select('*')
         .eq('user_id', userId)
@@ -316,7 +316,7 @@ export function useUserGoals(userId: string | undefined) {
     queryFn: async () => {
       if (!userId) throw new Error('User ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_goals')
         .select('*')
         .eq('user_id', userId)
@@ -343,7 +343,7 @@ export function useMuscleRecoveryData(userId: string | undefined) {
     queryFn: async () => {
       if (!userId) throw new Error('User ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('muscle_recovery_data')
         .select('*')
         .eq('user_id', userId)
@@ -370,7 +370,7 @@ export function useUserCompleteProfile(userId: string | undefined) {
     queryFn: async () => {
       if (!userId) throw new Error('User ID required');
       
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_complete_stats') // Vue avec toutes les stats
         .select('*')
         .eq('id', userId)
@@ -418,7 +418,7 @@ export function useExerciseSearch(
         query = query.in('equipment', filters.equipment);
       }
       
-      const { data, error } = await query
+      const { data, error }: any = await query
         .order('name')
         .limit(50);
       

@@ -83,7 +83,7 @@ interface UserStats {
   experience_points: number;
   level: number;
   healthScore: number;
-  lastActivityDate: Date | null;
+  lastActivityDate: Date | undefined;
   joinDate: Date;
   updatedAt: Date;
 }
@@ -128,7 +128,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({
 
       setStats(userStats);
       setBadgeStats(badgeStatsData);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur lors du chargement des statistiques:', error);
       toast({

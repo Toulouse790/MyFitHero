@@ -34,7 +34,7 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
   const getInitials = (name: string) => {
     return name
       .split(' ')
-      .map(word => word[0])
+      .map((word, index) => word[0])
       .join('')
       .toUpperCase()
       .slice(0, 2);

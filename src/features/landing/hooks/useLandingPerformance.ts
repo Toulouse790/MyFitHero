@@ -12,7 +12,7 @@ export const useLandingPerformance = (): UseLandingPerformanceReturn => {
       // Mock image optimization
       await new Promise(resolve => setTimeout(resolve, 2000));
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to optimize images:', error);
       return false;
     }
@@ -23,7 +23,7 @@ export const useLandingPerformance = (): UseLandingPerformanceReturn => {
       // Mock sitemap generation
       await new Promise(resolve => setTimeout(resolve, 1500));
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to generate sitemap:', error);
       return false;
     }

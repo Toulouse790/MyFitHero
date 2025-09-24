@@ -6,7 +6,7 @@ export interface UseSocialModalsReturn {
   // Modal states
   showCreatePost: boolean;
   showCreateChallenge: boolean;
-  showComments: string | null;
+  showComments: string | undefined;
   
   // Form data
   newPost: CreatePostData;
@@ -133,7 +133,7 @@ export const useSocialModals = (): UseSocialModalsReturn => {
       
       // You would typically call a refresh function here
       // to reload the posts with the new post
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating post:', error);
       throw error;
     }
@@ -151,7 +151,7 @@ export const useSocialModals = (): UseSocialModalsReturn => {
       
       // You would typically call a refresh function here
       // to reload the challenges with the new challenge
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating challenge:', error);
       throw error;
     }
@@ -161,7 +161,8 @@ export const useSocialModals = (): UseSocialModalsReturn => {
     if (!newComment.trim() || !showComments) return;
 
     try {
-      // Mock API call
+      // Mock API call - just log for now
+      console.log('Creating comment:', {
         postId: showComments,
         content: newComment,
       });
@@ -174,7 +175,7 @@ export const useSocialModals = (): UseSocialModalsReturn => {
       
       // You would typically call a refresh function here
       // to reload the post comments
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating comment:', error);
       throw error;
     }

@@ -14,7 +14,7 @@ interface SleepSession {
 }
 
 interface SleepSummaryProps {
-  currentSleep: SleepSession | null;
+  currentSleep: SleepSession | undefined;
   currentSleepHours: number;
   personalizedSleepGoal: number;
   userSportCategory: string;

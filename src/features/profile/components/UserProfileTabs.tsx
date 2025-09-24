@@ -26,7 +26,7 @@ const UserProfileTabs: React.FC<UserProfileTabsProps> = ({ className = '', onTab
     <div className={`bg-white rounded-xl shadow-sm ${className}`}>
       <div className="border-b border-gray-200">
         <nav className="flex space-x-8 px-6" aria-label="Tabs">
-          {tabs.map(tab => (
+          {tabs.map((tab, index) => (
             <button
               key={tab.id}
               onClick={() => handleTabClick(tab.id)}

@@ -3,8 +3,8 @@ import { supabase } from '@/lib/supabase';
 
 export interface AuthStatus {
   isAuthenticated: boolean;
-  user: any | null;
-  session: any | null;
+  user: any | undefined;
+  session: any | undefined;
   loading: boolean;
   signOut: () => Promise<void>;
 }
@@ -26,7 +26,7 @@ export const useAuthStatus = (): AuthStatus => {
 
         setSession(session);
         setUser(session?.user || null);
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Error checking user:', error);
         setSession(null);
@@ -56,7 +56,7 @@ export const useAuthStatus = (): AuthStatus => {
       if (error) throw error;
       setSession(null);
       setUser(null);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error signing out:', error);
     }

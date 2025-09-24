@@ -13,7 +13,7 @@ export const useRetryMechanism = ({ maxRetries = 3, baseDelay = 1000 }: UseRetry
     try {
       await fn();
       setRetryCount(0); // Reset retry count on success
-    } catch (error) {
+    } catch (error: any) {
       if (attempt < maxRetries) {
         const delay = Math.pow(2, attempt) * baseDelay; // Exponential backoff
         

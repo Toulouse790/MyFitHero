@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 import type { UserProfile } from '@/shared/types/userProfile';
 
 export interface UseAuthResult {
-  user: UserProfile | null;
+  user: UserProfile | undefined;
   isLoading: boolean;
   isAuthenticated: boolean;
   isAdmin: boolean;

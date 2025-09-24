@@ -34,7 +34,7 @@ export const PackSelector: React.FC<PackSelectorProps> = ({ onSelect, recommende
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-        {SMART_PACKS.map(pack => {
+        {SMART_PACKS.map((pack, index) => {
           const isRecommended = recommendedPacks.includes(pack.id);
           const isSelected = selectedPack === pack.id;
           const isHovered = hoveredPack === pack.id;
@@ -86,7 +86,7 @@ export const PackSelector: React.FC<PackSelectorProps> = ({ onSelect, recommende
                     Modules inclus :
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {pack.modules.map(module => (
+                    {pack.modules.map((module, index) => (
                       <Badge key={module} variant="outline" className="text-xs capitalize">
                         {module === 'strength' ? 'Musculation' : module}
                       </Badge>

@@ -1,0 +1,311 @@
+
+> myfithero@1.0.0 type-check
+> tsc --noEmit
+
+src/features/ai-coach/components/BalanceConnectButton.tsx(73,13): error TS2339: Property 'success' does not exist on type '{ error: (message: string) => void; }'.
+src/features/ai-coach/components/BalanceConnectButton.tsx(93,13): error TS2339: Property 'success' does not exist on type '{ error: (message: string) => void; }'.
+src/features/ai-coach/hooks/usePerformance.ts(98,13): error TS7030: Not all code paths return a value.
+src/features/analytics/components/SmartHealthDashboard.tsx(20,10): error TS2614: Module '"@/lib/wearableUtils"' has no exported member 'WearableAnalyzer'. Did you mean to use 'import WearableAnalyzer from "@/lib/wearableUtils"' instead?
+src/features/analytics/components/SportSelector.tsx(102,5): error TS2339: Property 'popularSports' does not exist on type '{ sports: SportOption[]; loading: boolean; error: string | null; refreshSports: () => void; }'.
+src/features/analytics/components/SportSelector.tsx(103,5): error TS2339: Property 'searchSports' does not exist on type '{ sports: SportOption[]; loading: boolean; error: string | null; refreshSports: () => void; }'.
+src/features/analytics/components/SportSelector.tsx(104,5): error TS2339: Property 'suggestSport' does not exist on type '{ sports: SportOption[]; loading: boolean; error: string | null; refreshSports: () => void; }'.
+src/features/analytics/components/SportSelector.tsx(107,5): error TS2339: Property 'refresh' does not exist on type '{ sports: SportOption[]; loading: boolean; error: string | null; refreshSports: () => void; }'.
+src/features/analytics/components/SportSelector.tsx(122,44): error TS7006: Parameter 'sport' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(139,8): error TS7006: Parameter 'acc' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(139,13): error TS7006: Parameter 'sport' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(153,30): error TS2339: Property 'length' does not exist on type 'UseDebounceReturn<string>'.
+src/features/analytics/components/SportSelector.tsx(164,19): error TS2345: Argument of type 'UseDebounceReturn<string>' is not assignable to parameter of type 'string'.
+src/features/analytics/components/SportSelector.tsx(189,67): error TS7006: Parameter 'sport' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(189,74): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(258,15): error TS2741: Property 'description' is missing in type '{ id: string; name: string; emoji: string; category: string; positions: never[]; isRecommended: false; popularity: number; }' but required in type 'SportWithMetadata'.
+src/features/analytics/components/SportSelector.tsx(345,20): error TS2339: Property 'isTrending' does not exist on type 'SportWithMetadata'.
+src/features/analytics/components/SportSelector.tsx(360,22): error TS2339: Property 'userCount' does not exist on type 'SportWithMetadata'.
+src/features/analytics/components/SportSelector.tsx(363,26): error TS2339: Property 'userCount' does not exist on type 'SportWithMetadata'.
+src/features/analytics/components/SportSelector.tsx(559,27): error TS7006: Parameter 'sport' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(559,34): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(571,14): error TS18046: 'sports' is of type 'unknown'.
+src/features/analytics/components/SportSelector.tsx(571,26): error TS7006: Parameter 'sport' implicitly has an 'any' type.
+src/features/analytics/components/SportSelector.tsx(571,33): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/features/analytics/components/USMarketDashboard.tsx(74,39): error TS2322: Type '{ value: number; type: string; }' is not assignable to type 'IntrinsicAttributes & UnitDisplayProps'.
+  Property 'type' does not exist on type 'IntrinsicAttributes & UnitDisplayProps'.
+src/features/analytics/components/USMarketDashboard.tsx(77,45): error TS2322: Type '{ value: number; type: string; }' is not assignable to type 'IntrinsicAttributes & UnitDisplayProps'.
+  Property 'type' does not exist on type 'IntrinsicAttributes & UnitDisplayProps'.
+src/features/analytics/components/USMarketDashboard.tsx(92,40): error TS2322: Type '{ value: number; type: string; }' is not assignable to type 'IntrinsicAttributes & UnitDisplayProps'.
+  Property 'type' does not exist on type 'IntrinsicAttributes & UnitDisplayProps'.
+src/features/analytics/components/USMarketDashboard.tsx(102,16): error TS2304: Cannot find name 'Droplets'.
+src/features/analytics/components/USMarketDashboard.tsx(108,41): error TS2322: Type '{ value: number; type: string; }' is not assignable to type 'IntrinsicAttributes & UnitDisplayProps'.
+  Property 'type' does not exist on type 'IntrinsicAttributes & UnitDisplayProps'.
+src/features/analytics/components/USMarketDashboard.tsx(111,47): error TS2322: Type '{ value: number; type: string; }' is not assignable to type 'IntrinsicAttributes & UnitDisplayProps'.
+  Property 'type' does not exist on type 'IntrinsicAttributes & UnitDisplayProps'.
+src/features/analytics/components/USMarketDashboard.tsx(121,16): error TS2304: Cannot find name 'Dumbbell'.
+src/features/analytics/components/USMarketDashboard.tsx(142,14): error TS2304: Cannot find name 'Flame'.
+src/features/analytics/components/USMarketDashboard.tsx(152,16): error TS2304: Cannot find name 'Droplets'.
+src/features/analytics/components/USMarketDashboard.tsx(159,16): error TS2304: Cannot find name 'Droplets'.
+src/features/analytics/components/USMarketDashboard.tsx(166,16): error TS2304: Cannot find name 'Dumbbell'.
+src/features/analytics/components/USMarketDashboard.tsx(216,16): error TS2304: Cannot find name 'Trophy'.
+src/features/analytics/components/USMarketDashboard.tsx(258,14): error TS2304: Cannot find name 'Flag'.
+src/features/analytics/hooks/useAnalytics.ts(2,15): error TS2305: Module '"@/features/analytics/types"' has no exported member 'AnalyticsData'.
+src/features/analytics/hooks/useSmartDashboard.ts(484,11): error TS2322: Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(485,11): error TS2322: Type 'number | null | undefined' is not assignable to type 'number | undefined'.
+  Type 'null' is not assignable to type 'number | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(486,11): error TS2322: Type '"male" | "female" | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(487,11): error TS2322: Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(489,11): error TS2322: Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(490,11): error TS2322: Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(491,11): error TS2322: Type '"beginner" | "intermediate" | "advanced" | "expert" | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(492,11): error TS2322: Type '"student" | "office_worker" | "physical_job" | "retired" | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(493,11): error TS2322: Type 'number | null | undefined' is not assignable to type 'number | undefined'.
+  Type 'null' is not assignable to type 'number | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(494,11): error TS2322: Type 'number | null | undefined' is not assignable to type 'number | undefined'.
+  Type 'null' is not assignable to type 'number | undefined'.
+src/features/analytics/hooks/useSmartDashboard.ts(497,11): error TS2322: Type '"pre_season" | "in_season" | "off_season" | "recovery" | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/analytics/pages/AnalyticsPage.tsx(302,15): error TS2322: Type '(value: "tableau-bord" | "rapports" | "export" | "social") => void' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type '"social" | "tableau-bord" | "rapports" | "export"'.
+src/features/auth/components/PositionSelector.tsx(6,10): error TS2305: Module '"@/features/auth/data/onboardingData"' has no exported member 'getSportById'.
+src/features/auth/components/PositionSelector.tsx(6,24): error TS2305: Module '"@/features/auth/data/onboardingData"' has no exported member 'getPositionsForSport'.
+src/features/auth/hooks/useErrorHandler.ts(51,11): error TS2339: Property 'error' does not exist on type 'LoadingState'.
+src/features/auth/hooks/useErrorHandler.ts(51,18): error TS2339: Property 'setError' does not exist on type 'LoadingState'.
+src/features/auth/hooks/useErrorHandler.ts(51,28): error TS2339: Property 'clearError' does not exist on type 'LoadingState'.
+src/features/auth/pages/ProfileComplete.tsx(43,43): error TS2339: Property 'phone' does not exist on type 'UserProfile'.
+src/features/auth/pages/ProfileComplete.tsx(110,52): error TS2339: Property 'phone' does not exist on type 'UserProfile'.
+src/features/auth/pages/ProfileComplete.tsx(393,41): error TS2339: Property 'color' does not exist on type '{ label: string; value: any; key: string; required: boolean; } | { label: string; value: string; key: string; required: boolean; color?: undefined; } | { label: string; value: string; key: string; required: boolean; color: string | undefined; }'.
+  Property 'color' does not exist on type '{ label: string; value: any; key: string; required: boolean; }'.
+src/features/auth/pages/SignupPage.original.tsx(28,27): error TS2304: Cannot find name 'useLocation'.
+src/features/auth/pages/SignupPage.original.tsx(29,35): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(36,31): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(37,37): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(38,43): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(39,57): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(40,47): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(41,39): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(42,39): error TS2304: Cannot find name 'useState'.
+src/features/auth/pages/SignupPage.original.tsx(69,17): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/features/auth/pages/SignupPage.original.tsx(73,15): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/features/auth/pages/SignupPage.original.tsx(78,17): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/features/auth/pages/SignupPage.original.tsx(128,58): error TS2304: Cannot find name 'supabase'.
+src/features/auth/pages/SignupPage.original.tsx(150,45): error TS2304: Cannot find name 'supabase'.
+src/features/auth/pages/SignupPage.original.tsx(217,12): error TS2304: Cannot find name 'CheckCircle'.
+src/features/auth/pages/SignupPage.original.tsx(221,14): error TS2304: Cannot find name 'Loader2'.
+src/features/auth/pages/SignupPage.original.tsx(243,16): error TS2304: Cannot find name 'AlertCircle'.
+src/features/auth/pages/SignupPage.original.tsx(254,16): error TS2304: Cannot find name 'User'.
+src/features/auth/pages/SignupPage.original.tsx(277,16): error TS2304: Cannot find name 'User'.
+src/features/auth/pages/SignupPage.original.tsx(300,16): error TS2304: Cannot find name 'Mail'.
+src/features/auth/pages/SignupPage.original.tsx(323,15): error TS2607: JSX element class does not support attributes because it does not have a 'props' property.
+src/features/auth/pages/SignupPage.original.tsx(323,16): error TS2786: 'Lock' cannot be used as a JSX component.
+  Its type '{ new (): Lock; prototype: Lock; }' is not a valid JSX element type.
+    Type '{ new (): Lock; prototype: Lock; }' is not assignable to type 'new (props: any, deprecatedLegacyContext?: any) => Component<any, any, any>'.
+      Type 'Lock' is missing the following properties from type 'Component<any, any, any>': context, setState, forceUpdate, render, and 3 more.
+src/features/auth/pages/SignupPage.original.tsx(339,34): error TS2304: Cannot find name 'EyeOff'.
+src/features/auth/pages/SignupPage.original.tsx(339,67): error TS2304: Cannot find name 'Eye'.
+src/features/auth/pages/SignupPage.original.tsx(375,15): error TS2607: JSX element class does not support attributes because it does not have a 'props' property.
+src/features/auth/pages/SignupPage.original.tsx(375,16): error TS2786: 'Lock' cannot be used as a JSX component.
+  Its type '{ new (): Lock; prototype: Lock; }' is not a valid JSX element type.
+    Type '{ new (): Lock; prototype: Lock; }' is not assignable to type 'new (props: any, deprecatedLegacyContext?: any) => Component<any, any, any>'.
+      Type 'Lock' is missing the following properties from type 'Component<any, any, any>': context, setState, forceUpdate, render, and 3 more.
+src/features/auth/pages/SignupPage.original.tsx(391,41): error TS2304: Cannot find name 'EyeOff'.
+src/features/auth/pages/SignupPage.original.tsx(391,74): error TS2304: Cannot find name 'Eye'.
+src/features/auth/pages/SignupPage.original.tsx(422,18): error TS2304: Cannot find name 'Loader2'.
+src/features/auth/pages/SignupPage.original.tsx(448,62): error TS18046: 'v' is of type 'unknown'.
+src/features/auth/services/auth.service.ts(518,9): error TS2322: Type '"prefer_not_to_say"' is not assignable to type '"male" | "female" | undefined'.
+src/features/index.ts(6,1): error TS2308: Module './nutrition' has already exported a member named 'PersonalInfoForm'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(7,1): error TS2308: Module './auth' has already exported a member named 'UserProfile'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(7,1): error TS2308: Module './recovery' has already exported a member named 'RecoveryRecommendation'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(12,1): error TS2308: Module './recovery' has already exported a member named 'SleepData'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(14,1): error TS2308: Module './recovery' has already exported a member named 'SleepData'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(15,1): error TS2308: Module './auth' has already exported a member named 'ConversationalOnboarding'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(15,1): error TS2308: Module './auth' has already exported a member named 'PackSelector'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(15,1): error TS2308: Module './auth' has already exported a member named 'PositionSelector'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(17,1): error TS2308: Module './ai-coach' has already exported a member named 'ExperienceLevel'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(17,1): error TS2308: Module './auth' has already exported a member named 'ActivityLevel'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(17,1): error TS2308: Module './auth' has already exported a member named 'FitnessGoal'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(17,1): error TS2308: Module './auth' has already exported a member named 'UpdateProfileData'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(17,1): error TS2308: Module './auth' has already exported a member named 'UserProfile'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/index.ts(17,1): error TS2308: Module './workout' has already exported a member named 'UserProfileUpdate'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/nutrition/hooks/useNutrition.ts(6,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'Meal'.
+src/features/nutrition/hooks/useNutrition.ts(7,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'FoodItem'.
+src/features/nutrition/hooks/useNutrition.ts(9,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'NutritionAnalysis'.
+src/features/nutrition/hooks/useNutrition.ts(10,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'Recipe'.
+src/features/nutrition/hooks/useNutrition.ts(11,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'MealPlan'.
+src/features/nutrition/hooks/useNutrition.ts(12,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'NutritionTrend'.
+src/features/nutrition/hooks/useNutrition.ts(13,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'CreateMealDTO'.
+src/features/nutrition/hooks/useNutrition.ts(14,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'UpdateNutritionGoalsDTO'.
+src/features/nutrition/hooks/useNutrition.ts(15,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'FoodSearchQuery'.
+src/features/nutrition/hooks/useNutrition.ts(16,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'NutritionInsight'.
+src/features/nutrition/hooks/useNutrition.ts(83,21): error TS2339: Property 'meals' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutrition.ts(84,21): error TS2339: Property 'dailyGoals' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutrition.ts(313,26): error TS2339: Property 'totalCalories' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutrition.ts(313,56): error TS2339: Property 'dailyGoals' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutrition.ts(323,13): error TS2339: Property 'totalMacros' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutrition.ts(323,26): error TS2339: Property 'dailyGoals' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutrition.ts(335,38): error TS2339: Property 'waterIntake' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutrition.ts(335,66): error TS2339: Property 'dailyGoals' does not exist on type 'NutritionData'.
+src/features/nutrition/hooks/useNutritionTracking.ts(3,25): error TS2307: Cannot find module './useAuth' or its corresponding type declarations.
+src/features/nutrition/hooks/useNutritionTracking.ts(29,11): error TS2339: Property 'showToast' does not exist on type '{ toast: (options: ToastOptions) => string; success: (title: string, description?: string | undefined) => string; error: (title: string, description?: string | undefined) => string; ... 4 more ...; toasts: Toast[]; }'.
+src/features/nutrition/hooks/useNutritionTracking.ts(46,10): error TS2304: Cannot find name 'error'.
+src/features/nutrition/hooks/useNutritionTracking.ts(46,19): error TS2304: Cannot find name 'data'.
+src/features/nutrition/hooks/useNutritionTracking.ts(46,36): error TS2304: Cannot find name 'data'.
+src/features/nutrition/hooks/useNutritionTracking.ts(58,9): error TS2304: Cannot find name 'data'.
+src/features/nutrition/hooks/useNutritionTracking.ts(58,24): error TS2304: Cannot find name 'data'.
+src/features/nutrition/hooks/useNutritionTracking.ts(74,12): error TS2304: Cannot find name 'error'.
+src/features/nutrition/hooks/useNutritionTracking.ts(90,12): error TS2304: Cannot find name 'error'.
+src/features/nutrition/services/nutrition.service.ts(4,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'Meal'.
+src/features/nutrition/services/nutrition.service.ts(5,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'FoodItem'.
+src/features/nutrition/services/nutrition.service.ts(7,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'NutritionAnalysis'.
+src/features/nutrition/services/nutrition.service.ts(8,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'Recipe'.
+src/features/nutrition/services/nutrition.service.ts(9,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'MealPlan'.
+src/features/nutrition/services/nutrition.service.ts(10,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'NutritionTrend'.
+src/features/nutrition/services/nutrition.service.ts(11,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'CreateMealDTO'.
+src/features/nutrition/services/nutrition.service.ts(12,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'UpdateNutritionGoalsDTO'.
+src/features/nutrition/services/nutrition.service.ts(13,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'FoodSearchQuery'.
+src/features/nutrition/services/nutrition.service.ts(14,3): error TS2305: Module '"@/features/nutrition/types/index"' has no exported member 'NutritionInsight'.
+src/features/nutrition/services/nutrition.service.ts(174,55): error TS18047: 'value' is possibly 'null'.
+src/features/nutrition/services/nutrition.service.ts(291,13): error TS2339: Property 'totalCalories' does not exist on type 'NutritionData'.
+src/features/nutrition/services/nutrition.service.ts(291,28): error TS2339: Property 'totalMacros' does not exist on type 'NutritionData'.
+src/features/nutrition/services/nutrition.service.ts(291,41): error TS2339: Property 'dailyGoals' does not exist on type 'NutritionData'.
+src/features/nutrition/services/nutrition.service.ts(291,53): error TS2339: Property 'waterIntake' does not exist on type 'NutritionData'.
+src/features/nutrition/services/nutrition.service.ts(352,9): error TS2353: Object literal may only specify known properties, and 'proteins' does not exist in type '{ proteinPercentage: number; carbPercentage: number; fatPercentage: number; }'.
+src/features/nutrition/services/nutrition.service.ts(364,7): error TS2353: Object literal may only specify known properties, and 'date' does not exist in type 'NutritionData'.
+src/features/profile/components/AvatarUpload.tsx(131,9): error TS2322: Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+  Type 'null' is not assignable to type 'string | undefined'.
+src/features/profile/hooks/useProfile.ts(210,54): error TS2339: Property 'progress' does not exist on type 'GoalData'.
+src/features/profile/hooks/useProfile.ts(215,38): error TS2339: Property 'isActive' does not exist on type 'GoalData'.
+src/features/profile/hooks/useProfile.ts(215,55): error TS2339: Property 'progress' does not exist on type 'GoalData'.
+src/features/profile/pages/ProfilePage.tsx(41,9): error TS2322: Type '"other" | "male" | "female"' is not assignable to type '"male" | "female" | null | undefined'.
+  Type '"other"' is not assignable to type '"male" | "female" | null | undefined'.
+src/features/profile/pages/ProfilePage.tsx(42,9): error TS2322: Type '"sedentary" | "very_active" | "lightly_active" | "moderately_active" | "extremely_active"' is not assignable to type '"moderate" | "sedentary" | "light" | "active" | "very_active" | null | undefined'.
+  Type '"lightly_active"' is not assignable to type '"moderate" | "sedentary" | "light" | "active" | "very_active" | null | undefined'.
+src/features/sleep/pages/SleepPage.tsx(408,54): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/features/sleep/pages/SleepPage.tsx(984,67): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/features/sleep/utils/sleepConfig.ts(2,15): error TS2305: Module '"@/features/sleep/types"' has no exported member 'SportSleepConfig'.
+src/features/sleep/utils/sleepConfig.ts(2,33): error TS2305: Module '"@/features/sleep/types"' has no exported member 'SleepFactor'.
+src/features/sleep/utils/sleepConfig.ts(26,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(49,15): error TS2304: Cannot find name 'Phone'.
+src/features/sleep/utils/sleepConfig.ts(55,15): error TS2304: Cannot find name 'Bed'.
+src/features/sleep/utils/sleepConfig.ts(77,15): error TS2304: Cannot find name 'Shield'.
+src/features/sleep/utils/sleepConfig.ts(84,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(93,15): error TS2304: Cannot find name 'Bed'.
+src/features/sleep/utils/sleepConfig.ts(105,15): error TS2304: Cannot find name 'Sun'.
+src/features/sleep/utils/sleepConfig.ts(121,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(139,15): error TS2304: Cannot find name 'Lightbulb'.
+src/features/sleep/utils/sleepConfig.ts(145,15): error TS2304: Cannot find name 'Bed'.
+src/features/sleep/utils/sleepConfig.ts(160,15): error TS2304: Cannot find name 'Shield'.
+src/features/sleep/utils/sleepConfig.ts(174,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(189,15): error TS2304: Cannot find name 'Bed'.
+src/features/sleep/utils/sleepConfig.ts(195,15): error TS2304: Cannot find name 'Sun'.
+src/features/sleep/utils/sleepConfig.ts(209,15): error TS2304: Cannot find name 'Shield'.
+src/features/sleep/utils/sleepConfig.ts(223,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(239,15): error TS2304: Cannot find name 'Bed'.
+src/features/sleep/utils/sleepConfig.ts(252,15): error TS2304: Cannot find name 'Shield'.
+src/features/sleep/utils/sleepConfig.ts(273,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(280,15): error TS2304: Cannot find name 'Shield'.
+src/features/sleep/utils/sleepConfig.ts(302,15): error TS2304: Cannot find name 'Sun'.
+src/features/sleep/utils/sleepConfig.ts(308,15): error TS2304: Cannot find name 'Bed'.
+src/features/sleep/utils/sleepConfig.ts(329,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(343,15): error TS2304: Cannot find name 'Shield'.
+src/features/sleep/utils/sleepConfig.ts(352,15): error TS2304: Cannot find name 'Brain'.
+src/features/sleep/utils/sleepConfig.ts(364,15): error TS2304: Cannot find name 'Lightbulb'.
+src/features/social/components/FriendsComparison.tsx(128,19): error TS18046: 'friend' is of type 'unknown'.
+src/features/social/components/FriendsComparison.tsx(129,16): error TS18046: 'friend' is of type 'unknown'.
+src/features/social/components/PrivacyManager.tsx(35,25): error TS2339: Property 'updateAppStoreUserProfile' does not exist on type 'AppStoreState'.
+src/features/social/components/PrivacyManager.tsx(64,11): error TS2304: Cannot find name 'error'.
+src/features/social/components/PrivacyManager.tsx(64,20): error TS2304: Cannot find name 'error'.
+src/features/social/components/PrivacyManager.tsx(65,15): error TS2304: Cannot find name 'error'.
+src/features/social/components/PrivacyManager.tsx(68,11): error TS2304: Cannot find name 'data'.
+src/features/social/components/PrivacyManager.tsx(69,21): error TS2304: Cannot find name 'data'.
+src/features/social/components/PrivacyManager.tsx(90,11): error TS2304: Cannot find name 'error'.
+src/features/social/components/PrivacyManager.tsx(91,15): error TS2304: Cannot find name 'error'.
+src/features/social/components/PrivacyManager.tsx(193,11): error TS2304: Cannot find name 'error'.
+src/features/social/components/PrivacyManager.tsx(194,15): error TS2304: Cannot find name 'error'.
+src/features/social/index.ts(5,1): error TS2308: Module './types' has already exported a member named 'SocialFeed'. Consider explicitly re-exporting to resolve the ambiguity.
+src/features/social/pages/ChallengesPage.tsx(53,11): error TS2558: Expected 2 type arguments, but got 1.
+src/features/social/pages/ChallengesPage.tsx(81,10): error TS2304: Cannot find name 'useQuery'.
+src/features/social/pages/ChallengesPage.tsx(87,11): error TS2558: Expected 2 type arguments, but got 1.
+src/features/social/pages/ChallengesPage.tsx(90,7): error TS2304: Cannot find name 'error'.
+src/features/social/pages/ChallengesPage.tsx(90,20): error TS2304: Cannot find name 'error'.
+src/features/social/pages/ChallengesPage.tsx(91,10): error TS2304: Cannot find name 'data'.
+src/features/social/pages/ChallengesPage.tsx(95,10): error TS2304: Cannot find name 'useQuery'.
+src/features/social/pages/ChallengesPage.tsx(107,75): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: { user_id: string; challenge_id: string; progress: number; completed: boolean; }, options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Type 'string[]' is not assignable to type 'string'.
+  Overload 2 of 2, '(values: any[], options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Object literal may only specify known properties, and 'user_id' does not exist in type 'any[]'.
+src/features/social/pages/ChallengesPage.tsx(116,7): error TS2304: Cannot find name 'error'.
+src/features/social/pages/ChallengesPage.tsx(116,20): error TS2304: Cannot find name 'error'.
+src/features/social/pages/ChallengesPage.tsx(125,7): error TS2304: Cannot find name 'error'.
+src/features/social/pages/ChallengesPage.tsx(125,20): error TS2304: Cannot find name 'error'.
+src/features/social/pages/ChallengesPage.tsx(138,23): error TS2304: Cannot find name 'useQueryClient'.
+src/features/social/pages/ChallengesPage.tsx(153,24): error TS2304: Cannot find name 'useMutation'.
+src/features/social/pages/ChallengesPage.tsx(167,25): error TS2304: Cannot find name 'useMutation'.
+src/features/social/pages/ChallengesPage.tsx(183,37): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/features/social/pages/ChallengesPage.tsx(272,25): error TS7006: Parameter 'challenge' implicitly has an 'any' type.
+src/features/wearables/hooks/useWearableSync.ts(68,5): error TS2578: Unused '@ts-expect-error' directive.
+src/features/wearables/hooks/useWearableSync.ts(70,47): error TS2339: Property 'webkit' does not exist on type 'Window & typeof globalThis'.
+src/features/wearables/hooks/useWearableSync.ts(70,64): error TS2339: Property 'webkit' does not exist on type 'Window & typeof globalThis'.
+src/features/workout/hooks/useRealtimeSync.ts(47,34): error TS2339: Property 'user_id' does not exist on type '{} | { [key: string]: any; }'.
+  Property 'user_id' does not exist on type '{}'.
+src/features/workout/hooks/useRealtimeSync.ts(47,58): error TS2339: Property 'user_id' does not exist on type '{} | Partial<{ [key: string]: any; }>'.
+  Property 'user_id' does not exist on type '{}'.
+src/features/workout/hooks/useWorkoutExercises.ts(127,13): error TS2322: Type '{ id?: string | undefined; reps: number; weight: number; completed: boolean; rest_time?: number; timestamp?: string; }' is not assignable to type 'ExerciseSet'.
+  Types of property 'id' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+src/features/workout/hooks/useWorkoutPersistence.ts(3,34): error TS2307: Cannot find module '@/features/workout/use-supabase-query' or its corresponding type declarations.
+src/features/workout/hooks/useWorkoutPersistence.ts(4,37): error TS2307: Cannot find module '@/shared/types/workout' or its corresponding type declarations.
+src/features/workout/hooks/useWorkoutPersistence.ts(21,11): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutPersistence.ts(21,24): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutPersistence.ts(34,11): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutPersistence.ts(34,24): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutPersistence.ts(47,11): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutPersistence.ts(47,24): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutPersistence.ts(48,14): error TS2304: Cannot find name 'data'.
+src/features/workout/hooks/useWorkoutPersistence.ts(57,11): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutPersistence.ts(57,24): error TS2304: Cannot find name 'error'.
+src/features/workout/hooks/useWorkoutSessionCore.ts(6,67): error TS2307: Cannot find module '@/shared/types/workout.types' or its corresponding type declarations.
+src/features/workout/hooks/useWorkoutSessionCore.ts(30,23): error TS2552: Cannot find name 'useQueryClient'. Did you mean 'queryClient'?
+src/features/workout/hooks/useWorkoutSessionCore.ts(91,11): error TS2552: Cannot find name 'error'. Did you mean '_error'?
+src/features/workout/hooks/useWorkoutSessionCore.ts(91,24): error TS2552: Cannot find name 'error'. Did you mean '_error'?
+src/features/workout/hooks/useWorkoutSessionCore.ts(276,16): error TS2552: Cannot find name 'error'. Did you mean '_error'?
+src/features/workout/hooks/useWorkoutSessionCore.ts(276,25): error TS2552: Cannot find name 'data'. Did you mean '_data'?
+src/features/workout/hooks/useWorkoutSessionCore.ts(276,33): error TS2552: Cannot find name 'data'. Did you mean '_data'?
+src/features/workout/hooks/useWorkoutSessionCore.ts(277,31): error TS2552: Cannot find name 'data'. Did you mean '_data'?
+src/features/workout/pages/WorkoutPage.tsx(88,7): error TS2322: Type 'string' is not assignable to type 'Equipment'.
+src/features/workout/pages/WorkoutPage.tsx(89,7): error TS2322: Type 'string' is not assignable to type 'string[]'.
+src/features/workout/pages/WorkoutPage.tsx(90,7): error TS2322: Type '{ reps: number; weight: number; completed: false; duration_seconds: null; distance_meters: null; rest_seconds: number; }[]' is not assignable to type 'number'.
+src/features/workout/pages/WorkoutPage.tsx(103,7): error TS2322: Type 'string' is not assignable to type 'Equipment'.
+src/features/workout/pages/WorkoutPage.tsx(104,7): error TS2322: Type 'string' is not assignable to type 'string[]'.
+src/features/workout/pages/WorkoutPage.tsx(105,7): error TS2322: Type '{ reps: number; weight: number; completed: false; duration_seconds: null; distance_meters: null; rest_seconds: number; }[]' is not assignable to type 'number'.
+src/features/workout/pages/WorkoutPage.tsx(118,7): error TS2322: Type 'string' is not assignable to type 'Equipment'.
+src/features/workout/pages/WorkoutPage.tsx(119,7): error TS2322: Type 'string' is not assignable to type 'string[]'.
+src/features/workout/pages/WorkoutPage.tsx(120,7): error TS2322: Type '{ reps: number; weight: null; completed: false; duration_seconds: null; distance_meters: null; rest_seconds: number; }[]' is not assignable to type 'number'.
+src/features/workout/pages/WorkoutPage.tsx(168,31): error TS2339: Property 'map' does not exist on type 'number'.
+src/features/workout/pages/WorkoutPage.tsx(347,89): error TS2551: Property 'completed' does not exist on type 'Exercise'. Did you mean 'isCompleted'?
+src/lib/services/scaleService.ts(16,49): error TS2304: Cannot find name 'BluetoothDevice'.
+src/lib/services/scaleService.ts(18,22): error TS2339: Property 'bluetooth' does not exist on type 'Navigator'.
+src/lib/services/scaleService.ts(22,38): error TS2339: Property 'bluetooth' does not exist on type 'Navigator'.
+src/lib/services/scaleService.ts(36,52): error TS2304: Cannot find name 'error'.
+src/lib/services/scaleService.ts(42,38): error TS2304: Cannot find name 'BluetoothDevice'.
+src/lib/services/scaleService.ts(64,48): error TS2304: Cannot find name 'error'.
+src/lib/services/scaleService.ts(100,43): error TS2304: Cannot find name 'error'.
+src/lib/services/scaleService.ts(122,43): error TS2304: Cannot find name 'error'.
+src/shared/utils/positionsService.ts(20,9): error TS2304: Cannot find name 'error'.
+src/shared/utils/positionsService.ts(20,19): error TS2304: Cannot find name 'data'.
+src/shared/utils/positionsService.ts(21,49): error TS2304: Cannot find name 'error'.
+src/shared/utils/positionsService.ts(24,23): error TS2304: Cannot find name 'data'.
+src/shared/utils/positionsService.ts(40,9): error TS2304: Cannot find name 'error'.
+src/shared/utils/positionsService.ts(40,19): error TS2304: Cannot find name 'data'.
+src/shared/utils/positionsService.ts(41,48): error TS2304: Cannot find name 'error'.
+src/shared/utils/positionsService.ts(44,42): error TS2304: Cannot find name 'data'.
+src/shared/utils/positionsService.ts(44,51): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/shared/utils/positionsService.ts(45,44): error TS2322: Type 'unknown[]' is not assignable to type 'string[]'.
+  Type 'unknown' is not assignable to type 'string'.
+src/shared/utils/positionsService.ts(46,5): error TS2322: Type 'unknown[]' is not assignable to type 'string[]'.
+  Type 'unknown' is not assignable to type 'string'.

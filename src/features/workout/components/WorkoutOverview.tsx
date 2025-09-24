@@ -25,7 +25,7 @@ interface WorkoutStats {
 }
 
 interface WorkoutOverviewProps {
-  stats: WorkoutStats | null;
+  stats: WorkoutStats | undefined;
   progressPercentage: number;
 }
 

@@ -53,7 +53,7 @@ interface RestTimerState {
   isPaused: boolean;
   timeRemaining: number;
   originalDuration: number;
-  recommendation: RestRecommendation | null;
+  recommendation: RestRecommendation | undefined;
   adaptiveMode: boolean;
   autoStart: boolean;
 }
@@ -305,7 +305,7 @@ export const SmartRestTimer: React.FC<SmartRestTimerProps> = ({
           timer_state: timerState
         }
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur sauvegarde rest session:', error);
     }
   }, [userId, timerState]);
@@ -450,7 +450,7 @@ export const SmartRestTimer: React.FC<SmartRestTimerProps> = ({
               <div className="space-y-2">
                 <div className="text-sm text-gray-600">Ou durée personnalisée:</div>
                 <div className="flex gap-2">
-                  {[60, 90, 120, 180, 240, 300].map(duration => (
+                  {[60, 90, 120, 180, 240, 300].map((duration, index) => (
                     <Button
                       key={duration}
                       variant="outline"

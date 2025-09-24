@@ -280,7 +280,7 @@ export class MockFoodVisionService {
    * Obtenir des aliments de démonstration
    */
   static getDemoFoods() {
-    return MOCK_FOOD_DATABASE.map(food => ({
+    return MOCK_FOOD_DATABASE.map((food, index) => ({
       name: food.name,
       ...food.nutrition,
       confidence: food.confidence
@@ -367,7 +367,7 @@ export const useMockFoodScanner = () => {
         default:
           return await MockFoodVisionService.simulateAnalysis();
       }
-    } catch (error) {
+    } catch (error: any) {
       throw error;
     }
   };

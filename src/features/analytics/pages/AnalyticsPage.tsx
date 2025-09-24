@@ -103,7 +103,7 @@ const Analytics: React.FC = () => {
       };
 
       setAnalyticsData(mockData);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur chargement analytics:', error);
       toast({
@@ -204,7 +204,7 @@ const Analytics: React.FC = () => {
             user_id: appStoreUser.id,
           });
         }
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur export:', error);
         toast({
@@ -305,7 +305,7 @@ const Analytics: React.FC = () => {
               className="space-y-6"
             >
               <TabsList className="grid w-full grid-cols-4">
-                {tabs.map(tab => {
+                {tabs.map((tab, index) => {
                   const TabIcon = tab.icon;
                   return (
                     <TabsTrigger

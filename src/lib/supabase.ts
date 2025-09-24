@@ -71,7 +71,7 @@ export const supabaseHelpers = {
 
   // Get user profile
   getUserProfile: async (userId: string) => {
-    const { data, error } = await supabase
+    const { data, error }: any = await supabase
       .from('user_profiles')
       .select('*')
       .eq('id', userId)
@@ -86,7 +86,7 @@ export const supabaseHelpers = {
 
   // Update user profile
   updateUserProfile: async (userId: string, updates: Database['public']['Tables']['user_profiles']['Update']) => {
-    const { data, error } = await supabase
+    const { data, error }: any = await supabase
       .from('user_profiles')
       .update({ ...updates, updated_at: new Date().toISOString() })
       .eq('id', userId)
@@ -125,7 +125,7 @@ export const supabaseHelpers = {
 
     query = query.order('date', { ascending: false });
 
-    const { data, error } = await query;
+    const { data, error }: any = await query;
     
     if (error) {
       console.error(`Error fetching data from ${table}:`, error);
@@ -160,7 +160,7 @@ export const supabaseHelpers = {
     id: string,
     updates: any
   ): Promise<T> => {
-    const { data, error } = await supabase
+    const { data, error }: any = await supabase
       .from(table)
       .update({ ...updates, updated_at: new Date().toISOString() })
       .eq('id', id)
@@ -213,7 +213,7 @@ export const supabaseHelpers = {
 // Auth helpers
 export const authHelpers = {
   signUp: async (email: string, password: string, metadata?: any) => {
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error }: any = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -230,7 +230,7 @@ export const authHelpers = {
   },
 
   signIn: async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error }: any = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -253,7 +253,7 @@ export const authHelpers = {
   },
 
   resetPassword: async (email: string) => {
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    const { data, error }: any = await supabase.auth.resetPasswordForEmail(email);
     
     if (error) {
       console.error('Error resetting password:', error);
@@ -271,14 +271,14 @@ export const supabaseHealthCheck = {
    */
   testConnection: async (): Promise<{ success: boolean; error?: string }> => {
     try {
-      const { data, error } = await supabase.from('user_profiles').select('count', { count: 'exact', head: true });
+      const { data, error }: any = await supabase.from('user_profiles').select('count', { count: 'exact', head: true });
       
       if (error) {
         return { success: false, error: error.message };
       }
       
       return { success: true };
-    } catch (error) {
+    } catch (error: any) {
       return { 
         success: false, 
         error: error instanceof Error ? error.message : 'Unknown connection error' 
@@ -291,14 +291,14 @@ export const supabaseHealthCheck = {
    */
   testAuthService: async (): Promise<{ success: boolean; error?: string }> => {
     try {
-      const { data, error } = await supabase.auth.getSession();
+      const { data, error }: any = await supabase.auth.getSession();
       
       if (error) {
         return { success: false, error: error.message };
       }
       
       return { success: true };
-    } catch (error) {
+    } catch (error: any) {
       return { 
         success: false, 
         error: error instanceof Error ? error.message : 'Auth service error' 
@@ -318,7 +318,7 @@ export const retryWithBackoff = async <T>(
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       return await fn();
-    } catch (error) {
+    } catch (error: any) {
       lastError = error instanceof Error ? error : new Error('Unknown error');
       
       if (attempt === maxRetries) {

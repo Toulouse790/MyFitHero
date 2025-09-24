@@ -81,7 +81,7 @@ interface OnboardingState {
   validationErrors: string[];
   isLoading: boolean;
   showTips: boolean;
-  selectedSport: SportOption | null;
+  selectedSport: SportOption | undefined;
   stepHistory: string[];
   completedModuleSteps: Record<string, string[]>;
   skipCount: number;

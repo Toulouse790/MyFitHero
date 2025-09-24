@@ -40,27 +40,27 @@ export interface ProfileMetrics {
 
 // Interface pour les données spécifiques au sport
 export interface SportProfileData {
-  sport?: string | null;
-  sport_position?: string | null;
-  sport_level?: 'recreational' | 'amateur_competitive' | 'semi_professional' | 'professional' | null;
+  sport?: string | undefined;
+  sport_position?: string | undefined;
+  sport_level?: 'recreational' | 'amateur_competitive' | 'semi_professional' | 'professional' | undefined;
   sport_specific_stats?: Record<string, number>;
-  training_frequency?: number | null;
-  season_period?: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | null;
-  available_time_per_day?: number | null;
+  training_frequency?: number | undefined;
+  season_period?: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | undefined;
+  available_time_per_day?: number | undefined;
 }
 
 // Interface pour les préférences nutritionnelles
 export interface NutritionPreferences {
   dietary_restrictions?: string[];
-  meal_preferences?: 'omnivore' | 'vegetarian' | 'vegan' | 'pescatarian' | 'keto' | 'paleo' | null;
-  daily_calories?: number | null;
-  city?: string | null; // CRITICAL for nutrition personalization
-  country?: string | null;
+  meal_preferences?: 'omnivore' | 'vegetarian' | 'vegan' | 'pescatarian' | 'keto' | 'paleo' | undefined;
+  daily_calories?: number | undefined;
+  city?: string | undefined; // CRITICAL for nutrition personalization
+  country?: string | undefined;
 }
 
 // Interface pour les préférences d'entraînement
 export interface WorkoutPreferences {
-  preferred_workout_time?: 'morning' | 'afternoon' | 'evening' | 'flexible' | null;
-  ai_coaching_style?: 'encouraging' | 'direct' | 'analytical' | 'motivational' | null;
-  preferred_measurement_system?: 'metric' | 'imperial' | null;
+  preferred_workout_time?: 'morning' | 'afternoon' | 'evening' | 'flexible' | undefined;
+  ai_coaching_style?: 'encouraging' | 'direct' | 'analytical' | 'motivational' | undefined;
+  preferred_measurement_system?: 'metric' | 'imperial' | undefined;
 }

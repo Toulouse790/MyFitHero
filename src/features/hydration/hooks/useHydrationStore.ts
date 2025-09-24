@@ -47,7 +47,7 @@ export const useHydrationStore = create<HydrationStore>()(
 
           // Recalculer les stats après ajout
           get().calculateStats('daily');
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : "Erreur lors de l'ajout";
           set({ error: message, isLoading: false });
@@ -72,12 +72,12 @@ export const useHydrationStore = create<HydrationStore>()(
           if (_error) throw _error;
 
           set(state => ({
-            entries: state.entries.map(entry => (entry.id === id ? _data : entry)),
+            entries: state.entries.map((entry, index) => (entry.id === id ? _data : entry)),
             isLoading: false,
           }));
 
           get().calculateStats('daily');
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : 'Erreur lors de la mise à jour';
           set({ error: message, isLoading: false });
@@ -99,7 +99,7 @@ export const useHydrationStore = create<HydrationStore>()(
           }));
 
           get().calculateStats('daily');
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : 'Erreur lors de la suppression';
           set({ error: message, isLoading: false });
@@ -137,7 +137,7 @@ export const useHydrationStore = create<HydrationStore>()(
             entries: _data || [],
             isLoading: false,
           });
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           const message = error instanceof Error ? error.message : 'Erreur lors du chargement';
           set({ error: message, isLoading: false });
@@ -184,7 +184,7 @@ export const useHydrationStore = create<HydrationStore>()(
             currentGoal: _data,
             isLoading: false,
           }));
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           const message =
             error instanceof Error ? error.message : "Erreur lors de la définition de l'objectif";
@@ -210,11 +210,11 @@ export const useHydrationStore = create<HydrationStore>()(
           if (_error) throw _error;
 
           set(state => ({
-            goals: state.goals.map(goal => (goal.id === id ? _data : goal)),
+            goals: state.goals.map((goal, index) => (goal.id === id ? _data : goal)),
             currentGoal: _data.isActive ? _data : state.currentGoal,
             isLoading: false,
           }));
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           const message =
             error instanceof Error ? error.message : "Erreur lors de la mise à jour de l'objectif";
@@ -240,14 +240,14 @@ export const useHydrationStore = create<HydrationStore>()(
 
           if (_error) throw _error;
 
-          const activeGoal = _data?.find(goal => goal.isActive) || null;
+          const activeGoal = _data?.find(goal => goal.isActive) || undefined;
 
           set({
             goals: _data || [],
             currentGoal: activeGoal,
             isLoading: false,
           });
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           const message =
             error instanceof Error ? error.message : 'Erreur lors du chargement des objectifs';

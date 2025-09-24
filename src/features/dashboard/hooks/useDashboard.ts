@@ -62,7 +62,7 @@ export const useDashboard = () => {
         loading: false,
         lastUpdated: new Date().toISOString(),
       }));
-    } catch (error) {
+    } catch (error: any) {
       setState(prev => ({
         ...prev,
         error: 'Erreur lors du chargement du dashboard',

@@ -14,7 +14,7 @@ export const useDataLoader = (config: LoaderConfig) => {
         setIsLoading(true);
         const result = await loadFn();
         return result;
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error loading data:', error);
         if (config.onError) {
           config.onError(

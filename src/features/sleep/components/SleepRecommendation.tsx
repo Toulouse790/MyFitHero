@@ -20,7 +20,7 @@ interface SportSleepConfig {
 }
 
 interface SleepRecommendationProps {
-  currentSleep: SleepSession | null;
+  currentSleep: SleepSession | undefined;
   sleepDeficit: number;
   userSportCategory: string;
   sportEmoji: string;

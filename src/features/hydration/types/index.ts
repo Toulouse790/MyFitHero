@@ -37,10 +37,10 @@ export interface HydrationStats {
 export interface HydrationStore {
   entries: HydrationEntry[];
   goals: HydrationGoal[];
-  currentGoal: HydrationGoal | null;
-  stats: HydrationStats | null;
+  currentGoal: HydrationGoal | undefined;
+  stats: HydrationStats | undefined;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   
   // Actions
   addEntry: (entryData: Omit<HydrationEntry, 'id' | 'userId' | 'created_at' | 'updated_at'>) => Promise<void>;

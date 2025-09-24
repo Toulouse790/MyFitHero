@@ -73,7 +73,7 @@ export const ProfileSettings: React.FC<ProfileSettingsProps> = ({
         title: 'Succès',
         description: 'Profil mis à jour avec succès !',
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Profile update error:', error);
       toast({
         title: 'Erreur',

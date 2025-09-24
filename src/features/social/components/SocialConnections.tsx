@@ -43,7 +43,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
       setIsLoading(true);
       const friendsData = await socialService.getFriends(userId);
       setFriends(friendsData);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error loading friends:', error);
       toast({
@@ -60,7 +60,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
     try {
       const stats = await socialService.getSocialStats(userId);
       setSocialStats(stats);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error loading social stats:', error);
     }
@@ -73,7 +73,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
       setIsLoading(true);
       const results = await socialService.searchUsers(searchQuery, userId);
       setSearchResults(results);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',
@@ -96,7 +96,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
         // Mettre à jour l'état local
         setSearchResults(prev => prev.filter(user => user.friend_id !== friendId));
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',
@@ -117,7 +117,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
         loadFriends();
         setFriendRequests(prev => prev.filter(req => req.id !== connectionId));
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       toast({
         title: 'Erreur',
@@ -346,7 +346,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
           <span className="text-sm text-gray-500">Basé sur vos intérêts</span>
         </div>
 
-        {suggestions.map(user => (
+        {suggestions.map((user, index) => (
           <SearchCard key={user.id} user={user} />
         ))}
       </div>
@@ -403,7 +403,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
         {activeTab === 'friends' && (
           <>
             {friends.length > 0 ? (
-              friends.map(friend => <FriendCard key={friend.id} friend={friend} />)
+              friends.map((friend, index) => <FriendCard key={friend.id} friend={friend} />)
             ) : (
               <div className="text-center py-12 text-gray-500">
                 <Users size={48} className="mx-auto mb-4 text-gray-300" />
@@ -419,7 +419,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
         {activeTab === 'search' && (
           <>
             {searchResults.length > 0 ? (
-              searchResults.map(user => <SearchCard key={user.friend_id} user={user} />)
+              searchResults.map((user, index) => <SearchCard key={user.friend_id} user={user} />)
             ) : searchQuery.trim() ? (
               <div className="text-center py-12 text-gray-500">
                 <Search size={48} className="mx-auto mb-4 text-gray-300" />
@@ -439,7 +439,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ userId }) => {
         {activeTab === 'requests' && (
           <>
             {friendRequests.length > 0 ? (
-              friendRequests.map(request => (
+              friendRequests.map((request, index) => (
                 <FriendCard key={request.id} friend={request} showActions={true} />
               ))
             ) : (

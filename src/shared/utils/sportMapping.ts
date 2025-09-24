@@ -5,7 +5,7 @@ export type NutritionSport = 'basketball' | 'tennis' | 'american_football' | 'fo
 export type SleepSportCategory = 'contact' | 'team' | 'precision' | 'endurance';
 
 // Mapping pour HydrationPage
-export const getSportCategoryForHydration = (sport: string | null | undefined): HydrationSportCategory => {
+export const getSportCategoryForHydration = (sport: string | undefined | undefined): HydrationSportCategory => {
   const sportMappings: Record<string, HydrationSportCategory> = {
     basketball: 'court',
     tennis: 'court',

@@ -28,11 +28,11 @@ type RecoveryActivityInput = {
 
 export interface UseRecoveryReturn {
   // État de base
-  recoveryData: RecoveryData | null;
-  metrics: RecoveryMetrics | null;
+  recoveryData: RecoveryData | undefined;
+  metrics: RecoveryMetrics | undefined;
   recommendations: RecoveryRecommendation[];
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
 
   // Nouvelles données IA
   aiInsights: AIInsight[];
@@ -114,7 +114,7 @@ export const useRecovery = (userId?: string): UseRecoveryReturn => {
   const getRecoveryTrend = useCallback((): 'improving' | 'stable' | 'declining' => {
     if (!recoveryData?.trends || recoveryData.trends.length < 2) return 'stable';
 
-    const recentScores = recoveryData.trends.slice(-7).map(t => t.overall);
+    const recentScores = recoveryData.trends.slice(-7).map((t, index) => t.overall);
     const trend = recentScores[recentScores.length - 1] - recentScores[0];
     
     if (trend > 5) return 'improving';

@@ -121,7 +121,7 @@ export const MuscleRecoveryDashboard: React.FC<MuscleRecoveryDashboardProps> = (
       {/* Grille des groupes musculaires */}
       <div className="p-6">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-6">
-          {muscleRecoveryData.map(muscle => (
+          {muscleRecoveryData.map((muscle, index) => (
             <div
               key={muscle.muscle_group}
               onClick={() => setSelectedMuscle(muscle.muscle_group)}
@@ -310,7 +310,7 @@ export const MuscleRecoveryDashboard: React.FC<MuscleRecoveryDashboardProps> = (
               </div>
               <div className="text-sm text-blue-600">
                 {globalMetrics.ready_for_training
-                  .map(muscle => muscle.replace('_', ' '))
+                  .map((muscle, index) => muscle.replace('_', ' '))
                   .join(', ') || 'Aucun'}
               </div>
             </div>
@@ -321,7 +321,7 @@ export const MuscleRecoveryDashboard: React.FC<MuscleRecoveryDashboardProps> = (
                 {globalMetrics.needs_rest.length}
               </div>
               <div className="text-sm text-red-600">
-                {globalMetrics.needs_rest.map(muscle => muscle.replace('_', ' ')).join(', ') ||
+                {globalMetrics.needs_rest.map((muscle, index) => muscle.replace('_', ' ')).join(', ') ||
                   'Aucun'}
               </div>
             </div>

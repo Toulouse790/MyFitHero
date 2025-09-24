@@ -63,7 +63,7 @@ export interface UserSettings {
   wearables: {
     autoSync: boolean;
     syncInterval: number; // minutes
-    preferredDevice: 'apple' | 'google' | 'garmin' | 'fitbit' | null;
+    preferredDevice: 'apple' | 'google' | 'garmin' | 'fitbit' | undefined;
     backgroundSync: boolean;
   };
 }
@@ -72,8 +72,8 @@ interface SettingsState {
   // État
   settings: UserSettings;
   isLoading: boolean;
-  error: string | null;
-  lastSyncTime: Date | null;
+  error: string | undefined;
+  lastSyncTime: Date | undefined;
   isDirty: boolean; // Modifications non sauvegardées
   
   // Actions
@@ -179,7 +179,7 @@ export const useSettingsStore = create<SettingsState>()(
               lastSyncTime: new Date() 
             });
             
-          } catch (error) {
+          } catch (error: any) {
             set({ 
               error: error instanceof Error ? error.message : 'Erreur de sauvegarde',
               isDirty: true 
@@ -208,7 +208,7 @@ export const useSettingsStore = create<SettingsState>()(
               
             if (error) throw error;
             
-          } catch (error) {
+          } catch (error: any) {
             console.error('Erreur sync Supabase:', error);
             throw error;
           }
@@ -222,7 +222,7 @@ export const useSettingsStore = create<SettingsState>()(
             const { data: { user } } = await supabase.auth.getUser();
             if (!user) throw new Error('Utilisateur non authentifié');
             
-            const { data, error } = await supabase
+            const { data, error }: any = await supabase
               .from('user_settings')
               .select('settings, updated_at')
               .eq('user_id', user.id)
@@ -241,7 +241,7 @@ export const useSettingsStore = create<SettingsState>()(
               });
             }
             
-          } catch (error) {
+          } catch (error: any) {
             set({ 
               error: error instanceof Error ? error.message : 'Erreur de chargement'
             });
@@ -260,7 +260,7 @@ export const useSettingsStore = create<SettingsState>()(
             await get().syncWithSupabase();
             set({ isDirty: false, lastSyncTime: new Date() });
             
-          } catch (error) {
+          } catch (error: any) {
             set({ 
               error: error instanceof Error ? error.message : 'Erreur de reset'
             });

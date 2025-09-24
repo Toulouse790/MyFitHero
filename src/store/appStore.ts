@@ -13,7 +13,7 @@ export interface Notification {
 
 interface AppStoreState {
   // User state
-  appStoreUser: UserProfile | null;
+  appStoreUser: UserProfile | undefined;
   isAuthenticated: boolean;
   isLoading: boolean;
   
@@ -28,7 +28,7 @@ interface AppStoreState {
   // App state
   theme: 'light' | 'dark' | 'system';
   sidebarCollapsed: boolean;
-  activeFeature: string | null;
+  activeFeature: string | undefined;
   
   // Actions
   setUser: (user: UserProfile | null) => void;
@@ -125,14 +125,14 @@ export const appStore = create<AppStoreState>()(
       }),
       
       markNotificationAsRead: (id) => set((state) => ({
-        notifications: state.notifications.map(notif =>
+        notifications: state.notifications.map((notif, index) =>
           notif.id === id ? { ...notif, read: true } : notif
         ),
         unreadCount: Math.max(0, state.unreadCount - 1),
       })),
       
       markAllNotificationsAsRead: () => set((state) => ({
-        notifications: state.notifications.map(notif => ({ ...notif, read: true })),
+        notifications: state.notifications.map((notif, index) => ({ ...notif, read: true })),
         unreadCount: 0,
       })),
       
@@ -174,7 +174,7 @@ export const appStore = create<AppStoreState>()(
             : [...currentModules, moduleId];
           
           // Update user in database
-          const { data, error } = await supabase
+          const { data, error }: any = await supabase
             .from('user_profiles')
             .update({ active_modules: updatedModules })
             .eq('id', currentUser.id)
@@ -194,7 +194,7 @@ export const appStore = create<AppStoreState>()(
           }));
           
           return true;
-        } catch (error) {
+        } catch (error: any) {
           console.error('Error activating module:', error);
           return false;
         }

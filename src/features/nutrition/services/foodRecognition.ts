@@ -75,7 +75,7 @@ export class FoodRecognitionService {
         analysis_time: analysisTime
       };
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de l\'analyse de l\'image:', error);
       
       return {
@@ -174,7 +174,7 @@ export class FoodRecognitionService {
       const data = await response.json();
       return data.predictions || [];
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur reconnaissance alimentaire:', error);
       // Fallback sur les données simulées
       return this.mockFoodRecognition();
@@ -227,7 +227,7 @@ export class FoodRecognitionService {
             estimated_fat: foodData.fat_per_100g * factor
           });
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error(`Erreur lors de l'enrichissement pour ${item.name}:`, error);
       }
     }
@@ -255,7 +255,7 @@ export class FoodRecognitionService {
       // Sinon, utiliser l'API externe (simulation pour le développement)
       return this.getMockNutritionData(foodName);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Erreur récupération données nutrition pour ${foodName}:`, error);
       return this.getMockNutritionData(foodName);
     }
@@ -343,7 +343,7 @@ export class FoodRecognitionService {
       if (error) {
         console.error('Erreur sauvegarde analyse:', error);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la sauvegarde:', error);
     }
   }

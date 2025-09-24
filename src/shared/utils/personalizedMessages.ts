@@ -1,16 +1,16 @@
 // src/shared/utils/personalizedMessages.ts
 
 interface User {
-  first_name?: string | null;
-  username?: string | null;
-  sport?: string | null;
+  first_name?: string | undefined;
+  username?: string | undefined;
+  sport?: string | undefined;
 }
 
 // Messages personnalisés pour HydrationPage
 export const getHydrationPersonalizedMessage = (
   percentage: number,
   isGoalReached: boolean,
-  user?: User | null
+  user?: User | undefined
 ): string => {
   const userName = user?.first_name || user?.username || 'Champion';
 
@@ -29,7 +29,7 @@ export const getHydrationPersonalizedMessage = (
 export const getNutritionPersonalizedMessage = (
   dailyCalories: number,
   targetCalories: number,
-  user?: User | null
+  user?: User | undefined
 ): string => {
   const progress = (dailyCalories / targetCalories) * 100;
   const userName = user?.first_name || user?.username || 'Champion';
@@ -49,7 +49,7 @@ export const getNutritionPersonalizedMessage = (
 export const getSleepPersonalizedMessage = (
   currentSleepHours: number,
   targetSleepHours: number,
-  user?: User | null
+  user?: User | undefined
 ): string => {
   const userName = user?.first_name || user?.username || 'Champion';
   const progress = (currentSleepHours / targetSleepHours) * 100;
@@ -68,7 +68,7 @@ export const getSleepPersonalizedMessage = (
 // Recommandation personnalisée pour SleepPage
 export const getSleepPersonalizedRecommendation = (
   sleepDeficit: number,
-  user?: User | null
+  user?: User | undefined
 ): string => {
   const deficit = Math.round(sleepDeficit * 60);
   if (deficit > 0) {

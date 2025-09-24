@@ -13,17 +13,17 @@ interface SpeechRecognition extends EventTarget {
   abort(): void;
   
   // Event handlers
-  onaudiostart: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onaudioend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
-  onnomatch: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
-  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
-  onsoundstart: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onsoundend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onspeechstart: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onspeechend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onaudiostart: ((this: SpeechRecognition, ev: Event) => any) | undefined;
+  onaudioend: ((this: SpeechRecognition, ev: Event) => any) | undefined;
+  onend: ((this: SpeechRecognition, ev: Event) => any) | undefined;
+  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | undefined;
+  onnomatch: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | undefined;
+  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | undefined;
+  onsoundstart: ((this: SpeechRecognition, ev: Event) => any) | undefined;
+  onsoundend: ((this: SpeechRecognition, ev: Event) => any) | undefined;
+  onspeechstart: ((this: SpeechRecognition, ev: Event) => any) | undefined;
+  onspeechend: ((this: SpeechRecognition, ev: Event) => any) | undefined;
+  onstart: ((this: SpeechRecognition, ev: Event) => any) | undefined;
 }
 
 declare var SpeechRecognition: {

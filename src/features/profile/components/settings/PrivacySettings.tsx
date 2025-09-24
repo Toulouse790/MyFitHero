@@ -69,7 +69,7 @@ export const PrivacySettings: React.FC<PrivacySettingsProps> = ({
         description: 'Vos données ont été exportées avec succès !',
       });
       setIsExportDialogOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur d\'export',
         description: 'Impossible d\'exporter vos données. Veuillez réessayer.',
@@ -89,7 +89,7 @@ export const PrivacySettings: React.FC<PrivacySettingsProps> = ({
         description: 'Toutes vos données ont été supprimées définitivement.',
       });
       setIsDeleteDialogOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur de suppression',
         description: 'Impossible de supprimer vos données. Veuillez réessayer.',

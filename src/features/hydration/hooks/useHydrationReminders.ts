@@ -26,7 +26,7 @@ interface HydrationStats {
   completion_percentage: number;
   average_per_hour: number;
   remaining_ml: number;
-  estimated_completion_time: string | null;
+  estimated_completion_time: string | undefined;
   streak_days: number;
 }
 
@@ -103,7 +103,7 @@ export function useHydrationReminders() {
     const averagePerHour = todayConsumed / hoursElapsed;
 
     // Estimer l'heure de completion
-    let estimatedCompletionTime: string | null = null;
+    let estimatedCompletionTime: string | undefined = null;
     if (remaining > 0 && averagePerHour > 0) {
       const hoursToComplete = remaining / averagePerHour;
       const completionDate = new Date(now.getTime() + hoursToComplete * 60 * 60 * 1000);
@@ -171,7 +171,7 @@ export function useHydrationReminders() {
         }
 
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error("Erreur lors de l'ajout:", error);
         showError("Erreur lors de l'ajout");
@@ -203,7 +203,7 @@ export function useHydrationReminders() {
         setHydrationEntries(prev => prev.filter(entry => entry.id !== entryId));
         success('Entrée supprimée');
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur lors de la suppression:', error);
         showError('Erreur lors de la suppression');
@@ -238,7 +238,7 @@ export function useHydrationReminders() {
         setHydrationGoal(_data);
         success('Objectifs mis à jour');
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur lors de la mise à jour:', error);
         showError('Erreur lors de la mise à jour');
@@ -314,7 +314,7 @@ export function useHydrationReminders() {
           };
           setHydrationGoal(defaultGoal);
         }
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur lors du chargement:', error);
       } finally {

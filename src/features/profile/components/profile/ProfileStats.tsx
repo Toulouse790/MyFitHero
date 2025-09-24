@@ -60,7 +60,7 @@ export const useProfileStats = (
   const getWeightRange = () => {
     if (weightHistory.length === 0) return null;
     
-    const weights = weightHistory.map(entry => entry.weight);
+    const weights = weightHistory.map((entry, index) => entry.weight);
     const min = Math.min(...weights);
     const max = Math.max(...weights);
     

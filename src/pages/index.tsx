@@ -38,7 +38,7 @@ interface FitnessProfile {
   height_ft: number;
   height_in: number;
   age: number;
-  gender: 'male' | 'female' | null; // Aligné avec Supabase
+  gender: 'male' | 'female' | undefined; // Aligné avec Supabase
   body_fat_percentage?: number;
 
   // Sports US populaires
@@ -735,7 +735,7 @@ const pwaConfig: PWAConfig = {
 
 interface AppState {
   // État d'authentification
-  user: User | null;
+  user: User | undefined;
   isAuthenticated: boolean;
   isLoading: boolean;
 
@@ -759,15 +759,15 @@ interface AppState {
     sleepEntries: SleepEntry[];
     hydrationEntries: HydrationEntry[];
     wellnessEntries: MentalWellnessEntry[];
-    socialData: SocialProfile | null;
-    analytics: UserAnalytics | null;
+    socialData: SocialProfile | undefined;
+    analytics: UserAnalytics | undefined;
   };
 
   // État de l'interface
   ui: {
     currentPage: string;
     isOffline: boolean;
-    lastSyncTime: string | null;
+    lastSyncTime: string | undefined;
     pendingSyncs: PendingSync[];
   };
 
@@ -972,7 +972,7 @@ const useUSLocation = () => {
 
         setLocation({ state, city, zip, timezone });
       }
-    } catch (error) {
+    } catch (error: any) {
       setError('Unable to determine your location. Please ensure location services are enabled.');
     } finally {
       setIsLoading(false);

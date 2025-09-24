@@ -41,13 +41,13 @@ import {
 // Types pour le state machine React
 interface SleepState {
   currentState: SleepTrackingState;
-  sleepData: SleepData | null;
-  sleepAnalysis: SleepAnalysis | null;
-  weeklySummary: WeeklySleepSummary | null;
-  sleepGoals: SleepGoals | null;
+  sleepData: SleepData | undefined;
+  sleepAnalysis: SleepAnalysis | undefined;
+  weeklySummary: WeeklySleepSummary | undefined;
+  sleepGoals: SleepGoals | undefined;
   recentNights: SleepData[];
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   showInsights: boolean;
   selectedDate: string;
   sleepScore: number;
@@ -63,7 +63,7 @@ type SleepAction =
   | { type: 'SET_GOALS'; payload: SleepGoals }
   | { type: 'SET_RECENT_NIGHTS'; payload: SleepData[] }
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_ERROR'; payload: string | undefined }
   | { type: 'TOGGLE_INSIGHTS' }
   | { type: 'SET_SELECTED_DATE'; payload: string }
   | { type: 'UPDATE_SCORES'; payload: { sleep: number; recovery: number; circadian: number } }
@@ -178,7 +178,7 @@ export const SleepQualityAnalyzer: React.FC = () => {
       }
 
       dispatch({ type: 'SET_STATE', payload: 'idle' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur chargement données sommeil:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors du chargement des données' });
       dispatch({ type: 'SET_STATE', payload: 'error' });
@@ -251,7 +251,7 @@ export const SleepQualityAnalyzer: React.FC = () => {
       // Sauvegarde en base
       await saveSleepAnalysis(analysis);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur analyse sommeil:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors de l\'analyse' });
     }
@@ -284,7 +284,7 @@ export const SleepQualityAnalyzer: React.FC = () => {
         });
 
       if (error) throw error;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur sauvegarde analyse:', error);
     }
   };
@@ -350,7 +350,7 @@ export const SleepQualityAnalyzer: React.FC = () => {
       await loadSleepData(userId); // Rechargement complet
 
       dispatch({ type: 'SET_STATE', payload: 'idle' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur enregistrement sommeil:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors de l\'enregistrement' });
       dispatch({ type: 'SET_STATE', payload: 'error' });

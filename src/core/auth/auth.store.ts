@@ -204,7 +204,7 @@ export const useAuthStore = create<AuthStore>()(
               isLoading: false,
             });
           }
-        } catch (error) {
+        } catch (error: any) {
           set({
             ...initialState,
             isLoading: false,

@@ -13,12 +13,12 @@ interface UseSupabaseQueryOptions {
 }
 
 interface UseSupabaseQueryResult<T> {
-  data: T | null;
+  data: T | undefined;
   loading: boolean;
-  error: Error | null;
+  error: Error | undefined;
   refetch: () => Promise<void>;
   isStale: boolean;
-  lastUpdated: Date | null;
+  lastUpdated: Date | undefined;
 }
 
 // Cache simple en mémoire
@@ -33,7 +33,7 @@ const queryCache = new Map<
 
 export function useSupabaseQuery<T>(
   queryKey: string[],
-  queryFn: () => Promise<{ data: T | null; error: any }>,
+  queryFn: () => Promise<{ data: T | undefined; error: any }>,
   options: UseSupabaseQueryOptions = {}
 ): UseSupabaseQueryResult<T> {
   const {

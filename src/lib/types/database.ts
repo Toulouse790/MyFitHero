@@ -1,4 +1,4 @@
-export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+export type Json = string | number | boolean | undefined | { [key: string]: Json | undefined } | Json[];
 
 export interface Database {
   public: {
@@ -6,83 +6,83 @@ export interface Database {
       ai_recommendations: {
         Row: {
           id: string;
-          user_id: string | null;
-          request_id: string | null;
-          pillar_type: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | null;
+          user_id: string | undefined;
+          request_id: string | undefined;
+          pillar_type: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | undefined;
           recommendation: string;
-          metadata: Json | null;
-          is_applied: boolean | null;
-          created_at: string | null;
-          applied_at: string | null;
-          applied_by: 'user' | 'auto' | null;
-          applicable_modules: string[] | null;
-          confidence_score: number | null;
+          metadata: Json | undefined;
+          is_applied: boolean | undefined;
+          created_at: string | undefined;
+          applied_at: string | undefined;
+          applied_by: 'user' | 'auto' | undefined;
+          applicable_modules: string[] | undefined;
+          confidence_score: number | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          request_id?: string | null;
-          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | null;
+          user_id?: string | undefined;
+          request_id?: string | undefined;
+          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | undefined;
           recommendation: string;
-          metadata?: Json | null;
-          is_applied?: boolean | null;
-          created_at?: string | null;
-          applied_at?: string | null;
-          applied_by?: 'user' | 'auto' | null;
-          applicable_modules?: string[] | null;
-          confidence_score?: number | null;
+          metadata?: Json | undefined;
+          is_applied?: boolean | undefined;
+          created_at?: string | undefined;
+          applied_at?: string | undefined;
+          applied_by?: 'user' | 'auto' | undefined;
+          applicable_modules?: string[] | undefined;
+          confidence_score?: number | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          request_id?: string | null;
-          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | null;
+          user_id?: string | undefined;
+          request_id?: string | undefined;
+          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | undefined;
           recommendation?: string;
-          metadata?: Json | null;
-          is_applied?: boolean | null;
-          created_at?: string | null;
-          applied_at?: string | null;
-          applied_by?: 'user' | 'auto' | null;
-          applicable_modules?: string[] | null;
-          confidence_score?: number | null;
+          metadata?: Json | undefined;
+          is_applied?: boolean | undefined;
+          created_at?: string | undefined;
+          applied_at?: string | undefined;
+          applied_by?: 'user' | 'auto' | undefined;
+          applicable_modules?: string[] | undefined;
+          confidence_score?: number | undefined;
         };
       };
       ai_requests: {
         Row: {
           id: string;
-          user_id: string | null;
-          pillar_type: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | null;
+          user_id: string | undefined;
+          pillar_type: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | undefined;
           prompt: string;
-          context: Json | null;
-          status: 'pending' | 'processing' | 'completed' | 'failed' | null;
-          webhook_response: Json | null;
-          created_at: string | null;
-          updated_at: string | null;
-          source: 'app' | 'voice' | 'chat' | 'api' | 'webhook' | 'mobile' | 'wearable' | null;
+          context: Json | undefined;
+          status: 'pending' | 'processing' | 'completed' | 'failed' | undefined;
+          webhook_response: Json | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
+          source: 'app' | 'voice' | 'chat' | 'api' | 'webhook' | 'mobile' | 'wearable' | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | null;
+          user_id?: string | undefined;
+          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | undefined;
           prompt: string;
-          context?: Json | null;
-          status?: 'pending' | 'processing' | 'completed' | 'failed' | null;
-          webhook_response?: Json | null;
-          created_at?: string | null;
-          updated_at?: string | null;
-          source?: 'app' | 'voice' | 'chat' | 'api' | 'webhook' | 'mobile' | 'wearable' | null;
+          context?: Json | undefined;
+          status?: 'pending' | 'processing' | 'completed' | 'failed' | undefined;
+          webhook_response?: Json | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
+          source?: 'app' | 'voice' | 'chat' | 'api' | 'webhook' | 'mobile' | 'wearable' | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | null;
+          user_id?: string | undefined;
+          pillar_type?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'general' | undefined;
           prompt?: string;
-          context?: Json | null;
-          status?: 'pending' | 'processing' | 'completed' | 'failed' | null;
-          webhook_response?: Json | null;
-          created_at?: string | null;
-          updated_at?: string | null;
-          source?: 'app' | 'voice' | 'chat' | 'api' | 'webhook' | 'mobile' | 'wearable' | null;
+          context?: Json | undefined;
+          status?: 'pending' | 'processing' | 'completed' | 'failed' | undefined;
+          webhook_response?: Json | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
+          source?: 'app' | 'voice' | 'chat' | 'api' | 'webhook' | 'mobile' | 'wearable' | undefined;
         };
       };
       countries: {
@@ -104,140 +104,140 @@ export interface Database {
           id: string;
           user_id: string;
           date: string;
-          mood: number | null;
-          energy: number | null;
-          motivation: number | null;
-          sleep_quality: number | null;
-          stress_level: number | null;
-          notes: string | null;
-          created_at: string | null;
+          mood: number | undefined;
+          energy: number | undefined;
+          motivation: number | undefined;
+          sleep_quality: number | undefined;
+          stress_level: number | undefined;
+          notes: string | undefined;
+          created_at: string | undefined;
         };
         Insert: {
           id?: string;
           user_id: string;
           date?: string;
-          mood?: number | null;
-          energy?: number | null;
-          motivation?: number | null;
-          sleep_quality?: number | null;
-          stress_level?: number | null;
-          notes?: string | null;
-          created_at?: string | null;
+          mood?: number | undefined;
+          energy?: number | undefined;
+          motivation?: number | undefined;
+          sleep_quality?: number | undefined;
+          stress_level?: number | undefined;
+          notes?: string | undefined;
+          created_at?: string | undefined;
         };
         Update: {
           id?: string;
           user_id?: string;
           date?: string;
-          mood?: number | null;
-          energy?: number | null;
-          motivation?: number | null;
-          sleep_quality?: number | null;
-          stress_level?: number | null;
-          notes?: string | null;
-          created_at?: string | null;
+          mood?: number | undefined;
+          energy?: number | undefined;
+          motivation?: number | undefined;
+          sleep_quality?: number | undefined;
+          stress_level?: number | undefined;
+          notes?: string | undefined;
+          created_at?: string | undefined;
         };
       };
       daily_stats: {
         Row: {
           id: string;
-          user_id: string | null;
+          user_id: string | undefined;
           stat_date: string;
-          workouts_completed: number | null;
-          total_workout_minutes: number | null;
-          calories_burned: number | null;
-          total_calories: number | null;
-          total_protein: number | null;
-          total_carbs: number | null;
-          total_fat: number | null;
-          sleep_duration_minutes: number | null;
-          sleep_quality: number | null;
-          water_intake_ml: number | null;
-          hydration_goal_ml: number | null;
-          created_at: string | null;
-          updated_at: string | null;
+          workouts_completed: number | undefined;
+          total_workout_minutes: number | undefined;
+          calories_burned: number | undefined;
+          total_calories: number | undefined;
+          total_protein: number | undefined;
+          total_carbs: number | undefined;
+          total_fat: number | undefined;
+          sleep_duration_minutes: number | undefined;
+          sleep_quality: number | undefined;
+          water_intake_ml: number | undefined;
+          hydration_goal_ml: number | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           stat_date: string;
-          workouts_completed?: number | null;
-          total_workout_minutes?: number | null;
-          calories_burned?: number | null;
-          total_calories?: number | null;
-          total_protein?: number | null;
-          total_carbs?: number | null;
-          total_fat?: number | null;
-          sleep_duration_minutes?: number | null;
-          sleep_quality?: number | null;
-          water_intake_ml?: number | null;
-          hydration_goal_ml?: number | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          workouts_completed?: number | undefined;
+          total_workout_minutes?: number | undefined;
+          calories_burned?: number | undefined;
+          total_calories?: number | undefined;
+          total_protein?: number | undefined;
+          total_carbs?: number | undefined;
+          total_fat?: number | undefined;
+          sleep_duration_minutes?: number | undefined;
+          sleep_quality?: number | undefined;
+          water_intake_ml?: number | undefined;
+          hydration_goal_ml?: number | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           stat_date?: string;
-          workouts_completed?: number | null;
-          total_workout_minutes?: number | null;
-          calories_burned?: number | null;
-          total_calories?: number | null;
-          total_protein?: number | null;
-          total_carbs?: number | null;
-          total_fat?: number | null;
-          sleep_duration_minutes?: number | null;
-          sleep_quality?: number | null;
-          water_intake_ml?: number | null;
-          hydration_goal_ml?: number | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          workouts_completed?: number | undefined;
+          total_workout_minutes?: number | undefined;
+          calories_burned?: number | undefined;
+          total_calories?: number | undefined;
+          total_protein?: number | undefined;
+          total_carbs?: number | undefined;
+          total_fat?: number | undefined;
+          sleep_duration_minutes?: number | undefined;
+          sleep_quality?: number | undefined;
+          water_intake_ml?: number | undefined;
+          hydration_goal_ml?: number | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       dietary_restrictions_reference: {
         Row: {
           id: number;
           name: string;
-          category: string | null;
-          description: string | null;
+          category: string | undefined;
+          description: string | undefined;
         };
         Insert: {
           id?: number;
           name: string;
-          category?: string | null;
-          description?: string | null;
+          category?: string | undefined;
+          description?: string | undefined;
         };
         Update: {
           id?: number;
           name?: string;
-          category?: string | null;
-          description?: string | null;
+          category?: string | undefined;
+          description?: string | undefined;
         };
       };
       exercises_complementarity: {
         Row: {
           id: string;
-          drill_id: string | null;
-          strength_ex_id: string | null;
-          complement_type: string | null;
+          drill_id: string | undefined;
+          strength_ex_id: string | undefined;
+          complement_type: string | undefined;
         };
         Insert: {
           id?: string;
-          drill_id?: string | null;
-          strength_ex_id?: string | null;
-          complement_type?: string | null;
+          drill_id?: string | undefined;
+          strength_ex_id?: string | undefined;
+          complement_type?: string | undefined;
         };
         Update: {
           id?: string;
-          drill_id?: string | null;
-          strength_ex_id?: string | null;
-          complement_type?: string | null;
+          drill_id?: string | undefined;
+          strength_ex_id?: string | undefined;
+          complement_type?: string | undefined;
         };
       };
       exercises_library: {
         Row: {
           id: string;
           name: string;
-          description: string | null;
+          description: string | undefined;
           category:
             | 'chest'
             | 'back'
@@ -247,8 +247,8 @@ export interface Database {
             | 'core'
             | 'cardio'
             | 'flexibility'
-            | null;
-          muscle_groups: string[] | null;
+            | undefined;
+          muscle_groups: string[] | undefined;
           equipment:
             | 'bodyweight'
             | 'dumbbells'
@@ -256,23 +256,23 @@ export interface Database {
             | 'resistance_band'
             | 'machine'
             | 'other'
-            | null;
-          difficulty: 'beginner' | 'intermediate' | 'advanced' | null;
-          instructions: string | null;
-          notes: string | null;
-          image_url: string | null;
-          video_url: string | null;
-          created_at: string | null;
-          movement_type: 'push' | 'pull' | 'legs' | 'core' | 'full_body' | null;
-          exercise_mechanic: 'compound' | 'isolation' | null;
-          force_type: 'push' | 'pull' | 'static' | null;
-          level_of_home_use: 'no_equipment' | 'minimal_equipment' | 'some_equipment' | null;
-          is_outdoor_friendly: boolean | null;
+            | undefined;
+          difficulty: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          instructions: string | undefined;
+          notes: string | undefined;
+          image_url: string | undefined;
+          video_url: string | undefined;
+          created_at: string | undefined;
+          movement_type: 'push' | 'pull' | 'legs' | 'core' | 'full_body' | undefined;
+          exercise_mechanic: 'compound' | 'isolation' | undefined;
+          force_type: 'push' | 'pull' | 'static' | undefined;
+          level_of_home_use: 'no_equipment' | 'minimal_equipment' | 'some_equipment' | undefined;
+          is_outdoor_friendly: boolean | undefined;
         };
         Insert: {
           id?: string;
           name: string;
-          description?: string | null;
+          description?: string | undefined;
           category?:
             | 'chest'
             | 'back'
@@ -282,8 +282,8 @@ export interface Database {
             | 'core'
             | 'cardio'
             | 'flexibility'
-            | null;
-          muscle_groups?: string[] | null;
+            | undefined;
+          muscle_groups?: string[] | undefined;
           equipment?:
             | 'bodyweight'
             | 'dumbbells'
@@ -291,23 +291,23 @@ export interface Database {
             | 'resistance_band'
             | 'machine'
             | 'other'
-            | null;
-          difficulty?: 'beginner' | 'intermediate' | 'advanced' | null;
-          instructions?: string | null;
-          notes?: string | null;
-          image_url?: string | null;
-          video_url?: string | null;
-          created_at?: string | null;
-          movement_type?: 'push' | 'pull' | 'legs' | 'core' | 'full_body' | null;
-          exercise_mechanic?: 'compound' | 'isolation' | null;
-          force_type?: 'push' | 'pull' | 'static' | null;
-          level_of_home_use?: 'no_equipment' | 'minimal_equipment' | 'some_equipment' | null;
-          is_outdoor_friendly?: boolean | null;
+            | undefined;
+          difficulty?: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          instructions?: string | undefined;
+          notes?: string | undefined;
+          image_url?: string | undefined;
+          video_url?: string | undefined;
+          created_at?: string | undefined;
+          movement_type?: 'push' | 'pull' | 'legs' | 'core' | 'full_body' | undefined;
+          exercise_mechanic?: 'compound' | 'isolation' | undefined;
+          force_type?: 'push' | 'pull' | 'static' | undefined;
+          level_of_home_use?: 'no_equipment' | 'minimal_equipment' | 'some_equipment' | undefined;
+          is_outdoor_friendly?: boolean | undefined;
         };
         Update: {
           id?: string;
           name?: string;
-          description?: string | null;
+          description?: string | undefined;
           category?:
             | 'chest'
             | 'back'
@@ -317,8 +317,8 @@ export interface Database {
             | 'core'
             | 'cardio'
             | 'flexibility'
-            | null;
-          muscle_groups?: string[] | null;
+            | undefined;
+          muscle_groups?: string[] | undefined;
           equipment?:
             | 'bodyweight'
             | 'dumbbells'
@@ -326,74 +326,74 @@ export interface Database {
             | 'resistance_band'
             | 'machine'
             | 'other'
-            | null;
-          difficulty?: 'beginner' | 'intermediate' | 'advanced' | null;
-          instructions?: string | null;
-          notes?: string | null;
-          image_url?: string | null;
-          video_url?: string | null;
-          created_at?: string | null;
-          movement_type?: 'push' | 'pull' | 'legs' | 'core' | 'full_body' | null;
-          exercise_mechanic?: 'compound' | 'isolation' | null;
-          force_type?: 'push' | 'pull' | 'static' | null;
-          level_of_home_use?: 'no_equipment' | 'minimal_equipment' | 'some_equipment' | null;
-          is_outdoor_friendly?: boolean | null;
+            | undefined;
+          difficulty?: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          instructions?: string | undefined;
+          notes?: string | undefined;
+          image_url?: string | undefined;
+          video_url?: string | undefined;
+          created_at?: string | undefined;
+          movement_type?: 'push' | 'pull' | 'legs' | 'core' | 'full_body' | undefined;
+          exercise_mechanic?: 'compound' | 'isolation' | undefined;
+          force_type?: 'push' | 'pull' | 'static' | undefined;
+          level_of_home_use?: 'no_equipment' | 'minimal_equipment' | 'some_equipment' | undefined;
+          is_outdoor_friendly?: boolean | undefined;
         };
       };
       food_allergies_reference: {
         Row: {
           id: number;
           name: string;
-          category: string | null;
-          severity_default: string | null;
-          description: string | null;
+          category: string | undefined;
+          severity_default: string | undefined;
+          description: string | undefined;
         };
         Insert: {
           id?: number;
           name: string;
-          category?: string | null;
-          severity_default?: string | null;
-          description?: string | null;
+          category?: string | undefined;
+          severity_default?: string | undefined;
+          description?: string | undefined;
         };
         Update: {
           id?: number;
           name?: string;
-          category?: string | null;
-          severity_default?: string | null;
-          description?: string | null;
+          category?: string | undefined;
+          severity_default?: string | undefined;
+          description?: string | undefined;
         };
       };
       food_preferences: {
         Row: {
           id: string;
-          user_id: string | null;
-          food_name: string | null;
-          preference: 'intolerance' | 'dislike' | 'temporary' | null;
-          recorded_at: string | null;
-          expire_at: string | null;
+          user_id: string | undefined;
+          food_name: string | undefined;
+          preference: 'intolerance' | 'dislike' | 'temporary' | undefined;
+          recorded_at: string | undefined;
+          expire_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          food_name?: string | null;
-          preference?: 'intolerance' | 'dislike' | 'temporary' | null;
-          recorded_at?: string | null;
-          expire_at?: string | null;
+          user_id?: string | undefined;
+          food_name?: string | undefined;
+          preference?: 'intolerance' | 'dislike' | 'temporary' | undefined;
+          recorded_at?: string | undefined;
+          expire_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          food_name?: string | null;
-          preference?: 'intolerance' | 'dislike' | 'temporary' | null;
-          recorded_at?: string | null;
-          expire_at?: string | null;
+          user_id?: string | undefined;
+          food_name?: string | undefined;
+          preference?: 'intolerance' | 'dislike' | 'temporary' | undefined;
+          recorded_at?: string | undefined;
+          expire_at?: string | undefined;
         };
       };
       foods_library: {
         Row: {
           id: string;
           name: string;
-          brand: string | null;
+          brand: string | undefined;
           category:
             | 'fruits'
             | 'vegetables'
@@ -404,35 +404,35 @@ export interface Database {
             | 'beverages'
             | 'snacks'
             | 'other'
-            | null;
-          calories_per_100g: number | null;
-          protein_per_100g: number | null;
-          carbs_per_100g: number | null;
-          fat_per_100g: number | null;
-          fiber_per_100g: number | null;
-          sugar_per_100g: number | null;
-          common_units: Json | null;
-          created_at: string | null;
-          sodium_per_100g: number | null;
-          calcium_per_100g: number | null;
-          iron_per_100g: number | null;
-          is_vegetarian: boolean | null;
-          is_vegan: boolean | null;
-          is_gluten_free: boolean | null;
-          origin: string | null;
-          is_dairy_free: boolean | null;
-          allergens: string[] | null;
-          dietary_tags: string[] | null;
-          barcode: string | null;
-          portion_size_default: number | null;
-          fdc_id: string | null;
-          gtin_upc: string | null;
-          updated_at: string | null;
+            | undefined;
+          calories_per_100g: number | undefined;
+          protein_per_100g: number | undefined;
+          carbs_per_100g: number | undefined;
+          fat_per_100g: number | undefined;
+          fiber_per_100g: number | undefined;
+          sugar_per_100g: number | undefined;
+          common_units: Json | undefined;
+          created_at: string | undefined;
+          sodium_per_100g: number | undefined;
+          calcium_per_100g: number | undefined;
+          iron_per_100g: number | undefined;
+          is_vegetarian: boolean | undefined;
+          is_vegan: boolean | undefined;
+          is_gluten_free: boolean | undefined;
+          origin: string | undefined;
+          is_dairy_free: boolean | undefined;
+          allergens: string[] | undefined;
+          dietary_tags: string[] | undefined;
+          barcode: string | undefined;
+          portion_size_default: number | undefined;
+          fdc_id: string | undefined;
+          gtin_upc: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: string;
           name: string;
-          brand?: string | null;
+          brand?: string | undefined;
           category?:
             | 'fruits'
             | 'vegetables'
@@ -443,35 +443,35 @@ export interface Database {
             | 'beverages'
             | 'snacks'
             | 'other'
-            | null;
-          calories_per_100g?: number | null;
-          protein_per_100g?: number | null;
-          carbs_per_100g?: number | null;
-          fat_per_100g?: number | null;
-          fiber_per_100g?: number | null;
-          sugar_per_100g?: number | null;
-          common_units?: Json | null;
-          created_at?: string | null;
-          sodium_per_100g?: number | null;
-          calcium_per_100g?: number | null;
-          iron_per_100g?: number | null;
-          is_vegetarian?: boolean | null;
-          is_vegan?: boolean | null;
-          is_gluten_free?: boolean | null;
-          origin?: string | null;
-          is_dairy_free?: boolean | null;
-          allergens?: string[] | null;
-          dietary_tags?: string[] | null;
-          barcode?: string | null;
-          portion_size_default?: number | null;
-          fdc_id?: string | null;
-          gtin_upc?: string | null;
-          updated_at?: string | null;
+            | undefined;
+          calories_per_100g?: number | undefined;
+          protein_per_100g?: number | undefined;
+          carbs_per_100g?: number | undefined;
+          fat_per_100g?: number | undefined;
+          fiber_per_100g?: number | undefined;
+          sugar_per_100g?: number | undefined;
+          common_units?: Json | undefined;
+          created_at?: string | undefined;
+          sodium_per_100g?: number | undefined;
+          calcium_per_100g?: number | undefined;
+          iron_per_100g?: number | undefined;
+          is_vegetarian?: boolean | undefined;
+          is_vegan?: boolean | undefined;
+          is_gluten_free?: boolean | undefined;
+          origin?: string | undefined;
+          is_dairy_free?: boolean | undefined;
+          allergens?: string[] | undefined;
+          dietary_tags?: string[] | undefined;
+          barcode?: string | undefined;
+          portion_size_default?: number | undefined;
+          fdc_id?: string | undefined;
+          gtin_upc?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: string;
           name?: string;
-          brand?: string | null;
+          brand?: string | undefined;
           category?:
             | 'fruits'
             | 'vegetables'
@@ -482,36 +482,36 @@ export interface Database {
             | 'beverages'
             | 'snacks'
             | 'other'
-            | null;
-          calories_per_100g?: number | null;
-          protein_per_100g?: number | null;
-          carbs_per_100g?: number | null;
-          fat_per_100g?: number | null;
-          fiber_per_100g?: number | null;
-          sugar_per_100g?: number | null;
-          common_units?: Json | null;
-          created_at?: string | null;
-          sodium_per_100g?: number | null;
-          calcium_per_100g?: number | null;
-          iron_per_100g?: number | null;
-          is_vegetarian?: boolean | null;
-          is_vegan?: boolean | null;
-          is_gluten_free?: boolean | null;
-          origin?: string | null;
-          is_dairy_free?: boolean | null;
-          allergens?: string[] | null;
-          dietary_tags?: string[] | null;
-          barcode?: string | null;
-          portion_size_default?: number | null;
-          fdc_id?: string | null;
-          gtin_upc?: string | null;
-          updated_at?: string | null;
+            | undefined;
+          calories_per_100g?: number | undefined;
+          protein_per_100g?: number | undefined;
+          carbs_per_100g?: number | undefined;
+          fat_per_100g?: number | undefined;
+          fiber_per_100g?: number | undefined;
+          sugar_per_100g?: number | undefined;
+          common_units?: Json | undefined;
+          created_at?: string | undefined;
+          sodium_per_100g?: number | undefined;
+          calcium_per_100g?: number | undefined;
+          iron_per_100g?: number | undefined;
+          is_vegetarian?: boolean | undefined;
+          is_vegan?: boolean | undefined;
+          is_gluten_free?: boolean | undefined;
+          origin?: string | undefined;
+          is_dairy_free?: boolean | undefined;
+          allergens?: string[] | undefined;
+          dietary_tags?: string[] | undefined;
+          barcode?: string | undefined;
+          portion_size_default?: number | undefined;
+          fdc_id?: string | undefined;
+          gtin_upc?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       hydration_logs: {
         Row: {
           id: string;
-          user_id: string | null;
+          user_id: string | undefined;
           log_date: string;
           amount_ml: number;
           drink_type:
@@ -522,9 +522,9 @@ export interface Database {
             | 'sports_drink'
             | 'other'
             | 'electrolytes'
-            | null;
-          logged_at: string | null;
-          created_at: string | null;
+            | undefined;
+          logged_at: string | undefined;
+          created_at: string | undefined;
           hydration_context:
             | 'normal'
             | 'workout'
@@ -533,16 +533,16 @@ export interface Database {
             | 'before_sleep'
             | 'medication'
             | 'thirst'
-            | null;
+            | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           log_date: string;
           amount_ml: number;
-          drink_type?: 'water' | 'tea' | 'coffee' | 'juice' | 'sports_drink' | 'other' | null;
-          logged_at?: string | null;
-          created_at?: string | null;
+          drink_type?: 'water' | 'tea' | 'coffee' | 'juice' | 'sports_drink' | 'other' | undefined;
+          logged_at?: string | undefined;
+          created_at?: string | undefined;
           hydration_context?:
             | 'normal'
             | 'workout'
@@ -551,16 +551,16 @@ export interface Database {
             | 'before_sleep'
             | 'medication'
             | 'thirst'
-            | null;
+            | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           log_date?: string;
           amount_ml?: number;
-          drink_type?: 'water' | 'tea' | 'coffee' | 'juice' | 'sports_drink' | 'other' | null;
-          logged_at?: string | null;
-          created_at?: string | null;
+          drink_type?: 'water' | 'tea' | 'coffee' | 'juice' | 'sports_drink' | 'other' | undefined;
+          logged_at?: string | undefined;
+          created_at?: string | undefined;
           hydration_context?:
             | 'normal'
             | 'workout'
@@ -569,69 +569,69 @@ export interface Database {
             | 'before_sleep'
             | 'medication'
             | 'thirst'
-            | null;
+            | undefined;
         };
       };
       meals: {
         Row: {
           id: string;
-          user_id: string | null;
-          meal_type: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null;
+          user_id: string | undefined;
+          meal_type: 'breakfast' | 'lunch' | 'dinner' | 'snack' | undefined;
           meal_date: string;
-          foods: Json | null;
-          total_calories: number | null;
-          total_protein: number | null;
-          total_carbs: number | null;
-          total_fat: number | null;
-          notes: string | null;
-          created_at: string | null;
-          is_vegetarian: boolean | null;
-          is_vegan: boolean | null;
-          is_gluten_free: boolean | null;
-          is_dairy_free: boolean | null;
-          allergens: string[] | null;
-          meal_photo_url: string | null;
-          meal_time: string | null;
+          foods: Json | undefined;
+          total_calories: number | undefined;
+          total_protein: number | undefined;
+          total_carbs: number | undefined;
+          total_fat: number | undefined;
+          notes: string | undefined;
+          created_at: string | undefined;
+          is_vegetarian: boolean | undefined;
+          is_vegan: boolean | undefined;
+          is_gluten_free: boolean | undefined;
+          is_dairy_free: boolean | undefined;
+          allergens: string[] | undefined;
+          meal_photo_url: string | undefined;
+          meal_time: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null;
+          user_id?: string | undefined;
+          meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | undefined;
           meal_date: string;
-          foods?: Json | null;
-          total_calories?: number | null;
-          total_protein?: number | null;
-          total_carbs?: number | null;
-          total_fat?: number | null;
-          notes?: string | null;
-          created_at?: string | null;
-          is_vegetarian?: boolean | null;
-          is_vegan?: boolean | null;
-          is_gluten_free?: boolean | null;
-          is_dairy_free?: boolean | null;
-          allergens?: string[] | null;
-          meal_photo_url?: string | null;
-          meal_time?: string | null;
+          foods?: Json | undefined;
+          total_calories?: number | undefined;
+          total_protein?: number | undefined;
+          total_carbs?: number | undefined;
+          total_fat?: number | undefined;
+          notes?: string | undefined;
+          created_at?: string | undefined;
+          is_vegetarian?: boolean | undefined;
+          is_vegan?: boolean | undefined;
+          is_gluten_free?: boolean | undefined;
+          is_dairy_free?: boolean | undefined;
+          allergens?: string[] | undefined;
+          meal_photo_url?: string | undefined;
+          meal_time?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | null;
+          user_id?: string | undefined;
+          meal_type?: 'breakfast' | 'lunch' | 'dinner' | 'snack' | undefined;
           meal_date?: string;
-          foods?: Json | null;
-          total_calories?: number | null;
-          total_protein?: number | null;
-          total_carbs?: number | null;
-          total_fat?: number | null;
-          notes?: string | null;
-          created_at?: string | null;
-          is_vegetarian?: boolean | null;
-          is_vegan?: boolean | null;
-          is_gluten_free?: boolean | null;
-          is_dairy_free?: boolean | null;
-          allergens?: string[] | null;
-          meal_photo_url?: string | null;
-          meal_time?: string | null;
+          foods?: Json | undefined;
+          total_calories?: number | undefined;
+          total_protein?: number | undefined;
+          total_carbs?: number | undefined;
+          total_fat?: number | undefined;
+          notes?: string | undefined;
+          created_at?: string | undefined;
+          is_vegetarian?: boolean | undefined;
+          is_vegan?: boolean | undefined;
+          is_gluten_free?: boolean | undefined;
+          is_dairy_free?: boolean | undefined;
+          allergens?: string[] | undefined;
+          meal_photo_url?: string | undefined;
+          meal_time?: string | undefined;
         };
       };
       monthly_stats: {
@@ -639,392 +639,392 @@ export interface Database {
           id: string;
           user_id: string;
           month: string;
-          total_workouts: number | null;
-          total_workout_minutes: number | null;
-          avg_workout_duration: number | null;
-          total_calories_burned: number | null;
-          avg_daily_calories: number | null;
-          avg_daily_protein: number | null;
-          avg_daily_carbs: number | null;
-          avg_daily_fat: number | null;
-          avg_sleep_duration: number | null;
-          avg_sleep_quality: number | null;
-          total_sleep_sessions: number | null;
-          avg_daily_water_ml: number | null;
-          hydration_goal_achievement_rate: number | null;
-          days_with_data: number | null;
-          profile_type: string | null;
-          active_modules: string[] | null;
-          created_at: string | null;
-          updated_at: string | null;
+          total_workouts: number | undefined;
+          total_workout_minutes: number | undefined;
+          avg_workout_duration: number | undefined;
+          total_calories_burned: number | undefined;
+          avg_daily_calories: number | undefined;
+          avg_daily_protein: number | undefined;
+          avg_daily_carbs: number | undefined;
+          avg_daily_fat: number | undefined;
+          avg_sleep_duration: number | undefined;
+          avg_sleep_quality: number | undefined;
+          total_sleep_sessions: number | undefined;
+          avg_daily_water_ml: number | undefined;
+          hydration_goal_achievement_rate: number | undefined;
+          days_with_data: number | undefined;
+          profile_type: string | undefined;
+          active_modules: string[] | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: string;
           user_id: string;
           month: string;
-          total_workouts?: number | null;
-          total_workout_minutes?: number | null;
-          avg_workout_duration?: number | null;
-          total_calories_burned?: number | null;
-          avg_daily_calories?: number | null;
-          avg_daily_protein?: number | null;
-          avg_daily_carbs?: number | null;
-          avg_daily_fat?: number | null;
-          avg_sleep_duration?: number | null;
-          avg_sleep_quality?: number | null;
-          total_sleep_sessions?: number | null;
-          avg_daily_water_ml?: number | null;
-          hydration_goal_achievement_rate?: number | null;
-          days_with_data?: number | null;
-          profile_type?: string | null;
-          active_modules?: string[] | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          total_workouts?: number | undefined;
+          total_workout_minutes?: number | undefined;
+          avg_workout_duration?: number | undefined;
+          total_calories_burned?: number | undefined;
+          avg_daily_calories?: number | undefined;
+          avg_daily_protein?: number | undefined;
+          avg_daily_carbs?: number | undefined;
+          avg_daily_fat?: number | undefined;
+          avg_sleep_duration?: number | undefined;
+          avg_sleep_quality?: number | undefined;
+          total_sleep_sessions?: number | undefined;
+          avg_daily_water_ml?: number | undefined;
+          hydration_goal_achievement_rate?: number | undefined;
+          days_with_data?: number | undefined;
+          profile_type?: string | undefined;
+          active_modules?: string[] | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: string;
           user_id?: string;
           month?: string;
-          total_workouts?: number | null;
-          total_workout_minutes?: number | null;
-          avg_workout_duration?: number | null;
-          total_calories_burned?: number | null;
-          avg_daily_calories?: number | null;
-          avg_daily_protein?: number | null;
-          avg_daily_carbs?: number | null;
-          avg_daily_fat?: number | null;
-          avg_sleep_duration?: number | null;
-          avg_sleep_quality?: number | null;
-          total_sleep_sessions?: number | null;
-          avg_daily_water_ml?: number | null;
-          hydration_goal_achievement_rate?: number | null;
-          days_with_data?: number | null;
-          profile_type?: string | null;
-          active_modules?: string[] | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          total_workouts?: number | undefined;
+          total_workout_minutes?: number | undefined;
+          avg_workout_duration?: number | undefined;
+          total_calories_burned?: number | undefined;
+          avg_daily_calories?: number | undefined;
+          avg_daily_protein?: number | undefined;
+          avg_daily_carbs?: number | undefined;
+          avg_daily_fat?: number | undefined;
+          avg_sleep_duration?: number | undefined;
+          avg_sleep_quality?: number | undefined;
+          total_sleep_sessions?: number | undefined;
+          avg_daily_water_ml?: number | undefined;
+          hydration_goal_achievement_rate?: number | undefined;
+          days_with_data?: number | undefined;
+          profile_type?: string | undefined;
+          active_modules?: string[] | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       muscle_recovery_data: {
         Row: {
           id: string;
-          user_id: string | null;
+          user_id: string | undefined;
           muscle_group: string;
-          last_workout_date: string | null;
-          workout_intensity: string | null;
-          workout_volume: number | null;
-          workout_duration_minutes: number | null;
+          last_workout_date: string | undefined;
+          workout_intensity: string | undefined;
+          workout_volume: number | undefined;
+          workout_duration_minutes: number | undefined;
           recovery_status: string;
           recovery_percentage: number;
           estimated_full_recovery: string;
           fatigue_level: number;
           soreness_level: number;
           readiness_score: number;
-          last_updated: string | null;
-          created_at: string | null;
+          last_updated: string | undefined;
+          created_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           muscle_group: string;
-          last_workout_date?: string | null;
-          workout_intensity?: string | null;
-          workout_volume?: number | null;
-          workout_duration_minutes?: number | null;
+          last_workout_date?: string | undefined;
+          workout_intensity?: string | undefined;
+          workout_volume?: number | undefined;
+          workout_duration_minutes?: number | undefined;
           recovery_status: string;
           recovery_percentage: number;
           estimated_full_recovery: string;
           fatigue_level: number;
           soreness_level: number;
           readiness_score: number;
-          last_updated?: string | null;
-          created_at?: string | null;
+          last_updated?: string | undefined;
+          created_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           muscle_group?: string;
-          last_workout_date?: string | null;
-          workout_intensity?: string | null;
-          workout_volume?: number | null;
-          workout_duration_minutes?: number | null;
+          last_workout_date?: string | undefined;
+          workout_intensity?: string | undefined;
+          workout_volume?: number | undefined;
+          workout_duration_minutes?: number | undefined;
           recovery_status?: string;
           recovery_percentage?: number;
           estimated_full_recovery?: string;
           fatigue_level?: number;
           soreness_level?: number;
           readiness_score?: number;
-          last_updated?: string | null;
-          created_at?: string | null;
+          last_updated?: string | undefined;
+          created_at?: string | undefined;
         };
       };
       pillar_coordination: {
         Row: {
           id: string;
-          user_id: string | null;
+          user_id: string | undefined;
           coordination_data: Json;
-          active: boolean | null;
-          created_at: string | null;
-          updated_at: string | null;
+          active: boolean | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           coordination_data: Json;
-          active?: boolean | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          active?: boolean | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           coordination_data?: Json;
-          active?: boolean | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          active?: boolean | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       risk_alerts: {
         Row: {
           id: string;
-          user_id: string | null;
-          recommendation_id: string | null;
-          pillar_type: string | null;
-          risk_code: string | null;
-          risk_level: 'info' | 'warning' | 'critical' | null;
-          message: string | null;
-          created_at: string | null;
+          user_id: string | undefined;
+          recommendation_id: string | undefined;
+          pillar_type: string | undefined;
+          risk_code: string | undefined;
+          risk_level: 'info' | 'warning' | 'critical' | undefined;
+          message: string | undefined;
+          created_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          recommendation_id?: string | null;
-          pillar_type?: string | null;
-          risk_code?: string | null;
-          risk_level?: 'info' | 'warning' | 'critical' | null;
-          message?: string | null;
-          created_at?: string | null;
+          user_id?: string | undefined;
+          recommendation_id?: string | undefined;
+          pillar_type?: string | undefined;
+          risk_code?: string | undefined;
+          risk_level?: 'info' | 'warning' | 'critical' | undefined;
+          message?: string | undefined;
+          created_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          recommendation_id?: string | null;
-          pillar_type?: string | null;
-          risk_code?: string | null;
-          risk_level?: 'info' | 'warning' | 'critical' | null;
-          message?: string | null;
-          created_at?: string | null;
+          user_id?: string | undefined;
+          recommendation_id?: string | undefined;
+          pillar_type?: string | undefined;
+          risk_code?: string | undefined;
+          risk_level?: 'info' | 'warning' | 'critical' | undefined;
+          message?: string | undefined;
+          created_at?: string | undefined;
         };
       };
       sleep_sessions: {
         Row: {
           id: string;
-          user_id: string | null;
+          user_id: string | undefined;
           sleep_date: string;
-          bedtime: string | null;
-          wake_time: string | null;
-          duration_minutes: number | null;
-          quality_rating: number | null;
-          mood_rating: number | null;
-          energy_level: number | null;
-          factors: Json | null;
-          notes: string | null;
-          created_at: string | null;
-          hrv_ms: number | null;
-          resting_hr: number | null;
-          sleep_efficiency: number | null;
-          sleep_stage_data: Json | null;
+          bedtime: string | undefined;
+          wake_time: string | undefined;
+          duration_minutes: number | undefined;
+          quality_rating: number | undefined;
+          mood_rating: number | undefined;
+          energy_level: number | undefined;
+          factors: Json | undefined;
+          notes: string | undefined;
+          created_at: string | undefined;
+          hrv_ms: number | undefined;
+          resting_hr: number | undefined;
+          sleep_efficiency: number | undefined;
+          sleep_stage_data: Json | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           sleep_date: string;
-          bedtime?: string | null;
-          wake_time?: string | null;
-          duration_minutes?: number | null;
-          quality_rating?: number | null;
-          mood_rating?: number | null;
-          energy_level?: number | null;
-          factors?: Json | null;
-          notes?: string | null;
-          created_at?: string | null;
-          hrv_ms?: number | null;
-          resting_hr?: number | null;
-          sleep_efficiency?: number | null;
-          sleep_stage_data?: Json | null;
+          bedtime?: string | undefined;
+          wake_time?: string | undefined;
+          duration_minutes?: number | undefined;
+          quality_rating?: number | undefined;
+          mood_rating?: number | undefined;
+          energy_level?: number | undefined;
+          factors?: Json | undefined;
+          notes?: string | undefined;
+          created_at?: string | undefined;
+          hrv_ms?: number | undefined;
+          resting_hr?: number | undefined;
+          sleep_efficiency?: number | undefined;
+          sleep_stage_data?: Json | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           sleep_date?: string;
-          bedtime?: string | null;
-          wake_time?: string | null;
-          duration_minutes?: number | null;
-          quality_rating?: number | null;
-          mood_rating?: number | null;
-          energy_level?: number | null;
-          factors?: Json | null;
-          notes?: string | null;
-          created_at?: string | null;
-          hrv_ms?: number | null;
-          resting_hr?: number | null;
-          sleep_efficiency?: number | null;
-          sleep_stage_data?: Json | null;
+          bedtime?: string | undefined;
+          wake_time?: string | undefined;
+          duration_minutes?: number | undefined;
+          quality_rating?: number | undefined;
+          mood_rating?: number | undefined;
+          energy_level?: number | undefined;
+          factors?: Json | undefined;
+          notes?: string | undefined;
+          created_at?: string | undefined;
+          hrv_ms?: number | undefined;
+          resting_hr?: number | undefined;
+          sleep_efficiency?: number | undefined;
+          sleep_stage_data?: Json | undefined;
         };
       };
       sport_drills_library: {
         Row: {
           id: string;
           name: string;
-          description: string | null;
+          description: string | undefined;
           sport: string;
-          position: string | null;
-          season_phase: 'pre_season' | 'in_season' | 'off_season' | 'recovery' | null;
-          goal: 'speed' | 'power' | 'endurance' | 'skill' | 'agility' | 'technical' | null;
-          difficulty: 'beginner' | 'intermediate' | 'advanced' | null;
-          duration_seconds: number | null;
-          equipment: string | null;
-          instructions: string | null;
-          video_url: string | null;
-          created_at: string | null;
+          position: string | undefined;
+          season_phase: 'pre_season' | 'in_season' | 'off_season' | 'recovery' | undefined;
+          goal: 'speed' | 'power' | 'endurance' | 'skill' | 'agility' | 'technical' | undefined;
+          difficulty: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          duration_seconds: number | undefined;
+          equipment: string | undefined;
+          instructions: string | undefined;
+          video_url: string | undefined;
+          created_at: string | undefined;
         };
         Insert: {
           id?: string;
           name: string;
-          description?: string | null;
+          description?: string | undefined;
           sport: string;
-          position?: string | null;
-          season_phase?: 'pre_season' | 'in_season' | 'off_season' | 'recovery' | null;
-          goal?: 'speed' | 'power' | 'endurance' | 'skill' | 'agility' | 'technical' | null;
-          difficulty?: 'beginner' | 'intermediate' | 'advanced' | null;
-          duration_seconds?: number | null;
-          equipment?: string | null;
-          instructions?: string | null;
-          video_url?: string | null;
-          created_at?: string | null;
+          position?: string | undefined;
+          season_phase?: 'pre_season' | 'in_season' | 'off_season' | 'recovery' | undefined;
+          goal?: 'speed' | 'power' | 'endurance' | 'skill' | 'agility' | 'technical' | undefined;
+          difficulty?: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          duration_seconds?: number | undefined;
+          equipment?: string | undefined;
+          instructions?: string | undefined;
+          video_url?: string | undefined;
+          created_at?: string | undefined;
         };
         Update: {
           id?: string;
           name?: string;
-          description?: string | null;
+          description?: string | undefined;
           sport?: string;
-          position?: string | null;
-          season_phase?: 'pre_season' | 'in_season' | 'off_season' | 'recovery' | null;
-          goal?: 'speed' | 'power' | 'endurance' | 'skill' | 'agility' | 'technical' | null;
-          difficulty?: 'beginner' | 'intermediate' | 'advanced' | null;
-          duration_seconds?: number | null;
-          equipment?: string | null;
-          instructions?: string | null;
-          video_url?: string | null;
-          created_at?: string | null;
+          position?: string | undefined;
+          season_phase?: 'pre_season' | 'in_season' | 'off_season' | 'recovery' | undefined;
+          goal?: 'speed' | 'power' | 'endurance' | 'skill' | 'agility' | 'technical' | undefined;
+          difficulty?: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          duration_seconds?: number | undefined;
+          equipment?: string | undefined;
+          instructions?: string | undefined;
+          video_url?: string | undefined;
+          created_at?: string | undefined;
         };
       };
       sports_library: {
         Row: {
           id: number;
           name: string;
-          name_en: string | null;
-          category: string | null;
-          country_code: string | null;
-          is_popular: boolean | null;
-          positions: string[] | null;
-          created_at: string | null;
-          updated_at: string | null;
+          name_en: string | undefined;
+          category: string | undefined;
+          country_code: string | undefined;
+          is_popular: boolean | undefined;
+          positions: string[] | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: number;
           name: string;
-          name_en?: string | null;
-          category?: string | null;
-          country_code?: string | null;
-          is_popular?: boolean | null;
-          positions?: string[] | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          name_en?: string | undefined;
+          category?: string | undefined;
+          country_code?: string | undefined;
+          is_popular?: boolean | undefined;
+          positions?: string[] | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: number;
           name?: string;
-          name_en?: string | null;
-          category?: string | null;
-          country_code?: string | null;
-          is_popular?: boolean | null;
-          positions?: string[] | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          name_en?: string | undefined;
+          category?: string | undefined;
+          country_code?: string | undefined;
+          is_popular?: boolean | undefined;
+          positions?: string[] | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       synthese_finale: {
         Row: {
           id: string;
-          user_id: string | null;
-          thread_id: string | null;
-          synthese: string | null;
-          type_demande: string | null;
-          horodatage: string | null;
-          created_at: string | null;
+          user_id: string | undefined;
+          thread_id: string | undefined;
+          synthese: string | undefined;
+          type_demande: string | undefined;
+          horodatage: string | undefined;
+          created_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          thread_id?: string | null;
-          synthese?: string | null;
-          type_demande?: string | null;
-          horodatage?: string | null;
-          created_at?: string | null;
+          user_id?: string | undefined;
+          thread_id?: string | undefined;
+          synthese?: string | undefined;
+          type_demande?: string | undefined;
+          horodatage?: string | undefined;
+          created_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          thread_id?: string | null;
-          synthese?: string | null;
-          type_demande?: string | null;
-          horodatage?: string | null;
-          created_at?: string | null;
+          user_id?: string | undefined;
+          thread_id?: string | undefined;
+          synthese?: string | undefined;
+          type_demande?: string | undefined;
+          horodatage?: string | undefined;
+          created_at?: string | undefined;
         };
       };
       training_load: {
         Row: {
           user_id: string;
           session_id: string;
-          start_ts: string | null;
-          duration_min: number | null;
-          avg_hr: number | null;
-          trimp: number | null;
-          atl: number | null;
-          ctl: number | null;
-          acwr: number | null;
-          hrv_rmssd: number | null;
-          fatigue_flag: boolean | null;
-          rpe: number | null;
+          start_ts: string | undefined;
+          duration_min: number | undefined;
+          avg_hr: number | undefined;
+          trimp: number | undefined;
+          atl: number | undefined;
+          ctl: number | undefined;
+          acwr: number | undefined;
+          hrv_rmssd: number | undefined;
+          fatigue_flag: boolean | undefined;
+          rpe: number | undefined;
         };
         Insert: {
           user_id: string;
           session_id: string;
-          start_ts?: string | null;
-          duration_min?: number | null;
-          avg_hr?: number | null;
-          trimp?: number | null;
-          atl?: number | null;
-          ctl?: number | null;
-          acwr?: number | null;
-          hrv_rmssd?: number | null;
-          fatigue_flag?: boolean | null;
-          rpe?: number | null;
+          start_ts?: string | undefined;
+          duration_min?: number | undefined;
+          avg_hr?: number | undefined;
+          trimp?: number | undefined;
+          atl?: number | undefined;
+          ctl?: number | undefined;
+          acwr?: number | undefined;
+          hrv_rmssd?: number | undefined;
+          fatigue_flag?: boolean | undefined;
+          rpe?: number | undefined;
         };
         Update: {
           user_id?: string;
           session_id?: string;
-          start_ts?: string | null;
-          duration_min?: number | null;
-          avg_hr?: number | null;
-          trimp?: number | null;
-          atl?: number | null;
-          ctl?: number | null;
-          acwr?: number | null;
-          hrv_rmssd?: number | null;
-          fatigue_flag?: boolean | null;
-          rpe?: number | null;
+          start_ts?: string | undefined;
+          duration_min?: number | undefined;
+          avg_hr?: number | undefined;
+          trimp?: number | undefined;
+          atl?: number | undefined;
+          ctl?: number | undefined;
+          acwr?: number | undefined;
+          hrv_rmssd?: number | undefined;
+          fatigue_flag?: boolean | undefined;
+          rpe?: number | undefined;
         };
       };
       user_badges: {
@@ -1033,121 +1033,121 @@ export interface Database {
           user_id: string;
           badge_type: string;
           badge_name: string;
-          description: string | null;
-          earned_at: string | null;
-          pillar_type: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | null;
-          metadata: Json | null;
+          description: string | undefined;
+          earned_at: string | undefined;
+          pillar_type: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | undefined;
+          metadata: Json | undefined;
         };
         Insert: {
           id?: string;
           user_id: string;
           badge_type: string;
           badge_name: string;
-          description?: string | null;
-          earned_at?: string | null;
-          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | null;
-          metadata?: Json | null;
+          description?: string | undefined;
+          earned_at?: string | undefined;
+          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | undefined;
+          metadata?: Json | undefined;
         };
         Update: {
           id?: string;
           user_id?: string;
           badge_type?: string;
           badge_name?: string;
-          description?: string | null;
-          earned_at?: string | null;
-          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | null;
-          metadata?: Json | null;
+          description?: string | undefined;
+          earned_at?: string | undefined;
+          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | undefined;
+          metadata?: Json | undefined;
         };
       };
       user_goals: {
         Row: {
           id: string;
-          user_id: string | null;
-          category: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'weight' | null;
-          goal_type: string | null;
-          target_value: number | null;
-          current_value: number | null;
-          unit: string | null;
-          start_date: string | null;
-          target_date: string | null;
-          is_active: boolean | null;
-          achieved_at: string | null;
-          created_at: string | null;
-          module: 'general' | 'sport' | 'nutrition' | 'sleep' | 'hydration' | null;
-          progress_history: Json | null;
-          reminder_enabled: boolean | null;
+          user_id: string | undefined;
+          category: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'weight' | undefined;
+          goal_type: string | undefined;
+          target_value: number | undefined;
+          current_value: number | undefined;
+          unit: string | undefined;
+          start_date: string | undefined;
+          target_date: string | undefined;
+          is_active: boolean | undefined;
+          achieved_at: string | undefined;
+          created_at: string | undefined;
+          module: 'general' | 'sport' | 'nutrition' | 'sleep' | 'hydration' | undefined;
+          progress_history: Json | undefined;
+          reminder_enabled: boolean | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          category?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'weight' | null;
-          goal_type?: string | null;
-          target_value?: number | null;
-          current_value?: number | null;
-          unit?: string | null;
-          start_date?: string | null;
-          target_date?: string | null;
-          is_active?: boolean | null;
-          achieved_at?: string | null;
-          created_at?: string | null;
-          module?: 'general' | 'sport' | 'nutrition' | 'sleep' | 'hydration' | null;
-          progress_history?: Json | null;
-          reminder_enabled?: boolean | null;
+          user_id?: string | undefined;
+          category?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'weight' | undefined;
+          goal_type?: string | undefined;
+          target_value?: number | undefined;
+          current_value?: number | undefined;
+          unit?: string | undefined;
+          start_date?: string | undefined;
+          target_date?: string | undefined;
+          is_active?: boolean | undefined;
+          achieved_at?: string | undefined;
+          created_at?: string | undefined;
+          module?: 'general' | 'sport' | 'nutrition' | 'sleep' | 'hydration' | undefined;
+          progress_history?: Json | undefined;
+          reminder_enabled?: boolean | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          category?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'weight' | null;
-          goal_type?: string | null;
-          target_value?: number | null;
-          current_value?: number | null;
-          unit?: string | null;
-          start_date?: string | null;
-          target_date?: string | null;
-          is_active?: boolean | null;
-          achieved_at?: string | null;
-          created_at?: string | null;
-          module?: 'general' | 'sport' | 'nutrition' | 'sleep' | 'hydration' | null;
-          progress_history?: Json | null;
-          reminder_enabled?: boolean | null;
+          user_id?: string | undefined;
+          category?: 'workout' | 'nutrition' | 'sleep' | 'hydration' | 'weight' | undefined;
+          goal_type?: string | undefined;
+          target_value?: number | undefined;
+          current_value?: number | undefined;
+          unit?: string | undefined;
+          start_date?: string | undefined;
+          target_date?: string | undefined;
+          is_active?: boolean | undefined;
+          achieved_at?: string | undefined;
+          created_at?: string | undefined;
+          module?: 'general' | 'sport' | 'nutrition' | 'sleep' | 'hydration' | undefined;
+          progress_history?: Json | undefined;
+          reminder_enabled?: boolean | undefined;
         };
       };
       user_injuries: {
         Row: {
           id: string;
-          user_id: string | null;
-          injury_type: string | null;
-          side: 'left' | 'right' | 'bilateral' | null;
-          severity: 'mild' | 'moderate' | 'severe' | null;
-          occurred_on: string | null;
-          resolved_on: string | null;
-          notes: string | null;
-          is_active: boolean | null;
-          created_at: string | null;
+          user_id: string | undefined;
+          injury_type: string | undefined;
+          side: 'left' | 'right' | 'bilateral' | undefined;
+          severity: 'mild' | 'moderate' | 'severe' | undefined;
+          occurred_on: string | undefined;
+          resolved_on: string | undefined;
+          notes: string | undefined;
+          is_active: boolean | undefined;
+          created_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          injury_type?: string | null;
-          side?: 'left' | 'right' | 'bilateral' | null;
-          severity?: 'mild' | 'moderate' | 'severe' | null;
-          occurred_on?: string | null;
-          resolved_on?: string | null;
-          notes?: string | null;
-          is_active?: boolean | null;
-          created_at?: string | null;
+          user_id?: string | undefined;
+          injury_type?: string | undefined;
+          side?: 'left' | 'right' | 'bilateral' | undefined;
+          severity?: 'mild' | 'moderate' | 'severe' | undefined;
+          occurred_on?: string | undefined;
+          resolved_on?: string | undefined;
+          notes?: string | undefined;
+          is_active?: boolean | undefined;
+          created_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          injury_type?: string | null;
-          side?: 'left' | 'right' | 'bilateral' | null;
-          severity?: 'mild' | 'moderate' | 'severe' | null;
-          occurred_on?: string | null;
-          resolved_on?: string | null;
-          notes?: string | null;
-          is_active?: boolean | null;
-          created_at?: string | null;
+          user_id?: string | undefined;
+          injury_type?: string | undefined;
+          side?: 'left' | 'right' | 'bilateral' | undefined;
+          severity?: 'mild' | 'moderate' | 'severe' | undefined;
+          occurred_on?: string | undefined;
+          resolved_on?: string | undefined;
+          notes?: string | undefined;
+          is_active?: boolean | undefined;
+          created_at?: string | undefined;
         };
       };
       user_notifications: {
@@ -1157,12 +1157,12 @@ export interface Database {
           title: string;
           message: string;
           type: string;
-          pillar_type: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | null;
-          is_read: boolean | null;
-          scheduled_for: string | null;
-          sent_at: string | null;
-          metadata: Json | null;
-          created_at: string | null;
+          pillar_type: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | undefined;
+          is_read: boolean | undefined;
+          scheduled_for: string | undefined;
+          sent_at: string | undefined;
+          metadata: Json | undefined;
+          created_at: string | undefined;
         };
         Insert: {
           id?: string;
@@ -1170,12 +1170,12 @@ export interface Database {
           title: string;
           message: string;
           type?: string;
-          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | null;
-          is_read?: boolean | null;
-          scheduled_for?: string | null;
-          sent_at?: string | null;
-          metadata?: Json | null;
-          created_at?: string | null;
+          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | undefined;
+          is_read?: boolean | undefined;
+          scheduled_for?: string | undefined;
+          sent_at?: string | undefined;
+          metadata?: Json | undefined;
+          created_at?: string | undefined;
         };
         Update: {
           id?: string;
@@ -1183,12 +1183,12 @@ export interface Database {
           title?: string;
           message?: string;
           type?: string;
-          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | null;
-          is_read?: boolean | null;
-          scheduled_for?: string | null;
-          sent_at?: string | null;
-          metadata?: Json | null;
-          created_at?: string | null;
+          pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout' | 'general' | undefined;
+          is_read?: boolean | undefined;
+          scheduled_for?: string | undefined;
+          sent_at?: string | undefined;
+          metadata?: Json | undefined;
+          created_at?: string | undefined;
         };
       };
       user_pillar_data: {
@@ -1197,37 +1197,37 @@ export interface Database {
           user_id: string;
           pillar_type: 'hydration' | 'nutrition' | 'sleep' | 'workout';
           data: Json;
-          created_at: string | null;
-          updated_at: string | null;
+          created_at: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: string;
           user_id: string;
           pillar_type: 'hydration' | 'nutrition' | 'sleep' | 'workout';
           data?: Json;
-          created_at?: string | null;
-          updated_at?: string | null;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: string;
           user_id?: string;
           pillar_type?: 'hydration' | 'nutrition' | 'sleep' | 'workout';
           data?: Json;
-          created_at?: string | null;
-          updated_at?: string | null;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       user_profiles: {
         Row: {
           id: string;
-          username: string | null;
-          full_name: string | null;
-          avatar_url: string | null;
-          age: number | null;
-          height_cm: number | null;
-          weight_kg: number | null;
-          gender: 'male' | 'female' | 'other' | null;
-          activity_level: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | null;
+          username: string | undefined;
+          full_name: string | undefined;
+          avatar_url: string | undefined;
+          age: number | undefined;
+          height_cm: number | undefined;
+          weight_kg: number | undefined;
+          gender: 'male' | 'female' | 'other' | undefined;
+          activity_level: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | undefined;
           fitness_goal:
             | 'weight_loss'
             | 'muscle_gain'
@@ -1241,31 +1241,31 @@ export interface Database {
             | 'general_health'
             | 'general'
             | 'none'
-            | null;
-          timezone: string | null;
-          notifications_enabled: boolean | null;
-          created_at: string | null;
-          updated_at: string | null;
-          available_time_per_day: number | null;
-          fitness_experience: 'beginner' | 'intermediate' | 'advanced' | 'expert' | null;
-          injuries: string[] | null;
-          primary_goals: string[] | null;
-          motivation: string | null;
-          sport: string | null;
-          sport_position: string | null;
+            | undefined;
+          timezone: string | undefined;
+          notifications_enabled: boolean | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
+          available_time_per_day: number | undefined;
+          fitness_experience: 'beginner' | 'intermediate' | 'advanced' | 'expert' | undefined;
+          injuries: string[] | undefined;
+          primary_goals: string[] | undefined;
+          motivation: string | undefined;
+          sport: string | undefined;
+          sport_position: string | undefined;
           sport_level:
             | 'recreational'
             | 'amateur_competitive'
             | 'semi_professional'
             | 'professional'
             | 'none'
-            | null;
-          training_frequency: number | null;
-          season_period: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | null;
-          lifestyle: 'student' | 'office_worker' | 'physical_job' | 'retired' | null;
-          profile_type: 'complete' | 'wellness' | 'sport_only' | 'sleep_focus' | null;
-          modules: string[] | null;
-          active_modules: string[] | null;
+            | undefined;
+          training_frequency: number | undefined;
+          season_period: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | undefined;
+          lifestyle: 'student' | 'office_worker' | 'physical_job' | 'retired' | undefined;
+          profile_type: 'complete' | 'wellness' | 'sport_only' | 'sleep_focus' | undefined;
+          modules: string[] | undefined;
+          active_modules: string[] | undefined;
           dietary_preference:
             | 'omnivore'
             | 'vegetarian'
@@ -1278,28 +1278,28 @@ export interface Database {
             | 'halal'
             | 'kosher'
             | 'other'
-            | null;
-          dietary_restrictions: string[] | null;
-          food_allergies: string[] | null;
-          food_dislikes: string[] | null;
-          country_code: string | null;
+            | undefined;
+          dietary_restrictions: string[] | undefined;
+          food_allergies: string[] | undefined;
+          food_dislikes: string[] | undefined;
+          country_code: string | undefined;
           equipment_level:
             | 'no_equipment'
             | 'minimal_equipment'
             | 'some_equipment'
             | 'full_gym'
-            | null;
-          first_name: string | null;
-          coaching_style: string | null;
-          target_weight_kg: number | null;
-          sleep_hours_average: number | null;
-          water_intake_goal: number | null;
-          main_obstacles: string[] | null;
-          connected_devices: string[] | null;
-          device_brands: Json | null;
-          email_validated: boolean | null;
-          last_login: string | null;
-          language: 'fr' | 'en' | 'es' | 'de' | 'it' | null;
+            | undefined;
+          first_name: string | undefined;
+          coaching_style: string | undefined;
+          target_weight_kg: number | undefined;
+          sleep_hours_average: number | undefined;
+          water_intake_goal: number | undefined;
+          main_obstacles: string[] | undefined;
+          connected_devices: string[] | undefined;
+          device_brands: Json | undefined;
+          email_validated: boolean | undefined;
+          last_login: string | undefined;
+          language: 'fr' | 'en' | 'es' | 'de' | 'it' | undefined;
           subscription_status:
             | 'free'
             | 'premium'
@@ -1307,33 +1307,33 @@ export interface Database {
             | 'enterprise'
             | 'trial'
             | 'expired'
-            | null;
-          strength_objective: string | null;
-          strength_experience: string | null;
-          nutrition_objective: string | null;
-          sleep_difficulties: boolean | null;
-          hydration_reminders: boolean | null;
-          privacy_consent: boolean | null;
-          marketing_consent: boolean | null;
-          onboarding_completed: boolean | null;
-          onboarding_completed_at: string | null;
+            | undefined;
+          strength_objective: string | undefined;
+          strength_experience: string | undefined;
+          nutrition_objective: string | undefined;
+          sleep_difficulties: boolean | undefined;
+          hydration_reminders: boolean | undefined;
+          privacy_consent: boolean | undefined;
+          marketing_consent: boolean | undefined;
+          onboarding_completed: boolean | undefined;
+          onboarding_completed_at: string | undefined;
           role: 'user' | 'admin' | 'coach' | 'moderator';
-          height: number | null;
-          target_weight: number | null;
-          preferred_workout_time: string | null;
-          ai_coaching_style: string | null;
-          profile_version: number | null;
+          height: number | undefined;
+          target_weight: number | undefined;
+          preferred_workout_time: string | undefined;
+          ai_coaching_style: string | undefined;
+          profile_version: number | undefined;
         };
         Insert: {
           id: string;
-          username?: string | null;
-          full_name?: string | null;
-          avatar_url?: string | null;
-          age?: number | null;
-          height_cm?: number | null;
-          weight_kg?: number | null;
-          gender?: 'male' | 'female' | 'other' | null;
-          activity_level?: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | null;
+          username?: string | undefined;
+          full_name?: string | undefined;
+          avatar_url?: string | undefined;
+          age?: number | undefined;
+          height_cm?: number | undefined;
+          weight_kg?: number | undefined;
+          gender?: 'male' | 'female' | 'other' | undefined;
+          activity_level?: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | undefined;
           fitness_goal?:
             | 'weight_loss'
             | 'muscle_gain'
@@ -1347,31 +1347,31 @@ export interface Database {
             | 'general_health'
             | 'general'
             | 'none'
-            | null;
-          timezone?: string | null;
-          notifications_enabled?: boolean | null;
-          created_at?: string | null;
-          updated_at?: string | null;
-          available_time_per_day?: number | null;
-          fitness_experience?: 'beginner' | 'intermediate' | 'advanced' | 'expert' | null;
-          injuries?: string[] | null;
-          primary_goals?: string[] | null;
-          motivation?: string | null;
-          sport?: string | null;
-          sport_position?: string | null;
+            | undefined;
+          timezone?: string | undefined;
+          notifications_enabled?: boolean | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
+          available_time_per_day?: number | undefined;
+          fitness_experience?: 'beginner' | 'intermediate' | 'advanced' | 'expert' | undefined;
+          injuries?: string[] | undefined;
+          primary_goals?: string[] | undefined;
+          motivation?: string | undefined;
+          sport?: string | undefined;
+          sport_position?: string | undefined;
           sport_level?:
             | 'recreational'
             | 'amateur_competitive'
             | 'semi_professional'
             | 'professional'
             | 'none'
-            | null;
-          training_frequency?: number | null;
-          season_period?: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | null;
-          lifestyle?: 'student' | 'office_worker' | 'physical_job' | 'retired' | null;
-          profile_type?: 'complete' | 'wellness' | 'sport_only' | 'sleep_focus' | null;
-          modules?: string[] | null;
-          active_modules?: string[] | null;
+            | undefined;
+          training_frequency?: number | undefined;
+          season_period?: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | undefined;
+          lifestyle?: 'student' | 'office_worker' | 'physical_job' | 'retired' | undefined;
+          profile_type?: 'complete' | 'wellness' | 'sport_only' | 'sleep_focus' | undefined;
+          modules?: string[] | undefined;
+          active_modules?: string[] | undefined;
           dietary_preference?:
             | 'omnivore'
             | 'vegetarian'
@@ -1384,28 +1384,28 @@ export interface Database {
             | 'halal'
             | 'kosher'
             | 'other'
-            | null;
-          dietary_restrictions?: string[] | null;
-          food_allergies?: string[] | null;
-          food_dislikes?: string[] | null;
-          country_code?: string | null;
+            | undefined;
+          dietary_restrictions?: string[] | undefined;
+          food_allergies?: string[] | undefined;
+          food_dislikes?: string[] | undefined;
+          country_code?: string | undefined;
           equipment_level?:
             | 'no_equipment'
             | 'minimal_equipment'
             | 'some_equipment'
             | 'full_gym'
-            | null;
-          first_name?: string | null;
-          coaching_style?: string | null;
-          target_weight_kg?: number | null;
-          sleep_hours_average?: number | null;
-          water_intake_goal?: number | null;
-          main_obstacles?: string[] | null;
-          connected_devices?: string[] | null;
-          device_brands?: Json | null;
-          email_validated?: boolean | null;
-          last_login?: string | null;
-          language?: 'fr' | 'en' | 'es' | 'de' | 'it' | null;
+            | undefined;
+          first_name?: string | undefined;
+          coaching_style?: string | undefined;
+          target_weight_kg?: number | undefined;
+          sleep_hours_average?: number | undefined;
+          water_intake_goal?: number | undefined;
+          main_obstacles?: string[] | undefined;
+          connected_devices?: string[] | undefined;
+          device_brands?: Json | undefined;
+          email_validated?: boolean | undefined;
+          last_login?: string | undefined;
+          language?: 'fr' | 'en' | 'es' | 'de' | 'it' | undefined;
           subscription_status?:
             | 'free'
             | 'premium'
@@ -1413,33 +1413,33 @@ export interface Database {
             | 'enterprise'
             | 'trial'
             | 'expired'
-            | null;
-          strength_objective?: string | null;
-          strength_experience?: string | null;
-          nutrition_objective?: string | null;
-          sleep_difficulties?: boolean | null;
-          hydration_reminders?: boolean | null;
-          privacy_consent?: boolean | null;
-          marketing_consent?: boolean | null;
-          onboarding_completed?: boolean | null;
-          onboarding_completed_at?: string | null;
+            | undefined;
+          strength_objective?: string | undefined;
+          strength_experience?: string | undefined;
+          nutrition_objective?: string | undefined;
+          sleep_difficulties?: boolean | undefined;
+          hydration_reminders?: boolean | undefined;
+          privacy_consent?: boolean | undefined;
+          marketing_consent?: boolean | undefined;
+          onboarding_completed?: boolean | undefined;
+          onboarding_completed_at?: string | undefined;
           role?: 'user' | 'admin' | 'coach' | 'moderator';
-          height?: number | null;
-          target_weight?: number | null;
-          preferred_workout_time?: string | null;
-          ai_coaching_style?: string | null;
-          profile_version?: number | null;
+          height?: number | undefined;
+          target_weight?: number | undefined;
+          preferred_workout_time?: string | undefined;
+          ai_coaching_style?: string | undefined;
+          profile_version?: number | undefined;
         };
         Update: {
           id?: string;
-          username?: string | null;
-          full_name?: string | null;
-          avatar_url?: string | null;
-          age?: number | null;
-          height_cm?: number | null;
-          weight_kg?: number | null;
-          gender?: 'male' | 'female' | 'other' | null;
-          activity_level?: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | null;
+          username?: string | undefined;
+          full_name?: string | undefined;
+          avatar_url?: string | undefined;
+          age?: number | undefined;
+          height_cm?: number | undefined;
+          weight_kg?: number | undefined;
+          gender?: 'male' | 'female' | 'other' | undefined;
+          activity_level?: 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active' | undefined;
           fitness_goal?:
             | 'weight_loss'
             | 'muscle_gain'
@@ -1453,31 +1453,31 @@ export interface Database {
             | 'general_health'
             | 'general'
             | 'none'
-            | null;
-          timezone?: string | null;
-          notifications_enabled?: boolean | null;
-          created_at?: string | null;
-          updated_at?: string | null;
-          available_time_per_day?: number | null;
-          fitness_experience?: 'beginner' | 'intermediate' | 'advanced' | 'expert' | null;
-          injuries?: string[] | null;
-          primary_goals?: string[] | null;
-          motivation?: string | null;
-          sport?: string | null;
-          sport_position?: string | null;
+            | undefined;
+          timezone?: string | undefined;
+          notifications_enabled?: boolean | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
+          available_time_per_day?: number | undefined;
+          fitness_experience?: 'beginner' | 'intermediate' | 'advanced' | 'expert' | undefined;
+          injuries?: string[] | undefined;
+          primary_goals?: string[] | undefined;
+          motivation?: string | undefined;
+          sport?: string | undefined;
+          sport_position?: string | undefined;
           sport_level?:
             | 'recreational'
             | 'amateur_competitive'
             | 'semi_professional'
             | 'professional'
             | 'none'
-            | null;
-          training_frequency?: number | null;
-          season_period?: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | null;
-          lifestyle?: 'student' | 'office_worker' | 'physical_job' | 'retired' | null;
-          profile_type?: 'complete' | 'wellness' | 'sport_only' | 'sleep_focus' | null;
-          modules?: string[] | null;
-          active_modules?: string[] | null;
+            | undefined;
+          training_frequency?: number | undefined;
+          season_period?: 'off_season' | 'pre_season' | 'in_season' | 'recovery' | undefined;
+          lifestyle?: 'student' | 'office_worker' | 'physical_job' | 'retired' | undefined;
+          profile_type?: 'complete' | 'wellness' | 'sport_only' | 'sleep_focus' | undefined;
+          modules?: string[] | undefined;
+          active_modules?: string[] | undefined;
           dietary_preference?:
             | 'omnivore'
             | 'vegetarian'
@@ -1490,28 +1490,28 @@ export interface Database {
             | 'halal'
             | 'kosher'
             | 'other'
-            | null;
-          dietary_restrictions?: string[] | null;
-          food_allergies?: string[] | null;
-          food_dislikes?: string[] | null;
-          country_code?: string | null;
+            | undefined;
+          dietary_restrictions?: string[] | undefined;
+          food_allergies?: string[] | undefined;
+          food_dislikes?: string[] | undefined;
+          country_code?: string | undefined;
           equipment_level?:
             | 'no_equipment'
             | 'minimal_equipment'
             | 'some_equipment'
             | 'full_gym'
-            | null;
-          first_name?: string | null;
-          coaching_style?: string | null;
-          target_weight_kg?: number | null;
-          sleep_hours_average?: number | null;
-          water_intake_goal?: number | null;
-          main_obstacles?: string[] | null;
-          connected_devices?: string[] | null;
-          device_brands?: Json | null;
-          email_validated?: boolean | null;
-          last_login?: string | null;
-          language?: 'fr' | 'en' | 'es' | 'de' | 'it' | null;
+            | undefined;
+          first_name?: string | undefined;
+          coaching_style?: string | undefined;
+          target_weight_kg?: number | undefined;
+          sleep_hours_average?: number | undefined;
+          water_intake_goal?: number | undefined;
+          main_obstacles?: string[] | undefined;
+          connected_devices?: string[] | undefined;
+          device_brands?: Json | undefined;
+          email_validated?: boolean | undefined;
+          last_login?: string | undefined;
+          language?: 'fr' | 'en' | 'es' | 'de' | 'it' | undefined;
           subscription_status?:
             | 'free'
             | 'premium'
@@ -1519,69 +1519,69 @@ export interface Database {
             | 'enterprise'
             | 'trial'
             | 'expired'
-            | null;
-          strength_objective?: string | null;
-          strength_experience?: string | null;
-          nutrition_objective?: string | null;
-          sleep_difficulties?: boolean | null;
-          hydration_reminders?: boolean | null;
-          privacy_consent?: boolean | null;
-          marketing_consent?: boolean | null;
-          onboarding_completed?: boolean | null;
-          onboarding_completed_at?: string | null;
+            | undefined;
+          strength_objective?: string | undefined;
+          strength_experience?: string | undefined;
+          nutrition_objective?: string | undefined;
+          sleep_difficulties?: boolean | undefined;
+          hydration_reminders?: boolean | undefined;
+          privacy_consent?: boolean | undefined;
+          marketing_consent?: boolean | undefined;
+          onboarding_completed?: boolean | undefined;
+          onboarding_completed_at?: string | undefined;
           role?: 'user' | 'admin' | 'coach' | 'moderator';
-          height?: number | null;
-          target_weight?: number | null;
-          preferred_workout_time?: string | null;
-          ai_coaching_style?: string | null;
-          profile_version?: number | null;
+          height?: number | undefined;
+          target_weight?: number | undefined;
+          preferred_workout_time?: string | undefined;
+          ai_coaching_style?: string | undefined;
+          profile_version?: number | undefined;
         };
       };
       user_recovery_profiles: {
         Row: {
           id: string;
-          user_id: string | null;
-          recovery_rate_multiplier: number | null;
-          sleep_quality_impact: number | null;
-          nutrition_quality_impact: number | null;
-          stress_level_impact: number | null;
-          hydration_impact: number | null;
-          age_factor: number | null;
-          fitness_level_factor: number | null;
-          injury_history: string[] | null;
-          supplements: string[] | null;
-          created_at: string | null;
-          updated_at: string | null;
+          user_id: string | undefined;
+          recovery_rate_multiplier: number | undefined;
+          sleep_quality_impact: number | undefined;
+          nutrition_quality_impact: number | undefined;
+          stress_level_impact: number | undefined;
+          hydration_impact: number | undefined;
+          age_factor: number | undefined;
+          fitness_level_factor: number | undefined;
+          injury_history: string[] | undefined;
+          supplements: string[] | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          recovery_rate_multiplier?: number | null;
-          sleep_quality_impact?: number | null;
-          nutrition_quality_impact?: number | null;
-          stress_level_impact?: number | null;
-          hydration_impact?: number | null;
-          age_factor?: number | null;
-          fitness_level_factor?: number | null;
-          injury_history?: string[] | null;
-          supplements?: string[] | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          user_id?: string | undefined;
+          recovery_rate_multiplier?: number | undefined;
+          sleep_quality_impact?: number | undefined;
+          nutrition_quality_impact?: number | undefined;
+          stress_level_impact?: number | undefined;
+          hydration_impact?: number | undefined;
+          age_factor?: number | undefined;
+          fitness_level_factor?: number | undefined;
+          injury_history?: string[] | undefined;
+          supplements?: string[] | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
-          recovery_rate_multiplier?: number | null;
-          sleep_quality_impact?: number | null;
-          nutrition_quality_impact?: number | null;
-          stress_level_impact?: number | null;
-          hydration_impact?: number | null;
-          age_factor?: number | null;
-          fitness_level_factor?: number | null;
-          injury_history?: string[] | null;
-          supplements?: string[] | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          user_id?: string | undefined;
+          recovery_rate_multiplier?: number | undefined;
+          sleep_quality_impact?: number | undefined;
+          nutrition_quality_impact?: number | undefined;
+          stress_level_impact?: number | undefined;
+          hydration_impact?: number | undefined;
+          age_factor?: number | undefined;
+          fitness_level_factor?: number | undefined;
+          injury_history?: string[] | undefined;
+          supplements?: string[] | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       user_stats: {
@@ -1592,9 +1592,9 @@ export interface Database {
           stat_type: string;
           value: number;
           date: string;
-          metadata: Json | null;
-          created_at: string | null;
-          updated_at: string | null;
+          metadata: Json | undefined;
+          created_at: string | undefined;
+          updated_at: string | undefined;
         };
         Insert: {
           id?: string;
@@ -1603,9 +1603,9 @@ export interface Database {
           stat_type: string;
           value?: number;
           date?: string;
-          metadata?: Json | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          metadata?: Json | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
         Update: {
           id?: string;
@@ -1614,65 +1614,65 @@ export interface Database {
           stat_type?: string;
           value?: number;
           date?: string;
-          metadata?: Json | null;
-          created_at?: string | null;
-          updated_at?: string | null;
+          metadata?: Json | undefined;
+          created_at?: string | undefined;
+          updated_at?: string | undefined;
         };
       };
       workouts: {
         Row: {
           id: string;
-          user_id: string | null;
+          user_id: string | undefined;
           name: string;
-          description: string | null;
-          workout_type: 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other' | null;
-          duration_minutes: number | null;
-          calories_burned: number | null;
-          difficulty: 'beginner' | 'intermediate' | 'advanced' | null;
-          exercises: Json | null;
-          notes: string | null;
-          started_at: string | null;
-          completed_at: string | null;
-          created_at: string | null;
-          plan_id: string | null;
-          is_template: boolean | null;
-          muscle_objectives: string[] | null;
+          description: string | undefined;
+          workout_type: 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other' | undefined;
+          duration_minutes: number | undefined;
+          calories_burned: number | undefined;
+          difficulty: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          exercises: Json | undefined;
+          notes: string | undefined;
+          started_at: string | undefined;
+          completed_at: string | undefined;
+          created_at: string | undefined;
+          plan_id: string | undefined;
+          is_template: boolean | undefined;
+          muscle_objectives: string[] | undefined;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           name: string;
-          description?: string | null;
-          workout_type?: 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other' | null;
-          duration_minutes?: number | null;
-          calories_burned?: number | null;
-          difficulty?: 'beginner' | 'intermediate' | 'advanced' | null;
-          exercises?: Json | null;
-          notes?: string | null;
-          started_at?: string | null;
-          completed_at?: string | null;
-          created_at?: string | null;
-          plan_id?: string | null;
-          is_template?: boolean | null;
-          muscle_objectives?: string[] | null;
+          description?: string | undefined;
+          workout_type?: 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other' | undefined;
+          duration_minutes?: number | undefined;
+          calories_burned?: number | undefined;
+          difficulty?: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          exercises?: Json | undefined;
+          notes?: string | undefined;
+          started_at?: string | undefined;
+          completed_at?: string | undefined;
+          created_at?: string | undefined;
+          plan_id?: string | undefined;
+          is_template?: boolean | undefined;
+          muscle_objectives?: string[] | undefined;
         };
         Update: {
           id?: string;
-          user_id?: string | null;
+          user_id?: string | undefined;
           name?: string;
-          description?: string | null;
-          workout_type?: 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other' | null;
-          duration_minutes?: number | null;
-          calories_burned?: number | null;
-          difficulty?: 'beginner' | 'intermediate' | 'advanced' | null;
-          exercises?: Json | null;
-          notes?: string | null;
-          started_at?: string | null;
-          completed_at?: string | null;
-          created_at?: string | null;
-          plan_id?: string | null;
-          is_template?: boolean | null;
-          muscle_objectives?: string[] | null;
+          description?: string | undefined;
+          workout_type?: 'strength' | 'cardio' | 'flexibility' | 'sports' | 'other' | undefined;
+          duration_minutes?: number | undefined;
+          calories_burned?: number | undefined;
+          difficulty?: 'beginner' | 'intermediate' | 'advanced' | undefined;
+          exercises?: Json | undefined;
+          notes?: string | undefined;
+          started_at?: string | undefined;
+          completed_at?: string | undefined;
+          created_at?: string | undefined;
+          plan_id?: string | undefined;
+          is_template?: boolean | undefined;
+          muscle_objectives?: string[] | undefined;
         };
       };
     };

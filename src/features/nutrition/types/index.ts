@@ -190,3 +190,106 @@ export interface DbMealAnalysis {
   created_at: string;
   updated_at: string;
 }
+
+// 🔧 MISSING TYPES FOR TYPESCRIPT FIXES
+
+export interface Meal {
+  id: string;
+  name: string;
+  calories: number;
+  macros: {
+    protein: number;
+    carbs: number;
+    fat: number;
+  };
+  foods: FoodItem[];
+  created_at: string;
+}
+
+export interface FoodItem {
+  id: string;
+  name: string;
+  calories_per_100g: number;
+  protein_per_100g: number;
+  carbs_per_100g: number;
+  fat_per_100g: number;
+  quantity: number;
+}
+
+export interface NutritionAnalysis {
+  calories: number;
+  macros: {
+    protein: number;
+    carbs: number;
+    fat: number;
+  };
+  micronutrients: {
+    vitamins: { [key: string]: number };
+    minerals: { [key: string]: number };
+  };
+  recommendations: string[];
+}
+
+export interface Recipe {
+  id: string;
+  name: string;
+  ingredients: FoodItem[];
+  instructions: string[];
+  prep_time_minutes: number;
+  servings: number;
+  nutrition_per_serving: NutritionAnalysis;
+}
+
+export interface MealPlan {
+  id: string;
+  name: string;
+  duration_days: number;
+  daily_meals: {
+    day: number;
+    breakfast: Meal[];
+    lunch: Meal[];
+    dinner: Meal[];
+    snacks: Meal[];
+  }[];
+  total_nutrition: NutritionAnalysis;
+}
+
+export interface NutritionTrend {
+  date: string;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  weight?: number;
+}
+
+export interface CreateMealDTO {
+  name: string;
+  foods: {
+    food_id: string;
+    quantity: number;
+  }[];
+  meal_type: 'breakfast' | 'lunch' | 'dinner' | 'snack';
+}
+
+export interface UpdateNutritionGoalsDTO {
+  daily_calories: number;
+  daily_protein: number;
+  daily_carbs: number;
+  daily_fat: number;
+}
+
+export interface FoodSearchQuery {
+  query: string;
+  limit?: number;
+  offset?: number;
+  category?: string;
+}
+
+export interface NutritionInsight {
+  type: 'warning' | 'success' | 'info';
+  title: string;
+  message: string;
+  action_required?: boolean;
+  priority: 'low' | 'medium' | 'high';
+}

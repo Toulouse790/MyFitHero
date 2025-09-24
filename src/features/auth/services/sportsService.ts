@@ -45,7 +45,7 @@ export class SportsService {
     try {
       await new Promise(resolve => setTimeout(resolve, 100)); // Simulation async
       return getSportsByCategory(category);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la récupération des sports par catégorie:', error);
       return [];
     }
@@ -58,7 +58,7 @@ export class SportsService {
     try {
       await new Promise(resolve => setTimeout(resolve, 100)); // Simulation async
       return getPositionsForSport(sport);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la récupération des positions:', error);
       return [];
     }
@@ -74,7 +74,7 @@ export class SportsService {
         return AVAILABLE_SPORTS;
       }
       return searchSports(query);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la recherche de sports:', error);
       return [];
     }
@@ -225,7 +225,7 @@ export class SportsService {
         .sort((a, b) => b.score - a.score)
         .slice(0, 5);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors du calcul des recommandations:', error);
       return [];
     }
@@ -313,9 +313,9 @@ export class SportsService {
       const sportAnalyses = positionAnalyses[sport];
       if (!sportAnalyses) return null;
 
-      return sportAnalyses[position] || null;
+      return sportAnalyses[position] || undefined;
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de l\'analyse de position:', error);
       return null;
     }
@@ -390,7 +390,7 @@ export class SportsService {
         injuryRate: 10
       };
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la récupération des statistiques:', error);
       return null;
     }
@@ -413,7 +413,7 @@ export class SportsService {
 
       return similarSports;
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la récupération des sports similaires:', error);
       return [];
     }
@@ -508,7 +508,7 @@ export class SportsService {
         benefits
       };
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la validation:', error);
       return {
         isRecommended: false,

@@ -21,8 +21,8 @@ interface FoodScanResult {
 }
 
 interface ScanResultsProps {
-  result: FoodScanResult | null;
-  previewImage: string | null;
+  result: FoodScanResult | undefined;
+  previewImage: string | undefined;
   onReset: () => void;
   onAddToJournal?: () => void;
   onModifyPortion?: () => void;

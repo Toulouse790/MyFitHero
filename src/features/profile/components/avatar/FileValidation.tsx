@@ -1,3 +1,4 @@
+import React from 'react';
 // src/features/profile/components/avatar/FileValidation.tsx
 
 export interface ValidationResult {

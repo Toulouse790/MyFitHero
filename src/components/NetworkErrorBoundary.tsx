@@ -3,7 +3,7 @@ import { AlertTriangle, RefreshCw, Wifi, WifiOff } from 'lucide-react';
 
 interface NetworkErrorBoundaryState {
   hasError: boolean;
-  error: Error | null;
+  error: Error | undefined;
   isNetworkError: boolean;
   retryCount: number;
 }
@@ -16,7 +16,7 @@ interface NetworkErrorBoundaryProps {
 }
 
 export class NetworkErrorBoundary extends Component<NetworkErrorBoundaryProps, NetworkErrorBoundaryState> {
-  private retryTimeout: NodeJS.Timeout | null = null;
+  private retryTimeout: NodeJS.Timeout | undefined = null;
 
   constructor(props: NetworkErrorBoundaryProps) {
     super(props);

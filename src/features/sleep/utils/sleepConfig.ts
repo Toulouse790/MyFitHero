@@ -1,4 +1,4 @@
-import { Heart, Zap, Clock, Star, Target } from 'lucide-react';
+import { Heart, Zap, Clock, Star, Target, Brain, Phone, Bed, Shield, Sun, Lightbulb } from 'lucide-react';
 import type { SportSleepConfig, SleepFactor } from '@/features/sleep/types';
 
 // Configuration du sommeil par sport

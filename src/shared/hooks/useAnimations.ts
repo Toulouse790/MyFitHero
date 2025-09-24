@@ -30,7 +30,7 @@ export const useAnimatedToast = () => {
   };
   
   const removeToast = (id: string) => {
-    setToasts(prev => prev.map(toast => 
+    setToasts(prev => prev.map((toast, index) => 
       toast.id === id ? { ...toast, isExiting: true } : toast
     ));
     

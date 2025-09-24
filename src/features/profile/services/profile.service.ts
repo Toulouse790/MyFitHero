@@ -13,7 +13,7 @@ export class ProfileService {
       const response = await fetch(`${this.BASE_URL}/${userId}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des données');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur API profile:', error);
       return this.getMockProfileData();
@@ -25,7 +25,7 @@ export class ProfileService {
       const response = await fetch(`${this.BASE_URL}/${userId}/stats`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des stats');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur API stats:', error);
       return this.getMockStatsData();
     }
@@ -36,7 +36,7 @@ export class ProfileService {
       const response = await fetch(`${this.BASE_URL}/${userId}/achievements`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des achievements');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur API achievements:', error);
       return this.getMockAchievements();
     }
@@ -47,7 +47,7 @@ export class ProfileService {
       const response = await fetch(`${this.BASE_URL}/${userId}/goals`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des goals');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur API goals:', error);
       return this.getMockGoals();
     }
@@ -62,7 +62,7 @@ export class ProfileService {
       });
       if (!response.ok) throw new Error('Erreur lors de la création du goal');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur création goal:', error);
       throw error;
     }
@@ -77,7 +77,7 @@ export class ProfileService {
       });
       if (!response.ok) throw new Error('Erreur lors de la mise à jour du goal');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur mise à jour goal:', error);
       throw error;
     }
@@ -89,7 +89,7 @@ export class ProfileService {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Erreur lors de la suppression du goal');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur suppression goal:', error);
       throw error;
     }
@@ -108,7 +108,7 @@ export class ProfileService {
       if (!response.ok) throw new Error('Erreur lors de l\'upload de l\'avatar');
       const result = await response.json();
       return result.avatarUrl;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur upload avatar:', error);
       throw error;
     }
@@ -123,7 +123,7 @@ export class ProfileService {
       });
       if (!response.ok) throw new Error('Erreur lors de la mise à jour');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur mise à jour profile:', error);
       throw error;

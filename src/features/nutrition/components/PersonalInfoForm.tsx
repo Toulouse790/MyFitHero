@@ -225,7 +225,7 @@ export default function PersonalInfoForm({ onComplete, initialData }: PersonalIn
               {[
                 { id: 'male', label: 'Homme', emoji: '👨' },
                 { id: 'female', label: 'Femme', emoji: '👩' },
-              ].map(option => (
+              ].map((option, index) => (
                 <button
                   key={option.id}
                   onClick={() =>
@@ -394,7 +394,7 @@ export default function PersonalInfoForm({ onComplete, initialData }: PersonalIn
             </div>
 
             <div className="space-y-3">
-              {LIFESTYLE_OPTIONS.map(option => (
+              {LIFESTYLE_OPTIONS.map((option, index) => (
                 <button
                   key={option.id}
                   onClick={() =>
@@ -488,7 +488,7 @@ export default function PersonalInfoForm({ onComplete, initialData }: PersonalIn
               </div>
 
               <div className="grid grid-cols-2 gap-2">
-                {[30, 45, 60, 90, 120, 180].map(time => (
+                {[30, 45, 60, 90, 120, 180].map((time, index) => (
                   <button
                     key={time}
                     onClick={() => setFormData({ ...formData, availableTimePerDay: time })}

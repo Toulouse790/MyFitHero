@@ -24,7 +24,7 @@ export class NutritionService {
       if (!response.ok)
         throw new Error('Erreur lors de la récupération des données nutritionnelles');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur API nutrition:', error);
       // Données de mock en cas d'erreur
@@ -49,7 +49,7 @@ export class NutritionService {
       });
       if (!response.ok) throw new Error("Erreur lors de l'ajout du repas");
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur ajout repas:', error);
       throw error;
@@ -64,7 +64,7 @@ export class NutritionService {
       // Simulation d'un userId - en réalité, il viendrait du contexte d'auth
       const userId = 'current-user';
       return await this.addMeal(userId, data);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error("Erreur lors de l'enregistrement du repas:", error);
       return null;
@@ -83,7 +83,7 @@ export class NutritionService {
       });
       if (!response.ok) throw new Error('Erreur lors de la mise à jour du repas');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur mise à jour repas:', error);
       return null;
@@ -99,7 +99,7 @@ export class NutritionService {
         method: 'DELETE',
       });
       return response.ok;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur suppression repas:', error);
       return false;
@@ -128,7 +128,7 @@ export class NutritionService {
         calories: totalCalories,
         macros: totalMacros,
       };
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur calcul macros:', error);
       return null;
@@ -153,7 +153,7 @@ export class NutritionService {
       });
       if (!response.ok) throw new Error('Erreur lors du calcul des recommandations');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur recommandations:', error);
       // Calcul basique en cas d'erreur
@@ -178,7 +178,7 @@ export class NutritionService {
       const response = await fetch(`${this.BASE_URL}/foods/search?${params}`);
       if (!response.ok) throw new Error("Erreur lors de la recherche d'aliments");
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur recherche aliments:', error);
       return this.getMockFoodSearchResults(query.query);
@@ -198,7 +198,7 @@ export class NutritionService {
       });
       if (!response.ok) throw new Error('Erreur lors de la mise à jour des objectifs');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur mise à jour objectifs:', error);
       throw error;
@@ -217,7 +217,7 @@ export class NutritionService {
       );
       if (!response.ok) throw new Error("Erreur lors de l'analyse nutritionnelle");
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur analyse nutritionnelle:', error);
       return this.getMockNutritionAnalysis();
@@ -237,7 +237,7 @@ export class NutritionService {
       const response = await fetch(`${this.BASE_URL}/recipes?${params}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des recettes');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur récupération recettes:', error);
       return this.getMockRecipes();
@@ -250,7 +250,7 @@ export class NutritionService {
       const response = await fetch(`${this.BASE_URL}/${userId}/meal-plans`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des plans de repas');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur plans de repas:', error);
       return this.getMockMealPlans();
@@ -266,7 +266,7 @@ export class NutritionService {
       const response = await fetch(`${this.BASE_URL}/${userId}/trends/${period}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des tendances');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur tendances nutritionnelles:', error);
       return this.getMockNutritionTrends(period);
@@ -279,7 +279,7 @@ export class NutritionService {
       const response = await fetch(`${this.BASE_URL}/${userId}/insights`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des insights');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur insights nutritionnels:', error);
       return this.getMockNutritionInsights();

@@ -7,12 +7,12 @@ interface UserProfileHeaderProps {
   userProfile: any;
   user: any;
   stats?: any;
-  bmi: string | null;
+  bmi: string | undefined;
   weightTrend: {
     type: 'up' | 'down' | 'stable';
     diff: number;
-  } | null;
-  latestWeight: number | null;
+  } | undefined;
+  latestWeight: number | undefined;
 }
 
 export const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({

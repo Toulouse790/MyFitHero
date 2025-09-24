@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect, createContext, useContext } from 'react';
 import { User, Session, AuthChangeEvent } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
@@ -5,29 +6,29 @@ import { supabase } from '@/lib/supabase';
 interface UserProfile {
   id: string;
   email: string;
-  first_name: string | null;
-  last_name: string | null;
-  full_name: string | null;
-  avatar_url: string | null;
-  age: number | null;
-  weight: number | null;
-  height: number | null;
-  gender: 'male' | 'female' | 'other' | null;
-  activity_level: 'sedentary' | 'lightly_active' | 'moderately_active' | 'very_active' | 'extremely_active' | null;
-  goals: string[] | null;
-  preferred_sports: string[] | null;
-  timezone: string | null;
-  language: string | null;
-  notifications_enabled: boolean | null;
-  onboarding_completed: boolean | null;
+  first_name: string | undefined;
+  last_name: string | undefined;
+  full_name: string | undefined;
+  avatar_url: string | undefined;
+  age: number | undefined;
+  weight: number | undefined;
+  height: number | undefined;
+  gender: 'male' | 'female' | 'other' | undefined;
+  activity_level: 'sedentary' | 'lightly_active' | 'moderately_active' | 'very_active' | 'extremely_active' | undefined;
+  goals: string[] | undefined;
+  preferred_sports: string[] | undefined;
+  timezone: string | undefined;
+  language: string | undefined;
+  notifications_enabled: boolean | undefined;
+  onboarding_completed: boolean | undefined;
   created_at: string;
   updated_at: string;
 }
 
 interface AuthContextValue {
-  user: User | null;
-  profile: UserProfile | null;
-  session: Session | null;
+  user: User | undefined;
+  profile: UserProfile | undefined;
+  session: Session | undefined;
   loading: boolean;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
@@ -55,7 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const fetchProfile = async (userId: string): Promise<UserProfile | null> => {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
@@ -67,7 +68,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur inattendue profil:', error);
       return null;
     }
@@ -86,7 +87,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (error) {
         console.error('Erreur déconnexion:', error);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur inattendue déconnexion:', error);
     }
   };
@@ -108,7 +109,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             setProfile(userProfile);
           }
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Erreur inattendue session:', error);
       } finally {
         setLoading(false);

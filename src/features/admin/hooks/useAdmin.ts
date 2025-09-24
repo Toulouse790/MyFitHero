@@ -31,14 +31,14 @@ export interface UserManagement {
 
 export interface UseAdminReturn {
   // Stats
-  stats: AdminStats | null;
+  stats: AdminStats | undefined;
   statsLoading: boolean;
-  statsError: string | null;
+  statsError: string | undefined;
 
   // User Management
   users: UserManagement;
   usersLoading: boolean;
-  usersError: string | null;
+  usersError: string | undefined;
 
   // Actions
   loadStats: () => Promise<void>;
@@ -108,7 +108,7 @@ export const useAdmin = (): UseAdminReturn => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       setStats(mockStats);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       setStatsError(error instanceof Error ? error.message : 'Failed to load stats');
     } finally {
@@ -164,7 +164,7 @@ export const useAdmin = (): UseAdminReturn => {
         totalUsers: filteredUsers.length,
         filters,
       });
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       setUsersError(error instanceof Error ? error.message : 'Failed to load users');
     } finally {
@@ -181,11 +181,11 @@ export const useAdmin = (): UseAdminReturn => {
 
         setUsers(prev => ({
           ...prev,
-          users: prev.users.map(user => (user.id === userId ? { ...user, status } : user)),
+          users: prev.users.map((user, index) => (user.id === userId ? { ...user, status } : user)),
         }));
 
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to update user status:', error);
         return false;
@@ -203,11 +203,11 @@ export const useAdmin = (): UseAdminReturn => {
 
         setUsers(prev => ({
           ...prev,
-          users: prev.users.map(user => (user.id === userId ? { ...user, role } : user)),
+          users: prev.users.map((user, index) => (user.id === userId ? { ...user, role } : user)),
         }));
 
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to update user role:', error);
         return false;
@@ -229,7 +229,7 @@ export const useAdmin = (): UseAdminReturn => {
       }));
 
       return true;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Failed to delete user:', error);
       return false;
@@ -245,7 +245,7 @@ export const useAdmin = (): UseAdminReturn => {
 
         setUsers(prev => ({
           ...prev,
-          users: prev.users.map(user => {
+          users: prev.users.map((user, index) => {
             if (userIds.includes(user.id)) {
               return {
                 ...user,
@@ -260,7 +260,7 @@ export const useAdmin = (): UseAdminReturn => {
         }));
 
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to bulk update users:', error);
         return false;
@@ -276,7 +276,7 @@ export const useAdmin = (): UseAdminReturn => {
         // Mock API call
         await new Promise(resolve => setTimeout(resolve, 800));
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to send notification:', error);
         return false;
@@ -323,7 +323,7 @@ export const useAdmin = (): UseAdminReturn => {
         }
 
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to export data:', error);
         return false;
@@ -339,7 +339,7 @@ export const useAdmin = (): UseAdminReturn => {
         // Mock report generation
         await new Promise(resolve => setTimeout(resolve, 2000));
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Failed to generate report:', error);
         return false;

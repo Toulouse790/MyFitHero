@@ -300,8 +300,8 @@ const Hydration: React.FC = () => {
         toast({ title: 'Erreur de chargement des logs', variant: 'destructive' });
       }
 
-      const currentStats = statsData as DailyStats | null;
-      const currentLogs = logsData as HydrationLog[] | null;
+      const currentStats = statsData as DailyStats | undefined;
+      const currentLogs = logsData as HydrationLog[] | undefined;
 
       setDailyStats(currentStats);
       setDailyLogs(currentLogs || []);
@@ -315,7 +315,7 @@ const Hydration: React.FC = () => {
       if (currentLogs && currentLogs.length > 0) {
         setLastDrinkTime(currentLogs[0].logged_at ? new Date(currentLogs[0].logged_at) : null);
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur chargement hydratation:', error);
       toast({
@@ -384,7 +384,7 @@ const Hydration: React.FC = () => {
         });
 
         await loadHydrationData();
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur ajout hydratation:', error);
         setCurrentMl(prev => prev - amount);
@@ -430,7 +430,7 @@ const Hydration: React.FC = () => {
       });
 
       await loadHydrationData();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur suppression:', error);
       setCurrentMl(prev => prev + lastLog.amount_ml);

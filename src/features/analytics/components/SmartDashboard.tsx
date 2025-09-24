@@ -46,7 +46,7 @@ interface DailyStatsLocal {
 }
 
 // Interface pour Json (remplace import manquant)
-// type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+// type Json = string | number | boolean | undefined | { [key: string]: Json | undefined } | Json[];
 import { DailyCheckIn } from '@/shared/components/DailyCheckIn';
 import { BadgeDisplay } from '@/shared/components/BadgeDisplay';
 import { StatsOverview } from '@/shared/components/StatsOverview';
@@ -515,7 +515,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
           },
         ]);
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur chargement données dashboard:', error);
       setMessages([
@@ -588,7 +588,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
         upcomingEvents: [],
         personalizedTips: messages
           .filter(m => m.type === 'ai')
-          .map(m => m.content)
+          .map((m, index) => m.content)
           .slice(-3),
       };
 
@@ -650,7 +650,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
           subscription.unsubscribe();
         }
       }, 30000);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error("Erreur lors de l'envoi du message:", error);
       setMessages(prev => [
@@ -883,7 +883,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
         {/* Smart Reminders */}
         {smartReminders.length > 0 && (
           <div className="mb-6 space-y-3">
-            {smartReminders.map(reminder => {
+            {smartReminders.map((reminder, index) => {
               const Icon = reminder.icon;
               return (
                 <div
@@ -950,7 +950,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {pillarActions.map(pillar => {
+                {pillarActions.map((pillar, index) => {
                   const Icon = pillar.icon;
                   const getStatusBadge = (status: string) => {
                     switch (status) {
@@ -1057,7 +1057,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
         {/* Badges récents */}
         <BadgeDisplay 
           className="mb-6" 
-          badges={dailyProgram.badges.earned.map(badge => ({
+          badges={dailyProgram.badges.earned.map((badge, index) => ({
             user_id: userProfile?.id || '',
             badge_id: badge.id,
             earned_at: new Date().toISOString(),
@@ -1096,7 +1096,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
           </div>
 
           <div className="h-96 overflow-y-auto p-4 space-y-4">
-            {messages.map(message => (
+            {messages.map((message, index) => (
               <div
                 key={message.id}
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -1179,7 +1179,7 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
 
             {/* Suggestions ultra-personnalisées */}
             <div className="flex flex-wrap gap-2">
-              {getPersonalizedSuggestions().map(suggestion => (
+              {getPersonalizedSuggestions().map((suggestion, index) => (
                 <button
                   key={suggestion}
                   onClick={() => setInputMessage(suggestion)}

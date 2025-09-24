@@ -47,14 +47,14 @@ import {
 // Types pour le state machine React
 interface HydrationState {
   currentState: HydrationTrackingState;
-  hydrationData: HydrationData | null;
-  hydrationAnalysis: HydrationAnalysis | null;
-  weeklySummary: WeeklyHydrationSummary | null;
-  hydrationGoals: HydrationGoals | null;
+  hydrationData: HydrationData | undefined;
+  hydrationAnalysis: HydrationAnalysis | undefined;
+  weeklySummary: WeeklyHydrationSummary | undefined;
+  hydrationGoals: HydrationGoals | undefined;
   recentDays: HydrationData[];
   todayIntakes: FluidIntakeEvent[];
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   showInsights: boolean;
   selectedDate: string;
   hydrationScore: number;
@@ -74,7 +74,7 @@ type HydrationAction =
   | { type: 'SET_TODAY_INTAKES'; payload: FluidIntakeEvent[] }
   | { type: 'ADD_INTAKE'; payload: FluidIntakeEvent }
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_ERROR'; payload: string | undefined }
   | { type: 'TOGGLE_INSIGHTS' }
   | { type: 'SET_SELECTED_DATE'; payload: string }
   | { type: 'UPDATE_SCORES'; payload: { hydration: number; efficiency: number; risk: string } }
@@ -222,7 +222,7 @@ export const HydrationOptimizer: React.FC = () => {
       }
 
       dispatch({ type: 'SET_STATE', payload: 'idle' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur chargement données hydratation:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors du chargement des données' });
       dispatch({ type: 'SET_STATE', payload: 'error' });
@@ -349,7 +349,7 @@ export const HydrationOptimizer: React.FC = () => {
       // Sauvegarde en base
       await saveHydrationAnalysis(analysis);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur analyse hydratation:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors de l\'analyse' });
     }
@@ -384,7 +384,7 @@ export const HydrationOptimizer: React.FC = () => {
         });
 
       if (error) throw error;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur sauvegarde analyse:', error);
     }
   };
@@ -464,7 +464,7 @@ export const HydrationOptimizer: React.FC = () => {
       await analyzeHydrationData(updatedHydrationData);
 
       dispatch({ type: 'SET_STATE', payload: 'idle' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur ajout prise fluide:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors de l\'ajout' });
       dispatch({ type: 'SET_STATE', payload: 'error' });

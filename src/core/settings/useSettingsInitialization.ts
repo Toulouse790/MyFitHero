@@ -10,7 +10,7 @@ import { supabase } from '@/lib/supabase';
 interface InitializationState {
   isInitializing: boolean;
   migrationCompleted: boolean;
-  error: string | null;
+  error: string | undefined;
   migrationSources: string[];
 }
 
@@ -81,7 +81,7 @@ export const useSettingsInitialization = () => {
           // 6️⃣ Charger depuis Supabase si disponible
           try {
             await loadFromSupabase();
-          } catch (error) {
+          } catch (error: any) {
             // Erreur silencieuse, les paramètres locaux seront utilisés
             console.warn('Could not load settings from Supabase:', error);
           }
@@ -95,7 +95,7 @@ export const useSettingsInitialization = () => {
           migrationCompleted: true,
         }));
         
-      } catch (error) {
+      } catch (error: any) {
         if (!mounted) return;
         
         const errorMessage = error instanceof Error ? error.message : 'Initialization failed';
@@ -147,7 +147,7 @@ export const useSettingsAutoSync = (enabled: boolean = true) => {
     const timeout = setTimeout(async () => {
       try {
         await syncWithSupabase();
-      } catch (error) {
+      } catch (error: any) {
         console.error('Auto-sync failed:', error);
       }
     }, 5000);

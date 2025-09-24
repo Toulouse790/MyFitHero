@@ -35,7 +35,7 @@ interface SmartDashboardState {
   inputMessage: string;
   isListening: boolean;
   isLoading: boolean;
-  dailyStats: DailyStats | null;
+  dailyStats: DailyStats | undefined;
   loadingDailyStats: boolean;
   dailyProgram: DailyProgramDisplay;
 }
@@ -507,7 +507,7 @@ export const useSmartDashboard = (
         upcomingEvents: [],
         personalizedTips: state.messages
           .filter(m => m.type === 'ai')
-          .map(m => m.content)
+          .map((m, index) => m.content)
           .slice(-3),
       };
 
@@ -541,7 +541,7 @@ export const useSmartDashboard = (
         }));
       }, 1000);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur envoi message:', error);
       setState(prev => ({ ...prev, isLoading: false }));
     }
@@ -588,7 +588,7 @@ export const useSmartDashboard = (
           },
         }));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur actualisation données:', error);
     } finally {
       setState(prev => ({ ...prev, loadingDailyStats: false }));

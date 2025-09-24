@@ -15,7 +15,7 @@ interface SleepStats {
     date: string;
     hours: number;
     quality: number;
-  } | null;
+  } | undefined;
   improvementTrend: 'improving' | 'stable' | 'declining';
 }
 

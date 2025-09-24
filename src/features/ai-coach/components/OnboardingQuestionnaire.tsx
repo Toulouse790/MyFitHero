@@ -61,7 +61,7 @@ const OnboardingQuestionnaire: React.FC<OnboardingQuestionnaireProps> = ({ user,
       });
 
       onComplete();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('🔴 Erreur lors de la finalisation:', error);
 

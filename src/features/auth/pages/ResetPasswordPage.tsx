@@ -67,7 +67,7 @@ export default function ResetPasswordPage() {
       });
 
       setLocation('/auth');
-    } catch (error) {
+    } catch (error: any) {
       toast({
         variant: 'destructive',
         title: 'Erreur',

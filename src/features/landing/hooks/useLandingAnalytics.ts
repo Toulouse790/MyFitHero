@@ -18,9 +18,9 @@ export interface CTAStats {
 }
 
 export interface UseLandingAnalyticsReturn {
-  metrics: LandingMetrics | null;
+  metrics: LandingMetrics | undefined;
   metricsLoading: boolean;
-  metricsError: string | null;
+  metricsError: string | undefined;
   ctaStats: CTAStats[];
   ctaStatsLoading: boolean;
   loadMetrics: () => Promise<void>;
@@ -55,7 +55,7 @@ export const useLandingAnalytics = (): UseLandingAnalyticsReturn => {
       await new Promise(resolve => setTimeout(resolve, 600));
 
       setMetrics(mockMetrics);
-    } catch (error) {
+    } catch (error: any) {
       setMetricsError(error instanceof Error ? error.message : 'Failed to load metrics');
     } finally {
       setMetricsLoading(false);
@@ -98,7 +98,7 @@ export const useLandingAnalytics = (): UseLandingAnalyticsReturn => {
       await new Promise(resolve => setTimeout(resolve, 500));
 
       setCTAStats(mockCTAStats);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load CTA stats:', error);
     } finally {
       setCTAStatsLoading(false);
@@ -111,7 +111,7 @@ export const useLandingAnalytics = (): UseLandingAnalyticsReturn => {
       await new Promise(resolve => setTimeout(resolve, 100));
 
       setCTAStats(prev =>
-        prev.map(stat =>
+        prev.map((stat, index) =>
           stat.section === section
             ? {
                 ...stat,
@@ -121,7 +121,7 @@ export const useLandingAnalytics = (): UseLandingAnalyticsReturn => {
             : stat
         )
       );
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to track CTA click:', error);
     }
   }, []);
@@ -139,7 +139,7 @@ export const useLandingAnalytics = (): UseLandingAnalyticsReturn => {
             }
           : null
       );
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to track page view:', error);
     }
   }, []);

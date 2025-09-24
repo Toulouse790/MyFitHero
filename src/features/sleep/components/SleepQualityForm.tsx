@@ -108,7 +108,7 @@ export const SleepQualityForm: React.FC<SleepQualityFormProps> = ({
         setErrors({});
 
         onComplete?.();
-      } catch (error) {
+      } catch (error: any) {
         // Erreur silencieuse
         toast({
           title: 'Erreur',

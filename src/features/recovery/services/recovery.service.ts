@@ -22,7 +22,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/status`);
       if (!response.ok) throw new Error('Erreur lors de la récupération du statut');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       // Mode mock pour le développement
       return this.getMockRecoveryData(userId);
@@ -37,7 +37,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/metrics`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des métriques');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       return this.getMockMetrics(userId);
     }
@@ -58,7 +58,7 @@ export class RecoveryService {
       });
       if (!response.ok) throw new Error('Erreur lors de la mise à jour');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       // Return updated mock data
       return { ...this.getMockMetrics(userId), ...metrics };
@@ -76,7 +76,7 @@ export class RecoveryService {
         body: JSON.stringify(activity),
       });
       if (!response.ok) throw new Error("Erreur lors de l'enregistrement");
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       // Mock success
     }
@@ -90,7 +90,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/recommendations`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des recommandations');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       return RecoveryService.getMockRecommendations();
     }
@@ -135,7 +135,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/trend?days=${days}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération de la tendance');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       return this.getMockTrendData(days);
     }
@@ -174,7 +174,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/ai-insights`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des insights');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return this.getMockAIInsights();
     }
   }
@@ -187,7 +187,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/predictions?days=${days}`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des prédictions');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return this.getMockPredictions(days);
     }
   }
@@ -200,7 +200,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/patterns`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des patterns');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return this.getMockPatterns();
     }
   }
@@ -213,7 +213,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/biometric-trends`);
       if (!response.ok) throw new Error('Erreur lors de la récupération des tendances');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return this.getMockBiometricTrends();
     }
   }
@@ -230,7 +230,7 @@ export class RecoveryService {
       });
       if (!response.ok) throw new Error('Erreur lors de l\'optimisation');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return this.getMockOptimizedPlan(goals);
     }
   }
@@ -243,7 +243,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/overtraining`);
       if (!response.ok) throw new Error('Erreur lors de la détection');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return {
         risk: Math.round(Math.random() * 100),
         recommendations: [
@@ -264,7 +264,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/optimal-days`);
       if (!response.ok) throw new Error('Erreur lors de la prédiction');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return ['Mardi', 'Jeudi', 'Samedi'];
     }
   }
@@ -277,7 +277,7 @@ export class RecoveryService {
       const response = await fetch(`${this.BASE_URL}/${userId}/personalized-recommendations`);
       if (!response.ok) throw new Error('Erreur lors de la récupération');
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       return RecoveryService.getMockRecommendations();
     }
   }

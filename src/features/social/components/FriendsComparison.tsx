@@ -40,7 +40,7 @@ const FriendsComparison: React.FC<FriendsComparisonProps> = ({
       setIsLoading(true);
       const data = await socialService.getFriendsComparison(userId, period);
       setComparisonData(data);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error loading friends comparison:', error);
       toast({
@@ -124,7 +124,7 @@ const FriendsComparison: React.FC<FriendsComparisonProps> = ({
   }) => {
     const allUsers = [
       { username: 'Vous', value: userValue, isUser: true },
-      ...friends.map(friend => ({
+      ...friends.map((friend, index) => ({
         username: friend.username,
         value: friend[metric],
         isUser: false,
@@ -269,7 +269,7 @@ const FriendsComparison: React.FC<FriendsComparisonProps> = ({
 
       {/* Grille de comparaisons par métrique */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Object.keys(user_stats).map(metric => (
+        {Object.keys(user_stats).map((metric, index) => (
           <ComparisonCard
             key={metric}
             metric={metric}

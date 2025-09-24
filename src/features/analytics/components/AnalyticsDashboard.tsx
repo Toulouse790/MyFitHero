@@ -146,7 +146,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ className = '' 
         <div className="header-controls">
           {/* Sélecteur de période */}
           <div className="period-selector">
-            {['7d', '30d', '90d'].map(period => (
+            {['7d', '30d', '90d'].map((period, index) => (
               <button
                 key={period}
                 className={`period-btn ${selectedPeriod === period ? 'active' : ''}`}
@@ -267,7 +267,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ className = '' 
           <div className="chart-header">
             <h3 style={{ color: adaptiveColors.text }}>Évolution Multi-Piliers</h3>
             <div className="chart-controls">
-              {['line', 'area', 'bar'].map(type => (
+              {['line', 'area', 'bar'].map((type, index) => (
                 <button
                   key={type}
                   className={`chart-type-btn ${chartType === type ? 'active' : ''}`}
@@ -301,7 +301,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ className = '' 
       <div className="pillars-progress">
         <h3 style={{ color: adaptiveColors.text }}>Progrès par Pilier</h3>
         <div className="pillars-grid">
-          {pillarProgress.map(pillar => (
+          {pillarProgress.map((pillar, index) => (
             <div
               key={pillar.pillar}
               className="pillar-card"

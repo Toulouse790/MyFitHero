@@ -16,11 +16,11 @@ export interface User {
 }
 
 export interface AuthState {
-  user: User | null;
-  session: any | null;
+  user: User | undefined;
+  session: any | undefined;
   isAuthenticated: boolean;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
 export interface SignUpData {

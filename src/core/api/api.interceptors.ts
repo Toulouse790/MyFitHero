@@ -11,8 +11,8 @@ export interface RequestConfig {
 }
 
 export interface ApiResponse<T = any> {
-  data: T | null;
-  error: Error | null;
+  data: T | undefined;
+  error: Error | undefined;
   status: number;
 }
 

@@ -127,7 +127,7 @@ const Settings: React.FC = () => {
           setPreferences(settings.preferences);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error loading settings:', error);
     } finally {
       setIsLoading(false);
@@ -153,7 +153,7 @@ const Settings: React.FC = () => {
         description: "Paramètres mis à jour avec succès",
       });
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving settings:', error);
       toast({
         title: "Erreur",

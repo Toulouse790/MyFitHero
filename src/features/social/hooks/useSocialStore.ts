@@ -132,7 +132,7 @@ interface LeaderboardEntry {
 
 interface SocialStore {
   // State
-  profile: SocialProfile | null;
+  profile: SocialProfile | undefined;
   friends: Friend[];
   friendRequests: Friend[];
   posts: ActivityPost[];
@@ -286,7 +286,7 @@ export const useSocialStore = create<SocialStore>()(
 
       markNotificationAsRead: async (notificationId: string) => {
         set(state => ({
-          notifications: state.notifications.map(notif =>
+          notifications: state.notifications.map((notif, index) =>
             notif.id === notificationId ? { ...notif, read: true } : notif
           ),
           unreadCount: Math.max(0, state.unreadCount - 1),
@@ -295,7 +295,7 @@ export const useSocialStore = create<SocialStore>()(
 
       markAllNotificationsAsRead: async () => {
         set(state => ({
-          notifications: state.notifications.map(notif => ({ ...notif, read: true })),
+          notifications: state.notifications.map((notif, index) => ({ ...notif, read: true })),
           unreadCount: 0,
         }));
       },

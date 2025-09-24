@@ -217,7 +217,7 @@ export class AICoachService {
       this.sessions.set(sessionId, session);
       return session;
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la création de la session de coaching:', error);
       throw new Error('Impossible de créer la session de coaching');
     }
@@ -278,7 +278,7 @@ export class AICoachService {
 
       return response;
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors du traitement de la question:', error);
       throw new Error('Impossible de traiter votre question');
     }
@@ -331,7 +331,7 @@ export class AICoachService {
 
       return plan;
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la génération du plan:', error);
       throw new Error('Impossible de générer votre plan personnalisé');
     }
@@ -387,7 +387,7 @@ export class AICoachService {
 
       return analysis;
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de l\'analyse des progrès:', error);
       throw new Error('Impossible d\'analyser vos progrès');
     }

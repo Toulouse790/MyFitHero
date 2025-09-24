@@ -57,7 +57,7 @@ export const LoginPage: React.FC = () => {
     setErrors({});
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error }: any = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password
       });
@@ -94,7 +94,7 @@ export const LoginPage: React.FC = () => {
         }
       }
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur inattendue:', error);
       setErrors({ general: 'Une erreur inattendue s\'est produite' });
     } finally {
@@ -123,7 +123,7 @@ export const LoginPage: React.FC = () => {
       } else {
         setResetEmailSent(true);
       }
-    } catch (error) {
+    } catch (error: any) {
       setErrors({ general: 'Une erreur inattendue s\'est produite' });
     }
   };

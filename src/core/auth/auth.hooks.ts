@@ -19,7 +19,7 @@ export const useAuth = () => {
       await authStore.signUp(data);
       // Redirection vers l'onboarding conversationnel après inscription
       navigate('/onboarding');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur inscription:', error);
     }
   };
@@ -44,7 +44,7 @@ export const useAuth = () => {
           navigate('/onboarding');
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur connexion:', error);
     }
   };
@@ -53,7 +53,7 @@ export const useAuth = () => {
     try {
       await authStore.signOut();
       navigate('/auth'); // Redirection vers auth après déconnexion
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur déconnexion:', error);
     }
   };
@@ -62,7 +62,7 @@ export const useAuth = () => {
     try {
       await authStore.updateProfile(data);
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur mise à jour profil:', error);
       return false;
     }

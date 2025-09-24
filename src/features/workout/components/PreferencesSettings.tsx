@@ -75,7 +75,7 @@ export const PreferencesSettings: React.FC<PreferencesSettingsProps> = ({ onClos
           Language
         </h3>
         <div className="grid grid-cols-2 gap-3">
-          {languages.map(lang => (
+          {languages.map((lang, index) => (
             <button
               key={lang.code}
               onClick={() => changeLanguage(lang.code)}
@@ -98,7 +98,7 @@ export const PreferencesSettings: React.FC<PreferencesSettingsProps> = ({ onClos
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Unit System</h3>
         <div className="space-y-3">
-          {unitSystems.map(system => (
+          {unitSystems.map((system, index) => (
             <button
               key={system.system}
               onClick={() => changeUnitSystem(system.system)}
@@ -122,7 +122,7 @@ export const PreferencesSettings: React.FC<PreferencesSettingsProps> = ({ onClos
           Date Format
         </h3>
         <div className="grid grid-cols-3 gap-3">
-          {dateFormats.map(format => (
+          {dateFormats.map((format, index) => (
             <button
               key={format.format}
               onClick={() => savePreferences({ dateFormat: format.format })}
@@ -146,7 +146,7 @@ export const PreferencesSettings: React.FC<PreferencesSettingsProps> = ({ onClos
           Time Format
         </h3>
         <div className="grid grid-cols-2 gap-3">
-          {timeFormats.map(format => (
+          {timeFormats.map((format, index) => (
             <button
               key={format.format}
               onClick={() => savePreferences({ timeFormat: format.format })}
@@ -170,7 +170,7 @@ export const PreferencesSettings: React.FC<PreferencesSettingsProps> = ({ onClos
           Currency
         </h3>
         <div className="grid grid-cols-2 gap-3">
-          {currencies.map(currency => (
+          {currencies.map((currency, index) => (
             <button
               key={currency.code}
               onClick={() => savePreferences({ currency: currency.code })}
@@ -193,7 +193,7 @@ export const PreferencesSettings: React.FC<PreferencesSettingsProps> = ({ onClos
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Theme</h3>
         <div className="grid grid-cols-3 gap-3">
-          {themes.map(theme => {
+          {themes.map((theme, index) => {
             const Icon = theme.icon;
             return (
               <button

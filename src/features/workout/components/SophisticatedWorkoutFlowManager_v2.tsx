@@ -68,13 +68,13 @@ interface WorkoutPlan {
 interface WorkoutFlowState {
   // État de base
   currentState: WorkoutState;
-  sessionId: string | null;
+  sessionId: string | undefined;
   currentExerciseIndex: number;
   currentSetNumber: number;
   
   // Données de session
-  startTime: Date | null;
-  pauseTime: Date | null;
+  startTime: Date | undefined;
+  pauseTime: Date | undefined;
   totalPauseTime: number; // millisecondes
   
   // Métriques en temps réel
@@ -96,10 +96,10 @@ interface WorkoutFlowState {
   // Support offline
   isOnline: boolean;
   pendingChanges: WorkoutSet[];
-  lastSyncTime: Date | null;
+  lastSyncTime: Date | undefined;
   
   // Configuration
-  workoutPlan: WorkoutPlan | null;
+  workoutPlan: WorkoutPlan | undefined;
   targetRestTime: number; // secondes
   
   // État UI
@@ -107,8 +107,8 @@ interface WorkoutFlowState {
   showSettings: boolean;
   
   // Alertes et notifications
-  emergencyStopReason: string | null;
-  coachingMessage: string | null;
+  emergencyStopReason: string | undefined;
+  coachingMessage: string | undefined;
 }
 
 // Props du composant principal
@@ -319,7 +319,7 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
         });
         dispatch({ type: 'START_WARMUP' });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors du démarrage:', error);
     }
   }, [userId, workoutPlan, state.autoProgressWeight, state.smartRestTimers, state.realTimeCoaching, createSession]);
@@ -342,7 +342,7 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
         const restTime = calculateSmartRestTime(setData, state.fatigueLevel);
         dispatch({ type: 'START_REST', duration: restTime });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de l\'ajout du set:', error);
     }
   }, [state.sessionId, state.smartRestTimers, state.fatigueLevel, addSet]);
@@ -377,7 +377,7 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
         // updatedSession might be void, so use session as fallback
         onWorkoutComplete(session);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la finalisation:', error);
     }
   }, [session, updateSession, state, onWorkoutComplete]);

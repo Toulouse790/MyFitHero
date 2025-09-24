@@ -56,15 +56,15 @@ export class MuscleRecoveryService {
   // === PROFIL DE RÉCUPÉRATION UTILISATEUR ===
   static async getUserRecoveryProfile(userId: string): Promise<UserRecoveryProfile | null> {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_recovery_profiles')
         .select('*')
         .eq('user_id', userId)
         .single();
 
       if (error && error.code !== 'PGRST116') throw error;
-      return data || null;
-    } catch (error) {
+      return data || undefined;
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error fetching user recovery profile:', error);
       return null;
@@ -85,7 +85,7 @@ export class MuscleRecoveryService {
         nutritionData
       );
 
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_recovery_profiles')
         .upsert(profile, { onConflict: 'user_id' })
         .select()
@@ -93,7 +93,7 @@ export class MuscleRecoveryService {
 
       if (error) throw error;
       return data;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error creating/updating recovery profile:', error);
       return null;
@@ -289,7 +289,7 @@ export class MuscleRecoveryService {
       }
 
       return Array.from(muscleRecoveryMap.values());
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error calculating muscle recovery:', error);
       return [];
@@ -331,7 +331,7 @@ export class MuscleRecoveryService {
           intensity: this.determineWorkoutIntensity(workout),
           volume: this.estimateVolumeFromWorkout(workout),
           duration_minutes: duration / affectedMuscles.length,
-          exercise_types: exercises.map(ex => ex.name || 'unknown'),
+          exercise_types: exercises.map((ex, index) => ex.name || 'unknown'),
           compound_movements: true, // Assumé pour les workouts typés
           eccentric_focus: false,
         });
@@ -639,12 +639,12 @@ export class MuscleRecoveryService {
     // Muscles prêts pour l'entraînement (>80% récupération)
     const readyForTraining = muscleRecoveryData
       .filter(muscle => muscle.recovery_percentage > 80)
-      .map(muscle => muscle.muscle_group);
+      .map((muscle, index) => muscle.muscle_group);
 
     // Muscles ayant besoin de repos (<60% récupération)
     const needsRest = muscleRecoveryData
       .filter(muscle => muscle.recovery_percentage < 60)
-      .map(muscle => muscle.muscle_group);
+      .map((muscle, index) => muscle.muscle_group);
 
     // Type d'entraînement optimal
     let optimalWorkoutType = 'rest';
@@ -680,7 +680,7 @@ export class MuscleRecoveryService {
       await supabase.from('muscle_recovery_data').delete().eq('user_id', userId);
 
       // Insérer les nouvelles données
-      const dataToInsert = recoveryData.map(data => ({
+      const dataToInsert = recoveryData.map((data, index) => ({
         user_id: userId,
         ...data,
       }));
@@ -689,7 +689,7 @@ export class MuscleRecoveryService {
 
       if (error) throw error;
       return true;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error saving muscle recovery data:', error);
       return false;
@@ -698,7 +698,7 @@ export class MuscleRecoveryService {
 
   static async getMuscleRecoveryData(userId: string): Promise<MuscleRecoveryData[]> {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('muscle_recovery_data')
         .select('*')
         .eq('user_id', userId)
@@ -706,7 +706,7 @@ export class MuscleRecoveryService {
 
       if (error) throw error;
       return data || [];
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Error fetching muscle recovery data:', error);
       return [];

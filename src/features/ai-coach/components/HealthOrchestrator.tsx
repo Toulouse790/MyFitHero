@@ -51,14 +51,14 @@ import {
 // Types pour le state machine React
 interface HealthOrchestratorState {
   currentState: HealthTrackingState;
-  healthData: HealthData | null;
-  healthAnalysis: HealthAnalysis | null;
-  weeklySummary: WeeklyHealthSummary | null;
-  healthGoals: HealthGoals | null;
+  healthData: HealthData | undefined;
+  healthAnalysis: HealthAnalysis | undefined;
+  weeklySummary: WeeklyHealthSummary | undefined;
+  healthGoals: HealthGoals | undefined;
   pillarStatuses: PillarStatus[];
   historicalData: HealthData[];
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   showDetailedAnalysis: boolean;
   selectedTimeframe: 'today' | 'week' | 'month' | 'quarter';
   globalHealthScore: number;
@@ -70,7 +70,7 @@ interface HealthOrchestratorState {
   };
   balanceScore: number;
   riskLevel: string;
-  lastSyncTime: Date | null;
+  lastSyncTime: Date | undefined;
 }
 
 type HealthOrchestratorAction =
@@ -82,7 +82,7 @@ type HealthOrchestratorAction =
   | { type: 'SET_PILLAR_STATUSES'; payload: PillarStatus[] }
   | { type: 'SET_HISTORICAL_DATA'; payload: HealthData[] }
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_ERROR'; payload: string | undefined }
   | { type: 'TOGGLE_DETAILED_ANALYSIS' }
   | { type: 'SET_TIMEFRAME'; payload: 'today' | 'week' | 'month' | 'quarter' }
   | { type: 'UPDATE_SCORES'; payload: { global: number; pillars: any; balance: number; risk: string } }
@@ -210,7 +210,7 @@ export const HealthOrchestrator: React.FC = () => {
       
       dispatch({ type: 'SET_LAST_SYNC', payload: new Date() });
       dispatch({ type: 'SET_STATE', payload: 'idle' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur synchronisation piliers:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors de la synchronisation des données' });
       dispatch({ type: 'SET_STATE', payload: 'error' });
@@ -285,7 +285,7 @@ export const HealthOrchestrator: React.FC = () => {
       // Sauvegarde en base
       await saveHealthAnalysis(healthData, analysis);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur analyse globale:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Erreur lors de l\'analyse globale' });
     }
@@ -331,7 +331,7 @@ export const HealthOrchestrator: React.FC = () => {
         });
 
       if (analysisError) throw analysisError;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur sauvegarde:', error);
     }
   };

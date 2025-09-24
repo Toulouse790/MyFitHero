@@ -36,7 +36,7 @@ const WearableStats: React.FC<WearableStatsProps> = ({ userId = 'current-user-id
       // Charger les statistiques depuis Supabase
       const wearableStats = await analyticsService.getPerformanceMetrics(userId);
       setStats(wearableStats);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur lors du chargement des données wearables:', error);
     } finally {
@@ -98,7 +98,7 @@ const WearableStats: React.FC<WearableStatsProps> = ({ userId = 'current-user-id
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold text-gray-900">Données Wearables</h2>
         <div className="flex space-x-2">
-          {[7, 30, 90].map(period => (
+          {[7, 30, 90].map((period, index) => (
             <Button
               key={period}
               onClick={() => setSelectedPeriod(period as 7 | 30 | 90)}

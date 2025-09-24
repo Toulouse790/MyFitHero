@@ -80,7 +80,7 @@ export const FoodScanner: React.FC = () => {
       const result = await FoodAnalysisService.scanFood(image);
       setScanResult(result);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Scan error:', error);
       setError({
         message: error instanceof Error ? error.message : 'Échec du scan alimentaire',

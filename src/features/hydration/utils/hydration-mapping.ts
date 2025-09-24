@@ -421,7 +421,7 @@ function calculateTimingScore(hydrationData: HydrationData): number {
   if (hydrationData.hydrationTimestamps.length === 0) return 50;
   
   // Analyse de la répartition temporelle
-  const timestamps = hydrationData.hydrationTimestamps.map(t => {
+  const timestamps = hydrationData.hydrationTimestamps.map((t, index) => {
     const [hours, minutes] = t.time.split(':').map(Number);
     return hours + minutes / 60;
   });

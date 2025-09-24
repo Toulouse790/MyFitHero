@@ -23,7 +23,7 @@ const Admin: React.FC = () => {
   // Récupérer le profil utilisateur avec le rôle
   const fetchUserProfile = async (userId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('user_profiles')
         .select('id, role')
         .eq('id', userId)
@@ -35,7 +35,7 @@ const Admin: React.FC = () => {
       }
 
       return data as UserProfile;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur fetchUserProfile:', error);
       return null;
     }

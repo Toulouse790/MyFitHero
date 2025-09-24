@@ -45,7 +45,7 @@ const ProfilePage: React.FC = () => {
         title: 'Profil mis à jour',
         description: 'Vos informations ont été sauvegardées avec succès.',
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur',
         description: 'Impossible de sauvegarder les modifications.',

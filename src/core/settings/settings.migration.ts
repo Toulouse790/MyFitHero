@@ -65,7 +65,7 @@ export class SettingsMigrationService {
       
       result.success = true;
       
-    } catch (error) {
+    } catch (error: any) {
       result.errors.push(`Migration failed: ${error}`);
     }
     
@@ -95,7 +95,7 @@ export class SettingsMigrationService {
         this.extractSettingsFromStore(parsed, result);
         result.sources.push(`localStorage: ${storeName}`);
         
-      } catch (error) {
+      } catch (error: any) {
         result.errors.push(`Failed to migrate from ${storeName}: ${error}`);
       }
     }
@@ -130,7 +130,7 @@ export class SettingsMigrationService {
         result.sources.push('Supabase: user_privacy_settings');
       }
       
-    } catch (error) {
+    } catch (error: any) {
       result.errors.push(`Supabase migration error: ${error}`);
     }
   }
@@ -167,7 +167,7 @@ export class SettingsMigrationService {
       
       result.sources.push('localStorage: app-store-state');
       
-    } catch (error) {
+    } catch (error: any) {
       result.errors.push(`AppStore migration error: ${error}`);
     }
   }
@@ -353,7 +353,7 @@ export class SettingsMigrationService {
     legacyKeys.forEach(key => {
       try {
         localStorage.removeItem(key);
-      } catch (error) {
+      } catch (error: any) {
         console.warn(`Failed to remove ${key}:`, error);
       }
     });
@@ -411,7 +411,7 @@ export const useSettingsMigration = () => {
       
       return result;
       
-    } catch (error) {
+    } catch (error: any) {
       setMigrationStatus({
         isRunning: false,
         completed: false,

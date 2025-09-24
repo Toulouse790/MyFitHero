@@ -32,10 +32,10 @@ export interface UserProfile {
 }
 
 export interface AuthState {
-  user: User | null;
-  profile: UserProfile | null;
+  user: User | undefined;
+  profile: UserProfile | undefined;
   loading: boolean;
-  error: string | null;
+  error: string | undefined;
   isAuthenticated: boolean;
 }
 
@@ -52,8 +52,8 @@ export interface RegisterCredentials {
 }
 
 export interface AuthResponse {
-  user: User | null;
-  error: string | null;
+  user: User | undefined;
+  error: string | undefined;
   success: boolean;
 }
 
@@ -100,7 +100,7 @@ export interface OnboardingProgress {
 export interface SessionValidation {
   isValid: boolean;
   expiresIn: number;
-  user: User | null;
+  user: User | undefined;
   permissions: string[];
   lastActivity: string;
 }

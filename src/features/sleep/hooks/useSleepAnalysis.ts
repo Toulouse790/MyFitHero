@@ -118,11 +118,11 @@ export function useSleepAnalysis() {
       recentEntries.reduce((sum, entry) => sum + entry.sleep_quality, 0) / recentEntries.length;
 
     // Calcul des heures moyennes de coucher et réveil
-    const bedtimes = recentEntries.map(entry => {
+    const bedtimes = recentEntries.map((entry, index) => {
       const [hour, min] = entry.bedtime.split(':').map(Number);
       return hour * 60 + min;
     });
-    const waketimes = recentEntries.map(entry => {
+    const waketimes = recentEntries.map((entry, index) => {
       const [hour, min] = entry.wake_time.split(':').map(Number);
       return hour * 60 + min;
     });
@@ -287,7 +287,7 @@ export function useSleepAnalysis() {
         setSleepEntries(prev => [_data, ...prev]);
         success(`Sommeil enregistré: ${formatDuration(duration)}`);
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error("Erreur lors de l'ajout:", error);
         toastError("Erreur lors de l'enregistrement");
@@ -325,10 +325,10 @@ export function useSleepAnalysis() {
 
         if (_error) throw _error;
 
-        setSleepEntries(prev => prev.map(entry => (entry.id === entryId ? _data : entry)));
+        setSleepEntries(prev => prev.map((entry, index) => (entry.id === entryId ? _data : entry)));
         success('Entrée mise à jour');
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur lors de la mise à jour:', error);
         showToast('Erreur lors de la mise à jour', 'error');
@@ -352,7 +352,7 @@ export function useSleepAnalysis() {
         setSleepEntries(prev => prev.filter(entry => entry.id !== entryId));
         showToast('Entrée supprimée', 'success');
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur lors de la suppression:', error);
         showToast('Erreur lors de la suppression', 'error');
@@ -387,7 +387,7 @@ export function useSleepAnalysis() {
         setSleepGoals(_data);
         showToast('Objectifs de sommeil mis à jour', 'success');
         return true;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur lors de la mise à jour:', error);
         showToast('Erreur lors de la mise à jour', 'error');
@@ -438,7 +438,7 @@ export function useSleepAnalysis() {
           };
           setSleepGoals(defaultGoals);
         }
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur lors du chargement:', error);
       } finally {

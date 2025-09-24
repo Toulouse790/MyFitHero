@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase';
 import type { WorkoutSession, WorkoutExercise, ExerciseSet } from '@/shared/types/workout.types';
 
 export interface UseWorkoutSessionCoreReturn {
-  currentSession: WorkoutSession | null;
+  currentSession: WorkoutSession | undefined;
   isSessionActive: boolean;
   startSession: (
     workoutName: string,
@@ -46,11 +46,11 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
     }
   };
 
-  function loadLocalSession(): WorkoutSession | null {
+  function loadLocalSession(): WorkoutSession | undefined {
     try {
       const raw = localStorage.getItem('currentWorkoutSession');
       return raw ? (JSON.parse(raw) as WorkoutSession) : null;
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur parsing session localStorage:', error);
       localStorage.removeItem('currentWorkoutSession');
@@ -225,7 +225,7 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
           onConflict: 'user_id,stat_date',
         }
       );
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur mise à jour stats quotidiennes:', error);
     }
@@ -296,7 +296,7 @@ export const useWorkoutSessionCore = (): UseWorkoutSessionCoreReturn => {
             setIsSessionActive(session.status === 'active');
             saveLocalSession(session);
           }
-        } catch (error) {
+        } catch (error: any) {
       // Erreur silencieuse
           console.error('Erreur récupération session interrompue:', error);
         }

@@ -211,7 +211,7 @@ const Nutrition: React.FC = () => {
     setIsLoading(true);
     try {
       const today = new Date().toISOString().split('T')[0];
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('daily_stats')
         .select('total_calories, total_protein, total_carbs, total_fat, water_intake_ml')
         .eq('user_id', appStoreUser.id)
@@ -228,7 +228,7 @@ const Nutrition: React.FC = () => {
           lastUpdated: new Date(),
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors du chargement des données:', error);
     } finally {
       setIsLoading(false);

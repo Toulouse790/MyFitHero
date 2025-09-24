@@ -12,12 +12,12 @@ import type {
 
 export interface UseProfileReturn {
   // État
-  profile: UserProfile | null;
-  stats: ProfileStats | null;
+  profile: UserProfile | undefined;
+  stats: ProfileStats | undefined;
   achievements: AchievementData[];
   goals: GoalData[];
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
 
   // Actions
   updateProfile: (data: UpdateProfileData) => Promise<void>;
@@ -172,7 +172,7 @@ export function useProfile(userId?: string): UseProfileReturn {
 
     try {
       const updatedGoal = await ProfileService.updateGoal(goalId, data);
-      setGoals(prev => prev.map(goal => (goal.id === goalId ? updatedGoal : goal)));
+      setGoals(prev => prev.map((goal, index) => (goal.id === goalId ? updatedGoal : goal)));
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Erreur lors de la mise à jour de l'objectif";

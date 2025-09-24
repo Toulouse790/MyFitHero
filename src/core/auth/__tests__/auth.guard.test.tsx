@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { AuthGuard } from '@/core/auth/auth.guard';
 import { useAuthStore } from '@/core/auth/auth.store';

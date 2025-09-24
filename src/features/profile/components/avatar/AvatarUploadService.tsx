@@ -1,3 +1,4 @@
+import React from 'react';
 // src/features/profile/components/avatar/AvatarUploadService.tsx
 import { supabase } from '@/lib/supabase';
 
@@ -51,7 +52,7 @@ export class AvatarUploadService {
         success: true,
         avatarUrl,
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur upload avatar:', error);
       return {
         success: false,
@@ -78,7 +79,7 @@ export class AvatarUploadService {
       return {
         success: true,
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur suppression avatar:', error);
       return {
         success: false,

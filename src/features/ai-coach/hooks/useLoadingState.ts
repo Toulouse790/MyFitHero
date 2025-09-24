@@ -3,20 +3,20 @@ import React, { useState, useEffect, useCallback } from 'react';
 // Types pour l'état de chargement
 export interface LoadingState {
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   data: any;
 }
 
 export interface UseLoadingStateOptions {
   initialLoading?: boolean;
-  initialError?: string | null;
+  initialError?: string | undefined;
   initialData?: any;
 }
 
 export interface UseLoadingStateReturn<T = any> {
   isLoading: boolean;
-  error: string | null;
-  data: T | null;
+  error: string | undefined;
+  data: T | undefined;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   setData: (data: T | null) => void;
@@ -118,7 +118,7 @@ export function useLoadingState<T = any>(
 // Hook spécialisé pour les formulaires
 export interface UseFormLoadingReturn {
   isSubmitting: boolean;
-  error: string | null;
+  error: string | undefined;
   submitForm: <T>(submitFn: () => Promise<T>) => Promise<T | null>;
   clearError: () => void;
 }
@@ -144,8 +144,8 @@ export function useFormLoading(): UseFormLoadingReturn {
 // Hook spécialisé pour les appels API
 export interface UseApiLoadingReturn<T> {
   isLoading: boolean;
-  error: string | null;
-  data: T | null;
+  error: string | undefined;
+  data: T | undefined;
   refetch: () => Promise<T | null>;
   mutate: (newData: T | null) => void;
   clearError: () => void;

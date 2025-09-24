@@ -44,7 +44,7 @@ export const SleepGoals: React.FC<SleepGoalsProps> = ({ className = '' }) => {
         }
 
         setIsEditing(false);
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         toast({
           title: 'Erreur',

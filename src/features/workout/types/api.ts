@@ -23,7 +23,7 @@ export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 export interface RequestConfig {
   method?: HttpMethod;
   headers?: Record<string, string>;
-  body?: FormData | string | Record<string, unknown> | null;
+  body?: FormData | string | Record<string, unknown> | undefined;
   params?: Record<string, string | number>;
   timeout?: number;
   retries?: number;

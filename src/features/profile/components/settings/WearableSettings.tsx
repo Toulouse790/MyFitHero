@@ -10,8 +10,8 @@ import { useToast } from '@/shared/hooks/use-toast';
 interface WearableSettingsProps {
   isAppleHealthAvailable: boolean;
   isGoogleFitAvailable: boolean;
-  lastSyncTime: Date | null;
-  syncError: string | null;
+  lastSyncTime: Date | undefined;
+  syncError: string | undefined;
   wearableLoading: boolean;
   onAppleHealthSync: () => Promise<void>;
   onGoogleFitSync: () => Promise<void>;
@@ -56,7 +56,7 @@ export const WearableSettings: React.FC<WearableSettingsProps> = ({
         title: 'Synchronisation réussie',
         description: `Données ${deviceName} synchronisées avec succès !`,
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur de synchronisation',
         description: `Impossible de synchroniser avec ${deviceName}`,

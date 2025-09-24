@@ -215,7 +215,7 @@ const UnifiedSettingsPage: React.FC = () => {
           description: `${settingItem.label} has been updated successfully.`
         });
         
-      } catch (error) {
+      } catch (error: any) {
         toast({
           title: '❌ Error',
           description: 'Failed to update setting. Please try again.',
@@ -278,7 +278,7 @@ const UnifiedSettingsPage: React.FC = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {settingItem.options?.map(option => (
+                    {settingItem.options?.map((option, index) => (
                       <SelectItem key={option.value} value={option.value}>
                         {option.label}
                       </SelectItem>
@@ -318,7 +318,7 @@ const UnifiedSettingsPage: React.FC = () => {
         title: '🔄 Settings Reset',
         description: 'All settings have been reset to default values.'
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: '❌ Error',
         description: 'Failed to reset settings.',
@@ -358,7 +358,7 @@ const UnifiedSettingsPage: React.FC = () => {
           title: '📤 Settings Imported',
           description: 'Your settings have been imported successfully.'
         });
-      } catch (error) {
+      } catch (error: any) {
         toast({
           title: '❌ Import Failed',
           description: 'Invalid settings file.',
@@ -432,7 +432,7 @@ const UnifiedSettingsPage: React.FC = () => {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {sections.map(section => (
+                {sections.map((section, index) => (
                   <SelectItem key={section.key} value={section.key}>
                     {section.label}
                   </SelectItem>

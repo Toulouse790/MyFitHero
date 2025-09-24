@@ -59,7 +59,7 @@ export const SignupPageComponent: React.FC = () => {
 
     try {
       await retryWithBackoff(performSignup);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur inscription:', error);
       
       // Gestion spécifique des erreurs réseau

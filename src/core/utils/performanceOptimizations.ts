@@ -1,14 +1,6 @@
 import { useEffect, useCallback } from 'react';
-import { onCLS, onLCP, onFCP, onTTFB, onINP } from 'web-vitals';
-
-// Types pour les métriques de performance
-interface PerformanceMetric {
-  name: string;
-  value: number;
-  delta: number;
-  id: string;
-  navigationType: string;
-}
+import { onCLS, onLCP, onFCP, onTTFB, onINP, type Metric } from 'web-vitals';
+import React from 'react';
 
 interface PerformanceThresholds {
   LCP: number; // < 2.5s
@@ -34,8 +26,8 @@ declare global {
 
 // Collecteur de métriques de performance
 class PerformanceCollector {
-  private metrics: Map<string, PerformanceMetric> = new Map();
-  private listeners: ((metric: PerformanceMetric) => void)[] = [];
+  private metrics: Map<string, Metric> = new Map();
+  private listeners: ((metric: Metric) => void)[] = [];
 
   constructor() {
     this.initWebVitals();
@@ -50,12 +42,13 @@ class PerformanceCollector {
     onTTFB(this.handleMetric.bind(this));
   }
 
-  private handleMetric(metric: PerformanceMetric) {
+  private handleMetric(metric: Metric) {
     this.metrics.set(metric.name, metric);
     this.listeners.forEach(listener => listener(metric));
     
     // Log en développement
     if (import.meta.env.DEV) {
+      console.log(`📊 Performance Metric: ${metric.name}`, {
         value: `${metric.value}ms`,
         threshold: `${PERFORMANCE_THRESHOLDS[metric.name as keyof PerformanceThresholds]}ms`,
         status: this.getMetricStatus(metric)
@@ -68,7 +61,7 @@ class PerformanceCollector {
     }
   }
 
-  private getMetricStatus(metric: PerformanceMetric): '✅ Good' | '⚠️ Needs Improvement' | '❌ Poor' {
+  private getMetricStatus(metric: Metric): '✅ Good' | '⚠️ Needs Improvement' | '❌ Poor' {
     const threshold = PERFORMANCE_THRESHOLDS[metric.name as keyof PerformanceThresholds];
     if (!threshold) return '✅ Good';
     
@@ -77,7 +70,7 @@ class PerformanceCollector {
     return '❌ Poor';
   }
 
-  private async sendToAnalytics(metric: PerformanceMetric) {
+  private async sendToAnalytics(metric: Metric) {
     try {
       // Envoyer à Google Analytics 4 ou service similaire
       if (typeof gtag !== 'undefined') {
@@ -95,20 +88,20 @@ class PerformanceCollector {
         metric_value: metric.value,
         metric_delta: metric.delta,
         metric_id: metric.id,
-        navigation_type: metric.navigationType,
+        navigation_type: performance.navigation ? performance.navigation.type.toString() : 'unknown',
         user_agent: navigator.userAgent,
         created_at: new Date().toISOString()
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to send performance metric:', error);
     }
   }
 
-  public getMetrics(): Map<string, PerformanceMetric> {
+  public getMetrics(): Map<string, Metric> {
     return this.metrics;
   }
 
-  public onMetric(listener: (metric: PerformanceMetric) => void) {
+  public onMetric(listener: (metric: Metric) => void) {
     this.listeners.push(listener);
     return () => {
       const index = this.listeners.indexOf(listener);
@@ -122,7 +115,7 @@ const performanceCollector = new PerformanceCollector();
 
 // Hook pour utiliser les métriques de performance
 export const usePerformanceMetrics = () => {
-  const handleMetric = useCallback((metric: PerformanceMetric) => {
+  const handleMetric = useCallback((metric: Metric) => {
     // Traitement optionnel des métriques dans les composants
   }, []);
 

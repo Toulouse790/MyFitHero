@@ -68,7 +68,7 @@ const queryClient = new QueryClient({
 // Validation des variables d'environnement au démarrage
 try {
   validateEnv();
-} catch (error) {
+} catch (error: any) {
   console.error('❌ Variables d\'environnement manquantes:', error);
   // En production, on pourrait rediriger vers une page d'erreur
   if (env.APP_ENV === 'production') {

@@ -4,7 +4,7 @@ import { SocialService } from '@/features/social/services/social.service';
 export interface UseSocialReturn {
   data: any;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   refresh: () => Promise<void>;
   update: (data: any) => Promise<void>;
 }

@@ -42,7 +42,7 @@ export const AccountDeletion: React.FC<AccountDeletionProps> = ({
         description: 'Vos données ont été exportées avec succès !',
       });
       setIsExportDialogOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur d\'export',
         description: 'Impossible d\'exporter vos données. Veuillez réessayer.',
@@ -64,7 +64,7 @@ export const AccountDeletion: React.FC<AccountDeletionProps> = ({
         description: 'Votre compte a été supprimé définitivement.',
       });
       setIsDeleteDialogOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: 'Erreur de suppression',
         description: 'Impossible de supprimer votre compte. Veuillez réessayer.',

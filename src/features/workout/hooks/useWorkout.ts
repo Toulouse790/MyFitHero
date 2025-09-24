@@ -12,11 +12,11 @@ import type {
 export interface UseWorkoutReturn {
   // État
   workouts: Workout[];
-  currentSession: WorkoutSession | null;
-  activeWorkout: Workout | null;
-  stats: WorkoutStats | null;
+  currentSession: WorkoutSession | undefined;
+  activeWorkout: Workout | undefined;
+  stats: WorkoutStats | undefined;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
 
   // Actions
   createWorkout: (data: CreateWorkoutData) => Promise<void>;
@@ -106,7 +106,7 @@ export function useWorkout(userId?: string): UseWorkoutReturn {
 
     try {
       const updatedWorkout = await WorkoutService.updateWorkout(id, data);
-      setWorkouts(prev => prev.map(w => (w.id === id ? updatedWorkout : w)));
+      setWorkouts(prev => prev.map((w, index) => (w.id === id ? updatedWorkout : w)));
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : 'Erreur lors de la mise à jour du workout';

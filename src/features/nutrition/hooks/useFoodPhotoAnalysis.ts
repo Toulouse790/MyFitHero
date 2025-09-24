@@ -5,9 +5,9 @@ import { useToast } from '@/shared/hooks/use-toast';
 
 export interface FoodPhotoAnalysisState {
   isAnalyzing: boolean;
-  analysisResult: FoodAnalysisResult | null;
+  analysisResult: FoodAnalysisResult | undefined;
   selectedFoods: RecognizedFood[];
-  error: string | null;
+  error: string | undefined;
 }
 
 export interface UseFoodPhotoAnalysisReturn {
@@ -88,7 +88,7 @@ export const useFoodPhotoAnalysis = (): UseFoodPhotoAnalysisReturn => {
           variant: 'destructive'
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
       
       setState(prev => ({
@@ -133,7 +133,7 @@ export const useFoodPhotoAnalysis = (): UseFoodPhotoAnalysisReturn => {
   const adjustQuantity = useCallback((foodId: string, newQuantity: number) => {
     setState(prev => ({
       ...prev,
-      selectedFoods: prev.selectedFoods.map(food => {
+      selectedFoods: prev.selectedFoods.map((food, index) => {
         if (food.food.id === foodId) {
           const factor = newQuantity / 100; // Pour 100g
           return {

@@ -270,7 +270,7 @@ export const PhotoNutritionAnalyzer: React.FC<PhotoNutritionAnalyzerProps> = ({
               </div>
 
               <div className="grid gap-3">
-                {state.analysisResult.foods.map(food => {
+                {state.analysisResult.foods.map((food, index) => {
                   const isSelected = state.selectedFoods.some(f => f.food.id === food.food.id);
                   return renderFoodItem(food, isSelected);
                 })}

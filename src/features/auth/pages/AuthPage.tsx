@@ -69,7 +69,7 @@ export function AuthPage() {
     try {
       if (isSignUp) {
         // Inscription
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error }: any = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
           options: {
@@ -91,7 +91,7 @@ export function AuthPage() {
         }
       } else {
         // Connexion
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error }: any = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
         });

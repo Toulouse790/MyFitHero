@@ -3,9 +3,9 @@ import { SleepService } from '@/features/sleep/services/sleep.service';
 import { SleepEntry } from '@/shared/types/sleep.types';
 
 export interface UseSleepReturn {
-  data: SleepEntry | null;
+  data: SleepEntry | undefined;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   refresh: () => Promise<void>;
   update: (data: SleepEntry) => Promise<void>;
 }

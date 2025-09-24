@@ -19,7 +19,7 @@ class SettingsSystemTests {
       
       console.log('✅ TOUS LES TESTS RÉUSSIS');
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ ÉCHEC DES TESTS:', error);
     }
   }
@@ -133,7 +133,7 @@ class SettingsSystemTests {
         throw new Error('Données non persistées correctement');
       }
       
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(`Persistance échouée: ${error}`);
     } finally {
       localStorage.removeItem(testKey);

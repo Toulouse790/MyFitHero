@@ -6,7 +6,7 @@ import React, { useState, useCallback } from 'react';
 // Interface pour l'état de loading
 export interface LoadingState {
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   lastAction?: string | undefined;
   startedAt?: number | undefined;
 }
@@ -62,7 +62,7 @@ export const useUnifiedLoading = (initialLoading = false): [LoadingState, Loadin
         const result = await asyncFn();
         setLoading(false);
         return result;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue';
         setError(errorMessage);
@@ -127,7 +127,7 @@ export const useFormLoading = () => {
         const result = await withLoading(submitFn, 'form_submit');
         onSuccess?.(result);
         return result;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         onError?.(error as Error);
         throw error;
@@ -157,7 +157,7 @@ export const useDataLoading = <T>() => {
         setData(result);
         onSuccess?.(result);
         return result;
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         setData(null);
         throw error;

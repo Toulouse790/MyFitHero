@@ -49,9 +49,9 @@ export interface LandingContent {
 }
 
 export interface UseLandingContentReturn {
-  content: LandingContent | null;
+  content: LandingContent | undefined;
   loading: boolean;
-  error: string | null;
+  error: string | undefined;
   loadContent: () => Promise<void>;
   updateContent: (section: keyof LandingContent, data: unknown) => Promise<boolean>;
 }
@@ -199,7 +199,7 @@ export const useLandingContent = (): UseLandingContentReturn => {
       await new Promise(resolve => setTimeout(resolve, 800));
 
       setContent(mockContent);
-    } catch (error) {
+    } catch (error: any) {
       setError(error instanceof Error ? error.message : 'Failed to load content');
     } finally {
       setLoading(false);
@@ -224,7 +224,7 @@ export const useLandingContent = (): UseLandingContentReturn => {
         );
 
         return true;
-      } catch (error) {
+      } catch (error: any) {
         console.error('Failed to update content:', error);
         return false;
       }

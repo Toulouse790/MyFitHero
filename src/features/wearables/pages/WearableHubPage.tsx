@@ -101,7 +101,7 @@ const WearableHub: React.FC = () => {
       ];
 
       setErrors(mockErrors);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur chargement appareils:', error);
       toast({
@@ -122,7 +122,7 @@ const WearableHub: React.FC = () => {
 
       // Mise à jour des statuts
       setDevices(prev =>
-        prev.map(device => ({
+        prev.map((device, index) => ({
           ...device,
           last_sync: new Date().toISOString(),
           sync_status: device.connected ? 'synced' : 'error',
@@ -142,7 +142,7 @@ const WearableHub: React.FC = () => {
           value: devices.filter(d => d.connected).length,
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       console.error('Erreur synchronisation:', error);
       toast({
@@ -160,7 +160,7 @@ const WearableHub: React.FC = () => {
     async (deviceId: string) => {
       try {
         setDevices(prev =>
-          prev.map(device =>
+          prev.map((device, index) =>
             device.id === deviceId ? { ...device, sync_status: 'syncing' } : device
           )
         );
@@ -169,7 +169,7 @@ const WearableHub: React.FC = () => {
         await new Promise(resolve => setTimeout(resolve, 3000));
 
         setDevices(prev =>
-          prev.map(device =>
+          prev.map((device, index) =>
             device.id === deviceId
               ? {
                   ...device,
@@ -183,7 +183,7 @@ const WearableHub: React.FC = () => {
 
         // Résoudre les erreurs liées à cet appareil
         setErrors(prev =>
-          prev.map(error => (error.device_id === deviceId ? { ...error, resolved: true } : error))
+          prev.map((error, index) => (error.device_id === deviceId ? { ...error, resolved: true } : error))
         );
 
         const device = devices.find(d => d.id === deviceId);
@@ -191,11 +191,11 @@ const WearableHub: React.FC = () => {
           title: 'Appareil reconnecté',
           description: `${device?.name} est maintenant connecté et synchronisé.`,
         });
-      } catch (error) {
+      } catch (error: any) {
       // Erreur silencieuse
         console.error('Erreur reconnexion:', error);
         setDevices(prev =>
-          prev.map(device =>
+          prev.map((device, index) =>
             device.id === deviceId ? { ...device, sync_status: 'error' } : device
           )
         );
@@ -383,7 +383,7 @@ const WearableHub: React.FC = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    {devices.map(device => (
+                    {devices.map((device, index) => (
                       <div key={device.id} className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           {device.type === 'watch' && <Watch className="text-blue-500" size={16} />}

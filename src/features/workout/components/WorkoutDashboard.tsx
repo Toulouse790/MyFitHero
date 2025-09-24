@@ -171,7 +171,7 @@ export default function WorkoutDashboard() {
         setWorkoutPlans(plans);
       }
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors du chargement:', error);
     } finally {
       setIsLoading(false);
@@ -227,7 +227,7 @@ export default function WorkoutDashboard() {
       if (!prev) return null;
       return {
         ...prev,
-        exercises: prev.exercises.map(ex => 
+        exercises: prev.exercises.map((ex, index) => 
           ex.id === exerciseId ? { ...ex, completed: true } : ex
         )
       };
@@ -306,7 +306,7 @@ export default function WorkoutDashboard() {
         {/* Navigation par onglets */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6">
-            {tabs.map(tab => {
+            {tabs.map((tab, index) => {
               const IconComponent = tab.icon;
               return (
                 <TabsTrigger key={tab.id} value={tab.id} className="flex items-center space-x-2">

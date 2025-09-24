@@ -130,6 +130,8 @@ export const usePerformanceMonitor = () => {
 
       return () => observer.disconnect();
     }
+    // Si performance n'est pas disponible, ne rien faire
+    return () => {};
   }, []);
 
   return metrics;

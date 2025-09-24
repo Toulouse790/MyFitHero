@@ -4,7 +4,7 @@ import { HydrationService } from '@/features/hydration/services/hydration.servic
 export interface UseHydrationReturn {
   data: any;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   refresh: () => Promise<void>;
   update: (data: any) => Promise<void>;
 }

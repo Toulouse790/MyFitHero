@@ -104,7 +104,7 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
 
   // Rendu selon le type de graphique
   const renderChart = () => {
-    const colors = data.datasets?.map(d => d.color) || ['#06b6d4', '#10b981', '#8b5cf6', '#ef4444'];
+    const colors = data.datasets?.map((d, index) => d.color) || ['#06b6d4', '#10b981', '#8b5cf6', '#ef4444'];
 
     switch (type) {
       case 'line':
@@ -117,7 +117,7 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
             <YAxis stroke={adaptiveColors.textSecondary} fontSize={12} />
             <Tooltip content={<CustomTooltip />} />
             {showLegend && <Legend />}
-            {data.datasets?.map(dataset => (
+            {data.datasets?.map((dataset, index) => (
               <Line
                 key={dataset.label}
                 type="monotone"
@@ -142,7 +142,7 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
             <YAxis stroke={adaptiveColors.textSecondary} fontSize={12} />
             <Tooltip content={<CustomTooltip />} />
             {showLegend && <Legend />}
-            {data.datasets?.map(dataset => (
+            {data.datasets?.map((dataset, index) => (
               <Area
                 key={dataset.label}
                 type="monotone"
@@ -167,7 +167,7 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
             <YAxis stroke={adaptiveColors.textSecondary} fontSize={12} />
             <Tooltip content={<CustomTooltip />} />
             {showLegend && <Legend />}
-            {data.datasets?.map(dataset => (
+            {data.datasets?.map((dataset, index) => (
               <Bar
                 key={dataset.label}
                 dataKey={dataset.label}
@@ -216,7 +216,7 @@ const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
       case 'pie':
         // Transformation pour le pie chart
         const pieData =
-          data.datasets?.map(dataset => ({
+          data.datasets?.map((dataset, index) => ({
             name: dataset.label,
             value: dataset.data.reduce((a, b) => a + b, 0),
             color: dataset.color,

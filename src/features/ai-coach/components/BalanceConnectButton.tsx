@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 // Mock toast pour les notifications
 const toast = {
   error: (message: string) => console.error('Error:', message),
+  success: (message: string) => console.log('Success:', message),
 };
 
 interface BalanceDevice {
@@ -71,7 +72,7 @@ const BalanceConnectButton: React.FC<BalanceConnectButtonProps> = ({
 
       setAvailableDevices(mockDevices);
       toast.success(`${mockDevices.length} balance(s) trouvée(s)`);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       toast.error('Erreur lors de la recherche');
     } finally {
@@ -91,7 +92,7 @@ const BalanceConnectButton: React.FC<BalanceConnectButtonProps> = ({
       setShowDeviceList(false);
       setAvailableDevices([]);
       toast.success(`${device.name} connectée avec succès !`);
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       toast.error('Échec de la connexion');
     } finally {
@@ -136,7 +137,7 @@ const BalanceConnectButton: React.FC<BalanceConnectButtonProps> = ({
             </div>
           ) : (
             <div className="divide-y divide-gray-200">
-              {availableDevices.map(device => (
+              {availableDevices.map((device, index) => (
                 <div key={device.id} className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">

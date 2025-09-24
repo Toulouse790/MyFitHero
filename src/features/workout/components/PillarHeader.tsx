@@ -94,7 +94,7 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
           created_at: aiData.created_at,
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       // Erreur silencieuse
       // Erreur silencieuse pour les recommandations IA
@@ -123,7 +123,7 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
       } else {
         setDailyGoal(getDefaultGoal());
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       // Erreur silencieuse
       setDailyGoal(getDefaultGoal());
@@ -191,7 +191,7 @@ const PillarHeader: React.FC<PillarHeaderProps> = ({
 
         setStreak(currentStreak);
       }
-    } catch (error) {
+    } catch (error: any) {
       // Erreur silencieuse
       // Erreur silencieuse
     }

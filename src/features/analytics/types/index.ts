@@ -4,6 +4,15 @@
 // ANALYTICS TYPES
 // ========================================
 
+export interface AnalyticsData {
+  user_analytics: UserAnalytics;
+  workout_analytics: WorkoutAnalytics;
+  nutrition_analytics?: any;
+  sleep_analytics?: any;
+  recovery_analytics?: any;
+  period?: AnalyticsPeriod;
+}
+
 export interface UserAnalytics {
   user_id: string;
   date_range: DateRange;

@@ -8,7 +8,7 @@ interface AuthResult {
 export const authClient = {
   async register(email: string, username: string, password: string): Promise<AuthResult> {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { data, error }: any = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -45,7 +45,7 @@ export const authClient = {
       }
 
       return { error: 'Échec de la création du compte' };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Registration error:', error);
       return { error: 'Une erreur est survenue lors de l\'inscription' };
     }
@@ -53,7 +53,7 @@ export const authClient = {
 
   async signIn(email: string, password: string): Promise<AuthResult> {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error }: any = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -67,7 +67,7 @@ export const authClient = {
       }
 
       return { error: 'Échec de la connexion' };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Sign in error:', error);
       return { error: 'Une erreur est survenue lors de la connexion' };
     }
@@ -82,7 +82,7 @@ export const authClient = {
       }
 
       return {};
-    } catch (error) {
+    } catch (error: any) {
       console.error('Sign out error:', error);
       return { error: 'Une erreur est survenue lors de la déconnexion' };
     }
@@ -99,7 +99,7 @@ export const authClient = {
       }
 
       return {};
-    } catch (error) {
+    } catch (error: any) {
       console.error('Reset password error:', error);
       return { error: 'Une erreur est survenue lors de la réinitialisation' };
     }

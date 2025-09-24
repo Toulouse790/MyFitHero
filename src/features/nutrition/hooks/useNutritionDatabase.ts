@@ -67,7 +67,7 @@ const USDA_BASE_URL = 'https://api.nal.usda.gov/fdc/v1';
 class NutritionCache {
   private dbName = 'MyFitHero_NutritionCache';
   private version = 1;
-  private db: IDBDatabase | null = null;
+  private db: IDBDatabase | undefined = null;
 
   async init(): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -279,11 +279,11 @@ export const useNutritionDatabase = () => {
     const usdaFoods = await searchUSDA(query, options);
 
     // 3. Convertir et fusionner les résultats
-    const convertedUSDA = usdaFoods.map(food => convertUSDAToFoodItem(food));
+    const convertedUSDA = usdaFoods.map((food, index) => convertUSDAToFoodItem(food));
     const allFoods = [...(localFoods || []), ...convertedUSDA];
 
     // 4. Scoring et tri par pertinence
-    const scoredFoods = allFoods.map(food => ({
+    const scoredFoods = allFoods.map((food, index) => ({
       ...food,
       relevanceScore: fuzzyMatch(query, food.name)
     })).filter(food => food.relevanceScore > 0.3)
@@ -322,7 +322,7 @@ export const useNutritionDatabase = () => {
   // Sauvegarder un aliment dans notre base
   const saveFoodItem = useCallback(async (foodItem: Omit<FoodItem, 'id' | 'created_at'>): Promise<FoodItem | null> => {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('food_items')
         .insert([foodItem])
         .select()
@@ -339,7 +339,7 @@ export const useNutritionDatabase = () => {
   // Sauvegarder un scan nutrition
   const saveScan = useCallback(async (scan: Omit<NutritionScan, 'id' | 'created_at'>): Promise<NutritionScan | null> => {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('nutrition_scans')
         .insert([scan])
         .select()
@@ -356,7 +356,7 @@ export const useNutritionDatabase = () => {
   // Obtenir l'historique des scans
   const getScanHistory = useCallback(async (userId: string, limit = 50): Promise<NutritionScan[]> => {
     try {
-      const { data, error } = await supabase
+      const { data, error }: any = await supabase
         .from('nutrition_scans')
         .select('*')
         .eq('user_id', userId)

@@ -261,12 +261,12 @@ export interface SleepGoal {
 
 export interface SleepStore {
   entries: SleepEntry[];
-  currentEntry: SleepEntry | null;
+  currentEntry: SleepEntry | undefined;
   goals: SleepGoal[];
-  currentGoal: SleepGoal | null;
-  stats: SleepStats | null;
+  currentGoal: SleepGoal | undefined;
+  stats: SleepStats | undefined;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
   
   // Actions
   addEntry: (entryData: Partial<SleepEntry>) => Promise<void>;
@@ -278,4 +278,25 @@ export interface SleepStore {
   deleteGoal: (id: string) => Promise<void>;
   loadGoals: () => Promise<void>;
   calculateStats: () => void;
+}
+
+// 🔧 MISSING TYPES FOR TYPESCRIPT FIXES
+
+export interface SportSleepConfig {
+  sport: string;
+  emoji?: string;
+  recommendedSleepHours: number;
+  recoveryImportance: 'low' | 'medium' | 'high' | 'critical';
+  sleepFactors: SleepFactor[];
+  recommendations: string[];
+}
+
+export interface SleepFactor {
+  id: string;
+  name: string;
+  description: string;
+  icon: React.ComponentType<any>;
+  impact: 'positive' | 'negative' | 'neutral' | 'high' | 'medium' | 'low';
+  severity: 'low' | 'medium' | 'high';
+  category: 'environment' | 'lifestyle' | 'nutrition' | 'training' | 'technology' | 'mental' | 'physical';
 }

@@ -15,6 +15,7 @@ export interface SportOption {
   emoji?: string;
   icon?: string;
   category?: string;
+  description?: string;
   positions?: string[];
   isPopular?: boolean;
   userCount?: number;
@@ -23,12 +24,12 @@ export interface SportOption {
 export interface SportRow {
   id: string;
   name: string;
-  emoji: string | null;
-  icon: string | null;
-  category: string | null;
-  positions: string[] | null;
-  is_popular: boolean | null;
-  user_count: number | null;
+  emoji: string | undefined;
+  icon: string | undefined;
+  category: string | undefined;
+  positions: string[] | undefined;
+  is_popular: boolean | undefined;
+  user_count: number | undefined;
   updated_at: string;
 }
 
@@ -47,7 +48,7 @@ const CACHE_TTL = 5 * 60_000; // 5 min
 const MEMO_KEY = 'sports-cache-v1';
 
 /* mémoire : { data, expiry } */
-let memoryCache: { data: SportRow[]; expiry: number } | null = null;
+let memoryCache: { data: SportRow[]; expiry: number } | undefined = null;
 
 /* ------------------------------------------------------------------ */
 /*                       FONCTIONS BAS NIVEAU                         */
@@ -71,7 +72,7 @@ async function fetchAllSports(): Promise<SportRow[]> {
   }
 
   // 3. Requête Supabase
-  const { data, error } = await supabase
+  const { data, error }: any = await supabase
     .from('sports_library')
     .select('id, name, emoji, icon, category, positions, is_popular, user_count, updated_at')
     .order('name', { ascending: true });
@@ -118,7 +119,7 @@ export const SportsService = {
   async getPopularSports(limit = 12): Promise<SportOption[]> {
     const rows = await fetchAllSports();
     return rows
-      .filter(r => r.is_popular)
+      .filter((r: any) => r.is_popular)
       .slice(0, limit)
       .map(mapRow);
   },
@@ -128,14 +129,14 @@ export const SportsService = {
     if (!query || query.length < 2) return [];
 
     // Recherche locale d’abord (perfs)
-    const localRows = (await fetchAllSports()).filter(r =>
+    const localRows = (await fetchAllSports()).filter((r: any) =>
       r.name.toLowerCase().includes(query.toLowerCase())
     );
 
     if (localRows.length > 0) return localRows.map(mapRow);
 
         // Recherche SQL ILIKE
-    const { data, error } = await supabase
+    const { data, error }: any = await supabase
       .from('sports_library')
       .select('id, name, emoji, icon, category, positions')
       .ilike('name', `%${query}%`)
@@ -151,7 +152,7 @@ export const SportsService = {
 
   /** Détails d'un sport */
   async getSportById(id: string): Promise<SportOption | null> {
-    const { data, error } = await supabase
+    const { data, error }: any = await supabase
       .from('sports_library')
       .select('id, name, emoji, icon, category, positions')
       .eq('id', id)
@@ -172,6 +173,7 @@ export const SportsService = {
     const { data: userData } = await supabase.auth.getUser();
     const payload: SportSuggestionPayload = {
       sport_name: sportName,
+      description: sport.name + " sport",
       suggested_position: opts.suggested_position,
       locale: opts.locale ?? 'fr',
       user_id: userData?.user?.id ?? undefined,
@@ -240,7 +242,7 @@ export function useSportsFallback() {
   const [state, setState] = React.useState<{
     sports: SportOption[];
     loading: boolean;
-    error: string | null;
+    error: string | undefined;
   }>({
     sports: [],
     loading: true,

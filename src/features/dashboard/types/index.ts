@@ -114,8 +114,8 @@ export interface DashboardState {
   widgets: DashboardWidget[];
   goals: PersonalizedGoal[];
   socialComparisons: SocialComparison[];
-  weather: WeatherImpact | null;
+  weather: WeatherImpact | undefined;
   loading: boolean;
-  error: string | null;
+  error: string | undefined;
   lastUpdated: string;
 }

@@ -59,11 +59,11 @@ interface User {
 }
 
 interface AuthState {
-  user: User | null;
-  session: Session | null;
+  user: User | undefined;
+  session: Session | undefined;
   isLoading: boolean;
   isAuthenticated: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
 // QueryClient pour React Query
@@ -87,11 +87,11 @@ function useAuthState(): AuthState & {
   completeOnboarding: (data: any) => Promise<void>;
 } {
   const [authState, setAuthState] = useState<AuthState>({
-    user: null,
-    session: null,
+    user: undefined,
+    session: undefined,
     isLoading: true,
     isAuthenticated: false,
-    error: null,
+    error: undefined,
   });
 
   // Fonction pour convertir camelCase vers snake_case pour Supabase
@@ -102,7 +102,7 @@ function useAuthState(): AuthState & {
     if (data.firstName !== undefined || data.lastName !== undefined) {
       const firstName = data.firstName || '';
       const lastName = data.lastName || '';
-      payload.full_name = `${firstName} ${lastName}`.trim() || null;
+      payload.full_name = `${firstName} ${lastName}`.trim() || undefined;
     }
     
     if (data.onboardingCompleted !== undefined) payload.onboarding_completed = data.onboardingCompleted;
@@ -244,7 +244,7 @@ function useAuthState(): AuthState & {
           // Nettoyer appStore si pas d'utilisateur
           appStore.getState().setUser(null);
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Erreur lors de la récupération de la session:', error);
         if (mounted) {
           setAuthState(prev => ({
@@ -321,7 +321,7 @@ function useAuthState(): AuthState & {
       if (error) throw error;
 
       toast.success('Connexion réussie !');
-    } catch (error) {
+    } catch (error: any) {
       const message = error instanceof Error ? error.message : 'Erreur de connexion';
       setAuthState(prev => ({ ...prev, error: message }));
       throw error;
@@ -347,7 +347,7 @@ function useAuthState(): AuthState & {
       if (error) throw error;
 
       toast.success('Inscription réussie ! Vérifiez votre email.');
-    } catch (error) {
+    } catch (error: any) {
       const message = error instanceof Error ? error.message : 'Erreur d\'inscription';
       setAuthState(prev => ({ ...prev, error: message }));
       throw error;
@@ -367,7 +367,7 @@ function useAuthState(): AuthState & {
       if (error) throw error;
       
       toast.success('Déconnexion réussie');
-    } catch (error) {
+    } catch (error: any) {
       const message = error instanceof Error ? error.message : 'Erreur de déconnexion';
       setAuthState(prev => ({ ...prev, error: message }));
       throw error;
@@ -411,7 +411,7 @@ function useAuthState(): AuthState & {
       }
 
       toast.success('Profil mis à jour');
-    } catch (error) {
+    } catch (error: any) {
       const message = error instanceof Error ? error.message : 'Erreur de mise à jour';
       console.error('❌ UpdateProfile error:', error);
       toast.error(message);
@@ -434,7 +434,7 @@ function useAuthState(): AuthState & {
       const currentAppStoreUser = appStore.getState().appStoreUser;
 
       toast.success('Configuration terminée ! Bienvenue dans MyFitHero 🎉');
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ CompleteOnboarding error:', error);
       throw error;
     }
@@ -488,7 +488,7 @@ function App() {
       
       // Rediriger vers le dashboard après completion
       setLocation('/dashboard');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erreur lors de la completion de l\'onboarding:', error);
       toast.error('Erreur lors de la sauvegarde de votre profil');
     }

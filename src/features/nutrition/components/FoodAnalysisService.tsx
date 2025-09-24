@@ -71,7 +71,7 @@ export class FoodAnalysisService {
       }
 
       return await response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Food analysis error:', error);
       throw new Error('Failed to analyze food image');
     }
@@ -108,7 +108,7 @@ export class FoodAnalysisService {
         portion_size: nutritionData.portion_size || '100g',
         weight_grams: nutritionData.weight_grams || 100
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Nutrition data error:', error);
       throw new Error('Failed to fetch nutrition data');
     }
