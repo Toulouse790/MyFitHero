@@ -1,8 +1,25 @@
-// Export des types de la feature auth
+/**
+ * 🎯 MYFITHERO AUTH - TYPES INDEX 6★/5
+ * Point d'entrée principal pour tous les types d'authentification
+ * 
+ * @version 2.0.0
+ * @author MyFitHero Team
+ * @since 2025-09-24
+ */
+
+// ============================================================================
+// EXPORTS PRINCIPAUX - TYPES AVANCÉS 6★/5
+// ============================================================================
+
+// Types ultra-rigoureux niveau enterprise
+export * from './advanced';
+export * from './validators';
+
+// Types conversationnels (existants)
 export * from './conversationalOnboarding';
 
 // ========================================
-// AUTH CORE TYPES
+// AUTH CORE TYPES (COMPATIBILITÉ LEGACY)
 // ========================================
 
 export interface User {
