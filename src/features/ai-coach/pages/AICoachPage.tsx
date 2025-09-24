@@ -11,6 +11,7 @@ import React, {
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { toast } from 'sonner';
+import { Loader2, Send } from 'lucide-react';
 
 /* --- TYPES --- */
 
@@ -416,7 +417,7 @@ const AICoachPage: FC = () => {
                   className="italic text-gray-500 dark:text-gray-400"
                   aria-live="assertive"
                 >
-                  <AiOutlineLoading3Quarters className="inline animate-spin mr-1" />
+                  <Loader2 className="inline animate-spin mr-1" size={16} />
                   L'IA rédige...
                 </motion.div>
               )}
@@ -462,7 +463,7 @@ const AICoachPage: FC = () => {
               title="Envoyer"
               className="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
             >
-              <AiOutlineSend size={20} />
+              <Send size={20} />
             </button>
           </form>
         </section>

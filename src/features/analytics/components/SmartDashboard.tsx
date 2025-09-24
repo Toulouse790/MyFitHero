@@ -562,20 +562,20 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
       const contextData: SmartDashboardContext = {
         user: {
           id: userProfile.id,
-          username: appStoreUser?.username,
-          age: appStoreUser?.age,
-          gender: appStoreUser?.gender,
-          fitness_goal: appStoreUser?.goal,
-          primary_goals: appStoreUser?.primary_goals,
-          sport: appStoreUser?.sport,
-          sport_position: appStoreUser?.sport_position,
-          fitness_experience: appStoreUser?.fitness_experience,
-          lifestyle: appStoreUser?.lifestyle,
-          available_time_per_day: appStoreUser?.available_time_per_day,
+          username: appStoreUser?.username || undefined,
+          age: appStoreUser?.age || undefined,
+          gender: appStoreUser?.gender || undefined,
+          fitness_goal: appStoreUser?.goal || undefined,
+          primary_goals: appStoreUser?.primary_goals || undefined,
+          sport: appStoreUser?.sport || undefined,
+          sport_position: appStoreUser?.sport_position || undefined,
+          fitness_experience: appStoreUser?.fitness_experience || undefined,
+          lifestyle: appStoreUser?.lifestyle || undefined,
+          available_time_per_day: appStoreUser?.available_time_per_day || undefined,
           training_frequency: typeof appStoreUser?.training_frequency === 'string' 
             ? parseInt(appStoreUser.training_frequency) 
-            : appStoreUser?.training_frequency,
-          season_period: appStoreUser?.season_period,
+            : appStoreUser?.training_frequency || undefined,
+          season_period: appStoreUser?.season_period || undefined,
           injuries: appStoreUser?.injuries,
         },
         dailyStats: dailyStats,
@@ -1055,7 +1055,20 @@ const SmartDashboard: React.FC<SmartDashboardProps> = ({ userProfile }) => {
         <StatsOverview className="mb-6" />
 
         {/* Badges récents */}
-        <BadgeDisplay className="mb-6" badges={dailyProgram.badges.earned} />
+        <BadgeDisplay 
+          className="mb-6" 
+          badges={dailyProgram.badges.earned.map(badge => ({
+            user_id: userProfile?.id || '',
+            badge_id: badge.id,
+            earned_at: new Date().toISOString(),
+            progress: 100,
+            display_order: 0,
+            is_favorite: false,
+            is_notified: false,
+            created_at: new Date().toISOString(),
+            ...badge
+          }))} 
+        />
 
         {/* Chat IA Ultra-Personnalisé */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
