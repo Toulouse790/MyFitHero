@@ -1,0 +1,539 @@
+ba9a0d4ded927c61f886e397171618dd
+"use strict";
+
+/* istanbul ignore next */
+function cov_2107bfhuq4() {
+  var path = "/workspaces/MyFitHero/src/features/hydration/components/HydrationCustomInput.tsx";
+  var hash = "c4d5eac8f7f7e7abe5e643d40ddc9eddaf0fb27c";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/features/hydration/components/HydrationCustomInput.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 1
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 4
+        },
+        end: {
+          line: 3,
+          column: 62
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 62
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 38
+        }
+      },
+      "4": {
+        start: {
+          line: 7,
+          column: 22
+        },
+        end: {
+          line: 7,
+          column: 50
+        }
+      },
+      "5": {
+        start: {
+          line: 9,
+          column: 16
+        },
+        end: {
+          line: 9,
+          column: 49
+        }
+      },
+      "6": {
+        start: {
+          line: 10,
+          column: 23
+        },
+        end: {
+          line: 10,
+          column: 46
+        }
+      },
+      "7": {
+        start: {
+          line: 11,
+          column: 29
+        },
+        end: {
+          line: 13,
+          column: 1
+        }
+      },
+      "8": {
+        start: {
+          line: 12,
+          column: 4
+        },
+        end: {
+          line: 12,
+          column: 1377
+        }
+      },
+      "9": {
+        start: {
+          line: 12,
+          column: 231
+        },
+        end: {
+          line: 12,
+          column: 280
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 694
+        },
+        end: {
+          line: 12,
+          column: 745
+        }
+      },
+      "11": {
+        start: {
+          line: 12,
+          column: 1021
+        },
+        end: {
+          line: 12,
+          column: 1066
+        }
+      },
+      "12": {
+        start: {
+          line: 14,
+          column: 0
+        },
+        end: {
+          line: 14,
+          column: 52
+        }
+      },
+      "13": {
+        start: {
+          line: 15,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 47
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 2,
+            column: 56
+          },
+          end: {
+            line: 2,
+            column: 57
+          }
+        },
+        loc: {
+          start: {
+            line: 2,
+            column: 71
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        },
+        line: 2
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 11,
+            column: 29
+          },
+          end: {
+            line: 11,
+            column: 30
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 82
+          },
+          end: {
+            line: 13,
+            column: 1
+          }
+        },
+        line: 11
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 12,
+            column: 225
+          },
+          end: {
+            line: 12,
+            column: 226
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 231
+          },
+          end: {
+            line: 12,
+            column: 280
+          }
+        },
+        line: 12
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 12,
+            column: 688
+          },
+          end: {
+            line: 12,
+            column: 689
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 694
+          },
+          end: {
+            line: 12,
+            column: 745
+          }
+        },
+        line: 12
+      },
+      "4": {
+        name: "(anonymous_4)",
+        decl: {
+          start: {
+            line: 12,
+            column: 1015
+          },
+          end: {
+            line: 12,
+            column: 1016
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 1021
+          },
+          end: {
+            line: 12,
+            column: 1066
+          }
+        },
+        line: 12
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 2,
+            column: 22
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 2,
+            column: 23
+          },
+          end: {
+            line: 2,
+            column: 27
+          }
+        }, {
+          start: {
+            line: 2,
+            column: 31
+          },
+          end: {
+            line: 2,
+            column: 51
+          }
+        }, {
+          start: {
+            line: 2,
+            column: 56
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        }],
+        line: 2
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 3,
+            column: 11
+          },
+          end: {
+            line: 3,
+            column: 61
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 3,
+            column: 37
+          },
+          end: {
+            line: 3,
+            column: 40
+          }
+        }, {
+          start: {
+            line: 3,
+            column: 43
+          },
+          end: {
+            line: 3,
+            column: 61
+          }
+        }],
+        line: 3
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 3,
+            column: 12
+          },
+          end: {
+            line: 3,
+            column: 33
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 3,
+            column: 12
+          },
+          end: {
+            line: 3,
+            column: 15
+          }
+        }, {
+          start: {
+            line: 3,
+            column: 19
+          },
+          end: {
+            line: 3,
+            column: 33
+          }
+        }],
+        line: 3
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    b: {
+      "0": [0, 0, 0],
+      "1": [0, 0],
+      "2": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/features/hydration/components/HydrationCustomInput.tsx",
+      mappings: ";;;;;;;AAAA,6DAA6D;AAC7D,kDAA0B;AAC1B,+CAAqD;AAY9C,MAAM,oBAAoB,GAAwC,CAAC,EACxE,cAAc,EACd,cAAc,EACd,UAAU,GACX,EAAE,EAAE;IACH,OAAO,CACL,iCAAK,SAAS,EAAC,MAAM,aACnB,iCAAK,SAAS,EAAC,iDAAiD,aAC9D,mCACE,OAAO,EAAE,GAAG,EAAE,CAAC,cAAc,CAAC,IAAI,CAAC,GAAG,CAAC,EAAE,EAAE,cAAc,GAAG,EAAE,CAAC,CAAC,EAChE,SAAS,EAAC,0HAA0H,YAEpI,uBAAC,oBAAK,IAAC,SAAS,EAAC,SAAS,GAAG,GACtB,EACT,kCAAM,SAAS,EAAC,0DAA0D,aAAE,cAAc,UAAU,EACpG,mCACE,OAAO,EAAE,GAAG,EAAE,CAAC,cAAc,CAAC,IAAI,CAAC,GAAG,CAAC,IAAI,EAAE,cAAc,GAAG,EAAE,CAAC,CAAC,EAClE,SAAS,EAAC,0HAA0H,YAEpI,uBAAC,mBAAI,IAAC,SAAS,EAAC,SAAS,GAAG,GACrB,IACL,EACN,oCACE,OAAO,EAAE,GAAG,EAAE,CAAC,UAAU,CAAC,cAAc,EAAE,OAAO,EAAE,QAAQ,CAAC,EAC5D,SAAS,EAAC,4JAA4J,aAEtK,uBAAC,uBAAQ,IAAC,SAAS,EAAC,qBAAqB,GAAG,cACnC,cAAc,UAChB,IACL,CACP,CAAC;AACJ,CAAC,CAAC;AA/BW,QAAA,oBAAoB,wBA+B/B;AAEF,kBAAe,4BAAoB,CAAC",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/features/hydration/components/HydrationCustomInput.tsx"],
+      sourcesContent: ["// src/features/hydration/components/HydrationCustomInput.tsx\nimport React from 'react';\nimport { Droplets, Plus, Minus } from 'lucide-react';\nimport { Database } from '@/lib/types/database';\n\ntype DrinkType = Database['public']['Tables']['hydration_logs']['Row']['drink_type'];\ntype HydrationContext = Database['public']['Tables']['hydration_logs']['Row']['hydration_context'];\n\ninterface HydrationCustomInputProps {\n  selectedAmount: number;\n  onAmountChange: (amount: number) => void;\n  onAddWater: (amount: number, drinkType: DrinkType, context: HydrationContext) => void;\n}\n\nexport const HydrationCustomInput: React.FC<HydrationCustomInputProps> = ({\n  selectedAmount,\n  onAmountChange,\n  onAddWater,\n}) => {\n  return (\n    <div className=\"mb-6\">\n      <div className=\"flex items-center justify-center space-x-3 mb-3\">\n        <button\n          onClick={() => onAmountChange(Math.max(50, selectedAmount - 50))}\n          className=\"w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 transition-colors\"\n        >\n          <Minus className=\"h-4 w-4\" />\n        </button>\n        <span className=\"font-semibold text-xl min-w-20 text-center text-gray-900\">{selectedAmount}ml</span>\n        <button\n          onClick={() => onAmountChange(Math.min(2000, selectedAmount + 50))}\n          className=\"w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 transition-colors\"\n        >\n          <Plus className=\"h-4 w-4\" />\n        </button>\n      </div>\n      <button\n        onClick={() => onAddWater(selectedAmount, 'water', 'normal')}\n        className=\"w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 rounded-xl font-medium transition-all duration-200\"\n      >\n        <Droplets className=\"h-5 w-5 inline mr-2\" />\n        Ajouter {selectedAmount}ml\n      </button>\n    </div>\n  );\n};\n\nexport default HydrationCustomInput;"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c4d5eac8f7f7e7abe5e643d40ddc9eddaf0fb27c"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2107bfhuq4 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_2107bfhuq4();
+var __importDefault =
+/* istanbul ignore next */
+(cov_2107bfhuq4().s[0]++,
+/* istanbul ignore next */
+(cov_2107bfhuq4().b[0][0]++, this) &&
+/* istanbul ignore next */
+(cov_2107bfhuq4().b[0][1]++, this.__importDefault) ||
+/* istanbul ignore next */
+(cov_2107bfhuq4().b[0][2]++, function (mod) {
+  /* istanbul ignore next */
+  cov_2107bfhuq4().f[0]++;
+  cov_2107bfhuq4().s[1]++;
+  return /* istanbul ignore next */(cov_2107bfhuq4().b[2][0]++, mod) &&
+  /* istanbul ignore next */
+  (cov_2107bfhuq4().b[2][1]++, mod.__esModule) ?
+  /* istanbul ignore next */
+  (cov_2107bfhuq4().b[1][0]++, mod) :
+  /* istanbul ignore next */
+  (cov_2107bfhuq4().b[1][1]++, {
+    "default": mod
+  });
+}));
+/* istanbul ignore next */
+cov_2107bfhuq4().s[2]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_2107bfhuq4().s[3]++;
+exports.HydrationCustomInput = void 0;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_2107bfhuq4().s[4]++, require("react/jsx-runtime"));
+// src/features/hydration/components/HydrationCustomInput.tsx
+const react_1 =
+/* istanbul ignore next */
+(cov_2107bfhuq4().s[5]++, __importDefault(require("react")));
+const lucide_react_1 =
+/* istanbul ignore next */
+(cov_2107bfhuq4().s[6]++, require("lucide-react"));
+/* istanbul ignore next */
+cov_2107bfhuq4().s[7]++;
+const HydrationCustomInput = ({
+  selectedAmount,
+  onAmountChange,
+  onAddWater
+}) => {
+  /* istanbul ignore next */
+  cov_2107bfhuq4().f[1]++;
+  cov_2107bfhuq4().s[8]++;
+  return (0, jsx_runtime_1.jsxs)("div", {
+    className: "mb-6",
+    children: [(0, jsx_runtime_1.jsxs)("div", {
+      className: "flex items-center justify-center space-x-3 mb-3",
+      children: [(0, jsx_runtime_1.jsx)("button", {
+        onClick: () => {
+          /* istanbul ignore next */
+          cov_2107bfhuq4().f[2]++;
+          cov_2107bfhuq4().s[9]++;
+          return onAmountChange(Math.max(50, selectedAmount - 50));
+        },
+        className: "w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 transition-colors",
+        children: (0, jsx_runtime_1.jsx)(lucide_react_1.Minus, {
+          className: "h-4 w-4"
+        })
+      }), (0, jsx_runtime_1.jsxs)("span", {
+        className: "font-semibold text-xl min-w-20 text-center text-gray-900",
+        children: [selectedAmount, "ml"]
+      }), (0, jsx_runtime_1.jsx)("button", {
+        onClick: () => {
+          /* istanbul ignore next */
+          cov_2107bfhuq4().f[3]++;
+          cov_2107bfhuq4().s[10]++;
+          return onAmountChange(Math.min(2000, selectedAmount + 50));
+        },
+        className: "w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 transition-colors",
+        children: (0, jsx_runtime_1.jsx)(lucide_react_1.Plus, {
+          className: "h-4 w-4"
+        })
+      })]
+    }), (0, jsx_runtime_1.jsxs)("button", {
+      onClick: () => {
+        /* istanbul ignore next */
+        cov_2107bfhuq4().f[4]++;
+        cov_2107bfhuq4().s[11]++;
+        return onAddWater(selectedAmount, 'water', 'normal');
+      },
+      className: "w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 rounded-xl font-medium transition-all duration-200",
+      children: [(0, jsx_runtime_1.jsx)(lucide_react_1.Droplets, {
+        className: "h-5 w-5 inline mr-2"
+      }), "Ajouter ", selectedAmount, "ml"]
+    })]
+  });
+};
+/* istanbul ignore next */
+cov_2107bfhuq4().s[12]++;
+exports.HydrationCustomInput = HydrationCustomInput;
+/* istanbul ignore next */
+cov_2107bfhuq4().s[13]++;
+exports.default = exports.HydrationCustomInput;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJyZWFjdF8xIiwiY292XzIxMDdiZmh1cTQiLCJzIiwiX19pbXBvcnREZWZhdWx0IiwicmVxdWlyZSIsImx1Y2lkZV9yZWFjdF8xIiwiSHlkcmF0aW9uQ3VzdG9tSW5wdXQiLCJzZWxlY3RlZEFtb3VudCIsIm9uQW1vdW50Q2hhbmdlIiwib25BZGRXYXRlciIsImYiLCJqc3hfcnVudGltZV8xIiwianN4cyIsImNsYXNzTmFtZSIsImNoaWxkcmVuIiwianN4Iiwib25DbGljayIsIk1hdGgiLCJtYXgiLCJNaW51cyIsIm1pbiIsIlBsdXMiLCJEcm9wbGV0cyIsImV4cG9ydHMiLCJkZWZhdWx0Il0sInNvdXJjZXMiOlsiL3dvcmtzcGFjZXMvTXlGaXRIZXJvL3NyYy9mZWF0dXJlcy9oeWRyYXRpb24vY29tcG9uZW50cy9IeWRyYXRpb25DdXN0b21JbnB1dC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiLy8gc3JjL2ZlYXR1cmVzL2h5ZHJhdGlvbi9jb21wb25lbnRzL0h5ZHJhdGlvbkN1c3RvbUlucHV0LnRzeFxuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IERyb3BsZXRzLCBQbHVzLCBNaW51cyB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XG5pbXBvcnQgeyBEYXRhYmFzZSB9IGZyb20gJ0AvbGliL3R5cGVzL2RhdGFiYXNlJztcblxudHlwZSBEcmlua1R5cGUgPSBEYXRhYmFzZVsncHVibGljJ11bJ1RhYmxlcyddWydoeWRyYXRpb25fbG9ncyddWydSb3cnXVsnZHJpbmtfdHlwZSddO1xudHlwZSBIeWRyYXRpb25Db250ZXh0ID0gRGF0YWJhc2VbJ3B1YmxpYyddWydUYWJsZXMnXVsnaHlkcmF0aW9uX2xvZ3MnXVsnUm93J11bJ2h5ZHJhdGlvbl9jb250ZXh0J107XG5cbmludGVyZmFjZSBIeWRyYXRpb25DdXN0b21JbnB1dFByb3BzIHtcbiAgc2VsZWN0ZWRBbW91bnQ6IG51bWJlcjtcbiAgb25BbW91bnRDaGFuZ2U6IChhbW91bnQ6IG51bWJlcikgPT4gdm9pZDtcbiAgb25BZGRXYXRlcjogKGFtb3VudDogbnVtYmVyLCBkcmlua1R5cGU6IERyaW5rVHlwZSwgY29udGV4dDogSHlkcmF0aW9uQ29udGV4dCkgPT4gdm9pZDtcbn1cblxuZXhwb3J0IGNvbnN0IEh5ZHJhdGlvbkN1c3RvbUlucHV0OiBSZWFjdC5GQzxIeWRyYXRpb25DdXN0b21JbnB1dFByb3BzPiA9ICh7XG4gIHNlbGVjdGVkQW1vdW50LFxuICBvbkFtb3VudENoYW5nZSxcbiAgb25BZGRXYXRlcixcbn0pID0+IHtcbiAgcmV0dXJuIChcbiAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTZcIj5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgc3BhY2UteC0zIG1iLTNcIj5cbiAgICAgICAgPGJ1dHRvblxuICAgICAgICAgIG9uQ2xpY2s9eygpID0+IG9uQW1vdW50Q2hhbmdlKE1hdGgubWF4KDUwLCBzZWxlY3RlZEFtb3VudCAtIDUwKSl9XG4gICAgICAgICAgY2xhc3NOYW1lPVwidy0xMCBoLTEwIHJvdW5kZWQtZnVsbCBib3JkZXItMiBib3JkZXItZ3JheS0zMDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgaG92ZXI6Ym9yZGVyLWJsdWUtNTAwIHRyYW5zaXRpb24tY29sb3JzXCJcbiAgICAgICAgPlxuICAgICAgICAgIDxNaW51cyBjbGFzc05hbWU9XCJoLTQgdy00XCIgLz5cbiAgICAgICAgPC9idXR0b24+XG4gICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC14bCBtaW4tdy0yMCB0ZXh0LWNlbnRlciB0ZXh0LWdyYXktOTAwXCI+e3NlbGVjdGVkQW1vdW50fW1sPC9zcGFuPlxuICAgICAgICA8YnV0dG9uXG4gICAgICAgICAgb25DbGljaz17KCkgPT4gb25BbW91bnRDaGFuZ2UoTWF0aC5taW4oMjAwMCwgc2VsZWN0ZWRBbW91bnQgKyA1MCkpfVxuICAgICAgICAgIGNsYXNzTmFtZT1cInctMTAgaC0xMCByb3VuZGVkLWZ1bGwgYm9yZGVyLTIgYm9yZGVyLWdyYXktMzAwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGhvdmVyOmJvcmRlci1ibHVlLTUwMCB0cmFuc2l0aW9uLWNvbG9yc1wiXG4gICAgICAgID5cbiAgICAgICAgICA8UGx1cyBjbGFzc05hbWU9XCJoLTQgdy00XCIgLz5cbiAgICAgICAgPC9idXR0b24+XG4gICAgICA8L2Rpdj5cbiAgICAgIDxidXR0b25cbiAgICAgICAgb25DbGljaz17KCkgPT4gb25BZGRXYXRlcihzZWxlY3RlZEFtb3VudCwgJ3dhdGVyJywgJ25vcm1hbCcpfVxuICAgICAgICBjbGFzc05hbWU9XCJ3LWZ1bGwgYmctZ3JhZGllbnQtdG8tciBmcm9tLWJsdWUtNTAwIHRvLWN5YW4tNTAwIGhvdmVyOmZyb20tYmx1ZS02MDAgaG92ZXI6dG8tY3lhbi02MDAgdGV4dC13aGl0ZSBweS0zIHJvdW5kZWQteGwgZm9udC1tZWRpdW0gdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMjAwXCJcbiAgICAgID5cbiAgICAgICAgPERyb3BsZXRzIGNsYXNzTmFtZT1cImgtNSB3LTUgaW5saW5lIG1yLTJcIiAvPlxuICAgICAgICBBam91dGVyIHtzZWxlY3RlZEFtb3VudH1tbFxuICAgICAgPC9idXR0b24+XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBIeWRyYXRpb25DdXN0b21JbnB1dDsiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7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

@@ -1,0 +1,60 @@
+1e7fec51bcd37a4d812422e0c3ec8cb9
+"use strict";
+
+/* istanbul ignore next */
+function cov_mrw9pkkcl() {
+  var path = "/workspaces/MyFitHero/src/core/auth/auth.types.ts";
+  var hash = "b80f2c1f55a63eed85bdfc89e44ed284fceff948";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/core/auth/auth.types.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/core/auth/auth.types.ts",
+      mappings: "",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/core/auth/auth.types.ts"],
+      sourcesContent: ["export interface User {\n  id: string;\n  email: string;\n  username?: string;\n  firstName?: string;\n  lastName?: string;\n  sport?: string;\n  weight?: number;\n  height?: number;\n  age?: number;\n  gender?: 'male' | 'female';\n  lifestyle?: 'student' | 'office_worker' | 'physical_job' | 'retired';\n  primaryGoals?: string[];\n  createdAt: string;\n  updatedAt: string;\n}\n\nexport interface AuthState {\n  user: User | undefined;\n  session: any | undefined;\n  isAuthenticated: boolean;\n  isLoading: boolean;\n  error: string | undefined;\n}\n\nexport interface SignUpData {\n  email: string;\n  password: string;\n  username?: string;\n  firstName?: string;\n  lastName?: string;\n}\n\nexport interface SignInData {\n  email: string;\n  password: string;\n}\n\nexport interface UpdateProfileData {\n  username?: string;\n  firstName?: string;\n  lastName?: string;\n  sport?: string;\n  weight?: number;\n  height?: number;\n  age?: number;\n  gender?: 'male' | 'female';\n  lifestyle?: string;\n  primaryGoals?: string[];\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "b80f2c1f55a63eed85bdfc89e44ed284fceff948"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_mrw9pkkcl = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_mrw9pkkcl();
+cov_mrw9pkkcl().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL3dvcmtzcGFjZXMvTXlGaXRIZXJvL3NyYy9jb3JlL2F1dGgvYXV0aC50eXBlcy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgaW50ZXJmYWNlIFVzZXIge1xuICBpZDogc3RyaW5nO1xuICBlbWFpbDogc3RyaW5nO1xuICB1c2VybmFtZT86IHN0cmluZztcbiAgZmlyc3ROYW1lPzogc3RyaW5nO1xuICBsYXN0TmFtZT86IHN0cmluZztcbiAgc3BvcnQ/OiBzdHJpbmc7XG4gIHdlaWdodD86IG51bWJlcjtcbiAgaGVpZ2h0PzogbnVtYmVyO1xuICBhZ2U/OiBudW1iZXI7XG4gIGdlbmRlcj86ICdtYWxlJyB8ICdmZW1hbGUnO1xuICBsaWZlc3R5bGU/OiAnc3R1ZGVudCcgfCAnb2ZmaWNlX3dvcmtlcicgfCAncGh5c2ljYWxfam9iJyB8ICdyZXRpcmVkJztcbiAgcHJpbWFyeUdvYWxzPzogc3RyaW5nW107XG4gIGNyZWF0ZWRBdDogc3RyaW5nO1xuICB1cGRhdGVkQXQ6IHN0cmluZztcbn1cblxuZXhwb3J0IGludGVyZmFjZSBBdXRoU3RhdGUge1xuICB1c2VyOiBVc2VyIHwgdW5kZWZpbmVkO1xuICBzZXNzaW9uOiBhbnkgfCB1bmRlZmluZWQ7XG4gIGlzQXV0aGVudGljYXRlZDogYm9vbGVhbjtcbiAgaXNMb2FkaW5nOiBib29sZWFuO1xuICBlcnJvcjogc3RyaW5nIHwgdW5kZWZpbmVkO1xufVxuXG5leHBvcnQgaW50ZXJmYWNlIFNpZ25VcERhdGEge1xuICBlbWFpbDogc3RyaW5nO1xuICBwYXNzd29yZDogc3RyaW5nO1xuICB1c2VybmFtZT86IHN0cmluZztcbiAgZmlyc3ROYW1lPzogc3RyaW5nO1xuICBsYXN0TmFtZT86IHN0cmluZztcbn1cblxuZXhwb3J0IGludGVyZmFjZSBTaWduSW5EYXRhIHtcbiAgZW1haWw6IHN0cmluZztcbiAgcGFzc3dvcmQ6IHN0cmluZztcbn1cblxuZXhwb3J0IGludGVyZmFjZSBVcGRhdGVQcm9maWxlRGF0YSB7XG4gIHVzZXJuYW1lPzogc3RyaW5nO1xuICBmaXJzdE5hbWU/OiBzdHJpbmc7XG4gIGxhc3ROYW1lPzogc3RyaW5nO1xuICBzcG9ydD86IHN0cmluZztcbiAgd2VpZ2h0PzogbnVtYmVyO1xuICBoZWlnaHQ/OiBudW1iZXI7XG4gIGFnZT86IG51bWJlcjtcbiAgZ2VuZGVyPzogJ21hbGUnIHwgJ2ZlbWFsZSc7XG4gIGxpZmVzdHlsZT86IHN0cmluZztcbiAgcHJpbWFyeUdvYWxzPzogc3RyaW5nW107XG59XG4iXSwibWFwcGluZ3MiOiIiLCJpZ25vcmVMaXN0IjpbXX0=

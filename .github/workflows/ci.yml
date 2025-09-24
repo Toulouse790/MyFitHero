@@ -1,0 +1,22 @@
+name: CI/CD Enterprise
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run test -- --coverage
+      - run: npm run lint
+      - run: npm run build
+      - name: Integration tests
+        run: echo "TODO: Add integration tests"
+      - name: E2E tests
+        run: echo "TODO: Add Playwright tests"
+      - name: Security scanning
+        run: echo "TODO: Add security scan"
+      - name: Performance tests
+        run: echo "TODO: Add Lighthouse CI"

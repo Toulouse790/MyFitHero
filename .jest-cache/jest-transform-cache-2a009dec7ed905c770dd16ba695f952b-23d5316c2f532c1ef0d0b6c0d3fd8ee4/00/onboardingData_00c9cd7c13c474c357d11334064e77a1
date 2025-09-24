@@ -1,0 +1,517 @@
+285cb7ec4880cb9912346bfed2a587c5
+"use strict";
+
+/* istanbul ignore next */
+function cov_2qq394t65c() {
+  var path = "/workspaces/MyFitHero/src/features/auth/data/onboardingData.ts";
+  var hash = "6e0d850a882918e474286d5ece884996eb1ebc8d";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/features/auth/data/onboardingData.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 378
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 24
+        },
+        end: {
+          line: 5,
+          column: 62
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 136
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 90
+        },
+        end: {
+          line: 6,
+          column: 130
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 0
+        },
+        end: {
+          line: 12,
+          column: 2
+        }
+      },
+      "6": {
+        start: {
+          line: 13,
+          column: 0
+        },
+        end: {
+          line: 18,
+          column: 2
+        }
+      },
+      "7": {
+        start: {
+          line: 19,
+          column: 0
+        },
+        end: {
+          line: 24,
+          column: 2
+        }
+      },
+      "8": {
+        start: {
+          line: 25,
+          column: 0
+        },
+        end: {
+          line: 30,
+          column: 2
+        }
+      },
+      "9": {
+        start: {
+          line: 31,
+          column: 0
+        },
+        end: {
+          line: 36,
+          column: 2
+        }
+      },
+      "10": {
+        start: {
+          line: 37,
+          column: 0
+        },
+        end: {
+          line: 42,
+          column: 2
+        }
+      },
+      "11": {
+        start: {
+          line: 43,
+          column: 0
+        },
+        end: {
+          line: 48,
+          column: 2
+        }
+      },
+      "12": {
+        start: {
+          line: 49,
+          column: 0
+        },
+        end: {
+          line: 54,
+          column: 2
+        }
+      },
+      "13": {
+        start: {
+          line: 55,
+          column: 0
+        },
+        end: {
+          line: 60,
+          column: 2
+        }
+      },
+      "14": {
+        start: {
+          line: 61,
+          column: 0
+        },
+        end: {
+          line: 66,
+          column: 2
+        }
+      },
+      "15": {
+        start: {
+          line: 67,
+          column: 0
+        },
+        end: {
+          line: 72,
+          column: 2
+        }
+      },
+      "16": {
+        start: {
+          line: 73,
+          column: 0
+        },
+        end: {
+          line: 80,
+          column: 2
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 6,
+            column: 76
+          },
+          end: {
+            line: 6,
+            column: 77
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 88
+          },
+          end: {
+            line: 6,
+            column: 132
+          }
+        },
+        line: 6
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/features/auth/data/onboardingData.ts",
+      mappings: "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",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/features/auth/data/onboardingData.ts"],
+      sourcesContent: ["// Donn\xE9es pour l'onboarding conversationnel\nimport { AVAILABLE_SPORTS } from '@/core/config/sports.config';\n\nexport { AVAILABLE_SPORTS };\n\nexport const MAIN_OBJECTIVES = [\n  { id: 'performance', label: 'Performance sportive', description: 'Am\xE9liorer mes performances dans mon sport' },\n  { id: 'health_wellness', label: 'Sant\xE9 et bien-\xEAtre', description: 'Maintenir une bonne sant\xE9 g\xE9n\xE9rale' },\n  { id: 'body_composition', label: 'Composition corporelle', description: 'Modifier ma composition corporelle' },\n  { id: 'energy_sleep', label: '\xC9nergie et sommeil', description: 'Am\xE9liorer mon \xE9nergie et mon sommeil' },\n];\n\nexport const AVAILABLE_MODULES = [\n  { id: 'sport', name: 'Sport', description: 'Suivi sportif et performances' },\n  { id: 'nutrition', name: 'Nutrition', description: 'Alimentation et macronutriments' },\n  { id: 'sleep', name: 'Sommeil', description: 'Qualit\xE9 et r\xE9cup\xE9ration' },\n  { id: 'hydration', name: 'Hydratation', description: 'Suivi hydrique quotidien' },\n];\n\nexport const LIFESTYLE_OPTIONS = [\n  { id: 'student', label: '\xC9tudiant(e)', description: 'Horaires flexibles, vie \xE9tudiante' },\n  { id: 'office_worker', label: 'Bureau', description: 'Travail de bureau, s\xE9dentaire' },\n  { id: 'physical_job', label: 'Travail physique', description: 'M\xE9tier demandant de l\\'effort physique' },\n  { id: 'retired', label: 'Retrait\xE9(e)', description: 'Plus de contraintes professionnelles' },\n];\n\nexport const DIETARY_PREFERENCES = [\n  { id: 'omnivore', label: 'Omnivore', description: 'Pas de restriction alimentaire' },\n  { id: 'vegetarian', label: 'V\xE9g\xE9tarien', description: 'Pas de viande ni poisson' },\n  { id: 'vegan', label: 'V\xE9g\xE9talien', description: 'Aucun produit animal' },\n  { id: 'pescatarian', label: 'Pesc\xE9tarien', description: 'Poisson mais pas de viande' },\n];\n\nexport const STRENGTH_OBJECTIVES = [\n  { id: 'muscle_gain', label: 'Gain musculaire', description: 'Augmenter ma masse musculaire' },\n  { id: 'strength', label: 'Force pure', description: 'Am\xE9liorer ma force maximale' },\n  { id: 'endurance', label: 'Endurance musculaire', description: 'Tenir plus longtemps' },\n  { id: 'toning', label: 'Tonification', description: 'Raffermir sans volume' },\n];\n\nexport const NUTRITION_OBJECTIVES = [\n  { id: 'weight_loss', label: 'Perte de poids', description: 'R\xE9duire ma masse corporelle' },\n  { id: 'muscle_gain', label: 'Prise de masse', description: 'Gagner du muscle' },\n  { id: 'maintenance', label: 'Maintien', description: 'Garder mon poids actuel' },\n  { id: 'performance', label: 'Performance', description: 'Optimiser pour le sport' },\n];\n\nexport const FITNESS_EXPERIENCE_LEVELS = [\n  { id: 'beginner', label: 'D\xE9butant', description: 'Moins de 6 mois d\\'exp\xE9rience' },\n  { id: 'intermediate', label: 'Interm\xE9diaire', description: '6 mois \xE0 2 ans d\\'exp\xE9rience' },\n  { id: 'advanced', label: 'Avanc\xE9', description: 'Plus de 2 ans d\\'exp\xE9rience' },\n  { id: 'expert', label: 'Expert', description: 'Entra\xEEneur ou athl\xE8te professionnel' },\n];\n\nexport const EQUIPMENT_LEVELS = [\n  { id: 'none', label: 'Aucun \xE9quipement', description: 'Exercices au poids du corps uniquement' },\n  { id: 'basic', label: '\xC9quipement de base', description: 'Halt\xE8res, tapis, bandes \xE9lastiques' },\n  { id: 'home_gym', label: 'Salle \xE0 domicile', description: 'Rack, barres, banc, machines' },\n  { id: 'full_gym', label: 'Salle de sport', description: 'Acc\xE8s complet \xE0 une salle \xE9quip\xE9e' },\n];\n\nexport const SPORT_LEVELS = [\n  { id: 'recreational', label: 'Loisir', description: 'Pour le plaisir et la forme' },\n  { id: 'amateur_competitive', label: 'Comp\xE9tition amateur', description: 'Comp\xE9titions locales/r\xE9gionales' },\n  { id: 'semi_professional', label: 'Semi-professionnel', description: 'Niveau \xE9lev\xE9, entra\xEEnement r\xE9gulier' },\n  { id: 'professional', label: 'Professionnel', description: 'Athl\xE8te de haut niveau' },\n];\n\nexport const SEASON_PERIODS = [\n  { id: 'off_season', label: 'Hors saison', description: 'Pas de comp\xE9tition pr\xE9vue' },\n  { id: 'pre_season', label: 'Pr\xE9-saison', description: 'Pr\xE9paration pour la saison' },\n  { id: 'in_season', label: 'En saison', description: 'P\xE9riode de comp\xE9tition' },\n  { id: 'recovery', label: 'R\xE9cup\xE9ration', description: 'Phase de repos actif' },\n];\n\nexport const TRAINING_AVAILABILITY = [\n  { id: '15-30min', label: '15-30 minutes', description: 'Sessions courtes mais efficaces' },\n  { id: '30-60min', label: '30-60 minutes', description: 'Dur\xE9e standard recommand\xE9e' },\n  { id: '60-90min', label: '1-1h30', description: 'Sessions plus longues et compl\xE8tes' },\n  { id: '90min+', label: 'Plus de 1h30', description: 'Sessions \xE9tendues pour objectifs sp\xE9cifiques' },\n];\n\nexport const HEALTH_CONDITIONS = [\n  { id: 'none', label: 'Aucune condition particuli\xE8re', description: 'En bonne sant\xE9 g\xE9n\xE9rale' },\n  { id: 'back_pain', label: 'Douleurs dorsales', description: 'Probl\xE8mes de dos chroniques ou r\xE9cents' },\n  { id: 'joint_issues', label: 'Probl\xE8mes articulaires', description: 'Douleurs aux genoux, \xE9paules, etc.' },\n  { id: 'cardiovascular', label: 'Condition cardiovasculaire', description: 'Hypertension, probl\xE8mes cardiaques' },\n  { id: 'diabetes', label: 'Diab\xE8te', description: 'Type 1 ou Type 2' },\n  { id: 'other', label: 'Autre condition', description: 'Condition m\xE9dicale sp\xE9cifique \xE0 pr\xE9ciser' },\n];"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "6e0d850a882918e474286d5ece884996eb1ebc8d"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2qq394t65c = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_2qq394t65c();
+cov_2qq394t65c().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_2qq394t65c().s[1]++;
+exports.HEALTH_CONDITIONS = exports.TRAINING_AVAILABILITY = exports.SEASON_PERIODS = exports.SPORT_LEVELS = exports.EQUIPMENT_LEVELS = exports.FITNESS_EXPERIENCE_LEVELS = exports.NUTRITION_OBJECTIVES = exports.STRENGTH_OBJECTIVES = exports.DIETARY_PREFERENCES = exports.LIFESTYLE_OPTIONS = exports.AVAILABLE_MODULES = exports.MAIN_OBJECTIVES = exports.AVAILABLE_SPORTS = void 0;
+// Données pour l'onboarding conversationnel
+const sports_config_1 =
+/* istanbul ignore next */
+(cov_2qq394t65c().s[2]++, require("@/core/config/sports.config"));
+/* istanbul ignore next */
+cov_2qq394t65c().s[3]++;
+Object.defineProperty(exports, "AVAILABLE_SPORTS", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_2qq394t65c().f[0]++;
+    cov_2qq394t65c().s[4]++;
+    return sports_config_1.AVAILABLE_SPORTS;
+  }
+});
+/* istanbul ignore next */
+cov_2qq394t65c().s[5]++;
+exports.MAIN_OBJECTIVES = [{
+  id: 'performance',
+  label: 'Performance sportive',
+  description: 'Améliorer mes performances dans mon sport'
+}, {
+  id: 'health_wellness',
+  label: 'Santé et bien-être',
+  description: 'Maintenir une bonne santé générale'
+}, {
+  id: 'body_composition',
+  label: 'Composition corporelle',
+  description: 'Modifier ma composition corporelle'
+}, {
+  id: 'energy_sleep',
+  label: 'Énergie et sommeil',
+  description: 'Améliorer mon énergie et mon sommeil'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[6]++;
+exports.AVAILABLE_MODULES = [{
+  id: 'sport',
+  name: 'Sport',
+  description: 'Suivi sportif et performances'
+}, {
+  id: 'nutrition',
+  name: 'Nutrition',
+  description: 'Alimentation et macronutriments'
+}, {
+  id: 'sleep',
+  name: 'Sommeil',
+  description: 'Qualité et récupération'
+}, {
+  id: 'hydration',
+  name: 'Hydratation',
+  description: 'Suivi hydrique quotidien'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[7]++;
+exports.LIFESTYLE_OPTIONS = [{
+  id: 'student',
+  label: 'Étudiant(e)',
+  description: 'Horaires flexibles, vie étudiante'
+}, {
+  id: 'office_worker',
+  label: 'Bureau',
+  description: 'Travail de bureau, sédentaire'
+}, {
+  id: 'physical_job',
+  label: 'Travail physique',
+  description: 'Métier demandant de l\'effort physique'
+}, {
+  id: 'retired',
+  label: 'Retraité(e)',
+  description: 'Plus de contraintes professionnelles'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[8]++;
+exports.DIETARY_PREFERENCES = [{
+  id: 'omnivore',
+  label: 'Omnivore',
+  description: 'Pas de restriction alimentaire'
+}, {
+  id: 'vegetarian',
+  label: 'Végétarien',
+  description: 'Pas de viande ni poisson'
+}, {
+  id: 'vegan',
+  label: 'Végétalien',
+  description: 'Aucun produit animal'
+}, {
+  id: 'pescatarian',
+  label: 'Pescétarien',
+  description: 'Poisson mais pas de viande'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[9]++;
+exports.STRENGTH_OBJECTIVES = [{
+  id: 'muscle_gain',
+  label: 'Gain musculaire',
+  description: 'Augmenter ma masse musculaire'
+}, {
+  id: 'strength',
+  label: 'Force pure',
+  description: 'Améliorer ma force maximale'
+}, {
+  id: 'endurance',
+  label: 'Endurance musculaire',
+  description: 'Tenir plus longtemps'
+}, {
+  id: 'toning',
+  label: 'Tonification',
+  description: 'Raffermir sans volume'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[10]++;
+exports.NUTRITION_OBJECTIVES = [{
+  id: 'weight_loss',
+  label: 'Perte de poids',
+  description: 'Réduire ma masse corporelle'
+}, {
+  id: 'muscle_gain',
+  label: 'Prise de masse',
+  description: 'Gagner du muscle'
+}, {
+  id: 'maintenance',
+  label: 'Maintien',
+  description: 'Garder mon poids actuel'
+}, {
+  id: 'performance',
+  label: 'Performance',
+  description: 'Optimiser pour le sport'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[11]++;
+exports.FITNESS_EXPERIENCE_LEVELS = [{
+  id: 'beginner',
+  label: 'Débutant',
+  description: 'Moins de 6 mois d\'expérience'
+}, {
+  id: 'intermediate',
+  label: 'Intermédiaire',
+  description: '6 mois à 2 ans d\'expérience'
+}, {
+  id: 'advanced',
+  label: 'Avancé',
+  description: 'Plus de 2 ans d\'expérience'
+}, {
+  id: 'expert',
+  label: 'Expert',
+  description: 'Entraîneur ou athlète professionnel'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[12]++;
+exports.EQUIPMENT_LEVELS = [{
+  id: 'none',
+  label: 'Aucun équipement',
+  description: 'Exercices au poids du corps uniquement'
+}, {
+  id: 'basic',
+  label: 'Équipement de base',
+  description: 'Haltères, tapis, bandes élastiques'
+}, {
+  id: 'home_gym',
+  label: 'Salle à domicile',
+  description: 'Rack, barres, banc, machines'
+}, {
+  id: 'full_gym',
+  label: 'Salle de sport',
+  description: 'Accès complet à une salle équipée'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[13]++;
+exports.SPORT_LEVELS = [{
+  id: 'recreational',
+  label: 'Loisir',
+  description: 'Pour le plaisir et la forme'
+}, {
+  id: 'amateur_competitive',
+  label: 'Compétition amateur',
+  description: 'Compétitions locales/régionales'
+}, {
+  id: 'semi_professional',
+  label: 'Semi-professionnel',
+  description: 'Niveau élevé, entraînement régulier'
+}, {
+  id: 'professional',
+  label: 'Professionnel',
+  description: 'Athlète de haut niveau'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[14]++;
+exports.SEASON_PERIODS = [{
+  id: 'off_season',
+  label: 'Hors saison',
+  description: 'Pas de compétition prévue'
+}, {
+  id: 'pre_season',
+  label: 'Pré-saison',
+  description: 'Préparation pour la saison'
+}, {
+  id: 'in_season',
+  label: 'En saison',
+  description: 'Période de compétition'
+}, {
+  id: 'recovery',
+  label: 'Récupération',
+  description: 'Phase de repos actif'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[15]++;
+exports.TRAINING_AVAILABILITY = [{
+  id: '15-30min',
+  label: '15-30 minutes',
+  description: 'Sessions courtes mais efficaces'
+}, {
+  id: '30-60min',
+  label: '30-60 minutes',
+  description: 'Durée standard recommandée'
+}, {
+  id: '60-90min',
+  label: '1-1h30',
+  description: 'Sessions plus longues et complètes'
+}, {
+  id: '90min+',
+  label: 'Plus de 1h30',
+  description: 'Sessions étendues pour objectifs spécifiques'
+}];
+/* istanbul ignore next */
+cov_2qq394t65c().s[16]++;
+exports.HEALTH_CONDITIONS = [{
+  id: 'none',
+  label: 'Aucune condition particulière',
+  description: 'En bonne santé générale'
+}, {
+  id: 'back_pain',
+  label: 'Douleurs dorsales',
+  description: 'Problèmes de dos chroniques ou récents'
+}, {
+  id: 'joint_issues',
+  label: 'Problèmes articulaires',
+  description: 'Douleurs aux genoux, épaules, etc.'
+}, {
+  id: 'cardiovascular',
+  label: 'Condition cardiovasculaire',
+  description: 'Hypertension, problèmes cardiaques'
+}, {
+  id: 'diabetes',
+  label: 'Diabète',
+  description: 'Type 1 ou Type 2'
+}, {
+  id: 'other',
+  label: 'Autre condition',
+  description: 'Condition médicale spécifique à préciser'
+}];
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMnFxMzk0dDY1YyIsImFjdHVhbENvdmVyYWdlIiwicyIsInNwb3J0c19jb25maWdfMSIsInJlcXVpcmUiLCJPYmplY3QiLCJkZWZpbmVQcm9wZXJ0eSIsImV4cG9ydHMiLCJlbnVtZXJhYmxlIiwiZ2V0IiwiZiIsIkFWQUlMQUJMRV9TUE9SVFMiLCJNQUlOX09CSkVDVElWRVMiLCJpZCIsImxhYmVsIiwiZGVzY3JpcHRpb24iLCJBVkFJTEFCTEVfTU9EVUxFUyIsIm5hbWUiLCJMSUZFU1RZTEVfT1BUSU9OUyIsIkRJRVRBUllfUFJFRkVSRU5DRVMiLCJTVFJFTkdUSF9PQkpFQ1RJVkVTIiwiTlVUUklUSU9OX09CSkVDVElWRVMiLCJGSVRORVNTX0VYUEVSSUVOQ0VfTEVWRUxTIiwiRVFVSVBNRU5UX0xFVkVMUyIsIlNQT1JUX0xFVkVMUyIsIlNFQVNPTl9QRVJJT0RTIiwiVFJBSU5JTkdfQVZBSUxBQklMSVRZIiwiSEVBTFRIX0NPTkRJVElPTlMiXSwic291cmNlcyI6WyIvd29ya3NwYWNlcy9NeUZpdEhlcm8vc3JjL2ZlYXR1cmVzL2F1dGgvZGF0YS9vbmJvYXJkaW5nRGF0YS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBEb25uw6llcyBwb3VyIGwnb25ib2FyZGluZyBjb252ZXJzYXRpb25uZWxcbmltcG9ydCB7IEFWQUlMQUJMRV9TUE9SVFMgfSBmcm9tICdAL2NvcmUvY29uZmlnL3Nwb3J0cy5jb25maWcnO1xuXG5leHBvcnQgeyBBVkFJTEFCTEVfU1BPUlRTIH07XG5cbmV4cG9ydCBjb25zdCBNQUlOX09CSkVDVElWRVMgPSBbXG4gIHsgaWQ6ICdwZXJmb3JtYW5jZScsIGxhYmVsOiAnUGVyZm9ybWFuY2Ugc3BvcnRpdmUnLCBkZXNjcmlwdGlvbjogJ0Ftw6lsaW9yZXIgbWVzIHBlcmZvcm1hbmNlcyBkYW5zIG1vbiBzcG9ydCcgfSxcbiAgeyBpZDogJ2hlYWx0aF93ZWxsbmVzcycsIGxhYmVsOiAnU2FudMOpIGV0IGJpZW4tw6p0cmUnLCBkZXNjcmlwdGlvbjogJ01haW50ZW5pciB1bmUgYm9ubmUgc2FudMOpIGfDqW7DqXJhbGUnIH0sXG4gIHsgaWQ6ICdib2R5X2NvbXBvc2l0aW9uJywgbGFiZWw6ICdDb21wb3NpdGlvbiBjb3Jwb3JlbGxlJywgZGVzY3JpcHRpb246ICdNb2RpZmllciBtYSBjb21wb3NpdGlvbiBjb3Jwb3JlbGxlJyB9LFxuICB7IGlkOiAnZW5lcmd5X3NsZWVwJywgbGFiZWw6ICfDiW5lcmdpZSBldCBzb21tZWlsJywgZGVzY3JpcHRpb246ICdBbcOpbGlvcmVyIG1vbiDDqW5lcmdpZSBldCBtb24gc29tbWVpbCcgfSxcbl07XG5cbmV4cG9ydCBjb25zdCBBVkFJTEFCTEVfTU9EVUxFUyA9IFtcbiAgeyBpZDogJ3Nwb3J0JywgbmFtZTogJ1Nwb3J0JywgZGVzY3JpcHRpb246ICdTdWl2aSBzcG9ydGlmIGV0IHBlcmZvcm1hbmNlcycgfSxcbiAgeyBpZDogJ251dHJpdGlvbicsIG5hbWU6ICdOdXRyaXRpb24nLCBkZXNjcmlwdGlvbjogJ0FsaW1lbnRhdGlvbiBldCBtYWNyb251dHJpbWVudHMnIH0sXG4gIHsgaWQ6ICdzbGVlcCcsIG5hbWU6ICdTb21tZWlsJywgZGVzY3JpcHRpb246ICdRdWFsaXTDqSBldCByw6ljdXDDqXJhdGlvbicgfSxcbiAgeyBpZDogJ2h5ZHJhdGlvbicsIG5hbWU6ICdIeWRyYXRhdGlvbicsIGRlc2NyaXB0aW9uOiAnU3VpdmkgaHlkcmlxdWUgcXVvdGlkaWVuJyB9LFxuXTtcblxuZXhwb3J0IGNvbnN0IExJRkVTVFlMRV9PUFRJT05TID0gW1xuICB7IGlkOiAnc3R1ZGVudCcsIGxhYmVsOiAnw4l0dWRpYW50KGUpJywgZGVzY3JpcHRpb246ICdIb3JhaXJlcyBmbGV4aWJsZXMsIHZpZSDDqXR1ZGlhbnRlJyB9LFxuICB7IGlkOiAnb2ZmaWNlX3dvcmtlcicsIGxhYmVsOiAnQnVyZWF1JywgZGVzY3JpcHRpb246ICdUcmF2YWlsIGRlIGJ1cmVhdSwgc8OpZGVudGFpcmUnIH0sXG4gIHsgaWQ6ICdwaHlzaWNhbF9qb2InLCBsYWJlbDogJ1RyYXZhaWwgcGh5c2lxdWUnLCBkZXNjcmlwdGlvbjogJ03DqXRpZXIgZGVtYW5kYW50IGRlIGxcXCdlZmZvcnQgcGh5c2lxdWUnIH0sXG4gIHsgaWQ6ICdyZXRpcmVkJywgbGFiZWw6ICdSZXRyYWl0w6koZSknLCBkZXNjcmlwdGlvbjogJ1BsdXMgZGUgY29udHJhaW50ZXMgcHJvZmVzc2lvbm5lbGxlcycgfSxcbl07XG5cbmV4cG9ydCBjb25zdCBESUVUQVJZX1BSRUZFUkVOQ0VTID0gW1xuICB7IGlkOiAnb21uaXZvcmUnLCBsYWJlbDogJ09tbml2b3JlJywgZGVzY3JpcHRpb246ICdQYXMgZGUgcmVzdHJpY3Rpb24gYWxpbWVudGFpcmUnIH0sXG4gIHsgaWQ6ICd2ZWdldGFyaWFuJywgbGFiZWw6ICdWw6lnw6l0YXJpZW4nLCBkZXNjcmlwdGlvbjogJ1BhcyBkZSB2aWFuZGUgbmkgcG9pc3NvbicgfSxcbiAgeyBpZDogJ3ZlZ2FuJywgbGFiZWw6ICdWw6lnw6l0YWxpZW4nLCBkZXNjcmlwdGlvbjogJ0F1Y3VuIHByb2R1aXQgYW5pbWFsJyB9LFxuICB7IGlkOiAncGVzY2F0YXJpYW4nLCBsYWJlbDogJ1Blc2PDqXRhcmllbicsIGRlc2NyaXB0aW9uOiAnUG9pc3NvbiBtYWlzIHBhcyBkZSB2aWFuZGUnIH0sXG5dO1xuXG5leHBvcnQgY29uc3QgU1RSRU5HVEhfT0JKRUNUSVZFUyA9IFtcbiAgeyBpZDogJ211c2NsZV9nYWluJywgbGFiZWw6ICdHYWluIG11c2N1bGFpcmUnLCBkZXNjcmlwdGlvbjogJ0F1Z21lbnRlciBtYSBtYXNzZSBtdXNjdWxhaXJlJyB9LFxuICB7IGlkOiAnc3RyZW5ndGgnLCBsYWJlbDogJ0ZvcmNlIHB1cmUnLCBkZXNjcmlwdGlvbjogJ0Ftw6lsaW9yZXIgbWEgZm9yY2UgbWF4aW1hbGUnIH0sXG4gIHsgaWQ6ICdlbmR1cmFuY2UnLCBsYWJlbDogJ0VuZHVyYW5jZSBtdXNjdWxhaXJlJywgZGVzY3JpcHRpb246ICdUZW5pciBwbHVzIGxvbmd0ZW1wcycgfSxcbiAgeyBpZDogJ3RvbmluZycsIGxhYmVsOiAnVG9uaWZpY2F0aW9uJywgZGVzY3JpcHRpb246ICdSYWZmZXJtaXIgc2FucyB2b2x1bWUnIH0sXG5dO1xuXG5leHBvcnQgY29uc3QgTlVUUklUSU9OX09CSkVDVElWRVMgPSBbXG4gIHsgaWQ6ICd3ZWlnaHRfbG9zcycsIGxhYmVsOiAnUGVydGUgZGUgcG9pZHMnLCBkZXNjcmlwdGlvbjogJ1LDqWR1aXJlIG1hIG1hc3NlIGNvcnBvcmVsbGUnIH0sXG4gIHsgaWQ6ICdtdXNjbGVfZ2FpbicsIGxhYmVsOiAnUHJpc2UgZGUgbWFzc2UnLCBkZXNjcmlwdGlvbjogJ0dhZ25lciBkdSBtdXNjbGUnIH0sXG4gIHsgaWQ6ICdtYWludGVuYW5jZScsIGxhYmVsOiAnTWFpbnRpZW4nLCBkZXNjcmlwdGlvbjogJ0dhcmRlciBtb24gcG9pZHMgYWN0dWVsJyB9LFxuICB7IGlkOiAncGVyZm9ybWFuY2UnLCBsYWJlbDogJ1BlcmZvcm1hbmNlJywgZGVzY3JpcHRpb246ICdPcHRpbWlzZXIgcG91ciBsZSBzcG9ydCcgfSxcbl07XG5cbmV4cG9ydCBjb25zdCBGSVRORVNTX0VYUEVSSUVOQ0VfTEVWRUxTID0gW1xuICB7IGlkOiAnYmVnaW5uZXInLCBsYWJlbDogJ0TDqWJ1dGFudCcsIGRlc2NyaXB0aW9uOiAnTW9pbnMgZGUgNiBtb2lzIGRcXCdleHDDqXJpZW5jZScgfSxcbiAgeyBpZDogJ2ludGVybWVkaWF0ZScsIGxhYmVsOiAnSW50ZXJtw6lkaWFpcmUnLCBkZXNjcmlwdGlvbjogJzYgbW9pcyDDoCAyIGFucyBkXFwnZXhww6lyaWVuY2UnIH0sXG4gIHsgaWQ6ICdhZHZhbmNlZCcsIGxhYmVsOiAnQXZhbmPDqScsIGRlc2NyaXB0aW9uOiAnUGx1cyBkZSAyIGFucyBkXFwnZXhww6lyaWVuY2UnIH0sXG4gIHsgaWQ6ICdleHBlcnQnLCBsYWJlbDogJ0V4cGVydCcsIGRlc2NyaXB0aW9uOiAnRW50cmHDrm5ldXIgb3UgYXRobMOodGUgcHJvZmVzc2lvbm5lbCcgfSxcbl07XG5cbmV4cG9ydCBjb25zdCBFUVVJUE1FTlRfTEVWRUxTID0gW1xuICB7IGlkOiAnbm9uZScsIGxhYmVsOiAnQXVjdW4gw6lxdWlwZW1lbnQnLCBkZXNjcmlwdGlvbjogJ0V4ZXJjaWNlcyBhdSBwb2lkcyBkdSBjb3JwcyB1bmlxdWVtZW50JyB9LFxuICB7IGlkOiAnYmFzaWMnLCBsYWJlbDogJ8OJcXVpcGVtZW50IGRlIGJhc2UnLCBkZXNjcmlwdGlvbjogJ0hhbHTDqHJlcywgdGFwaXMsIGJhbmRlcyDDqWxhc3RpcXVlcycgfSxcbiAgeyBpZDogJ2hvbWVfZ3ltJywgbGFiZWw6ICdTYWxsZSDDoCBkb21pY2lsZScsIGRlc2NyaXB0aW9uOiAnUmFjaywgYmFycmVzLCBiYW5jLCBtYWNoaW5lcycgfSxcbiAgeyBpZDogJ2Z1bGxfZ3ltJywgbGFiZWw6ICdTYWxsZSBkZSBzcG9ydCcsIGRlc2NyaXB0aW9uOiAnQWNjw6hzIGNvbXBsZXQgw6AgdW5lIHNhbGxlIMOpcXVpcMOpZScgfSxcbl07XG5cbmV4cG9ydCBjb25zdCBTUE9SVF9MRVZFTFMgPSBbXG4gIHsgaWQ6ICdyZWNyZWF0aW9uYWwnLCBsYWJlbDogJ0xvaXNpcicsIGRlc2NyaXB0aW9uOiAnUG91ciBsZSBwbGFpc2lyIGV0IGxhIGZvcm1lJyB9LFxuICB7IGlkOiAnYW1hdGV1cl9jb21wZXRpdGl2ZScsIGxhYmVsOiAnQ29tcMOpdGl0aW9uIGFtYXRldXInLCBkZXNjcmlwdGlvbjogJ0NvbXDDqXRpdGlvbnMgbG9jYWxlcy9yw6lnaW9uYWxlcycgfSxcbiAgeyBpZDogJ3NlbWlfcHJvZmVzc2lvbmFsJywgbGFiZWw6ICdTZW1pLXByb2Zlc3Npb25uZWwnLCBkZXNjcmlwdGlvbjogJ05pdmVhdSDDqWxldsOpLCBlbnRyYcOubmVtZW50IHLDqWd1bGllcicgfSxcbiAgeyBpZDogJ3Byb2Zlc3Npb25hbCcsIGxhYmVsOiAnUHJvZmVzc2lvbm5lbCcsIGRlc2NyaXB0aW9uOiAnQXRobMOodGUgZGUgaGF1dCBuaXZlYXUnIH0sXG5dO1xuXG5leHBvcnQgY29uc3QgU0VBU09OX1BFUklPRFMgPSBbXG4gIHsgaWQ6ICdvZmZfc2Vhc29uJywgbGFiZWw6ICdIb3JzIHNhaXNvbicsIGRlc2NyaXB0aW9uOiAnUGFzIGRlIGNvbXDDqXRpdGlvbiBwcsOpdnVlJyB9LFxuICB7IGlkOiAncHJlX3NlYXNvbicsIGxhYmVsOiAnUHLDqS1zYWlzb24nLCBkZXNjcmlwdGlvbjogJ1Byw6lwYXJhdGlvbiBwb3VyIGxhIHNhaXNvbicgfSxcbiAgeyBpZDogJ2luX3NlYXNvbicsIGxhYmVsOiAnRW4gc2Fpc29uJywgZGVzY3JpcHRpb246ICdQw6lyaW9kZSBkZSBjb21ww6l0aXRpb24nIH0sXG4gIHsgaWQ6ICdyZWNvdmVyeScsIGxhYmVsOiAnUsOpY3Vww6lyYXRpb24nLCBkZXNjcmlwdGlvbjogJ1BoYXNlIGRlIHJlcG9zIGFjdGlmJyB9LFxuXTtcblxuZXhwb3J0IGNvbnN0IFRSQUlOSU5HX0FWQUlMQUJJTElUWSA9IFtcbiAgeyBpZDogJzE1LTMwbWluJywgbGFiZWw6ICcxNS0zMCBtaW51dGVzJywgZGVzY3JpcHRpb246ICdTZXNzaW9ucyBjb3VydGVzIG1haXMgZWZmaWNhY2VzJyB9LFxuICB7IGlkOiAnMzAtNjBtaW4nLCBsYWJlbDogJzMwLTYwIG1pbnV0ZXMnLCBkZXNjcmlwdGlvbjogJ0R1csOpZSBzdGFuZGFyZCByZWNvbW1hbmTDqWUnIH0sXG4gIHsgaWQ6ICc2MC05MG1pbicsIGxhYmVsOiAnMS0xaDMwJywgZGVzY3JpcHRpb246ICdTZXNzaW9ucyBwbHVzIGxvbmd1ZXMgZXQgY29tcGzDqHRlcycgfSxcbiAgeyBpZDogJzkwbWluKycsIGxhYmVsOiAnUGx1cyBkZSAxaDMwJywgZGVzY3JpcHRpb246ICdTZXNzaW9ucyDDqXRlbmR1ZXMgcG91ciBvYmplY3RpZnMgc3DDqWNpZmlxdWVzJyB9LFxuXTtcblxuZXhwb3J0IGNvbnN0IEhFQUxUSF9DT05ESVRJT05TID0gW1xuICB7IGlkOiAnbm9uZScsIGxhYmVsOiAnQXVjdW5lIGNvbmRpdGlvbiBwYXJ0aWN1bGnDqHJlJywgZGVzY3JpcHRpb246ICdFbiBib25uZSBzYW50w6kgZ8OpbsOpcmFsZScgfSxcbiAgeyBpZDogJ2JhY2tfcGFpbicsIGxhYmVsOiAnRG91bGV1cnMgZG9yc2FsZXMnLCBkZXNjcmlwdGlvbjogJ1Byb2Jsw6htZXMgZGUgZG9zIGNocm9uaXF1ZXMgb3UgcsOpY2VudHMnIH0sXG4gIHsgaWQ6ICdqb2ludF9pc3N1ZXMnLCBsYWJlbDogJ1Byb2Jsw6htZXMgYXJ0aWN1bGFpcmVzJywgZGVzY3JpcHRpb246ICdEb3VsZXVycyBhdXggZ2Vub3V4LCDDqXBhdWxlcywgZXRjLicgfSxcbiAgeyBpZDogJ2NhcmRpb3Zhc2N1bGFyJywgbGFiZWw6ICdDb25kaXRpb24gY2FyZGlvdmFzY3VsYWlyZScsIGRlc2NyaXB0aW9uOiAnSHlwZXJ0ZW5zaW9uLCBwcm9ibMOobWVzIGNhcmRpYXF1ZXMnIH0sXG4gIHsgaWQ6ICdkaWFiZXRlcycsIGxhYmVsOiAnRGlhYsOodGUnLCBkZXNjcmlwdGlvbjogJ1R5cGUgMSBvdSBUeXBlIDInIH0sXG4gIHsgaWQ6ICdvdGhlcicsIGxhYmVsOiAnQXV0cmUgY29uZGl0aW9uJywgZGVzY3JpcHRpb246ICdDb25kaXRpb24gbcOpZGljYWxlIHNww6ljaWZpcXVlIMOgIHByw6ljaXNlcicgfSxcbl07Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFlUTtJQUFBQSxjQUFBLFlBQUFBLENBQUE7TUFBQSxP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

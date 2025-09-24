@@ -1,5 +1,22 @@
 import '@testing-library/jest-dom';
 
+import 'jest-axe/extend-expect';
+
+// Mocks globaux pour l'environnement de test (fetch, localStorage, etc.)
+// Temporairement simplifiés pour éviter les dépendances manquantes
+
+// Mock pour fetch simplifié
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    status: 200,
+    json: () => Promise.resolve({}),
+    text: () => Promise.resolve(''),
+  })
+) as jest.Mock;
+
+// Ajoutez ici d'autres mocks globaux si besoin (Web Speech API, etc.)
+
 // Mock pour env.config.ts qui utilise import.meta.env
 jest.mock('@/core/config/env.config', () => ({
   env: {

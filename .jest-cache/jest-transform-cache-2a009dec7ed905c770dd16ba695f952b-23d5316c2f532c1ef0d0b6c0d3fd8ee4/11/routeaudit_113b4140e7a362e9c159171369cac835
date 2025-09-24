@@ -1,0 +1,494 @@
+58495505b7b82e0823f687b049567256
+"use strict";
+
+// Test des parcours utilisateur - MyFitHero Routes Audit
+// 🎯 Script pour valider tous les parcours utilisateur critiques
+/* istanbul ignore next */
+function cov_vhbnoktwp() {
+  var path = "/workspaces/MyFitHero/src/core/routes/route-audit.ts";
+  var hash = "1fb385cdb8fa2feb2203d1212876082e2da974d4";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/core/routes/route-audit.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 144
+        }
+      },
+      "2": {
+        start: {
+          line: 7,
+          column: 0
+        },
+        end: {
+          line: 143,
+          column: 2
+        }
+      },
+      "3": {
+        start: {
+          line: 145,
+          column: 0
+        },
+        end: {
+          line: 165,
+          column: 2
+        }
+      },
+      "4": {
+        start: {
+          line: 167,
+          column: 0
+        },
+        end: {
+          line: 184,
+          column: 2
+        }
+      },
+      "5": {
+        start: {
+          line: 186,
+          column: 0
+        },
+        end: {
+          line: 218,
+          column: 2
+        }
+      },
+      "6": {
+        start: {
+          line: 220,
+          column: 0
+        },
+        end: {
+          line: 231,
+          column: 2
+        }
+      },
+      "7": {
+        start: {
+          line: 221,
+          column: 64
+        },
+        end: {
+          line: 221,
+          column: 89
+        }
+      },
+      "8": {
+        start: {
+          line: 222,
+          column: 65
+        },
+        end: {
+          line: 222,
+          column: 91
+        }
+      },
+      "9": {
+        start: {
+          line: 223,
+          column: 62
+        },
+        end: {
+          line: 223,
+          column: 85
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 221,
+            column: 59
+          },
+          end: {
+            line: 221,
+            column: 60
+          }
+        },
+        loc: {
+          start: {
+            line: 221,
+            column: 64
+          },
+          end: {
+            line: 221,
+            column: 89
+          }
+        },
+        line: 221
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 222,
+            column: 60
+          },
+          end: {
+            line: 222,
+            column: 61
+          }
+        },
+        loc: {
+          start: {
+            line: 222,
+            column: 65
+          },
+          end: {
+            line: 222,
+            column: 91
+          }
+        },
+        line: 222
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 223,
+            column: 57
+          },
+          end: {
+            line: 223,
+            column: 58
+          }
+        },
+        loc: {
+          start: {
+            line: 223,
+            column: 62
+          },
+          end: {
+            line: 223,
+            column: 85
+          }
+        },
+        line: 223
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/core/routes/route-audit.ts",
+      mappings: "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",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/core/routes/route-audit.ts"],
+      sourcesContent: ["// Test des parcours utilisateur - MyFitHero Routes Audit\n// \uD83C\uDFAF Script pour valider tous les parcours utilisateur critiques\n\nimport React from 'react';\n\n// Types pour les routes\ninterface RouteTest {\n  path: string;\n  component: string;\n  requiresAuth: boolean;\n  requiresOnboarding: boolean;\n  title: string;\n  description: string;\n  priority: 'critical' | 'important' | 'normal';\n  userJourney: string;\n}\n\n// Routes critiques identifi\xE9es\nexport const CRITICAL_USER_JOURNEYS: RouteTest[] = [\n  // \uD83D\uDE80 PARCOURS D'ACQUISITION\n  {\n    path: '/',\n    component: 'LandingPage',\n    requiresAuth: false,\n    requiresOnboarding: false,\n    title: 'MyFitHero - AI-Powered Fitness for Americans',\n    description: 'Page d\\'accueil - point d\\'entr\xE9e principal',\n    priority: 'critical',\n    userJourney: 'acquisition'\n  },\n  {\n    path: '/register',\n    component: 'AuthPage',\n    requiresAuth: false,\n    requiresOnboarding: false,\n    title: 'Create Account - MyFitHero',\n    description: 'Inscription utilisateur - conversion critique',\n    priority: 'critical',\n    userJourney: 'acquisition'\n  },\n  {\n    path: '/login',\n    component: 'AuthPage',\n    requiresAuth: false,\n    requiresOnboarding: false,\n    title: 'Sign In - MyFitHero',\n    description: 'Connexion utilisateur - r\xE9tention',\n    priority: 'critical',\n    userJourney: 'activation'\n  },\n\n  // \uD83C\uDFAF PARCOURS D'ACTIVATION\n  {\n    path: '/onboarding',\n    component: 'OnboardingPage',\n    requiresAuth: true,\n    requiresOnboarding: false,\n    title: 'Welcome to MyFitHero',\n    description: 'Onboarding initial - activation utilisateur',\n    priority: 'critical',\n    userJourney: 'activation'\n  },\n  {\n    path: '/dashboard',\n    component: 'DashboardPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'Dashboard - MyFitHero',\n    description: 'Dashboard principal - c\u0153ur de l\\'app',\n    priority: 'critical',\n    userJourney: 'engagement'\n  },\n\n  // \uD83D\uDCAA PARCOURS D'ENGAGEMENT CORE\n  {\n    path: '/workouts',\n    component: 'WorkoutPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'Workouts - MyFitHero',\n    description: 'Entra\xEEnements - valeur principale',\n    priority: 'critical',\n    userJourney: 'engagement'\n  },\n  {\n    path: '/analytics',\n    component: 'AnalyticsPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'Progress Analytics - MyFitHero',\n    description: 'Analytics - r\xE9tention long terme',\n    priority: 'critical',\n    userJourney: 'retention'\n  },\n  {\n    path: '/ai-coach',\n    component: 'AICoachPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'AI Coach - MyFitHero',\n    description: 'IA Coach - diff\xE9renciation produit',\n    priority: 'critical',\n    userJourney: 'engagement'\n  },\n\n  // \uD83C\uDF1F PARCOURS SOCIAL & RETENTION\n  {\n    path: '/social',\n    component: 'SocialPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'Community - MyFitHero',\n    description: 'R\xE9seau social - r\xE9tention virale',\n    priority: 'important',\n    userJourney: 'retention'\n  },\n  {\n    path: '/profile',\n    component: 'ProfilePage',\n    requiresAuth: true,\n    requiresOnboarding: false,\n    title: 'Your Profile - MyFitHero',\n    description: 'Profil utilisateur - personnalisation',\n    priority: 'important',\n    userJourney: 'engagement'\n  },\n\n  // \uD83D\uDCCA PARCOURS WELLNESS COMPLET\n  {\n    path: '/nutrition',\n    component: 'NutritionPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'Nutrition - MyFitHero',\n    description: 'Nutrition - pilier wellness',\n    priority: 'important',\n    userJourney: 'engagement'\n  },\n  {\n    path: '/sleep',\n    component: 'SleepPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'Sleep Tracking - MyFitHero',\n    description: 'Sommeil - r\xE9cup\xE9ration',\n    priority: 'important',\n    userJourney: 'engagement'\n  },\n  {\n    path: '/hydration',\n    component: 'HydrationPage',\n    requiresAuth: true,\n    requiresOnboarding: true,\n    title: 'Hydration - MyFitHero',\n    description: 'Hydratation - habitudes quotidiennes',\n    priority: 'normal',\n    userJourney: 'engagement'\n  }\n];\n\n// Parcours utilisateur types par funnel\nexport const USER_JOURNEYS = {\n  // \uD83C\uDFAF ACQUISITION (Non-connect\xE9 \u2192 Inscription)\n  acquisition: [\n    '/ \u2192 /register \u2192 /onboarding \u2192 /dashboard'\n  ],\n  \n  // \uD83D\uDE80 ACTIVATION (Nouveau utilisateur \u2192 Premier usage)\n  activation: [\n    '/login \u2192 /onboarding \u2192 /dashboard \u2192 /workouts'\n  ],\n  \n  // \uD83D\uDCAA ENGAGEMENT (Utilisateur actif \u2192 Usage r\xE9gulier)\n  engagement: [\n    '/dashboard \u2192 /workouts \u2192 /analytics \u2192 /ai-coach',\n    '/dashboard \u2192 /nutrition \u2192 /sleep \u2192 /analytics',\n    '/workouts \u2192 /social \u2192 /profile \u2192 /settings'\n  ],\n  \n  // \uD83C\uDF1F RETENTION (Utilisateur fid\xE8le \u2192 Ambassadeur)\n  retention: [\n    '/analytics \u2192 /social \u2192 /social/challenges',\n    '/profile \u2192 /wearables \u2192 /analytics \u2192 /ai-coach'\n  ]\n};\n\n// Test des redirections et guards\nexport const ROUTE_GUARDS_TESTS = {\n  // Tests d'authentification\n  authRequired: [\n    '/dashboard', '/workouts', '/analytics', '/ai-coach',\n    '/social', '/nutrition', '/sleep', '/hydration',\n    '/profile', '/settings', '/exercises'\n  ],\n  \n  // Tests d'onboarding requis\n  onboardingRequired: [\n    '/dashboard', '/workouts', '/analytics', '/ai-coach',\n    '/social', '/nutrition', '/sleep', '/hydration',\n    '/wearables'\n  ],\n  \n  // Routes publiques (accessibles sans auth)\n  publicRoutes: [\n    '/', '/login', '/register', '/privacy', '/terms', '/support'\n  ]\n};\n\n// Scenarios de test complets\nexport const TEST_SCENARIOS = [\n  {\n    name: 'Nouveau visiteur \u2192 Inscription compl\xE8te',\n    flow: [\n      { step: 1, route: '/', action: 'visit_landing' },\n      { step: 2, route: '/register', action: 'click_signup' },\n      { step: 3, route: '/onboarding', action: 'complete_signup' },\n      { step: 4, route: '/dashboard', action: 'complete_onboarding' }\n    ],\n    expected: 'User successfully onboarded and sees dashboard'\n  },\n  \n  {\n    name: 'Utilisateur existant \u2192 Session workout',\n    flow: [\n      { step: 1, route: '/login', action: 'login' },\n      { step: 2, route: '/dashboard', action: 'authenticated' },\n      { step: 3, route: '/workouts', action: 'click_workouts' },\n      { step: 4, route: '/workouts/123', action: 'start_workout' },\n      { step: 5, route: '/analytics', action: 'complete_workout' }\n    ],\n    expected: 'Workout completed and analytics updated'\n  },\n  \n  {\n    name: 'Utilisateur avanc\xE9 \u2192 Analyse progr\xE8s',\n    flow: [\n      { step: 1, route: '/dashboard', action: 'daily_checkin' },\n      { step: 2, route: '/analytics', action: 'view_progress' },\n      { step: 3, route: '/ai-coach', action: 'get_recommendations' },\n      { step: 4, route: '/social', action: 'share_achievement' }\n    ],\n    expected: 'Progress analyzed and shared with community'\n  }\n];\n\n// Export des constantes pour les tests\nexport const ROUTE_CONSTANTS = {\n  CRITICAL_ROUTES: CRITICAL_USER_JOURNEYS.filter(r => r.priority === 'critical'),\n  IMPORTANT_ROUTES: CRITICAL_USER_JOURNEYS.filter(r => r.priority === 'important'),\n  NORMAL_ROUTES: CRITICAL_USER_JOURNEYS.filter(r => r.priority === 'normal'),\n  \n  // M\xE9triques de succ\xE8s\n  SUCCESS_METRICS: {\n    acquisition: ['landing_page_load', 'signup_completion', 'onboarding_start'],\n    activation: ['onboarding_completion', 'first_workout', 'dashboard_visit'],\n    engagement: ['daily_active_usage', 'feature_adoption', 'session_duration'],\n    retention: ['weekly_retention', 'social_engagement', 'goal_achievement']\n  }\n};\n\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "1fb385cdb8fa2feb2203d1212876082e2da974d4"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_vhbnoktwp = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_vhbnoktwp();
+cov_vhbnoktwp().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_vhbnoktwp().s[1]++;
+exports.ROUTE_CONSTANTS = exports.TEST_SCENARIOS = exports.ROUTE_GUARDS_TESTS = exports.USER_JOURNEYS = exports.CRITICAL_USER_JOURNEYS = void 0;
+// Routes critiques identifiées
+/* istanbul ignore next */
+cov_vhbnoktwp().s[2]++;
+exports.CRITICAL_USER_JOURNEYS = [
+// 🚀 PARCOURS D'ACQUISITION
+{
+  path: '/',
+  component: 'LandingPage',
+  requiresAuth: false,
+  requiresOnboarding: false,
+  title: 'MyFitHero - AI-Powered Fitness for Americans',
+  description: 'Page d\'accueil - point d\'entrée principal',
+  priority: 'critical',
+  userJourney: 'acquisition'
+}, {
+  path: '/register',
+  component: 'AuthPage',
+  requiresAuth: false,
+  requiresOnboarding: false,
+  title: 'Create Account - MyFitHero',
+  description: 'Inscription utilisateur - conversion critique',
+  priority: 'critical',
+  userJourney: 'acquisition'
+}, {
+  path: '/login',
+  component: 'AuthPage',
+  requiresAuth: false,
+  requiresOnboarding: false,
+  title: 'Sign In - MyFitHero',
+  description: 'Connexion utilisateur - rétention',
+  priority: 'critical',
+  userJourney: 'activation'
+},
+// 🎯 PARCOURS D'ACTIVATION
+{
+  path: '/onboarding',
+  component: 'OnboardingPage',
+  requiresAuth: true,
+  requiresOnboarding: false,
+  title: 'Welcome to MyFitHero',
+  description: 'Onboarding initial - activation utilisateur',
+  priority: 'critical',
+  userJourney: 'activation'
+}, {
+  path: '/dashboard',
+  component: 'DashboardPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'Dashboard - MyFitHero',
+  description: 'Dashboard principal - cœur de l\'app',
+  priority: 'critical',
+  userJourney: 'engagement'
+},
+// 💪 PARCOURS D'ENGAGEMENT CORE
+{
+  path: '/workouts',
+  component: 'WorkoutPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'Workouts - MyFitHero',
+  description: 'Entraînements - valeur principale',
+  priority: 'critical',
+  userJourney: 'engagement'
+}, {
+  path: '/analytics',
+  component: 'AnalyticsPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'Progress Analytics - MyFitHero',
+  description: 'Analytics - rétention long terme',
+  priority: 'critical',
+  userJourney: 'retention'
+}, {
+  path: '/ai-coach',
+  component: 'AICoachPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'AI Coach - MyFitHero',
+  description: 'IA Coach - différenciation produit',
+  priority: 'critical',
+  userJourney: 'engagement'
+},
+// 🌟 PARCOURS SOCIAL & RETENTION
+{
+  path: '/social',
+  component: 'SocialPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'Community - MyFitHero',
+  description: 'Réseau social - rétention virale',
+  priority: 'important',
+  userJourney: 'retention'
+}, {
+  path: '/profile',
+  component: 'ProfilePage',
+  requiresAuth: true,
+  requiresOnboarding: false,
+  title: 'Your Profile - MyFitHero',
+  description: 'Profil utilisateur - personnalisation',
+  priority: 'important',
+  userJourney: 'engagement'
+},
+// 📊 PARCOURS WELLNESS COMPLET
+{
+  path: '/nutrition',
+  component: 'NutritionPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'Nutrition - MyFitHero',
+  description: 'Nutrition - pilier wellness',
+  priority: 'important',
+  userJourney: 'engagement'
+}, {
+  path: '/sleep',
+  component: 'SleepPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'Sleep Tracking - MyFitHero',
+  description: 'Sommeil - récupération',
+  priority: 'important',
+  userJourney: 'engagement'
+}, {
+  path: '/hydration',
+  component: 'HydrationPage',
+  requiresAuth: true,
+  requiresOnboarding: true,
+  title: 'Hydration - MyFitHero',
+  description: 'Hydratation - habitudes quotidiennes',
+  priority: 'normal',
+  userJourney: 'engagement'
+}];
+// Parcours utilisateur types par funnel
+/* istanbul ignore next */
+cov_vhbnoktwp().s[3]++;
+exports.USER_JOURNEYS = {
+  // 🎯 ACQUISITION (Non-connecté → Inscription)
+  acquisition: ['/ → /register → /onboarding → /dashboard'],
+  // 🚀 ACTIVATION (Nouveau utilisateur → Premier usage)
+  activation: ['/login → /onboarding → /dashboard → /workouts'],
+  // 💪 ENGAGEMENT (Utilisateur actif → Usage régulier)
+  engagement: ['/dashboard → /workouts → /analytics → /ai-coach', '/dashboard → /nutrition → /sleep → /analytics', '/workouts → /social → /profile → /settings'],
+  // 🌟 RETENTION (Utilisateur fidèle → Ambassadeur)
+  retention: ['/analytics → /social → /social/challenges', '/profile → /wearables → /analytics → /ai-coach']
+};
+// Test des redirections et guards
+/* istanbul ignore next */
+cov_vhbnoktwp().s[4]++;
+exports.ROUTE_GUARDS_TESTS = {
+  // Tests d'authentification
+  authRequired: ['/dashboard', '/workouts', '/analytics', '/ai-coach', '/social', '/nutrition', '/sleep', '/hydration', '/profile', '/settings', '/exercises'],
+  // Tests d'onboarding requis
+  onboardingRequired: ['/dashboard', '/workouts', '/analytics', '/ai-coach', '/social', '/nutrition', '/sleep', '/hydration', '/wearables'],
+  // Routes publiques (accessibles sans auth)
+  publicRoutes: ['/', '/login', '/register', '/privacy', '/terms', '/support']
+};
+// Scenarios de test complets
+/* istanbul ignore next */
+cov_vhbnoktwp().s[5]++;
+exports.TEST_SCENARIOS = [{
+  name: 'Nouveau visiteur → Inscription complète',
+  flow: [{
+    step: 1,
+    route: '/',
+    action: 'visit_landing'
+  }, {
+    step: 2,
+    route: '/register',
+    action: 'click_signup'
+  }, {
+    step: 3,
+    route: '/onboarding',
+    action: 'complete_signup'
+  }, {
+    step: 4,
+    route: '/dashboard',
+    action: 'complete_onboarding'
+  }],
+  expected: 'User successfully onboarded and sees dashboard'
+}, {
+  name: 'Utilisateur existant → Session workout',
+  flow: [{
+    step: 1,
+    route: '/login',
+    action: 'login'
+  }, {
+    step: 2,
+    route: '/dashboard',
+    action: 'authenticated'
+  }, {
+    step: 3,
+    route: '/workouts',
+    action: 'click_workouts'
+  }, {
+    step: 4,
+    route: '/workouts/123',
+    action: 'start_workout'
+  }, {
+    step: 5,
+    route: '/analytics',
+    action: 'complete_workout'
+  }],
+  expected: 'Workout completed and analytics updated'
+}, {
+  name: 'Utilisateur avancé → Analyse progrès',
+  flow: [{
+    step: 1,
+    route: '/dashboard',
+    action: 'daily_checkin'
+  }, {
+    step: 2,
+    route: '/analytics',
+    action: 'view_progress'
+  }, {
+    step: 3,
+    route: '/ai-coach',
+    action: 'get_recommendations'
+  }, {
+    step: 4,
+    route: '/social',
+    action: 'share_achievement'
+  }],
+  expected: 'Progress analyzed and shared with community'
+}];
+// Export des constantes pour les tests
+/* istanbul ignore next */
+cov_vhbnoktwp().s[6]++;
+exports.ROUTE_CONSTANTS = {
+  CRITICAL_ROUTES: exports.CRITICAL_USER_JOURNEYS.filter(r => {
+    /* istanbul ignore next */
+    cov_vhbnoktwp().f[0]++;
+    cov_vhbnoktwp().s[7]++;
+    return r.priority === 'critical';
+  }),
+  IMPORTANT_ROUTES: exports.CRITICAL_USER_JOURNEYS.filter(r => {
+    /* istanbul ignore next */
+    cov_vhbnoktwp().f[1]++;
+    cov_vhbnoktwp().s[8]++;
+    return r.priority === 'important';
+  }),
+  NORMAL_ROUTES: exports.CRITICAL_USER_JOURNEYS.filter(r => {
+    /* istanbul ignore next */
+    cov_vhbnoktwp().f[2]++;
+    cov_vhbnoktwp().s[9]++;
+    return r.priority === 'normal';
+  }),
+  // Métriques de succès
+  SUCCESS_METRICS: {
+    acquisition: ['landing_page_load', 'signup_completion', 'onboarding_start'],
+    activation: ['onboarding_completion', 'first_workout', 'dashboard_visit'],
+    engagement: ['daily_active_usage', 'feature_adoption', 'session_duration'],
+    retention: ['weekly_retention', 'social_engagement', 'goal_achievement']
+  }
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfdmhibm9rdHdwIiwicGF0aCIsImhhc2giLCJnbG9iYWwiLCJGdW5jdGlvbiIsImdjdiIsImNvdmVyYWdlRGF0YSIsInN0YXRlbWVudE1hcCIsInN0YXJ0IiwibGluZSIsImNvbHVtbiIsImVuZCIsImZuTWFwIiwibmFtZSIsImRlY2wiLCJsb2MiLCJicmFuY2hNYXAiLCJzIiwiZiIsImIiLCJpbnB1dFNvdXJjZU1hcCIsImZpbGUiLCJtYXBwaW5ncyIsIm5hbWVzIiwic291cmNlcyIsInNvdXJjZXNDb250ZW50IiwidmVyc2lvbiIsIl9jb3ZlcmFnZVNjaGVtYSIsImNvdmVyYWdlIiwiYWN0dWFsQ292ZXJhZ2UiLCJleHBvcnRzIiwiQ1JJVElDQUxfVVNFUl9KT1VSTkVZUyIsImNvbXBvbmVudCIsInJlcXVpcmVzQXV0aCIsInJlcXVpcmVzT25ib2FyZGluZyIsInRpdGxlIiwiZGVzY3JpcHRpb24iLCJwcmlvcml0eSIsInVzZXJKb3VybmV5IiwiVVNFUl9KT1VSTkVZUyIsImFjcXVpc2l0aW9uIiwiYWN0aXZhdGlvbiIsImVuZ2FnZW1lbnQiLCJyZXRlbnRpb24iLCJST1VURV9HVUFSRFNfVEVTVFMiLCJhdXRoUmVxdWlyZWQiLCJvbmJvYXJkaW5nUmVxdWlyZWQiLCJwdWJsaWNSb3V0ZXMiLCJURVNUX1NDRU5BUklPUyIsImZsb3ciLCJzdGVwIiwicm91dGUiLCJhY3Rpb24iLCJleHBlY3RlZCIsIlJPVVRFX0NPTlNUQU5UUyIsIkNSSVRJQ0FMX1JPVVRFUyIsImZpbHRlciIsInIiLCJJTVBPUlRBTlRfUk9VVEVTIiwiTk9STUFMX1JPVVRFUyIsIlNVQ0NFU1NfTUVUUklDUyJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2VzL015Rml0SGVyby9zcmMvY29yZS9yb3V0ZXMvcm91dGUtYXVkaXQudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gVGVzdCBkZXMgcGFyY291cnMgdXRpbGlzYXRldXIgLSBNeUZpdEhlcm8gUm91dGVzIEF1ZGl0XG4vLyDwn46vIFNjcmlwdCBwb3VyIHZhbGlkZXIgdG91cyBsZXMgcGFyY291cnMgdXRpbGlzYXRldXIgY3JpdGlxdWVzXG5cbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5cbi8vIFR5cGVzIHBvdXIgbGVzIHJvdXRlc1xuaW50ZXJmYWNlIFJvdXRlVGVzdCB7XG4gIHBhdGg6IHN0cmluZztcbiAgY29tcG9uZW50OiBzdHJpbmc7XG4gIHJlcXVpcmVzQXV0aDogYm9vbGVhbjtcbiAgcmVxdWlyZXNPbmJvYXJkaW5nOiBib29sZWFuO1xuICB0aXRsZTogc3RyaW5nO1xuICBkZXNjcmlwdGlvbjogc3RyaW5nO1xuICBwcmlvcml0eTogJ2NyaXRpY2FsJyB8ICdpbXBvcnRhbnQnIHwgJ25vcm1hbCc7XG4gIHVzZXJKb3VybmV5OiBzdHJpbmc7XG59XG5cbi8vIFJvdXRlcyBjcml0aXF1ZXMgaWRlbnRpZmnDqWVzXG5leHBvcnQgY29uc3QgQ1JJVElDQUxfVVNFUl9KT1VSTkVZUzogUm91dGVUZXN0W10gPSBbXG4gIC8vIPCfmoAgUEFSQ09VUlMgRCdBQ1FVSVNJVElPTlxuICB7XG4gICAgcGF0aDogJy8nLFxuICAgIGNvbXBvbmVudDogJ0xhbmRpbmdQYWdlJyxcbiAgICByZXF1aXJlc0F1dGg6IGZhbHNlLFxuICAgIHJlcXVpcmVzT25ib2FyZGluZzogZmFsc2UsXG4gICAgdGl0bGU6ICdNeUZpdEhlcm8gLSBBSS1Qb3dlcmVkIEZpdG5lc3MgZm9yIEFtZXJpY2FucycsXG4gICAgZGVzY3JpcHRpb246ICdQYWdlIGRcXCdhY2N1ZWlsIC0gcG9pbnQgZFxcJ2VudHLDqWUgcHJpbmNpcGFsJyxcbiAgICBwcmlvcml0eTogJ2NyaXRpY2FsJyxcbiAgICB1c2VySm91cm5leTogJ2FjcXVpc2l0aW9uJ1xuICB9LFxuICB7XG4gICAgcGF0aDogJy9yZWdpc3RlcicsXG4gICAgY29tcG9uZW50OiAnQXV0aFBhZ2UnLFxuICAgIHJlcXVpcmVzQXV0aDogZmFsc2UsXG4gICAgcmVxdWlyZXNPbmJvYXJkaW5nOiBmYWxzZSxcbiAgICB0aXRsZTogJ0NyZWF0ZSBBY2NvdW50IC0gTXlGaXRIZXJvJyxcbiAgICBkZXNjcmlwdGlvbjogJ0luc2NyaXB0aW9uIHV0aWxpc2F0ZXVyIC0gY29udmVyc2lvbiBjcml0aXF1ZScsXG4gICAgcHJpb3JpdHk6ICdjcml0aWNhbCcsXG4gICAgdXNlckpvdXJuZXk6ICdhY3F1aXNpdGlvbidcbiAgfSxcbiAge1xuICAgIHBhdGg6ICcvbG9naW4nLFxuICAgIGNvbXBvbmVudDogJ0F1dGhQYWdlJyxcbiAgICByZXF1aXJlc0F1dGg6IGZhbHNlLFxuICAgIHJlcXVpcmVzT25ib2FyZGluZzogZmFsc2UsXG4gICAgdGl0bGU6ICdTaWduIEluIC0gTXlGaXRIZXJvJyxcbiAgICBkZXNjcmlwdGlvbjogJ0Nvbm5leGlvbiB1dGlsaXNhdGV1ciAtIHLDqXRlbnRpb24nLFxuICAgIHByaW9yaXR5OiAnY3JpdGljYWwnLFxuICAgIHVzZXJKb3VybmV5OiAnYWN0aXZhdGlvbidcbiAgfSxcblxuICAvLyDwn46vIFBBUkNPVVJTIEQnQUNUSVZBVElPTlxuICB7XG4gICAgcGF0aDogJy9vbmJvYXJkaW5nJyxcbiAgICBjb21wb25lbnQ6ICdPbmJvYXJkaW5nUGFnZScsXG4gICAgcmVxdWlyZXNBdXRoOiB0cnVlLFxuICAgIHJlcXVpcmVzT25ib2FyZGluZzogZmFsc2UsXG4gICAgdGl0bGU6ICdXZWxjb21lIHRvIE15Rml0SGVybycsXG4gICAgZGVzY3JpcHRpb246ICdPbmJvYXJkaW5nIGluaXRpYWwgLSBhY3RpdmF0aW9uIHV0aWxpc2F0ZXVyJyxcbiAgICBwcmlvcml0eTogJ2NyaXRpY2FsJyxcbiAgICB1c2VySm91cm5leTogJ2FjdGl2YXRpb24nXG4gIH0sXG4gIHtcbiAgICBwYXRoOiAnL2Rhc2hib2FyZCcsXG4gICAgY29tcG9uZW50OiAnRGFzaGJvYXJkUGFnZScsXG4gICAgcmVxdWlyZXNBdXRoOiB0cnVlLFxuICAgIHJlcXVpcmVzT25ib2FyZGluZzogdHJ1ZSxcbiAgICB0aXRsZTogJ0Rhc2hib2FyZCAtIE15Rml0SGVybycsXG4gICAgZGVzY3JpcHRpb246ICdEYXNoYm9hcmQgcHJpbmNpcGFsIC0gY8WTdXIgZGUgbFxcJ2FwcCcsXG4gICAgcHJpb3JpdHk6ICdjcml0aWNhbCcsXG4gICAgdXNlckpvdXJuZXk6ICdlbmdhZ2VtZW50J1xuICB9LFxuXG4gIC8vIPCfkqogUEFSQ09VUlMgRCdFTkdBR0VNRU5UIENPUkVcbiAge1xuICAgIHBhdGg6ICcvd29ya291dHMnLFxuICAgIGNvbXBvbmVudDogJ1dvcmtvdXRQYWdlJyxcbiAgICByZXF1aXJlc0F1dGg6IHRydWUsXG4gICAgcmVxdWlyZXNPbmJvYXJkaW5nOiB0cnVlLFxuICAgIHRpdGxlOiAnV29ya291dHMgLSBNeUZpdEhlcm8nLFxuICAgIGRlc2NyaXB0aW9uOiAnRW50cmHDrm5lbWVudHMgLSB2YWxldXIgcHJpbmNpcGFsZScsXG4gICAgcHJpb3JpdHk6ICdjcml0aWNhbCcsXG4gICAgdXNlckpvdXJuZXk6ICdlbmdhZ2VtZW50J1xuICB9LFxuICB7XG4gICAgcGF0aDogJy9hbmFseXRpY3MnLFxuICAgIGNvbXBvbmVudDogJ0FuYWx5dGljc1BhZ2UnLFxuICAgIHJlcXVpcmVzQXV0aDogdHJ1ZSxcbiAgICByZXF1aXJlc09uYm9hcmRpbmc6IHRydWUsXG4gICAgdGl0bGU6ICdQcm9ncmVzcyBBbmFseXRpY3MgLSBNeUZpdEhlcm8nLFxuICAgIGRlc2NyaXB0aW9uOiAnQW5hbHl0aWNzIC0gcsOpdGVudGlvbiBsb25nIHRlcm1lJyxcbiAgICBwcmlvcml0eTogJ2NyaXRpY2FsJyxcbiAgICB1c2VySm91cm5leTogJ3JldGVudGlvbidcbiAgfSxcbiAge1xuICAgIHBhdGg6ICcvYWktY29hY2gnLFxuICAgIGNvbXBvbmVudDogJ0FJQ29hY2hQYWdlJyxcbiAgICByZXF1aXJlc0F1dGg6IHRydWUsXG4gICAgcmVxdWlyZXNPbmJvYXJkaW5nOiB0cnVlLFxuICAgIHRpdGxlOiAnQUkgQ29hY2ggLSBNeUZpdEhlcm8nLFxuICAgIGRlc2NyaXB0aW9uOiAnSUEgQ29hY2ggLSBkaWZmw6lyZW5jaWF0aW9uIHByb2R1aXQnLFxuICAgIHByaW9yaXR5OiAnY3JpdGljYWwnLFxuICAgIHVzZXJKb3VybmV5OiAnZW5nYWdlbWVudCdcbiAgfSxcblxuICAvLyDwn4yfIFBBUkNPVVJTIFNPQ0lBTCAmIFJFVEVOVElPTlxuICB7XG4gICAgcGF0aDogJy9zb2NpYWwnLFxuICAgIGNvbXBvbmVudDogJ1NvY2lhbFBhZ2UnLFxuICAgIHJlcXVpcmVzQXV0aDogdHJ1ZSxcbiAgICByZXF1aXJlc09uYm9hcmRpbmc6IHRydWUsXG4gICAgdGl0bGU6ICdDb21tdW5pdHkgLSBNeUZpdEhlcm8nLFxuICAgIGRlc2NyaXB0aW9uOiAnUsOpc2VhdSBzb2NpYWwgLSByw6l0ZW50aW9uIHZpcmFsZScsXG4gICAgcHJpb3JpdHk6ICdpbXBvcnRhbnQnLFxuICAgIHVzZXJKb3VybmV5OiAncmV0ZW50aW9uJ1xuICB9LFxuICB7XG4gICAgcGF0aDogJy9wcm9maWxlJyxcbiAgICBjb21wb25lbnQ6ICdQcm9maWxlUGFnZScsXG4gICAgcmVxdWlyZXNBdXRoOiB0cnVlLFxuICAgIHJlcXVpcmVzT25ib2FyZGluZzogZmFsc2UsXG4gICAgdGl0bGU6ICdZb3VyIFByb2ZpbGUgLSBNeUZpdEhlcm8nLFxuICAgIGRlc2NyaXB0aW9uOiAnUHJvZmlsIHV0aWxpc2F0ZXVyIC0gcGVyc29ubmFsaXNhdGlvbicsXG4gICAgcHJpb3JpdHk6ICdpbXBvcnRhbnQnLFxuICAgIHVzZXJKb3VybmV5OiAnZW5nYWdlbWVudCdcbiAgfSxcblxuICAvLyDwn5OKIFBBUkNPVVJTIFdFTExORVNTIENPTVBMRVRcbiAge1xuICAgIHBhdGg6ICcvbnV0cml0aW9uJyxcbiAgICBjb21wb25lbnQ6ICdOdXRyaXRpb25QYWdlJyxcbiAgICByZXF1aXJlc0F1dGg6IHRydWUsXG4gICAgcmVxdWlyZXNPbmJvYXJkaW5nOiB0cnVlLFxuICAgIHRpdGxlOiAnTnV0cml0aW9uIC0gTXlGaXRIZXJvJyxcbiAgICBkZXNjcmlwdGlvbjogJ051dHJpdGlvbiAtIHBpbGllciB3ZWxsbmVzcycsXG4gICAgcHJpb3JpdHk6ICdpbXBvcnRhbnQnLFxuICAgIHVzZXJKb3VybmV5OiAnZW5nYWdlbWVudCdcbiAgfSxcbiAge1xuICAgIHBhdGg6ICcvc2xlZXAnLFxuICAgIGNvbXBvbmVudDogJ1NsZWVwUGFnZScsXG4gICAgcmVxdWlyZXNBdXRoOiB0cnVlLFxuICAgIHJlcXVpcmVzT25ib2FyZGluZzogdHJ1ZSxcbiAgICB0aXRsZTogJ1NsZWVwIFRyYWNraW5nIC0gTXlGaXRIZXJvJyxcbiAgICBkZXNjcmlwdGlvbjogJ1NvbW1laWwgLSByw6ljdXDDqXJhdGlvbicsXG4gICAgcHJpb3JpdHk6ICdpbXBvcnRhbnQnLFxuICAgIHVzZXJKb3VybmV5OiAnZW5nYWdlbWVudCdcbiAgfSxcbiAge1xuICAgIHBhdGg6ICcvaHlkcmF0aW9uJyxcbiAgICBjb21wb25lbnQ6ICdIeWRyYXRpb25QYWdlJyxcbiAgICByZXF1aXJlc0F1dGg6IHRydWUsXG4gICAgcmVxdWlyZXNPbmJvYXJkaW5nOiB0cnVlLFxuICAgIHRpdGxlOiAnSHlkcmF0aW9uIC0gTXlGaXRIZXJvJyxcbiAgICBkZXNjcmlwdGlvbjogJ0h5ZHJhdGF0aW9uIC0gaGFiaXR1ZGVzIHF1b3RpZGllbm5lcycsXG4gICAgcHJpb3JpdHk6ICdub3JtYWwnLFxuICAgIHVzZXJKb3VybmV5OiAnZW5nYWdlbWVudCdcbiAgfVxuXTtcblxuLy8gUGFyY291cnMgdXRpbGlzYXRldXIgdHlwZXMgcGFyIGZ1bm5lbFxuZXhwb3J0IGNvbnN0IFVTRVJfSk9VUk5FWVMgPSB7XG4gIC8vIPCfjq8gQUNRVUlTSVRJT04gKE5vbi1jb25uZWN0w6kg4oaSIEluc2NyaXB0aW9uKVxuICBhY3F1aXNpdGlvbjogW1xuICAgICcvIOKGkiAvcmVnaXN0ZXIg4oaSIC9vbmJvYXJkaW5nIOKGkiAvZGFzaGJvYXJkJ1xuICBdLFxuICBcbiAgLy8g8J+agCBBQ1RJVkFUSU9OIChOb3V2ZWF1IHV0aWxpc2F0ZXVyIOKGkiBQcmVtaWVyIHVzYWdlKVxuICBhY3RpdmF0aW9uOiBbXG4gICAgJy9sb2dpbiDihpIgL29uYm9hcmRpbmcg4oaSIC9kYXNoYm9hcmQg4oaSIC93b3Jrb3V0cydcbiAgXSxcbiAgXG4gIC8vIPCfkqogRU5HQUdFTUVOVCAoVXRpbGlzYXRldXIgYWN0aWYg4oaSIFVzYWdlIHLDqWd1bGllcilcbiAgZW5nYWdlbWVudDogW1xuICAgICcvZGFzaGJvYXJkIOKGkiAvd29ya291dHMg4oaSIC9hbmFseXRpY3Mg4oaSIC9haS1jb2FjaCcsXG4gICAgJy9kYXNoYm9hcmQg4oaSIC9udXRyaXRpb24g4oaSIC9zbGVlcCDihpIgL2FuYWx5dGljcycsXG4gICAgJy93b3Jrb3V0cyDihpIgL3NvY2lhbCDihpIgL3Byb2ZpbGUg4oaSIC9zZXR0aW5ncydcbiAgXSxcbiAgXG4gIC8vIPCfjJ8gUkVURU5USU9OIChVdGlsaXNhdGV1ciBmaWTDqGxlIOKGkiBBbWJhc3NhZGV1cilcbiAgcmV0ZW50aW9uOiBbXG4gICAgJy9hbmFseXRpY3Mg4oaSIC9zb2NpYWwg4oaSIC9zb2NpYWwvY2hhbGxlbmdlcycsXG4gICAgJy9wcm9maWxlIOKGkiAvd2VhcmFibGVzIOKGkiAvYW5hbHl0aWNzIOKGkiAvYWktY29hY2gnXG4gIF1cbn07XG5cbi8vIFRlc3QgZGVzIHJlZGlyZWN0aW9ucyBldCBndWFyZHNcbmV4cG9ydCBjb25zdCBST1VURV9HVUFSRFNfVEVTVFMgPSB7XG4gIC8vIFRlc3RzIGQnYXV0aGVudGlmaWNhdGlvblxuICBhdXRoUmVxdWlyZWQ6IFtcbiAgICAnL2Rhc2hib2FyZCcsICcvd29ya291dHMnLCAnL2FuYWx5dGljcycsICcvYWktY29hY2gnLFxuICAgICcvc29jaWFsJywgJy9udXRyaXRpb24nLCAnL3NsZWVwJywgJy9oeWRyYXRpb24nLFxuICAgICcvcHJvZmlsZScsICcvc2V0dGluZ3MnLCAnL2V4ZXJjaXNlcydcbiAgXSxcbiAgXG4gIC8vIFRlc3RzIGQnb25ib2FyZGluZyByZXF1aXNcbiAgb25ib2FyZGluZ1JlcXVpcmVkOiBbXG4gICAgJy9kYXNoYm9hcmQnLCAnL3dvcmtvdXRzJywgJy9hbmFseXRpY3MnLCAnL2FpLWNvYWNoJyxcbiAgICAnL3NvY2lhbCcsICcvbnV0cml0aW9uJywgJy9zbGVlcCcsICcvaHlkcmF0aW9uJyxcbiAgICAnL3dlYXJhYmxlcydcbiAgXSxcbiAgXG4gIC8vIFJvdXRlcyBwdWJsaXF1ZXMgKGFjY2Vzc2libGVzIHNhbnMgYXV0aClcbiAgcHVibGljUm91dGVzOiBbXG4gICAgJy8nLCAnL2xvZ2luJywgJy9yZWdpc3RlcicsICcvcHJpdmFjeScsICcvdGVybXMnLCAnL3N1cHBvcnQnXG4gIF1cbn07XG5cbi8vIFNjZW5hcmlvcyBkZSB0ZXN0IGNvbXBsZXRzXG5leHBvcnQgY29uc3QgVEVTVF9TQ0VOQVJJT1MgPSBbXG4gIHtcbiAgICBuYW1lOiAnTm91dmVhdSB2aXNpdGV1ciDihpIgSW5zY3JpcHRpb24gY29tcGzDqHRlJyxcbiAgICBmbG93OiBbXG4gICAgICB7IHN0ZXA6IDEsIHJvdXRlOiAnLycsIGFjdGlvbjogJ3Zpc2l0X2xhbmRpbmcnIH0sXG4gICAgICB7IHN0ZXA6IDIsIHJvdXRlOiAnL3JlZ2lzdGVyJywgYWN0aW9uOiAnY2xpY2tfc2lnbnVwJyB9LFxuICAgICAgeyBzdGVwOiAzLCByb3V0ZTogJy9vbmJvYXJkaW5nJywgYWN0aW9uOiAnY29tcGxldGVfc2lnbnVwJyB9LFxuICAgICAgeyBzdGVwOiA0LCByb3V0ZTogJy9kYXNoYm9hcmQnLCBhY3Rpb246ICdjb21wbGV0ZV9vbmJvYXJkaW5nJyB9XG4gICAgXSxcbiAgICBleHBlY3RlZDogJ1VzZXIgc3VjY2Vzc2Z1bGx5IG9uYm9hcmRlZCBhbmQgc2VlcyBkYXNoYm9hcmQnXG4gIH0sXG4gIFxuICB7XG4gICAgbmFtZTogJ1V0aWxpc2F0ZXVyIGV4aXN0YW50IOKGkiBTZXNzaW9uIHdvcmtvdXQnLFxuICAgIGZsb3c6IFtcbiAgICAgIHsgc3RlcDogMSwgcm91dGU6ICcvbG9naW4nLCBhY3Rpb246ICdsb2dpbicgfSxcbiAgICAgIHsgc3RlcDogMiwgcm91dGU6ICcvZGFzaGJvYXJkJywgYWN0aW9uOiAnYXV0aGVudGljYXRlZCcgfSxcbiAgICAgIHsgc3RlcDogMywgcm91dGU6ICcvd29ya291dHMnLCBhY3Rpb246ICdjbGlja193b3Jrb3V0cycgfSxcbiAgICAgIHsgc3RlcDogNCwgcm91dGU6ICcvd29ya291dHMvMTIzJywgYWN0aW9uOiAnc3RhcnRfd29ya291dCcgfSxcbiAgICAgIHsgc3RlcDogNSwgcm91dGU6ICcvYW5hbHl0aWNzJywgYWN0aW9uOiAnY29tcGxldGVfd29ya291dCcgfVxuICAgIF0sXG4gICAgZXhwZWN0ZWQ6ICdXb3Jrb3V0IGNvbXBsZXRlZCBhbmQgYW5hbHl0aWNzIHVwZGF0ZWQnXG4gIH0sXG4gIFxuICB7XG4gICAgbmFtZTogJ1V0aWxpc2F0ZXVyIGF2YW5jw6kg4oaSIEFuYWx5c2UgcHJvZ3LDqHMnLFxuICAgIGZsb3c6IFtcbiAgICAgIHsgc3RlcDogMSwgcm91dGU6ICcvZGFzaGJvYXJkJywgYWN0aW9uOiAnZGFpbHlfY2hlY2tpbicgfSxcbiAgICAgIHsgc3RlcDogMiwgcm91dGU6ICcvYW5hbHl0aWNzJywgYWN0aW9uOiAndmlld19wcm9ncmVzcycgfSxcbiAgICAgIHsgc3RlcDogMywgcm91dGU6ICcvYWktY29hY2gnLCBhY3Rpb246ICdnZXRfcmVjb21tZW5kYXRpb25zJyB9LFxuICAgICAgeyBzdGVwOiA0LCByb3V0ZTogJy9zb2NpYWwnLCBhY3Rpb246ICdzaGFyZV9hY2hpZXZlbWVudCcgfVxuICAgIF0sXG4gICAgZXhwZWN0ZWQ6ICdQcm9ncmVzcyBhbmFseXplZCBhbmQgc2hhcmVkIHdpdGggY29tbXVuaXR5J1xuICB9XG5dO1xuXG4vLyBFeHBvcnQgZGVzIGNvbnN0YW50ZXMgcG91ciBsZXMgdGVzdHNcbmV4cG9ydCBjb25zdCBST1VURV9DT05TVEFOVFMgPSB7XG4gIENSSVRJQ0FMX1JPVVRFUzogQ1JJVElDQUxfVVNFUl9KT1VSTkVZUy5maWx0ZXIociA9PiByLnByaW9yaXR5ID09PSAnY3JpdGljYWwnKSxcbiAgSU1QT1JUQU5UX1JPVVRFUzogQ1JJVElDQUxfVVNFUl9KT1VSTkVZUy5maWx0ZXIociA9PiByLnByaW9yaXR5ID09PSAnaW1wb3J0YW50JyksXG4gIE5PUk1BTF9ST1VURVM6IENSSVRJQ0FMX1VTRVJfSk9VUk5FWVMuZmlsdGVyKHIgPT4gci5wcmlvcml0eSA9PT0gJ25vcm1hbCcpLFxuICBcbiAgLy8gTcOpdHJpcXVlcyBkZSBzdWNjw6hzXG4gIFNVQ0NFU1NfTUVUUklDUzoge1xuICAgIGFjcXVpc2l0aW9uOiBbJ2xhbmRpbmdfcGFnZV9sb2FkJywgJ3NpZ251cF9jb21wbGV0aW9uJywgJ29uYm9hcmRpbmdfc3RhcnQnXSxcbiAgICBhY3RpdmF0aW9uOiBbJ29uYm9hcmRpbmdfY29tcGxldGlvbicsICdmaXJzdF93b3Jrb3V0JywgJ2Rhc2hib2FyZF92aXNpdCddLFxuICAgIGVuZ2FnZW1lbnQ6IFsnZGFpbHlfYWN0aXZlX3VzYWdlJywgJ2ZlYXR1cmVfYWRvcHRpb24nLCAnc2Vzc2lvbl9kdXJhdGlvbiddLFxuICAgIHJldGVudGlvbjogWyd3ZWVrbHlfcmV0ZW50aW9uJywgJ3NvY2lhbF9lbmdhZ2VtZW50JywgJ2dvYWxfYWNoaWV2ZW1lbnQnXVxuICB9XG59O1xuXG4iXSwibWFwcGluZ3MiOiI7O0FBQUE7QUFDQTtBQUFBO0FBQUEsU0FBQUEsY0FBQTtFQUFBLElBQUFDLElBQUE7RUFBQSxJQUFBQyxJQUFBO0VBQUEsSUFBQUMsTUFBQSxPQUFBQyxRQUFBO0VBQUEsSUFBQUMsR0FBQTtFQUFBLElBQUFDLFlBQUE7SUFBQUwsSUFBQTtJQUFBTSxZQUFBO01BQUE7UUFBQUMsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7SUFBQTtJQUFBRSxLQUFBO01BQUE7UUFBQUMsSUFBQTtRQUFBQyxJQUFBO1VBQUFOLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFLLEdBQUE7VUFBQVAsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFB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

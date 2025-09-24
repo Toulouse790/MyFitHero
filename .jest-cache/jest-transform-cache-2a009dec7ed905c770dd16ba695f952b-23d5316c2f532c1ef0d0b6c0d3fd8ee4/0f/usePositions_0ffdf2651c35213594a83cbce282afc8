@@ -1,0 +1,338 @@
+732fd498311e9b0c010989b06af14e53
+"use strict";
+
+// client/src/services/usePositions.ts
+/* istanbul ignore next */
+function cov_23uhrbtu1s() {
+  var path = "/workspaces/MyFitHero/src/lib/services/usePositions.ts";
+  var hash = "8d0696414ce45fe76c4002c533b0bfc6e2828776";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/lib/services/usePositions.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 36
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 16
+        },
+        end: {
+          line: 5,
+          column: 32
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 18
+        },
+        end: {
+          line: 43,
+          column: 1
+        }
+      },
+      "4": {
+        start: {
+          line: 45,
+          column: 4
+        },
+        end: {
+          line: 47,
+          column: 16
+        }
+      },
+      "5": {
+        start: {
+          line: 46,
+          column: 8
+        },
+        end: {
+          line: 46,
+          column: 54
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "usePositions",
+        decl: {
+          start: {
+            line: 44,
+            column: 9
+          },
+          end: {
+            line: 44,
+            column: 21
+          }
+        },
+        loc: {
+          start: {
+            line: 44,
+            column: 42
+          },
+          end: {
+            line: 48,
+            column: 1
+          }
+        },
+        line: 44
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 45,
+            column: 32
+          },
+          end: {
+            line: 45,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 45,
+            column: 38
+          },
+          end: {
+            line: 47,
+            column: 5
+          }
+        },
+        line: 45
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 44,
+            column: 22
+          },
+          end: {
+            line: 44,
+            column: 40
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 44,
+            column: 30
+          },
+          end: {
+            line: 44,
+            column: 40
+          }
+        }],
+        line: 44
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 46,
+            column: 15
+          },
+          end: {
+            line: 46,
+            column: 53
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 46,
+            column: 15
+          },
+          end: {
+            line: 46,
+            column: 31
+          }
+        }, {
+          start: {
+            line: 46,
+            column: 35
+          },
+          end: {
+            line: 46,
+            column: 53
+          }
+        }],
+        line: 46
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/lib/services/usePositions.ts",
+      mappings: ";AAAA,sCAAsC;;AAkDtC,oCAIC;AApDD,iCAAgC;AAShC,MAAM,SAAS,GAA8B;IAC3C,QAAQ,EAAE;QACR,EAAE,KAAK,EAAE,SAAS,EAAE,KAAK,EAAE,gBAAgB,EAAE;QAC7C,EAAE,KAAK,EAAE,WAAW,EAAE,KAAK,EAAE,WAAW,EAAE;QAC1C,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,WAAW,EAAE,KAAK,EAAE,WAAW,EAAE;KAC3C;IACD,UAAU,EAAE;QACV,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,SAAS,EAAE,KAAK,EAAE,SAAS,EAAE;QACtC,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,aAAa,EAAE,KAAK,EAAE,aAAa,EAAE;QAC9C,EAAE,KAAK,EAAE,OAAO,EAAE,KAAK,EAAE,OAAO,EAAE;KACnC;IACD,UAAU,EAAE;QACV,EAAE,KAAK,EAAE,SAAS,EAAE,KAAK,EAAE,SAAS,EAAE;QACtC,EAAE,KAAK,EAAE,SAAS,EAAE,KAAK,EAAE,SAAS,EAAE;QACtC,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,eAAe,EAAE,KAAK,EAAE,yBAAyB,EAAE;QAC5D,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;KACrC;IACD,KAAK,EAAE;QACL,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,WAAW,EAAE,KAAK,EAAE,WAAW,EAAE;QAC1C,EAAE,KAAK,EAAE,gBAAgB,EAAE,KAAK,EAAE,gBAAgB,EAAE;QACpD,EAAE,KAAK,EAAE,iBAAiB,EAAE,KAAK,EAAE,iBAAiB,EAAE;QACtD,EAAE,KAAK,EAAE,YAAY,EAAE,KAAK,EAAE,eAAe,EAAE;QAC/C,EAAE,KAAK,EAAE,SAAS,EAAE,KAAK,EAAE,SAAS,EAAE;QACtC,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,SAAS,EAAE,KAAK,EAAE,SAAS,EAAE;KACvC;IACD,MAAM,EAAE;QACN,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;QACpC,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,QAAQ,EAAE;KACrC;IACD,KAAK,EAAE,CAAC,EAAE,KAAK,EAAE,OAAO,EAAE,KAAK,EAAE,OAAO,EAAE,CAAC;CAC5C,CAAC;AAEF,SAAgB,YAAY,CAAC,QAAe,UAAU;IACpD,OAAO,IAAA,eAAO,EAAC,GAAG,EAAE;QAClB,OAAO,SAAS,CAAC,KAAK,CAAC,IAAI,SAAS,CAAC,OAAO,CAAC,CAAC;IAChD,CAAC,EAAE,CAAC,KAAK,CAAC,CAAC,CAAC;AACd,CAAC",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/lib/services/usePositions.ts"],
+      sourcesContent: ["// client/src/services/usePositions.ts\n\nimport { useMemo } from 'react';\n\ntype Sport = 'football' | 'basketball' | 'volleyball' | 'rugby' | 'tennis' | 'autre';\n\ntype Position = {\n  value: string;\n  label: string;\n};\n\nconst POSITIONS: Record<Sport, Position[]> = {\n  football: [\n    { value: 'gardien', label: 'Gardien de but' },\n    { value: 'defenseur', label: 'D\xE9fenseur' },\n    { value: 'milieu', label: 'Milieu' },\n    { value: 'attaquant', label: 'Attaquant' },\n  ],\n  basketball: [\n    { value: 'meneur', label: 'Meneur' },\n    { value: 'arriere', label: 'Arri\xE8re' },\n    { value: 'ailier', label: 'Ailier' },\n    { value: 'ailier_fort', label: 'Ailier fort' },\n    { value: 'pivot', label: 'Pivot' },\n  ],\n  volleyball: [\n    { value: 'passeur', label: 'Passeur' },\n    { value: 'central', label: 'Central' },\n    { value: 'pointu', label: 'Pointu' },\n    { value: 'receptionneur', label: 'R\xE9ceptionneur-attaquant' },\n    { value: 'libero', label: 'Lib\xE9ro' },\n  ],\n  rugby: [\n    { value: 'pilier', label: 'Pilier' },\n    { value: 'talonneur', label: 'Talonneur' },\n    { value: 'deuxieme_ligne', label: 'Deuxi\xE8me ligne' },\n    { value: 'troisieme_ligne', label: 'Troisi\xE8me ligne' },\n    { value: 'demi_mel\xE9e', label: 'Demi de m\xEAl\xE9e' },\n    { value: 'ouvreur', label: 'Ouvreur' },\n    { value: 'centre', label: 'Centre' },\n    { value: 'ailier', label: 'Ailier' },\n    { value: 'arriere', label: 'Arri\xE8re' },\n  ],\n  tennis: [\n    { value: 'simple', label: 'Simple' },\n    { value: 'double', label: 'Double' },\n  ],\n  autre: [{ value: 'autre', label: 'Autre' }],\n};\n\nexport function usePositions(sport: Sport = 'football') {\n  return useMemo(() => {\n    return POSITIONS[sport] || POSITIONS['autre'];\n  }, [sport]);\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "8d0696414ce45fe76c4002c533b0bfc6e2828776"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_23uhrbtu1s = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_23uhrbtu1s();
+cov_23uhrbtu1s().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_23uhrbtu1s().s[1]++;
+exports.usePositions = usePositions;
+const react_1 =
+/* istanbul ignore next */
+(cov_23uhrbtu1s().s[2]++, require("react"));
+const POSITIONS =
+/* istanbul ignore next */
+(cov_23uhrbtu1s().s[3]++, {
+  football: [{
+    value: 'gardien',
+    label: 'Gardien de but'
+  }, {
+    value: 'defenseur',
+    label: 'Défenseur'
+  }, {
+    value: 'milieu',
+    label: 'Milieu'
+  }, {
+    value: 'attaquant',
+    label: 'Attaquant'
+  }],
+  basketball: [{
+    value: 'meneur',
+    label: 'Meneur'
+  }, {
+    value: 'arriere',
+    label: 'Arrière'
+  }, {
+    value: 'ailier',
+    label: 'Ailier'
+  }, {
+    value: 'ailier_fort',
+    label: 'Ailier fort'
+  }, {
+    value: 'pivot',
+    label: 'Pivot'
+  }],
+  volleyball: [{
+    value: 'passeur',
+    label: 'Passeur'
+  }, {
+    value: 'central',
+    label: 'Central'
+  }, {
+    value: 'pointu',
+    label: 'Pointu'
+  }, {
+    value: 'receptionneur',
+    label: 'Réceptionneur-attaquant'
+  }, {
+    value: 'libero',
+    label: 'Libéro'
+  }],
+  rugby: [{
+    value: 'pilier',
+    label: 'Pilier'
+  }, {
+    value: 'talonneur',
+    label: 'Talonneur'
+  }, {
+    value: 'deuxieme_ligne',
+    label: 'Deuxième ligne'
+  }, {
+    value: 'troisieme_ligne',
+    label: 'Troisième ligne'
+  }, {
+    value: 'demi_melée',
+    label: 'Demi de mêlée'
+  }, {
+    value: 'ouvreur',
+    label: 'Ouvreur'
+  }, {
+    value: 'centre',
+    label: 'Centre'
+  }, {
+    value: 'ailier',
+    label: 'Ailier'
+  }, {
+    value: 'arriere',
+    label: 'Arrière'
+  }],
+  tennis: [{
+    value: 'simple',
+    label: 'Simple'
+  }, {
+    value: 'double',
+    label: 'Double'
+  }],
+  autre: [{
+    value: 'autre',
+    label: 'Autre'
+  }]
+});
+function usePositions(sport =
+/* istanbul ignore next */
+(cov_23uhrbtu1s().b[0][0]++, 'football')) {
+  /* istanbul ignore next */
+  cov_23uhrbtu1s().f[0]++;
+  cov_23uhrbtu1s().s[4]++;
+  return (0, react_1.useMemo)(() => {
+    /* istanbul ignore next */
+    cov_23uhrbtu1s().f[1]++;
+    cov_23uhrbtu1s().s[5]++;
+    return /* istanbul ignore next */(cov_23uhrbtu1s().b[1][0]++, POSITIONS[sport]) ||
+    /* istanbul ignore next */
+    (cov_23uhrbtu1s().b[1][1]++, POSITIONS['autre']);
+  }, [sport]);
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMjN1aHJidHUxcyIsInBhdGgiLCJoYXNoIiwiZ2xvYmFsIiwiRnVuY3Rpb24iLCJnY3YiLCJjb3ZlcmFnZURhdGEiLCJzdGF0ZW1lbnRNYXAiLCJzdGFydCIsImxpbmUiLCJjb2x1bW4iLCJlbmQiLCJmbk1hcCIsIm5hbWUiLCJkZWNsIiwibG9jIiwiYnJhbmNoTWFwIiwidHlwZSIsImxvY2F0aW9ucyIsInMiLCJmIiwiYiIsImlucHV0U291cmNlTWFwIiwiZmlsZSIsIm1hcHBpbmdzIiwibmFtZXMiLCJzb3VyY2VzIiwic291cmNlc0NvbnRlbnQiLCJ2ZXJzaW9uIiwiX2NvdmVyYWdlU2NoZW1hIiwiY292ZXJhZ2UiLCJhY3R1YWxDb3ZlcmFnZSIsImV4cG9ydHMiLCJ1c2VQb3NpdGlvbnMiLCJyZWFjdF8xIiwicmVxdWlyZSIsIlBPU0lUSU9OUyIsImZvb3RiYWxsIiwidmFsdWUiLCJsYWJlbCIsImJhc2tldGJhbGwiLCJ2b2xsZXliYWxsIiwicnVnYnkiLCJ0ZW5uaXMiLCJhdXRyZSIsInNwb3J0IiwidXNlTWVtbyJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2VzL015Rml0SGVyby9zcmMvbGliL3NlcnZpY2VzL3VzZVBvc2l0aW9ucy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBjbGllbnQvc3JjL3NlcnZpY2VzL3VzZVBvc2l0aW9ucy50c1xuXG5pbXBvcnQgeyB1c2VNZW1vIH0gZnJvbSAncmVhY3QnO1xuXG50eXBlIFNwb3J0ID0gJ2Zvb3RiYWxsJyB8ICdiYXNrZXRiYWxsJyB8ICd2b2xsZXliYWxsJyB8ICdydWdieScgfCAndGVubmlzJyB8ICdhdXRyZSc7XG5cbnR5cGUgUG9zaXRpb24gPSB7XG4gIHZhbHVlOiBzdHJpbmc7XG4gIGxhYmVsOiBzdHJpbmc7XG59O1xuXG5jb25zdCBQT1NJVElPTlM6IFJlY29yZDxTcG9ydCwgUG9zaXRpb25bXT4gPSB7XG4gIGZvb3RiYWxsOiBbXG4gICAgeyB2YWx1ZTogJ2dhcmRpZW4nLCBsYWJlbDogJ0dhcmRpZW4gZGUgYnV0JyB9LFxuICAgIHsgdmFsdWU6ICdkZWZlbnNldXInLCBsYWJlbDogJ0TDqWZlbnNldXInIH0sXG4gICAgeyB2YWx1ZTogJ21pbGlldScsIGxhYmVsOiAnTWlsaWV1JyB9LFxuICAgIHsgdmFsdWU6ICdhdHRhcXVhbnQnLCBsYWJlbDogJ0F0dGFxdWFudCcgfSxcbiAgXSxcbiAgYmFza2V0YmFsbDogW1xuICAgIHsgdmFsdWU6ICdtZW5ldXInLCBsYWJlbDogJ01lbmV1cicgfSxcbiAgICB7IHZhbHVlOiAnYXJyaWVyZScsIGxhYmVsOiAnQXJyacOocmUnIH0sXG4gICAgeyB2YWx1ZTogJ2FpbGllcicsIGxhYmVsOiAnQWlsaWVyJyB9LFxuICAgIHsgdmFsdWU6ICdhaWxpZXJfZm9ydCcsIGxhYmVsOiAnQWlsaWVyIGZvcnQnIH0sXG4gICAgeyB2YWx1ZTogJ3Bpdm90JywgbGFiZWw6ICdQaXZvdCcgfSxcbiAgXSxcbiAgdm9sbGV5YmFsbDogW1xuICAgIHsgdmFsdWU6ICdwYXNzZXVyJywgbGFiZWw6ICdQYXNzZXVyJyB9LFxuICAgIHsgdmFsdWU6ICdjZW50cmFsJywgbGFiZWw6ICdDZW50cmFsJyB9LFxuICAgIHsgdmFsdWU6ICdwb2ludHUnLCBsYWJlbDogJ1BvaW50dScgfSxcbiAgICB7IHZhbHVlOiAncmVjZXB0aW9ubmV1cicsIGxhYmVsOiAnUsOpY2VwdGlvbm5ldXItYXR0YXF1YW50JyB9LFxuICAgIHsgdmFsdWU6ICdsaWJlcm8nLCBsYWJlbDogJ0xpYsOpcm8nIH0sXG4gIF0sXG4gIHJ1Z2J5OiBbXG4gICAgeyB2YWx1ZTogJ3BpbGllcicsIGxhYmVsOiAnUGlsaWVyJyB9LFxuICAgIHsgdmFsdWU6ICd0YWxvbm5ldXInLCBsYWJlbDogJ1RhbG9ubmV1cicgfSxcbiAgICB7IHZhbHVlOiAnZGV1eGllbWVfbGlnbmUnLCBsYWJlbDogJ0RldXhpw6htZSBsaWduZScgfSxcbiAgICB7IHZhbHVlOiAndHJvaXNpZW1lX2xpZ25lJywgbGFiZWw6ICdUcm9pc2nDqG1lIGxpZ25lJyB9LFxuICAgIHsgdmFsdWU6ICdkZW1pX21lbMOpZScsIGxhYmVsOiAnRGVtaSBkZSBtw6psw6llJyB9LFxuICAgIHsgdmFsdWU6ICdvdXZyZXVyJywgbGFiZWw6ICdPdXZyZXVyJyB9LFxuICAgIHsgdmFsdWU6ICdjZW50cmUnLCBsYWJlbDogJ0NlbnRyZScgfSxcbiAgICB7IHZhbHVlOiAnYWlsaWVyJywgbGFiZWw6ICdBaWxpZXInIH0sXG4gICAgeyB2YWx1ZTogJ2FycmllcmUnLCBsYWJlbDogJ0FycmnDqHJlJyB9LFxuICBdLFxuICB0ZW5uaXM6IFtcbiAgICB7IHZhbHVlOiAnc2ltcGxlJywgbGFiZWw6ICdTaW1wbGUnIH0sXG4gICAgeyB2YWx1ZTogJ2RvdWJsZScsIGxhYmVsOiAnRG91YmxlJyB9LFxuICBdLFxuICBhdXRyZTogW3sgdmFsdWU6ICdhdXRyZScsIGxhYmVsOiAnQXV0cmUnIH1dLFxufTtcblxuZXhwb3J0IGZ1bmN0aW9uIHVzZVBvc2l0aW9ucyhzcG9ydDogU3BvcnQgPSAnZm9vdGJhbGwnKSB7XG4gIHJldHVybiB1c2VNZW1vKCgpID0+IHtcbiAgICByZXR1cm4gUE9TSVRJT05TW3Nwb3J0XSB8fCBQT1NJVElPTlNbJ2F1dHJlJ107XG4gIH0sIFtzcG9ydF0pO1xufVxuIl0sIm1hcHBpbmdzIjoiOztBQUFBO0FBQUE7QUFBQSxTQUFBQSxlQUFBO0VBQUEsSUFBQUMsSUFBQTtFQUFBLElBQUFDLElBQUE7RUFBQSxJQUFBQyxNQUFBLE9BQUFDLFFBQUE7RUFBQSxJQUFBQyxHQUFBO0VBQUEsSUFBQUMsWUFBQTtJQUFBTCxJQUFBO0lBQUFNLFlBQUE7TUFBQTtRQUFBQyxLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7SUFBQTtJQUFBRSxLQUFBO01BQUE7UUFBQUMsSUFBQTtRQUFBQyxJQUFBO1VBQUFOLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFLLEdBQUE7VUFBQVAsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO01BQUE7UUFBQUksSUFBQTtRQUFBQyxJQUFBO1VBQUFOLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFLLEdBQUE7VUFBQVAsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO0lBQUE7SUFBQU8sU0FBQTtNQUFBO1FBQUFELEdBQUE7VUFBQVAsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7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

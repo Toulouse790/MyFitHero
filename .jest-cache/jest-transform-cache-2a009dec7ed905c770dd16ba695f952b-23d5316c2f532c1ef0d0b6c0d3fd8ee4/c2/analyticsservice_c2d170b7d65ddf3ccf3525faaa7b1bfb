@@ -1,0 +1,276 @@
+eb9dd118b5cda9be3bfc3479e6f0623c
+"use strict";
+
+/* istanbul ignore next */
+function cov_cwscb4upf() {
+  var path = "/workspaces/MyFitHero/src/features/analytics/services/analytics.service.ts";
+  var hash = "c855db638e4a646d65860c08f24cc48af46bfd60";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/features/analytics/services/analytics.service.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 34
+        }
+      },
+      "2": {
+        start: {
+          line: 10,
+          column: 8
+        },
+        end: {
+          line: 10,
+          column: 20
+        }
+      },
+      "3": {
+        start: {
+          line: 17,
+          column: 8
+        },
+        end: {
+          line: 17,
+          column: 20
+        }
+      },
+      "4": {
+        start: {
+          line: 24,
+          column: 8
+        },
+        end: {
+          line: 24,
+          column: 20
+        }
+      },
+      "5": {
+        start: {
+          line: 31,
+          column: 8
+        },
+        end: {
+          line: 31,
+          column: 20
+        }
+      },
+      "6": {
+        start: {
+          line: 34,
+          column: 0
+        },
+        end: {
+          line: 34,
+          column: 44
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 8,
+            column: 4
+          },
+          end: {
+            line: 8,
+            column: 5
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 52
+          },
+          end: {
+            line: 11,
+            column: 5
+          }
+        },
+        line: 8
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 15,
+            column: 4
+          },
+          end: {
+            line: 15,
+            column: 5
+          }
+        },
+        loc: {
+          start: {
+            line: 15,
+            column: 44
+          },
+          end: {
+            line: 18,
+            column: 5
+          }
+        },
+        line: 15
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 22,
+            column: 4
+          },
+          end: {
+            line: 22,
+            column: 5
+          }
+        },
+        loc: {
+          start: {
+            line: 22,
+            column: 58
+          },
+          end: {
+            line: 25,
+            column: 5
+          }
+        },
+        line: 22
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 29,
+            column: 4
+          },
+          end: {
+            line: 29,
+            column: 5
+          }
+        },
+        loc: {
+          start: {
+            line: 29,
+            column: 46
+          },
+          end: {
+            line: 32,
+            column: 5
+          }
+        },
+        line: 29
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/features/analytics/services/analytics.service.ts",
+      mappings: ";;;AAAA,MAAa,gBAAgB;IAC3B;;OAEG;IACH,MAAM,CAAC,KAAK,CAAC,gBAAgB,CAAC,OAAe,EAAE,OAAgB;QAC7D,yBAAyB;QACzB,OAAO,IAAI,CAAC;IACd,CAAC;IAED;;OAEG;IACH,MAAM,CAAC,KAAK,CAAC,iBAAiB,CAAC,OAAe;QAC5C,yBAAyB;QACzB,OAAO,IAAI,CAAC;IACd,CAAC;IAED;;OAEG;IACH,MAAM,CAAC,KAAK,CAAC,sBAAsB,CAAC,OAAe,EAAE,OAAe;QAClE,yBAAyB;QACzB,OAAO,IAAI,CAAC;IACd,CAAC;IAED;;OAEG;IACH,MAAM,CAAC,KAAK,CAAC,UAAU,CAAC,OAAe,EAAE,OAAsB;QAC7D,yBAAyB;QACzB,OAAO,IAAI,CAAC;IACd,CAAC;CACF;AAhCD,4CAgCC",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/features/analytics/services/analytics.service.ts"],
+      sourcesContent: ["export class AnalyticsService {\n  /**\n   * R\xE9cup\xE8re les analytics d'un utilisateur\n   */\n  static async getUserAnalytics(_userId: string, _period: unknown) {\n    // Implementation \xE0 venir\n    return null;\n  }\n\n  /**\n   * G\xE9n\xE8re un rapport de progression\n   */\n  static async getProgressReport(_userId: string) {\n    // Implementation \xE0 venir\n    return null;\n  }\n\n  /**\n   * Analyse comparative\n   */\n  static async getComparativeAnalysis(_userId: string, _metric: string) {\n    // Implementation \xE0 venir\n    return null;\n  }\n\n  /**\n   * Exporte les donn\xE9es\n   */\n  static async exportData(_userId: string, _format: 'csv' | 'pdf') {\n    // Implementation \xE0 venir\n    return null;\n  }\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c855db638e4a646d65860c08f24cc48af46bfd60"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_cwscb4upf = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_cwscb4upf();
+cov_cwscb4upf().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_cwscb4upf().s[1]++;
+exports.AnalyticsService = void 0;
+class AnalyticsService {
+  /**
+   * Récupère les analytics d'un utilisateur
+   */
+  static async getUserAnalytics(_userId, _period) {
+    /* istanbul ignore next */
+    cov_cwscb4upf().f[0]++;
+    cov_cwscb4upf().s[2]++;
+    // Implementation à venir
+    return null;
+  }
+  /**
+   * Génère un rapport de progression
+   */
+  static async getProgressReport(_userId) {
+    /* istanbul ignore next */
+    cov_cwscb4upf().f[1]++;
+    cov_cwscb4upf().s[3]++;
+    // Implementation à venir
+    return null;
+  }
+  /**
+   * Analyse comparative
+   */
+  static async getComparativeAnalysis(_userId, _metric) {
+    /* istanbul ignore next */
+    cov_cwscb4upf().f[2]++;
+    cov_cwscb4upf().s[4]++;
+    // Implementation à venir
+    return null;
+  }
+  /**
+   * Exporte les données
+   */
+  static async exportData(_userId, _format) {
+    /* istanbul ignore next */
+    cov_cwscb4upf().f[3]++;
+    cov_cwscb4upf().s[5]++;
+    // Implementation à venir
+    return null;
+  }
+}
+/* istanbul ignore next */
+cov_cwscb4upf().s[6]++;
+exports.AnalyticsService = AnalyticsService;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfY3dzY2I0dXBmIiwiYWN0dWFsQ292ZXJhZ2UiLCJzIiwiQW5hbHl0aWNzU2VydmljZSIsImdldFVzZXJBbmFseXRpY3MiLCJfdXNlcklkIiwiX3BlcmlvZCIsImYiLCJnZXRQcm9ncmVzc1JlcG9ydCIsImdldENvbXBhcmF0aXZlQW5hbHlzaXMiLCJfbWV0cmljIiwiZXhwb3J0RGF0YSIsIl9mb3JtYXQiLCJleHBvcnRzIl0sInNvdXJjZXMiOlsiL3dvcmtzcGFjZXMvTXlGaXRIZXJvL3NyYy9mZWF0dXJlcy9hbmFseXRpY3Mvc2VydmljZXMvYW5hbHl0aWNzLnNlcnZpY2UudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNsYXNzIEFuYWx5dGljc1NlcnZpY2Uge1xuICAvKipcbiAgICogUsOpY3Vww6hyZSBsZXMgYW5hbHl0aWNzIGQndW4gdXRpbGlzYXRldXJcbiAgICovXG4gIHN0YXRpYyBhc3luYyBnZXRVc2VyQW5hbHl0aWNzKF91c2VySWQ6IHN0cmluZywgX3BlcmlvZDogdW5rbm93bikge1xuICAgIC8vIEltcGxlbWVudGF0aW9uIMOgIHZlbmlyXG4gICAgcmV0dXJuIG51bGw7XG4gIH1cblxuICAvKipcbiAgICogR8OpbsOocmUgdW4gcmFwcG9ydCBkZSBwcm9ncmVzc2lvblxuICAgKi9cbiAgc3RhdGljIGFzeW5jIGdldFByb2dyZXNzUmVwb3J0KF91c2VySWQ6IHN0cmluZykge1xuICAgIC8vIEltcGxlbWVudGF0aW9uIMOgIHZlbmlyXG4gICAgcmV0dXJuIG51bGw7XG4gIH1cblxuICAvKipcbiAgICogQW5hbHlzZSBjb21wYXJhdGl2ZVxuICAgKi9cbiAgc3RhdGljIGFzeW5jIGdldENvbXBhcmF0aXZlQW5hbHlzaXMoX3VzZXJJZDogc3RyaW5nLCBfbWV0cmljOiBzdHJpbmcpIHtcbiAgICAvLyBJbXBsZW1lbnRhdGlvbiDDoCB2ZW5pclxuICAgIHJldHVybiBudWxsO1xuICB9XG5cbiAgLyoqXG4gICAqIEV4cG9ydGUgbGVzIGRvbm7DqWVzXG4gICAqL1xuICBzdGF0aWMgYXN5bmMgZXhwb3J0RGF0YShfdXNlcklkOiBzdHJpbmcsIF9mb3JtYXQ6ICdjc3YnIHwgJ3BkZicpIHtcbiAgICAvLyBJbXBsZW1lbnRhdGlvbiDDoCB2ZW5pclxuICAgIHJldHVybiBudWxsO1xuICB9XG59XG4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFhSTtJQUFBQSxhQUFBLFlBQUFBLENBQUE7TUFBQSxPQUFBQyxjQUFBO0lBQUE7RUFBQTtFQUFBLE9BQUFBLGNBQUE7QUFBQTtBQUFBRCxhQUFBO0FBQUFBLGFBQUEsR0FBQUUsQ0FBQTs7Ozs7OztBQWJKLE1BQWFDLGdCQUFnQjtFQUMzQjs7O0VBR0EsYUFBYUMsZ0JBQWdCQSxDQUFDQyxPQUFlLEVBQUVDLE9BQWdCO0lBQUE7SUFBQU4sYUFBQSxHQUFBTyxDQUFBO0lBQUFQLGFBQUEsR0FBQUUsQ0FBQTtJQUM3RDtJQUNBLE9BQU8sSUFBSTtFQUNiO0VBRUE7OztFQUdBLGFBQWFNLGlCQUFpQkEsQ0FBQ0gsT0FBZTtJQUFBO0lBQUFMLGFBQUEsR0FBQU8sQ0FBQTtJQUFBUCxhQUFBLEdBQUFFLENBQUE7SUFDNUM7SUFDQSxPQUFPLElBQUk7RUFDYjtFQUVBOzs7RUFHQSxhQUFhTyxzQkFBc0JBLENBQUNKLE9BQWUsRUFBRUssT0FBZTtJQUFBO0lBQUFWLGFBQUEsR0FBQU8sQ0FBQTtJQUFBUCxhQUFBLEdBQUFFLENBQUE7SUFDbEU7SUFDQSxPQUFPLElBQUk7RUFDYjtFQUVBOzs7RUFHQSxhQUFhUyxVQUFVQSxDQUFDTixPQUFlLEVBQUVPLE9BQXNCO0lBQUE7SUFBQVosYUFBQSxHQUFBTyxDQUFBO0lBQUFQLGFBQUEsR0FBQUUsQ0FBQTtJQUM3RDtJQUNBLE9BQU8sSUFBSTtFQUNiOztBQUNEO0FBQUFGLGFBQUEsR0FBQUUsQ0FBQTtBQWhDRFcsT0FBQSxDQUFBVixnQkFBQSxHQUFBQSxnQkFBQSIsImlnbm9yZUxpc3QiOltdfQ==

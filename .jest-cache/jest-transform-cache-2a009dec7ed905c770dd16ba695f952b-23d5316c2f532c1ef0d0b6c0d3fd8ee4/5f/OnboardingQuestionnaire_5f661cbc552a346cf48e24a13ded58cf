@@ -1,0 +1,824 @@
+51518975251d04efbe3ae1411ade5a4b
+"use strict";
+
+/* istanbul ignore next */
+function cov_1de05a3civ() {
+  var path = "/workspaces/MyFitHero/src/features/ai-coach/components/OnboardingQuestionnaire.tsx";
+  var hash = "ff3884eb7b7b8f48cc6291475429d4d2e05b336d";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/features/ai-coach/components/OnboardingQuestionnaire.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 1
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 4
+        },
+        end: {
+          line: 3,
+          column: 62
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 62
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 22
+        },
+        end: {
+          line: 6,
+          column: 50
+        }
+      },
+      "4": {
+        start: {
+          line: 7,
+          column: 16
+        },
+        end: {
+          line: 7,
+          column: 49
+        }
+      },
+      "5": {
+        start: {
+          line: 8,
+          column: 20
+        },
+        end: {
+          line: 8,
+          column: 55
+        }
+      },
+      "6": {
+        start: {
+          line: 9,
+          column: 19
+        },
+        end: {
+          line: 9,
+          column: 44
+        }
+      },
+      "7": {
+        start: {
+          line: 10,
+          column: 35
+        },
+        end: {
+          line: 10,
+          column: 89
+        }
+      },
+      "8": {
+        start: {
+          line: 11,
+          column: 32
+        },
+        end: {
+          line: 70,
+          column: 1
+        }
+      },
+      "9": {
+        start: {
+          line: 12,
+          column: 22
+        },
+        end: {
+          line: 12,
+          column: 49
+        }
+      },
+      "10": {
+        start: {
+          line: 14,
+          column: 41
+        },
+        end: {
+          line: 68,
+          column: 5
+        }
+      },
+      "11": {
+        start: {
+          line: 16,
+          column: 8
+        },
+        end: {
+          line: 19,
+          column: 11
+        }
+      },
+      "12": {
+        start: {
+          line: 20,
+          column: 8
+        },
+        end: {
+          line: 67,
+          column: 9
+        }
+      },
+      "13": {
+        start: {
+          line: 21,
+          column: 38
+        },
+        end: {
+          line: 31,
+          column: 34
+        }
+      },
+      "14": {
+        start: {
+          line: 32,
+          column: 12
+        },
+        end: {
+          line: 47,
+          column: 13
+        }
+      },
+      "15": {
+        start: {
+          line: 33,
+          column: 16
+        },
+        end: {
+          line: 33,
+          column: 84
+        }
+      },
+      "16": {
+        start: {
+          line: 34,
+          column: 16
+        },
+        end: {
+          line: 34,
+          column: 73
+        }
+      },
+      "17": {
+        start: {
+          line: 35,
+          column: 16
+        },
+        end: {
+          line: 35,
+          column: 64
+        }
+      },
+      "18": {
+        start: {
+          line: 36,
+          column: 16
+        },
+        end: {
+          line: 36,
+          column: 62
+        }
+      },
+      "19": {
+        start: {
+          line: 39,
+          column: 16
+        },
+        end: {
+          line: 43,
+          column: 19
+        }
+      },
+      "20": {
+        start: {
+          line: 45,
+          column: 16
+        },
+        end: {
+          line: 45,
+          column: 29
+        }
+      },
+      "21": {
+        start: {
+          line: 46,
+          column: 16
+        },
+        end: {
+          line: 46,
+          column: 23
+        }
+      },
+      "22": {
+        start: {
+          line: 49,
+          column: 12
+        },
+        end: {
+          line: 52,
+          column: 15
+        }
+      },
+      "23": {
+        start: {
+          line: 53,
+          column: 12
+        },
+        end: {
+          line: 53,
+          column: 25
+        }
+      },
+      "24": {
+        start: {
+          line: 57,
+          column: 12
+        },
+        end: {
+          line: 57,
+          column: 71
+        }
+      },
+      "25": {
+        start: {
+          line: 60,
+          column: 12
+        },
+        end: {
+          line: 64,
+          column: 15
+        }
+      },
+      "26": {
+        start: {
+          line: 66,
+          column: 12
+        },
+        end: {
+          line: 66,
+          column: 25
+        }
+      },
+      "27": {
+        start: {
+          line: 69,
+          column: 4
+        },
+        end: {
+          line: 69,
+          column: 192
+        }
+      },
+      "28": {
+        start: {
+          line: 71,
+          column: 0
+        },
+        end: {
+          line: 71,
+          column: 42
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 2,
+            column: 56
+          },
+          end: {
+            line: 2,
+            column: 57
+          }
+        },
+        loc: {
+          start: {
+            line: 2,
+            column: 71
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        },
+        line: 2
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 11,
+            column: 32
+          },
+          end: {
+            line: 11,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 58
+          },
+          end: {
+            line: 70,
+            column: 1
+          }
+        },
+        line: 11
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 14,
+            column: 41
+          },
+          end: {
+            line: 14,
+            column: 42
+          }
+        },
+        loc: {
+          start: {
+            line: 14,
+            column: 57
+          },
+          end: {
+            line: 68,
+            column: 5
+          }
+        },
+        line: 14
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 2,
+            column: 22
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 2,
+            column: 23
+          },
+          end: {
+            line: 2,
+            column: 27
+          }
+        }, {
+          start: {
+            line: 2,
+            column: 31
+          },
+          end: {
+            line: 2,
+            column: 51
+          }
+        }, {
+          start: {
+            line: 2,
+            column: 56
+          },
+          end: {
+            line: 4,
+            column: 1
+          }
+        }],
+        line: 2
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 3,
+            column: 11
+          },
+          end: {
+            line: 3,
+            column: 61
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 3,
+            column: 37
+          },
+          end: {
+            line: 3,
+            column: 40
+          }
+        }, {
+          start: {
+            line: 3,
+            column: 43
+          },
+          end: {
+            line: 3,
+            column: 61
+          }
+        }],
+        line: 3
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 3,
+            column: 12
+          },
+          end: {
+            line: 3,
+            column: 33
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 3,
+            column: 12
+          },
+          end: {
+            line: 3,
+            column: 15
+          }
+        }, {
+          start: {
+            line: 3,
+            column: 19
+          },
+          end: {
+            line: 3,
+            column: 33
+          }
+        }],
+        line: 3
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 27,
+            column: 25
+          },
+          end: {
+            line: 27,
+            column: 93
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 27,
+            column: 25
+          },
+          end: {
+            line: 27,
+            column: 45
+          }
+        }, {
+          start: {
+            line: 27,
+            column: 49
+          },
+          end: {
+            line: 27,
+            column: 93
+          }
+        }],
+        line: 27
+      },
+      "4": {
+        loc: {
+          start: {
+            line: 28,
+            column: 32
+          },
+          end: {
+            line: 28,
+            column: 100
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 28,
+            column: 32
+          },
+          end: {
+            line: 28,
+            column: 52
+          }
+        }, {
+          start: {
+            line: 28,
+            column: 56
+          },
+          end: {
+            line: 28,
+            column: 100
+          }
+        }],
+        line: 28
+      },
+      "5": {
+        loc: {
+          start: {
+            line: 32,
+            column: 12
+          },
+          end: {
+            line: 47,
+            column: 13
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 32,
+            column: 12
+          },
+          end: {
+            line: 47,
+            column: 13
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 32
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0,
+      "28": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0, 0],
+      "1": [0, 0],
+      "2": [0, 0],
+      "3": [0, 0],
+      "4": [0, 0],
+      "5": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/features/ai-coach/components/OnboardingQuestionnaire.tsx",
+      mappings: ";;;;;;AAAA,kDAA0B;AAC1B,wDAAoD;AACpD,6CAA0C;AAC1C,0FAAkE;AAQlE,MAAM,uBAAuB,GAA2C,CAAC,EAAE,IAAI,EAAE,UAAU,EAAE,EAAE,EAAE;IAC/F,MAAM,EAAE,KAAK,EAAE,GAAG,IAAA,oBAAQ,GAAE,CAAC;IAE7B,6CAA6C;IAC7C,MAAM,4BAA4B,GAAG,KAAK,EAAE,IAAoB,EAAE,EAAE;QAClE,sCAAsC;QACtC,KAAK,CAAC;YACJ,KAAK,EAAE,iCAAiC;YACxC,WAAW,EAAE,0CAA0C;SACxD,CAAC,CAAC;QAEH,IAAI,CAAC;YACH,MAAM,EAAE,KAAK,EAAE,MAAM,EAAE,GAAG,MAAM,mBAAQ;iBACrC,IAAI,CAAC,eAAe,CAAC;iBACrB,MAAM,CAAC;gBACN,oBAAoB,EAAE,IAAI;gBAC1B,uBAAuB,EAAE,IAAI,IAAI,EAAE,CAAC,WAAW,EAAE;gBACjD,YAAY,EAAE,UAAU;gBACxB,OAAO,EAAE,IAAI,CAAC,eAAe,IAAI,CAAC,OAAO,EAAE,WAAW,EAAE,OAAO,EAAE,WAAW,CAAC;gBAC7E,cAAc,EAAE,IAAI,CAAC,eAAe,IAAI,CAAC,OAAO,EAAE,WAAW,EAAE,OAAO,EAAE,WAAW,CAAC;gBACpF,UAAU,EAAE,IAAI,IAAI,EAAE,CAAC,WAAW,EAAE;aACrC,CAAC;iBACD,EAAE,CAAC,IAAI,EAAE,IAAI,CAAC,EAAE,CAAC,CAAC;YAErB,IAAI,MAAM,EAAE,CAAC;gBACX,OAAO,CAAC,KAAK,CAAC,4CAA4C,EAAE,MAAM,CAAC,CAAC;gBACpE,OAAO,CAAC,KAAK,CAAC,yBAAyB,EAAE,MAAM,CAAC,OAAO,CAAC,CAAC;gBACzD,OAAO,CAAC,KAAK,CAAC,mBAAmB,EAAE,MAAM,CAAC,IAAI,CAAC,CAAC;gBAChD,OAAO,CAAC,KAAK,CAAC,qBAAqB,EAAE,IAAI,CAAC,EAAE,CAAC,CAAC;gBAE9C,yDAAyD;gBACzD,oDAAoD;gBACpD,KAAK,CAAC;oBACJ,KAAK,EAAE,iCAAiC;oBACxC,WAAW,EACT,+EAA+E;oBACjF,OAAO,EAAE,aAAa;iBACvB,CAAC,CAAC;gBAEH,qEAAqE;gBACrE,UAAU,EAAE,CAAC;gBACb,OAAO;YACT,CAAC;YAGD,8BAA8B;YAC9B,KAAK,CAAC;gBACJ,KAAK,EAAE,+BAA+B;gBACtC,WAAW,EAAE,oFAAoF;aAClG,CAAC,CAAC;YAEH,UAAU,EAAE,CAAC;QACf,CAAC;QAAC,OAAO,KAAU,EAAE,CAAC;YACpB,qBAAqB;YACrB,OAAO,CAAC,KAAK,CAAC,oCAAoC,EAAE,KAAK,CAAC,CAAC;YAE3D,gDAAgD;YAChD,8EAA8E;YAC9E,KAAK,CAAC;gBACJ,KAAK,EAAE,sBAAsB;gBAC7B,WAAW,EAAE,mEAAmE;gBAChF,OAAO,EAAE,aAAa;aACvB,CAAC,CAAC;YAEH,qDAAqD;YACrD,UAAU,EAAE,CAAC;QACf,CAAC;IACH,CAAC,CAAC;IAEF,OAAO,CACL,gCAAK,SAAS,EAAC,gBAAgB,YAC7B,uBAAC,kCAAwB,IAAC,UAAU,EAAE,4BAA4B,GAAI,GAClE,CACP,CAAC;AACJ,CAAC,CAAC;AAEF,kBAAe,uBAAuB,CAAC",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/features/ai-coach/components/OnboardingQuestionnaire.tsx"],
+      sourcesContent: ["import React from 'react';\nimport { useToast } from '@/shared/hooks/use-toast';\nimport { supabase } from '@/lib/supabase';\nimport ConversationalOnboarding from './ConversationalOnboarding';\nimport { OnboardingData } from '@/shared/types/conversationalOnboarding';\n\ninterface OnboardingQuestionnaireProps {\n  user: any;\n  onComplete: (data?: any) => void; // Rendre data optionnel car d\xE9j\xE0 sauvegard\xE9\n}\n\nconst OnboardingQuestionnaire: React.FC<OnboardingQuestionnaireProps> = ({ user, onComplete }) => {\n  const { toast } = useToast();\n\n  // G\xE9rer la finalisation du nouvel onboarding\n  const handleConversationalComplete = async (data: OnboardingData) => {\n    // \uD83C\uDFAF Ajouter feedback visuel imm\xE9diat\n    toast({\n      title: 'Finalisation de votre profil...',\n      description: 'Sauvegarde en cours, veuillez patienter.',\n    });\n\n    try {\n      const { error: _error } = await supabase\n        .from('user_profiles')\n        .update({\n          onboarding_completed: true,\n          onboarding_completed_at: new Date().toISOString(),\n          profile_type: 'complete',\n          modules: data.selectedModules || ['sport', 'nutrition', 'sleep', 'hydration'],\n          active_modules: data.selectedModules || ['sport', 'nutrition', 'sleep', 'hydration'],\n          updated_at: new Date().toISOString(),\n        })\n        .eq('id', user.id);\n\n      if (_error) {\n        console.error('\uD83D\uDD34 Erreur Supabase lors de la mise \xE0 jour:', _error);\n        console.error(\"\uD83D\uDD34 D\xE9tails de l'erreur:\", _error.message);\n        console.error(\"\uD83D\uDD34 Code d'erreur:\", _error.code);\n        console.error('\uD83D\uDD34 User ID utilis\xE9:', user.id);\n\n        // \u26A0\uFE0F M\xCAME EN CAS D'ERREUR, on continue vers le dashboard\n        // L'essentiel est que le profil de base existe d\xE9j\xE0\n        toast({\n          title: 'Profil partiellement sauvegard\xE9',\n          description:\n            \"Certaines donn\xE9es n'ont pas pu \xEAtre sauvegard\xE9es, mais vous pouvez continuer.\",\n          variant: 'destructive',\n        });\n\n        // \u2705 TOUJOURS appeler onComplete pour \xE9viter de bloquer l'utilisateur\n        onComplete();\n        return;\n      }\n\n\n      // \uD83C\uDF89 FEEDBACK SUCC\xC8S AM\xC9LIORE\n      toast({\n        title: '\uD83C\uDF89 Bienvenue dans MyFitHero !',\n        description: 'Votre profil a \xE9t\xE9 cr\xE9\xE9 avec succ\xE8s. D\xE9couvrez votre tableau de bord personnalis\xE9.',\n      });\n\n      onComplete();\n    } catch (error: any) {\n      // Erreur silencieuse\n      console.error('\uD83D\uDD34 Erreur lors de la finalisation:', error);\n\n      // \u26A0\uFE0F M\xCAME EN CAS D'ERREUR CRITIQUE, on redirige\n      // Mieux vaut avoir un utilisateur sur le dashboard qu'en boucle d'inscription\n      toast({\n        title: 'Erreur de sauvegarde',\n        description: 'Une erreur est survenue, mais vous pouvez acc\xE9der \xE0 votre compte.',\n        variant: 'destructive',\n      });\n\n      // \u2705 TOUJOURS rediriger pour \xE9viter la boucle infinie\n      onComplete();\n    }\n  };\n\n  return (\n    <div className=\"hero-container\">\n      <ConversationalOnboarding onComplete={handleConversationalComplete} />\n    </div>\n  );\n};\n\nexport default OnboardingQuestionnaire;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "ff3884eb7b7b8f48cc6291475429d4d2e05b336d"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1de05a3civ = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1de05a3civ();
+var __importDefault =
+/* istanbul ignore next */
+(cov_1de05a3civ().s[0]++,
+/* istanbul ignore next */
+(cov_1de05a3civ().b[0][0]++, this) &&
+/* istanbul ignore next */
+(cov_1de05a3civ().b[0][1]++, this.__importDefault) ||
+/* istanbul ignore next */
+(cov_1de05a3civ().b[0][2]++, function (mod) {
+  /* istanbul ignore next */
+  cov_1de05a3civ().f[0]++;
+  cov_1de05a3civ().s[1]++;
+  return /* istanbul ignore next */(cov_1de05a3civ().b[2][0]++, mod) &&
+  /* istanbul ignore next */
+  (cov_1de05a3civ().b[2][1]++, mod.__esModule) ?
+  /* istanbul ignore next */
+  (cov_1de05a3civ().b[1][0]++, mod) :
+  /* istanbul ignore next */
+  (cov_1de05a3civ().b[1][1]++, {
+    "default": mod
+  });
+}));
+/* istanbul ignore next */
+cov_1de05a3civ().s[2]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_1de05a3civ().s[3]++, require("react/jsx-runtime"));
+const react_1 =
+/* istanbul ignore next */
+(cov_1de05a3civ().s[4]++, __importDefault(require("react")));
+const use_toast_1 =
+/* istanbul ignore next */
+(cov_1de05a3civ().s[5]++, require("@/shared/hooks/use-toast"));
+const supabase_1 =
+/* istanbul ignore next */
+(cov_1de05a3civ().s[6]++, require("@/lib/supabase"));
+const ConversationalOnboarding_1 =
+/* istanbul ignore next */
+(cov_1de05a3civ().s[7]++, __importDefault(require("./ConversationalOnboarding")));
+/* istanbul ignore next */
+cov_1de05a3civ().s[8]++;
+const OnboardingQuestionnaire = ({
+  user,
+  onComplete
+}) => {
+  /* istanbul ignore next */
+  cov_1de05a3civ().f[1]++;
+  const {
+    toast
+  } =
+  /* istanbul ignore next */
+  (cov_1de05a3civ().s[9]++, (0, use_toast_1.useToast)());
+  // Gérer la finalisation du nouvel onboarding
+  /* istanbul ignore next */
+  cov_1de05a3civ().s[10]++;
+  const handleConversationalComplete = async data => {
+    /* istanbul ignore next */
+    cov_1de05a3civ().f[2]++;
+    cov_1de05a3civ().s[11]++;
+    // 🎯 Ajouter feedback visuel immédiat
+    toast({
+      title: 'Finalisation de votre profil...',
+      description: 'Sauvegarde en cours, veuillez patienter.'
+    });
+    /* istanbul ignore next */
+    cov_1de05a3civ().s[12]++;
+    try {
+      const {
+        error: _error
+      } =
+      /* istanbul ignore next */
+      (cov_1de05a3civ().s[13]++, await supabase_1.supabase.from('user_profiles').update({
+        onboarding_completed: true,
+        onboarding_completed_at: new Date().toISOString(),
+        profile_type: 'complete',
+        modules:
+        /* istanbul ignore next */
+        (cov_1de05a3civ().b[3][0]++, data.selectedModules) ||
+        /* istanbul ignore next */
+        (cov_1de05a3civ().b[3][1]++, ['sport', 'nutrition', 'sleep', 'hydration']),
+        active_modules:
+        /* istanbul ignore next */
+        (cov_1de05a3civ().b[4][0]++, data.selectedModules) ||
+        /* istanbul ignore next */
+        (cov_1de05a3civ().b[4][1]++, ['sport', 'nutrition', 'sleep', 'hydration']),
+        updated_at: new Date().toISOString()
+      }).eq('id', user.id));
+      /* istanbul ignore next */
+      cov_1de05a3civ().s[14]++;
+      if (_error) {
+        /* istanbul ignore next */
+        cov_1de05a3civ().b[5][0]++;
+        cov_1de05a3civ().s[15]++;
+        console.error('🔴 Erreur Supabase lors de la mise à jour:', _error);
+        /* istanbul ignore next */
+        cov_1de05a3civ().s[16]++;
+        console.error("🔴 Détails de l'erreur:", _error.message);
+        /* istanbul ignore next */
+        cov_1de05a3civ().s[17]++;
+        console.error("🔴 Code d'erreur:", _error.code);
+        /* istanbul ignore next */
+        cov_1de05a3civ().s[18]++;
+        console.error('🔴 User ID utilisé:', user.id);
+        // ⚠️ MÊME EN CAS D'ERREUR, on continue vers le dashboard
+        // L'essentiel est que le profil de base existe déjà
+        /* istanbul ignore next */
+        cov_1de05a3civ().s[19]++;
+        toast({
+          title: 'Profil partiellement sauvegardé',
+          description: "Certaines données n'ont pas pu être sauvegardées, mais vous pouvez continuer.",
+          variant: 'destructive'
+        });
+        // ✅ TOUJOURS appeler onComplete pour éviter de bloquer l'utilisateur
+        /* istanbul ignore next */
+        cov_1de05a3civ().s[20]++;
+        onComplete();
+        /* istanbul ignore next */
+        cov_1de05a3civ().s[21]++;
+        return;
+      } else
+      /* istanbul ignore next */
+      {
+        cov_1de05a3civ().b[5][1]++;
+      }
+      // 🎉 FEEDBACK SUCCÈS AMÉLIORE
+      cov_1de05a3civ().s[22]++;
+      toast({
+        title: '🎉 Bienvenue dans MyFitHero !',
+        description: 'Votre profil a été créé avec succès. Découvrez votre tableau de bord personnalisé.'
+      });
+      /* istanbul ignore next */
+      cov_1de05a3civ().s[23]++;
+      onComplete();
+    } catch (error) {
+      /* istanbul ignore next */
+      cov_1de05a3civ().s[24]++;
+      // Erreur silencieuse
+      console.error('🔴 Erreur lors de la finalisation:', error);
+      // ⚠️ MÊME EN CAS D'ERREUR CRITIQUE, on redirige
+      // Mieux vaut avoir un utilisateur sur le dashboard qu'en boucle d'inscription
+      /* istanbul ignore next */
+      cov_1de05a3civ().s[25]++;
+      toast({
+        title: 'Erreur de sauvegarde',
+        description: 'Une erreur est survenue, mais vous pouvez accéder à votre compte.',
+        variant: 'destructive'
+      });
+      // ✅ TOUJOURS rediriger pour éviter la boucle infinie
+      /* istanbul ignore next */
+      cov_1de05a3civ().s[26]++;
+      onComplete();
+    }
+  };
+  /* istanbul ignore next */
+  cov_1de05a3civ().s[27]++;
+  return (0, jsx_runtime_1.jsx)("div", {
+    className: "hero-container",
+    children: (0, jsx_runtime_1.jsx)(ConversationalOnboarding_1.default, {
+      onComplete: handleConversationalComplete
+    })
+  });
+};
+/* istanbul ignore next */
+cov_1de05a3civ().s[28]++;
+exports.default = OnboardingQuestionnaire;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMWRlMDVhM2NpdiIsImFjdHVhbENvdmVyYWdlIiwicmVhY3RfMSIsInMiLCJfX2ltcG9ydERlZmF1bHQiLCJyZXF1aXJlIiwidXNlX3RvYXN0XzEiLCJzdXBhYmFzZV8xIiwiQ29udmVyc2F0aW9uYWxPbmJvYXJkaW5nXzEiLCJPbmJvYXJkaW5nUXVlc3Rpb25uYWlyZSIsInVzZXIiLCJvbkNvbXBsZXRlIiwiZiIsInRvYXN0IiwidXNlVG9hc3QiLCJoYW5kbGVDb252ZXJzYXRpb25hbENvbXBsZXRlIiwiZGF0YSIsInRpdGxlIiwiZGVzY3JpcHRpb24iLCJlcnJvciIsIl9lcnJvciIsInN1cGFiYXNlIiwiZnJvbSIsInVwZGF0ZSIsIm9uYm9hcmRpbmdfY29tcGxldGVkIiwib25ib2FyZGluZ19jb21wbGV0ZWRfYXQiLCJEYXRlIiwidG9JU09TdHJpbmciLCJwcm9maWxlX3R5cGUiLCJtb2R1bGVzIiwiYiIsInNlbGVjdGVkTW9kdWxlcyIsImFjdGl2ZV9tb2R1bGVzIiwidXBkYXRlZF9hdCIsImVxIiwiaWQiLCJjb25zb2xlIiwibWVzc2FnZSIsImNvZGUiLCJ2YXJpYW50IiwianN4X3J1bnRpbWVfMSIsImpzeCIsImNsYXNzTmFtZSIsImNoaWxkcmVuIiwiZGVmYXVsdCIsImV4cG9ydHMiXSwic291cmNlcyI6WyIvd29ya3NwYWNlcy9NeUZpdEhlcm8vc3JjL2ZlYXR1cmVzL2FpLWNvYWNoL2NvbXBvbmVudHMvT25ib2FyZGluZ1F1ZXN0aW9ubmFpcmUudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyB1c2VUb2FzdCB9IGZyb20gJ0Avc2hhcmVkL2hvb2tzL3VzZS10b2FzdCc7XG5pbXBvcnQgeyBzdXBhYmFzZSB9IGZyb20gJ0AvbGliL3N1cGFiYXNlJztcbmltcG9ydCBDb252ZXJzYXRpb25hbE9uYm9hcmRpbmcgZnJvbSAnLi9Db252ZXJzYXRpb25hbE9uYm9hcmRpbmcnO1xuaW1wb3J0IHsgT25ib2FyZGluZ0RhdGEgfSBmcm9tICdAL3NoYXJlZC90eXBlcy9jb252ZXJzYXRpb25hbE9uYm9hcmRpbmcnO1xuXG5pbnRlcmZhY2UgT25ib2FyZGluZ1F1ZXN0aW9ubmFpcmVQcm9wcyB7XG4gIHVzZXI6IGFueTtcbiAgb25Db21wbGV0ZTogKGRhdGE/OiBhbnkpID0+IHZvaWQ7IC8vIFJlbmRyZSBkYXRhIG9wdGlvbm5lbCBjYXIgZMOpasOgIHNhdXZlZ2FyZMOpXG59XG5cbmNvbnN0IE9uYm9hcmRpbmdRdWVzdGlvbm5haXJlOiBSZWFjdC5GQzxPbmJvYXJkaW5nUXVlc3Rpb25uYWlyZVByb3BzPiA9ICh7IHVzZXIsIG9uQ29tcGxldGUgfSkgPT4ge1xuICBjb25zdCB7IHRvYXN0IH0gPSB1c2VUb2FzdCgpO1xuXG4gIC8vIEfDqXJlciBsYSBmaW5hbGlzYXRpb24gZHUgbm91dmVsIG9uYm9hcmRpbmdcbiAgY29uc3QgaGFuZGxlQ29udmVyc2F0aW9uYWxDb21wbGV0ZSA9IGFzeW5jIChkYXRhOiBPbmJvYXJkaW5nRGF0YSkgPT4ge1xuICAgIC8vIPCfjq8gQWpvdXRlciBmZWVkYmFjayB2aXN1ZWwgaW1tw6lkaWF0XG4gICAgdG9hc3Qoe1xuICAgICAgdGl0bGU6ICdGaW5hbGlzYXRpb24gZGUgdm90cmUgcHJvZmlsLi4uJyxcbiAgICAgIGRlc2NyaXB0aW9uOiAnU2F1dmVnYXJkZSBlbiBjb3VycywgdmV1aWxsZXogcGF0aWVudGVyLicsXG4gICAgfSk7XG5cbiAgICB0cnkge1xuICAgICAgY29uc3QgeyBlcnJvcjogX2Vycm9yIH0gPSBhd2FpdCBzdXBhYmFzZVxuICAgICAgICAuZnJvbSgndXNlcl9wcm9maWxlcycpXG4gICAgICAgIC51cGRhdGUoe1xuICAgICAgICAgIG9uYm9hcmRpbmdfY29tcGxldGVkOiB0cnVlLFxuICAgICAgICAgIG9uYm9hcmRpbmdfY29tcGxldGVkX2F0OiBuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKCksXG4gICAgICAgICAgcHJvZmlsZV90eXBlOiAnY29tcGxldGUnLFxuICAgICAgICAgIG1vZHVsZXM6IGRhdGEuc2VsZWN0ZWRNb2R1bGVzIHx8IFsnc3BvcnQnLCAnbnV0cml0aW9uJywgJ3NsZWVwJywgJ2h5ZHJhdGlvbiddLFxuICAgICAgICAgIGFjdGl2ZV9tb2R1bGVzOiBkYXRhLnNlbGVjdGVkTW9kdWxlcyB8fCBbJ3Nwb3J0JywgJ251dHJpdGlvbicsICdzbGVlcCcsICdoeWRyYXRpb24nXSxcbiAgICAgICAgICB1cGRhdGVkX2F0OiBuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKCksXG4gICAgICAgIH0pXG4gICAgICAgIC5lcSgnaWQnLCB1c2VyLmlkKTtcblxuICAgICAgaWYgKF9lcnJvcikge1xuICAgICAgICBjb25zb2xlLmVycm9yKCfwn5S0IEVycmV1ciBTdXBhYmFzZSBsb3JzIGRlIGxhIG1pc2Ugw6Agam91cjonLCBfZXJyb3IpO1xuICAgICAgICBjb25zb2xlLmVycm9yKFwi8J+UtCBEw6l0YWlscyBkZSBsJ2VycmV1cjpcIiwgX2Vycm9yLm1lc3NhZ2UpO1xuICAgICAgICBjb25zb2xlLmVycm9yKFwi8J+UtCBDb2RlIGQnZXJyZXVyOlwiLCBfZXJyb3IuY29kZSk7XG4gICAgICAgIGNvbnNvbGUuZXJyb3IoJ/CflLQgVXNlciBJRCB1dGlsaXPDqTonLCB1c2VyLmlkKTtcblxuICAgICAgICAvLyDimqDvuI8gTcOKTUUgRU4gQ0FTIEQnRVJSRVVSLCBvbiBjb250aW51ZSB2ZXJzIGxlIGRhc2hib2FyZFxuICAgICAgICAvLyBMJ2Vzc2VudGllbCBlc3QgcXVlIGxlIHByb2ZpbCBkZSBiYXNlIGV4aXN0ZSBkw6lqw6BcbiAgICAgICAgdG9hc3Qoe1xuICAgICAgICAgIHRpdGxlOiAnUHJvZmlsIHBhcnRpZWxsZW1lbnQgc2F1dmVnYXJkw6knLFxuICAgICAgICAgIGRlc2NyaXB0aW9uOlxuICAgICAgICAgICAgXCJDZXJ0YWluZXMgZG9ubsOpZXMgbidvbnQgcGFzIHB1IMOqdHJlIHNhdXZlZ2FyZMOpZXMsIG1haXMgdm91cyBwb3V2ZXogY29udGludWVyLlwiLFxuICAgICAgICAgIHZhcmlhbnQ6ICdkZXN0cnVjdGl2ZScsXG4gICAgICAgIH0pO1xuXG4gICAgICAgIC8vIOKchSBUT1VKT1VSUyBhcHBlbGVyIG9uQ29tcGxldGUgcG91ciDDqXZpdGVyIGRlIGJsb3F1ZXIgbCd1dGlsaXNhdGV1clxuICAgICAgICBvbkNvbXBsZXRlKCk7XG4gICAgICAgIHJldHVybjtcbiAgICAgIH1cblxuXG4gICAgICAvLyDwn46JIEZFRURCQUNLIFNVQ0PDiFMgQU3DiUxJT1JFXG4gICAgICB0b2FzdCh7XG4gICAgICAgIHRpdGxlOiAn8J+OiSBCaWVudmVudWUgZGFucyBNeUZpdEhlcm8gIScsXG4gICAgICAgIGRlc2NyaXB0aW9uOiAnVm90cmUgcHJvZmlsIGEgw6l0w6kgY3LDqcOpIGF2ZWMgc3VjY8Oocy4gRMOpY291dnJleiB2b3RyZSB0YWJsZWF1IGRlIGJvcmQgcGVyc29ubmFsaXPDqS4nLFxuICAgICAgfSk7XG5cbiAgICAgIG9uQ29tcGxldGUoKTtcbiAgICB9IGNhdGNoIChlcnJvcjogYW55KSB7XG4gICAgICAvLyBFcnJldXIgc2lsZW5jaWV1c2VcbiAgICAgIGNvbnNvbGUuZXJyb3IoJ/CflLQgRXJyZXVyIGxvcnMgZGUgbGEgZmluYWxpc2F0aW9uOicsIGVycm9yKTtcblxuICAgICAgLy8g4pqg77iPIE3Dik1FIEVOIENBUyBEJ0VSUkVVUiBDUklUSVFVRSwgb24gcmVkaXJpZ2VcbiAgICAgIC8vIE1pZXV4IHZhdXQgYXZvaXIgdW4gdXRpbGlzYXRldXIgc3VyIGxlIGRhc2hib2FyZCBxdSdlbiBib3VjbGUgZCdpbnNjcmlwdGlvblxuICAgICAgdG9hc3Qoe1xuICAgICAgICB0aXRsZTogJ0VycmV1ciBkZSBzYXV2ZWdhcmRlJyxcbiAgICAgICAgZGVzY3JpcHRpb246ICdVbmUgZXJyZXVyIGVzdCBzdXJ2ZW51ZSwgbWFpcyB2b3VzIHBvdXZleiBhY2PDqWRlciDDoCB2b3RyZSBjb21wdGUuJyxcbiAgICAgICAgdmFyaWFudDogJ2Rlc3RydWN0aXZlJyxcbiAgICAgIH0pO1xuXG4gICAgICAvLyDinIUgVE9VSk9VUlMgcmVkaXJpZ2VyIHBvdXIgw6l2aXRlciBsYSBib3VjbGUgaW5maW5pZVxuICAgICAgb25Db21wbGV0ZSgpO1xuICAgIH1cbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwiaGVyby1jb250YWluZXJcIj5cbiAgICAgIDxDb252ZXJzYXRpb25hbE9uYm9hcmRpbmcgb25Db21wbGV0ZT17aGFuZGxlQ29udmVyc2F0aW9uYWxDb21wbGV0ZX0gLz5cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IE9uYm9hcmRpbmdRdWVzdGlvbm5haXJlO1xuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7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QUM7UUFBQXJDLGNBQUEsR0FBQUcsQ0FBQTtRQUN6RGlDLE9BQU8sQ0FBQ2pCLEtBQUssQ0FBQyxtQkFBbUIsRUFBRUMsTUFBTSxDQUFDa0IsSUFBSSxDQUFDO1FBQUM7UUFBQXRDLGNBQUEsR0FBQUcsQ0FBQTtRQUNoRGlDLE9BQU8sQ0FBQ2pCLEtBQUssQ0FBQyxxQkFBcUIsRUFBRVQsSUFBSSxDQUFDeUIsRUFBRSxDQUFDO1FBRTdDO1FBQ0E7UUFBQTtRQUFBbkMsY0FBQSxHQUFBRyxDQUFBO1FBQ0FVLEtBQUssQ0FBQztVQUNKSSxLQUFLLEVBQUUsaUNBQWlDO1VBQ3hDQyxXQUFXLEVBQ1QsK0VBQStFO1VBQ2pGcUIsT0FBTyxFQUFFO1NBQ1YsQ0FBQztRQUVGO1FBQUE7UUFBQXZDLGNBQUEsR0FBQUcsQ0FBQTtRQUNBUSxVQUFVLEVBQUU7UUFBQztRQUFBWCxjQUFBLEdBQUFHLENBQUE7UUFDYjtNQUNGLENBQUM7TUFBQTtNQUFBO1FBQUFILGNBQUEsR0FBQThCLENBQUE7TUFBQTtNQUdEO01BQUE5QixjQUFBLEdBQUFHLENBQUE7TUFDQVUsS0FBSyxDQUFDO1FBQ0pJLEtBQUssRUFBRSwrQkFBK0I7UUFDdENDLFdBQVcsRUFBRTtPQUNkLENBQUM7TUFBQztNQUFBbEIsY0FBQSxHQUFBRyxDQUFBO01BRUhRLFVBQVUsRUFBRTtJQUNkLENBQUMsQ0FBQyxPQUFPUSxLQUFVLEVBQUU7TUFBQTtNQUFBbkIsY0FBQSxHQUFBRyxDQUFBO01BQ25CO01BQ0FpQyxPQUFPLENBQUNqQixLQUFLLENBQUMsb0NBQW9DLEVBQUVBLEtBQUssQ0FBQztNQUUxRDtNQUNBO01BQUE7TUFBQW5CLGNBQUEsR0FBQUcsQ0FBQTtNQUNBVSxLQUFLLENBQUM7UUFDSkksS0FBSyxFQUFFLHNCQUFzQjtRQUM3QkMsV0FBVyxFQUFFLG1FQUFtRTtRQUNoRnFCLE9BQU8sRUFBRTtPQUNWLENBQUM7TUFFRjtNQUFBO01BQUF2QyxjQUFBLEdBQUFHLENBQUE7TUFDQVEsVUFBVSxFQUFFO0lBQ2Q7RUFDRixDQUFDO0VBQUM7RUFBQVgsY0FBQSxHQUFBRyxDQUFBO0VBRUYsT0FDRSxJQUFBcUMsYUFBQSxDQUFBQyxHQUFBO0lBQUtDLFNBQVMsRUFBQyxnQkFBZ0I7SUFBQUMsUUFBQSxFQUM3QixJQUFBSCxhQUFBLENBQUFDLEdBQUEsRUFBQ2pDLDBCQUFBLENBQUFvQyxPQUF3QjtNQUFDakMsVUFBVSxFQUFFSTtJQUE0QjtFQUFJLEVBQ2xFO0FBRVYsQ0FBQztBQUFDO0FBQUFmLGNBQUEsR0FBQUcsQ0FBQTtBQUVGMEMsT0FBQSxDQUFBRCxPQUFBLEdBQWVuQyx1QkFBdUIiLCJpZ25vcmVMaXN0IjpbXX0=

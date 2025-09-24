@@ -1,0 +1,279 @@
+1cde38e6c0fca72e945ae78fa4b19aeb
+"use strict";
+
+/* istanbul ignore next */
+function cov_189l6ylf5y() {
+  var path = "/workspaces/MyFitHero/src/core/config/index.ts";
+  var hash = "91587de883e0508bfaa229b8c71587b5c7d6a51a";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/workspaces/MyFitHero/src/core/config/index.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 66
+        }
+      },
+      "2": {
+        start: {
+          line: 5,
+          column: 19
+        },
+        end: {
+          line: 5,
+          column: 42
+        }
+      },
+      "3": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 107
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 77
+        },
+        end: {
+          line: 6,
+          column: 101
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 0
+        },
+        end: {
+          line: 7,
+          column: 123
+        }
+      },
+      "6": {
+        start: {
+          line: 7,
+          column: 85
+        },
+        end: {
+          line: 7,
+          column: 117
+        }
+      },
+      "7": {
+        start: {
+          line: 8,
+          column: 22
+        },
+        end: {
+          line: 8,
+          column: 48
+        }
+      },
+      "8": {
+        start: {
+          line: 9,
+          column: 0
+        },
+        end: {
+          line: 9,
+          column: 128
+        }
+      },
+      "9": {
+        start: {
+          line: 9,
+          column: 86
+        },
+        end: {
+          line: 9,
+          column: 122
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 6,
+            column: 63
+          },
+          end: {
+            line: 6,
+            column: 64
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 75
+          },
+          end: {
+            line: 6,
+            column: 103
+          }
+        },
+        line: 6
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 7,
+            column: 71
+          },
+          end: {
+            line: 7,
+            column: 72
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 83
+          },
+          end: {
+            line: 7,
+            column: 119
+          }
+        },
+        line: 7
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 9,
+            column: 72
+          },
+          end: {
+            line: 9,
+            column: 73
+          }
+        },
+        loc: {
+          start: {
+            line: 9,
+            column: 84
+          },
+          end: {
+            line: 9,
+            column: 124
+          }
+        },
+        line: 9
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/workspaces/MyFitHero/src/core/config/index.ts",
+      mappings: ";;;AAAA,wBAAwB;AACxB,2CAAgD;AAAvC,iGAAA,GAAG,OAAA;AAAE,yGAAA,WAAW,OAAA;AACzB,iDAA6E;AAApE,6GAAA,YAAY,OAAA",
+      names: [],
+      sources: ["/workspaces/MyFitHero/src/core/config/index.ts"],
+      sourcesContent: ["// Configuration exports\nexport { env, validateEnv } from './env.config';\nexport { sportsConfig, type Sport, type SportConfig } from './sports.config';\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "91587de883e0508bfaa229b8c71587b5c7d6a51a"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_189l6ylf5y = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_189l6ylf5y();
+cov_189l6ylf5y().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_189l6ylf5y().s[1]++;
+exports.sportsConfig = exports.validateEnv = exports.env = void 0;
+// Configuration exports
+var env_config_1 =
+/* istanbul ignore next */
+(cov_189l6ylf5y().s[2]++, require("./env.config"));
+/* istanbul ignore next */
+cov_189l6ylf5y().s[3]++;
+Object.defineProperty(exports, "env", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_189l6ylf5y().f[0]++;
+    cov_189l6ylf5y().s[4]++;
+    return env_config_1.env;
+  }
+});
+/* istanbul ignore next */
+cov_189l6ylf5y().s[5]++;
+Object.defineProperty(exports, "validateEnv", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_189l6ylf5y().f[1]++;
+    cov_189l6ylf5y().s[6]++;
+    return env_config_1.validateEnv;
+  }
+});
+var sports_config_1 =
+/* istanbul ignore next */
+(cov_189l6ylf5y().s[7]++, require("./sports.config"));
+/* istanbul ignore next */
+cov_189l6ylf5y().s[8]++;
+Object.defineProperty(exports, "sportsConfig", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_189l6ylf5y().f[2]++;
+    cov_189l6ylf5y().s[9]++;
+    return sports_config_1.sportsConfig;
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJlbnZfY29uZmlnXzEiLCJjb3ZfMTg5bDZ5bGY1eSIsInMiLCJyZXF1aXJlIiwiT2JqZWN0IiwiZGVmaW5lUHJvcGVydHkiLCJleHBvcnRzIiwiZW51bWVyYWJsZSIsImdldCIsImYiLCJlbnYiLCJ2YWxpZGF0ZUVudiIsInNwb3J0c19jb25maWdfMSIsInNwb3J0c0NvbmZpZyJdLCJzb3VyY2VzIjpbIi93b3Jrc3BhY2VzL015Rml0SGVyby9zcmMvY29yZS9jb25maWcvaW5kZXgudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQ29uZmlndXJhdGlvbiBleHBvcnRzXG5leHBvcnQgeyBlbnYsIHZhbGlkYXRlRW52IH0gZnJvbSAnLi9lbnYuY29uZmlnJztcbmV4cG9ydCB7IHNwb3J0c0NvbmZpZywgdHlwZSBTcG9ydCwgdHlwZSBTcG9ydENvbmZpZyB9IGZyb20gJy4vc3BvcnRzLmNvbmZpZyc7XG4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQ0EsSUFBQUEsWUFBQTtBQUFBO0FBQUEsQ0FBQUMsY0FBQSxHQUFBQyxDQUFBLE9BQUFDLE9BQUE7QUFBZ0Q7QUFBQUYsY0FBQSxHQUFBQyxDQUFBO0FBQXZDRSxNQUFBLENBQUFDLGNBQUEsQ0FBQUMsT0FBQTtFQUFBQyxVQUFBO0VBQUFDLEdBQUEsV0FBQUEsQ0FBQTtJQUFBO0lBQUFQLGNBQUEsR0FBQVEsQ0FBQTtJQUFBUixjQUFBLEdBQUFDLENBQUE7SUFBQSxPQUFBRixZQUFBLENBQUFVLEdBQUc7RUFBQTtBQUFBO0FBQUE7QUFBQVQsY0FBQSxHQUFBQyxDQUFBO0FBQUVFLE1BQUEsQ0FBQUMsY0FBQSxDQUFBQyxPQUFBO0VBQUFDLFVBQUE7RUFBQUMsR0FBQSxXQUFBQSxDQUFBO0lBQUE7SUFBQVAsY0FBQSxHQUFBUSxDQUFBO0lBQUFSLGNBQUEsR0FBQUMsQ0FBQTtJQUFBLE9BQUFGLFlBQUEsQ0FBQVcsV0FBVztFQUFBO0FBQUE7QUFDekIsSUFBQUMsZUFBQTtBQUFBO0FBQUEsQ0FBQVgsY0FBQSxHQUFBQyxDQUFBLE9BQUFDLE9BQUE7QUFBNkU7QUFBQUYsY0FBQSxHQUFBQyxDQUFBO0FBQXBFRSxNQUFBLENBQUFDLGNBQUEsQ0FBQUMsT0FBQTtFQUFBQyxVQUFBO0VBQUFDLEdBQUEsV0FBQUEsQ0FBQTtJQUFBO0lBQUFQLGNBQUEsR0FBQVEsQ0FBQTtJQUFBUixjQUFBLEdBQUFDLENBQUE7SUFBQSxPQUFBVSxlQUFBLENBQUFDLFlBQVk7RUFBQTtBQUFBIiwiaWdub3JlTGlzdCI6W119
