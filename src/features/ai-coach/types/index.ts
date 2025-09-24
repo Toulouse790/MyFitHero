@@ -36,6 +36,21 @@ export interface AICoachingSession {
   feedback?: SessionFeedback;
 }
 
+// Alias pour compatibilité
+export type CoachingSession = AICoachingSession;
+
+// Message interface pour chat
+export interface Message {
+  id: string;
+  content: string;
+  role: 'user' | 'assistant' | 'system';
+  timestamp: Date;
+  metadata?: Record<string, any>;
+}
+
+// Recommendation alias
+export type Recommendation = AIRecommendation;
+
 export interface AIRecommendation {
   id: string;
   user_id: string;

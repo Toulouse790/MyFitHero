@@ -84,7 +84,7 @@ export const usePerformanceMonitoring = (): UsePerformanceMonitoringReturn => {
             const navigationEntry = entry as PerformanceNavigationTiming;
             setMetrics(prev => ({
               ...prev,
-              loadTime: navigationEntry.loadEventEnd - navigationEntry.navigationStart,
+              loadTime: navigationEntry.loadEventEnd - (navigationEntry.fetchStart || 0),
             }));
           }
 
@@ -177,17 +177,17 @@ export const usePerformanceMonitoring = (): UsePerformanceMonitoringReturn => {
 
   // Update metrics periodically
   useEffect(() => {
-    if (isMonitoring) {
-      const interval = setInterval(() => {
-        setMetrics(prev => ({
-          ...prev,
-          memoryUsage: getMemoryUsage(),
-          networkRequests: getNetworkRequests(),
-        }));
-      }, 5000); // Update every 5 seconds
+    if (!isMonitoring) return;
+    
+    const interval = setInterval(() => {
+      setMetrics(prev => ({
+        ...prev,
+        memoryUsage: getMemoryUsage(),
+        networkRequests: getNetworkRequests(),
+      }));
+    }, 5000); // Update every 5 seconds
 
-      return () => clearInterval(interval);
-    }
+    return () => clearInterval(interval);
   }, [isMonitoring, getMemoryUsage, getNetworkRequests]);
 
   // Cleanup on unmount

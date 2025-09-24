@@ -1,6 +1,12 @@
 // Export des hooks de la feature ai-coach
 export * from './useAICoach';
-export * from './useLoadingState';
+export {
+  type LoadingState,
+  type UseLoadingStateOptions,
+  type UseLoadingStateReturn,
+  useLoadingState,
+  useFormLoading
+} from './useLoadingState';
 export * from './useUserPreferences';
 export * from './useUnifiedLoading';
 export * from './usePositions';
