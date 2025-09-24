@@ -77,7 +77,6 @@ export const useExerciseHistory = (): UseExerciseHistoryReturn => {
           .limit(1);
 
         if (_error || !_data?.length) {
-          console.log('Aucune session précédente trouvée pour:', workoutName);
           return [];
         }
 

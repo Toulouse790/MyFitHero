@@ -84,7 +84,6 @@ const AIIntelligence: React.FC<AIIntelligenceProps> = ({
       if (showRecommendations && results[2]) setRecommendations(results[2].recommendations || []);
 
       // Toast de succès simplifié
-      console.log('Intelligence AI mise à jour');
     } catch (err) {
       setError("Erreur lors du chargement de l'intelligence AI");
       console.error('AI Intelligence error:', err);

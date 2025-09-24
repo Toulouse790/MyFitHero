@@ -266,7 +266,6 @@ const BadgeSystem: React.FC<BadgeSystemProps> = ({ showProgress = true, compact 
         );
 
         // Notification (si toast disponible)
-        console.log(`Badge débloqué: ${badge.title}`);
       }
     } catch (error) {
       // Erreur silencieuse

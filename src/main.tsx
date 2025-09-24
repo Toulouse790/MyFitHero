@@ -207,16 +207,10 @@ root.render(
 );
 
 // Log du démarrage de l'application
-console.log(`🚀 MyFitHero v${env.APP_VERSION} démarré en mode ${env.APP_ENV}`);
 
 // Performance monitoring en développement
 if (env.APP_ENV === 'development') {
   // Web Vitals pour mesurer les performances
   import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
-    onCLS(console.log);
-    onINP(console.log);
-    onFCP(console.log);
-    onLCP(console.log);
-    onTTFB(console.log);
   });
 }

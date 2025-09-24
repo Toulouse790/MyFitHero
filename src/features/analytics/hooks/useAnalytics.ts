@@ -13,7 +13,6 @@ export const useAnalytics = () => {
       // Implementation à venir - appel au service
       // const result = await AnalyticsService.getUserAnalytics(userId, period);
       // setData(result);
-      console.log('Loading analytics for period:', period);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Une erreur est survenue');
     } finally {
@@ -24,7 +23,6 @@ export const useAnalytics = () => {
   const exportData = useCallback(async (format: 'csv' | 'pdf') => {
     try {
       // Implementation à venir
-      console.log('Exporting data in format:', format);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erreur lors de l'export");
     }

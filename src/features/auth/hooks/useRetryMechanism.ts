@@ -16,7 +16,6 @@ export const useRetryMechanism = ({ maxRetries = 3, baseDelay = 1000 }: UseRetry
     } catch (error) {
       if (attempt < maxRetries) {
         const delay = Math.pow(2, attempt) * baseDelay; // Exponential backoff
-        console.log(`🟡 Tentative ${attempt + 1}/${maxRetries} échouée, retry dans ${delay}ms`);
         
         setIsRetrying(true);
         setRetryCount(attempt + 1);

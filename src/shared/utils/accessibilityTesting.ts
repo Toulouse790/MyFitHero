@@ -304,12 +304,9 @@ export const developmentAccessibilityHelpers = {
       console.group('🚨 Violations d\'accessibilité détectées:');
       results.violations.forEach(violation => {
         console.error(`${violation.id}: ${violation.description}`);
-        console.log('Éléments concernés:', violation.nodes);
-        console.log('Aide:', violation.helpUrl);
       });
       console.groupEnd();
     } else {
-      console.log('✅ Aucune violation d\'accessibilité détectée');
     }
     
     return results;

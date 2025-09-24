@@ -258,7 +258,3 @@ export const ROUTE_CONSTANTS = {
   }
 };
 
-console.log('🎯 Route Audit Script Loaded');
-console.log('📊 Critical Routes:', ROUTE_CONSTANTS.CRITICAL_ROUTES.length);
-console.log('⚡ Important Routes:', ROUTE_CONSTANTS.IMPORTANT_ROUTES.length);
-console.log('📋 Test Scenarios:', TEST_SCENARIOS.length);

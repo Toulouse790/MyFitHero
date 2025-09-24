@@ -56,7 +56,6 @@ class PerformanceCollector {
     
     // Log en développement
     if (import.meta.env.DEV) {
-      console.log(`📊 ${metric.name}:`, {
         value: `${metric.value}ms`,
         threshold: `${PERFORMANCE_THRESHOLDS[metric.name as keyof PerformanceThresholds]}ms`,
         status: this.getMetricStatus(metric)

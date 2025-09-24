@@ -161,7 +161,6 @@ const Nutrition: React.FC = () => {
 
   // --- HANDLERS ---
   const handleAddMeal = (type?: string) => {
-    console.log('Ajouter repas:', type);
     // Logic to add meal
   };
 
@@ -198,7 +197,6 @@ const Nutrition: React.FC = () => {
   };
 
   const handlePhotoAnalysisComplete = (foods: RecognizedFood[]) => {
-    console.log('Aliments reconnus:', foods);
     setShowPhotoAnalyzer(false);
   };
 

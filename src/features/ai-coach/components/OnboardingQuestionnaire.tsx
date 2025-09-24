@@ -14,9 +14,13 @@ const OnboardingQuestionnaire: React.FC<OnboardingQuestionnaireProps> = ({ user,
 
   // Gérer la finalisation du nouvel onboarding
   const handleConversationalComplete = async (data: OnboardingData) => {
-    try {
-      console.log("🔄 Début de la finalisation de l'onboarding", { userId: user?.id, data });
+    // 🎯 Ajouter feedback visuel immédiat
+    toast({
+      title: 'Finalisation de votre profil...',
+      description: 'Sauvegarde en cours, veuillez patienter.',
+    });
 
+    try {
       const { error: _error } = await supabase
         .from('user_profiles')
         .update({
@@ -45,19 +49,17 @@ const OnboardingQuestionnaire: React.FC<OnboardingQuestionnaireProps> = ({ user,
         });
 
         // ✅ TOUJOURS appeler onComplete pour éviter de bloquer l'utilisateur
-        console.log("🟡 Redirection vers dashboard malgré l'erreur Supabase");
         onComplete();
         return;
       }
 
-      console.log('🟢 Mise à jour Supabase réussie');
 
+      // 🎉 FEEDBACK SUCCÈS AMÉLIORE
       toast({
-        title: 'Bienvenue dans MyFitHero !',
-        description: 'Votre profil a été créé avec succès.',
+        title: '🎉 Bienvenue dans MyFitHero !',
+        description: 'Votre profil a été créé avec succès. Découvrez votre tableau de bord personnalisé.',
       });
 
-      console.log('🟢 Redirection vers dashboard');
       onComplete();
     } catch (error) {
       // Erreur silencieuse
@@ -72,7 +74,6 @@ const OnboardingQuestionnaire: React.FC<OnboardingQuestionnaireProps> = ({ user,
       });
 
       // ✅ TOUJOURS rediriger pour éviter la boucle infinie
-      console.log('🟡 Redirection forcée vers dashboard après erreur');
       onComplete();
     }
   };

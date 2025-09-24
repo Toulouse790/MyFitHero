@@ -14,6 +14,13 @@ import { appStore } from './store/appStore';
 import { UserProfile } from './shared/types/user';
 import LoadingScreen from './components/LoadingScreen';
 
+// 🎯 SYSTÈME DE PARAMÈTRES UNIFIÉ
+import { 
+  useSettingsInitialization, 
+  useSettingsNotifications, 
+  useSettingsPWAIntegration 
+} from './core/settings/useSettingsInitialization';
+
 // Imports des composants avec lazy loading
 const LandingPage = lazy(() => import('./features/landing/pages/LandingPage'));
 const AuthPage = lazy(() => import('./features/auth/pages/AuthPage'));
@@ -22,6 +29,7 @@ const Dashboard = lazy(() => import('./features/dashboard/pages/Dashboard'));
 const OnboardingQuestionnaire = lazy(() => import('./features/ai-coach/components/OnboardingQuestionnaire'));
 const ProfilePage = lazy(() => import('./features/profile/pages/ProfilePage'));
 const SettingsPage = lazy(() => import('./features/profile/pages/SettingsPage'));
+const UnifiedSettingsPage = lazy(() => import('./features/profile/components/UnifiedSettingsPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
@@ -255,7 +263,6 @@ function useAuthState(): AuthState & {
       async (event, session) => {
         if (!mounted) return;
 
-        console.log('Auth state change:', event);
 
         if (event === 'SIGNED_IN' && session) {
           const { data: profile } = await supabase
@@ -375,12 +382,9 @@ function useAuthState(): AuthState & {
     try {
       if (!authState.user) throw new Error('Utilisateur non connecté');
 
-      console.log('🔄 UpdateProfile - Data to update:', data);
-      console.log('🔄 UpdateProfile - Current authState.user:', authState.user);
 
       // Convertir les données camelCase vers snake_case pour Supabase
       const supabasePayload = toSupabasePayload(data);
-      console.log('📤 UpdateProfile - Supabase payload:', supabasePayload);
 
       const { error } = await supabase
         .from('user_profiles')
@@ -403,9 +407,7 @@ function useAuthState(): AuthState & {
       if (authState.user) {
         const updatedUser = { ...authState.user, ...data };
         const userProfile = convertToUserProfile(updatedUser);
-        console.log('📤 UpdateProfile - Syncing with appStore:', userProfile);
         appStore.getState().setUser(userProfile);
-        console.log('✅ UpdateProfile - AppStore updated successfully');
       }
 
       toast.success('Profil mis à jour');
@@ -422,8 +424,6 @@ function useAuthState(): AuthState & {
     try {
       if (!authState.user) throw new Error('Utilisateur non connecté');
 
-      console.log('🔄 CompleteOnboarding - Data received:', data);
-      console.log('🔄 CompleteOnboarding - Current user before update:', authState.user);
 
       await updateProfile({
         ...data,
@@ -432,7 +432,6 @@ function useAuthState(): AuthState & {
 
       // Vérifier que appStore a bien été mis à jour
       const currentAppStoreUser = appStore.getState().appStoreUser;
-      console.log('✅ CompleteOnboarding - AppStore user after update:', currentAppStoreUser);
 
       toast.success('Configuration terminée ! Bienvenue dans MyFitHero 🎉');
     } catch (error) {
@@ -455,6 +454,28 @@ function useAuthState(): AuthState & {
 function App() {
   const auth = useAuthState();
   const [, setLocation] = useLocation();
+  
+  // 🎯 INITIALISATION DES PARAMÈTRES UNIFIÉS
+  const {
+    isInitializing,
+    migrationCompleted,
+    error: settingsError,
+    migrationSources
+  } = useSettingsInitialization();
+  
+  // 🔔 INTÉGRATION DES NOTIFICATIONS ET THÈME
+  useSettingsNotifications();
+  
+  // 📱 INTÉGRATION PWA
+  const { triggerVibration, playSound } = useSettingsPWAIntegration();
+  
+  // 🎊 FEEDBACK DE MIGRATION
+  useEffect(() => {
+    if (migrationCompleted && migrationSources.length > 0) {
+      triggerVibration([100, 50, 100]);
+      playSound('success');
+    }
+  }, [migrationCompleted, migrationSources.length, triggerVibration, playSound]);
 
   // Handler pour la completion de l'onboarding
   const handleOnboardingComplete = async (data?: any) => {
@@ -473,9 +494,17 @@ function App() {
     }
   };
 
-  // Affichage du loading principal
-  if (auth.isLoading) {
-    return <LoadingScreen />;
+  // Affichage du loading principal (auth + settings)
+  if (auth.isLoading || isInitializing) {
+    return (
+      <LoadingScreen 
+        message={
+          auth.isLoading ? 'Authenticating...' :
+          isInitializing ? 'Initializing settings...' :
+          'Loading...'
+        }
+      />
+    );
   }
 
   return (
@@ -558,6 +587,17 @@ function App() {
 
               {/* Route settings - protégée et onboarding requis */}
               <Route path="/settings">
+                {!auth.isAuthenticated ? (
+                  <Redirect to="/" />
+                ) : !auth.user?.onboardingCompleted ? (
+                  <Redirect to="/onboarding" />
+                ) : (
+                  <UnifiedSettingsPage />
+                )}
+              </Route>
+              
+              {/* Route settings legacy - redirige vers la nouvelle page */}
+              <Route path="/settings-legacy">
                 {!auth.isAuthenticated ? (
                   <Redirect to="/" />
                 ) : !auth.user?.onboardingCompleted ? (

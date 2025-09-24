@@ -262,7 +262,6 @@ class MarketingAnalyticsService {
       });
 
       // Log for development
-      console.log('📊 Marketing Event Tracked:', eventData);
     } catch (error) {
       console.warn('Failed to track marketing event:', error);
       // Store in localStorage as fallback

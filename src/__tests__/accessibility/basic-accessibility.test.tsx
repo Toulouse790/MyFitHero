@@ -189,13 +189,8 @@ describe('📊 Rapport de Conformité WCAG 2.1 AA', () => {
     expect(results).toHaveNoViolations();
 
     // Rapport détaillé
-    console.log('🎉 Conformité WCAG 2.1 AA validée !');
-    console.log(`✅ Tests réussis: ${results.passes.length}`);
-    console.log(`❌ Violations: ${results.violations.length}`);
-    console.log(`⚠️ Tests incomplets: ${results.incomplete.length}`);
     
     if (results.violations.length > 0) {
-      console.log('Violations détectées:', results.violations);
     }
   });
 });

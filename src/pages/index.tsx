@@ -1772,7 +1772,6 @@ const MyFitHeroIndex: React.FC = () => {
         // Vérifier le support PWA
         if ('serviceWorker' in navigator && pwaConfig.enableOfflineMode) {
           const registration = await navigator.serviceWorker.register('/sw.js');
-          console.log('ServiceWorker registered:', registration);
         }
 
         // Configurer les notifications push
@@ -1794,11 +1793,6 @@ const MyFitHeroIndex: React.FC = () => {
         if (process.env.NODE_ENV === 'production') {
           // Web Vitals et autres métriques
 
-          onCLS(console.log);
-          onINP(console.log);
-          onFCP(console.log);
-          onLCP(console.log);
-          onTTFB(console.log);
         }
 
         setIsInitialized(true);

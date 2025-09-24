@@ -17,7 +17,6 @@ export const useLandingABTest = (): UseLandingABTestReturn => {
       try {
         // Mock A/B test setup
         await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log(`Starting A/B test: ${testName} with variants:`, variants);
         return true;
       } catch (error) {
         console.error('Failed to start A/B test:', error);
@@ -39,7 +38,6 @@ export const useLandingABTest = (): UseLandingABTestReturn => {
           confidence: 85.6,
         };
 
-        console.log(`A/B test results for ${testName}:`, mockResults);
         return mockResults;
       } catch (error) {
         console.error('Failed to get A/B test result:', error);

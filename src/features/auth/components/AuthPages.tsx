@@ -84,7 +84,6 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
     }
 
     setLoading(true);
-    console.log('🚀 Début inscription pour:', signUpForm.email);
 
     try {
       const result = await authClient.register(
@@ -92,7 +91,6 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
         signUpForm.username,
         signUpForm.password
       );
-      console.log('📦 Résultat inscription:', result);
 
       if (result.error) {
         console.error('❌ Erreur lors inscription:', result.error);
@@ -102,8 +100,6 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
           variant: 'destructive',
         });
       } else if (result.user) {
-        console.log('✅ Inscription réussie - Appel onAuthSuccess avec isNewUser=true');
-        console.log('👤 Utilisateur créé:', result.user.id);
 
         // ✅ APPEL CRITIQUE - Marquer comme nouvel utilisateur
         onAuthSuccess(result.user, true);
@@ -111,10 +107,8 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
         // ✅ FALLBACK DE SÉCURITÉ - Redirection directe si le callback échoue
         setTimeout(() => {
           const currentPath = window.location.pathname;
-          console.log('🔍 Vérification path après inscription:', currentPath);
 
           if (currentPath === '/auth') {
-            console.log('⚠️ Toujours sur /auth - Force redirection vers /onboarding');
             window.location.href = '/onboarding';
           }
         }, 1500);
@@ -153,11 +147,9 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
     }
 
     setLoading(true);
-    console.log('🔑 Début connexion pour:', signInForm.email);
 
     try {
       const result = await authClient.signIn(signInForm.email, signInForm.password);
-      console.log('📦 Résultat connexion:', result);
 
       if (result.error) {
         console.error('❌ Erreur lors connexion:', result.error);
@@ -167,8 +159,6 @@ const AuthPages: React.FC<AuthPagesProps> = ({ onAuthSuccess }) => {
           variant: 'destructive',
         });
       } else if (result.user) {
-        console.log('✅ Connexion réussie - Appel onAuthSuccess avec isNewUser=false');
-        console.log('👤 Utilisateur connecté:', result.user.id);
 
         // ✅ Pas de toast ici - App.tsx gérera le message de bienvenue
         onAuthSuccess(result.user, false);

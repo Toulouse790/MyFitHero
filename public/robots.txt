@@ -1,22 +1,32 @@
-User-agent: *User-agent: Googlebot
+User-agent: *
+Allow: /
 
-Allow: /Allow: /
+# Sitemap
+Sitemap: https://myfithero.app/sitemap.xml
 
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
 
+# Disallow paths non-utiles pour SEO
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*?*utm_*
+Disallow: /*?*debug*
+Disallow: /*?*test*
 
-# SitemapUser-agent: Bingbot
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
 
-Sitemap: https://myfithero.app/sitemap.xmlAllow: /
+User-agent: Bingbot
+Allow: /
 
+User-agent: Twitterbot
+Allow: /
 
-
-# Crawl-delay pour éviter la surchargeUser-agent: Twitterbot
-
-Crawl-delay: 1Allow: /
-
-
-
-# Disallow paths non-utiles pour SEOUser-agent: facebookexternalhit
+User-agent: facebookexternalhit
 
 Disallow: /api/Allow: /
 

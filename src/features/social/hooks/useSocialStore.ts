@@ -229,27 +229,22 @@ export const useSocialStore = create<SocialStore>()(
 
       sendFriendRequest: async (userId: string) => {
         // TODO: Implement real API call
-        console.log('Sending friend request to:', userId);
       },
 
       acceptFriendRequest: async (requestId: string) => {
         // TODO: Implement real API call
-        console.log('Accepting friend request:', requestId);
       },
 
       declineFriendRequest: async (requestId: string) => {
         // TODO: Implement real API call
-        console.log('Declining friend request:', requestId);
       },
 
       removeFriend: async (friendId: string) => {
         // TODO: Implement real API call
-        console.log('Removing friend:', friendId);
       },
 
       createPost: async (postData: any) => {
         // TODO: Implement real API call
-        console.log('Creating post:', postData);
       },
 
       loadPosts: async (filter?: any) => {
@@ -267,32 +262,26 @@ export const useSocialStore = create<SocialStore>()(
 
       likePost: async (postId: string) => {
         // TODO: Implement real API call
-        console.log('Liking post:', postId);
       },
 
       commentPost: async (postId: string, content: string) => {
         // TODO: Implement real API call
-        console.log('Commenting on post:', postId, content);
       },
 
       sharePost: async (postId: string) => {
         // TODO: Implement real API call
-        console.log('Sharing post:', postId);
       },
 
       createChallenge: async (challengeData: any) => {
         // TODO: Implement real API call
-        console.log('Creating challenge:', challengeData);
       },
 
       joinChallenge: async (challengeId: string) => {
         // TODO: Implement real API call
-        console.log('Joining challenge:', challengeId);
       },
 
       updateChallengeProgress: async (challengeId: string, progress: number) => {
         // TODO: Implement real API call
-        console.log('Updating challenge progress:', challengeId, progress);
       },
 
       markNotificationAsRead: async (notificationId: string) => {
@@ -313,17 +302,14 @@ export const useSocialStore = create<SocialStore>()(
 
       getLeaderboard: async (category: string, period: string) => {
         // TODO: Implement real API call
-        console.log('Getting leaderboard:', category, period);
       },
 
       initializeRealTime: () => {
         // TODO: Implement real-time subscriptions
-        console.log('Initializing real-time connections');
       },
 
       searchUsers: async (query: string, filters?: any) => {
         // TODO: Implement real API call
-        console.log('Searching users:', query, filters);
       },
     }),
     {

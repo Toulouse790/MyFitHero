@@ -62,7 +62,6 @@ const Dashboard: React.FC = () => {
 
   const handleViewGoal = (goal: PersonalizedGoal) => {
     // Navigate to goal details or open modal
-    console.log('Viewing goal:', goal);
   };
 
   if (isLoading) {

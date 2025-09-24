@@ -132,12 +132,10 @@ export const useRecovery = (userId?: string): UseRecoveryReturn => {
 
   const addRecoveryActivity = useCallback(async (activity: RecoveryActivityInput) => {
     // Implementation basique pour éviter les erreurs
-    console.log('Activity added:', activity);
   }, []);
 
   const refreshData = useCallback(async () => {
     // Implementation basique pour éviter les erreurs
-    console.log('Data refreshed');
   }, []);
 
   // Nouvelles fonctionnalités IA

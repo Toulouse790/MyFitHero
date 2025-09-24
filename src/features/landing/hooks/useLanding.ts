@@ -411,7 +411,6 @@ export const useLanding = (): UseLandingReturn => {
       try {
         // Mock A/B test setup
         await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log(`Starting A/B test: ${testName} with variants:`, variants);
         return true;
       } catch (error) {
       // Erreur silencieuse
@@ -435,7 +434,6 @@ export const useLanding = (): UseLandingReturn => {
           confidence: 85.6,
         };
 
-        console.log(`A/B test results for ${testName}:`, mockResults);
         return mockResults;
       } catch (error) {
       // Erreur silencieuse
@@ -451,7 +449,6 @@ export const useLanding = (): UseLandingReturn => {
     try {
       // Mock image optimization
       await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log('Images optimized successfully');
       return true;
     } catch (error) {
       // Erreur silencieuse
@@ -465,7 +462,6 @@ export const useLanding = (): UseLandingReturn => {
     try {
       // Mock sitemap generation
       await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Sitemap generated successfully');
       return true;
     } catch (error) {
       // Erreur silencieuse

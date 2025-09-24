@@ -624,7 +624,6 @@ export const SophisticatedWorkoutFlowManager: React.FC<WorkoutFlowManagerProps> 
         <AdvancedSessionTimer
           userId={userId}
           workoutId={sessionId}
-          onSessionEnd={(metrics) => console.log('Session metrics:', metrics)}
         />
       )}
 

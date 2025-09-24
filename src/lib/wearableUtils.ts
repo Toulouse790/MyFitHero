@@ -34,7 +34,6 @@ export const getDeviceStatus = (device: WearableDevice): string => {
 
 export const syncWearableData = async (deviceId: string): Promise<WearableData[]> => {
   // Placeholder for wearable sync logic
-  console.log(`Synchronisation des données pour l'appareil ${deviceId}`);
   return [];
 };
 

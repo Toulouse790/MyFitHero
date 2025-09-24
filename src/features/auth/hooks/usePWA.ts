@@ -31,7 +31,6 @@ export const usePWA = (): PWAState & PWAActions => {
       navigator.serviceWorker
         .register('/sw.js')
         .then(registration => {
-          console.log('✅ Service Worker enregistré:', registration);
 
           // Vérifier les mises à jour
           registration.addEventListener('updatefound', () => {

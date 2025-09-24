@@ -100,7 +100,6 @@ export const SignupPageComponent: React.FC = () => {
     } catch (error) {
       if (attempt < MAX_RETRIES) {
         const delay = Math.pow(2, attempt) * 1000; // 1s, 2s, 4s
-        console.log(`🟡 Tentative ${attempt + 1}/${MAX_RETRIES} échouée, retry dans ${delay}ms`);
         
         setIsRetrying(true);
         setRetryCount(attempt + 1);

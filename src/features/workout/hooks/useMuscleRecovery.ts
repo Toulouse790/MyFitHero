@@ -77,7 +77,6 @@ export const useMuscleRecovery = (): UseMuscleRecoveryReturn => {
     try {
       setIsLoading(true);
       // TODO: Implémenter la logique complète quand les services seront prêts
-      console.log('Update recovery profile for user:', appStoreUser.id);
     } catch (err) {
       console.error('Error updating recovery profile:', err);
     } finally {

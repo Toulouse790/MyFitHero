@@ -40,7 +40,6 @@ export const useRealtimeSync = ({ pillar, onUpdate, onInsert, onDelete }: Realti
           filter: `user_id=eq.${appStoreUser.id}`,
         },
         payload => {
-          console.log(`📡 Realtime update for ${pillar}:`, payload);
 
           // Add userId to payload for identification
           const enrichedPayload = {

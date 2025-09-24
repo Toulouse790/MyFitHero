@@ -48,7 +48,7 @@ export const validateSupabaseConfig = () => {
     isValidUrl: supabaseUrl?.startsWith('https://') && supabaseUrl.includes('.supabase.co'),
   };
   
-  console.log('🔧 Configuration Supabase:', {
+  console.log('📊 Configuration Supabase:', {
     url: config.url,
     hasAnonKey: config.hasAnonKey,
     isValidUrl: config.isValidUrl,

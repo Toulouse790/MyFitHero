@@ -119,12 +119,10 @@ export const FoodScanner: React.FC = () => {
   // Actions sur les résultats
   const handleAddToJournal = () => {
     // TODO: Implémenter l'ajout au journal
-    console.log('Ajouter au journal:', scanResult);
   };
 
   const handleModifyPortion = () => {
     // TODO: Implémenter la modification de portion
-    console.log('Modifier la portion:', scanResult);
   };
 
   return (

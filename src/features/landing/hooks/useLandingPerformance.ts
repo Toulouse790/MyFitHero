@@ -11,7 +11,6 @@ export const useLandingPerformance = (): UseLandingPerformanceReturn => {
     try {
       // Mock image optimization
       await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log('Images optimized successfully');
       return true;
     } catch (error) {
       console.error('Failed to optimize images:', error);
@@ -23,7 +22,6 @@ export const useLandingPerformance = (): UseLandingPerformanceReturn => {
     try {
       // Mock sitemap generation
       await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Sitemap generated successfully');
       return true;
     } catch (error) {
       console.error('Failed to generate sitemap:', error);

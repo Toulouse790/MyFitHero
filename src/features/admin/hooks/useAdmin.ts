@@ -275,7 +275,6 @@ export const useAdmin = (): UseAdminReturn => {
       try {
         // Mock API call
         await new Promise(resolve => setTimeout(resolve, 800));
-        console.log('Sending notification to users:', targetUsers, 'Message:', message);
         return true;
       } catch (error) {
       // Erreur silencieuse
@@ -339,7 +338,6 @@ export const useAdmin = (): UseAdminReturn => {
       try {
         // Mock report generation
         await new Promise(resolve => setTimeout(resolve, 2000));
-        console.log(`Generating ${type} report...`);
         return true;
       } catch (error) {
       // Erreur silencieuse

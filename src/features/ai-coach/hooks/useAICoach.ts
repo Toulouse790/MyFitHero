@@ -27,7 +27,6 @@ export const useAICoach = () => {
 
       try {
         // Implementation à venir
-        console.log('Sending message to AI Coach:', content);
         // const response = await AICoachService.submitQuestion(content, session?.context);
 
         // Simuler une réponse de l'IA (à remplacer par l'appel au service)
@@ -52,7 +51,6 @@ export const useAICoach = () => {
     setError(null);
     try {
       // Implementation à venir
-      console.log('Getting AI recommendations...');
       // const recs = await AICoachService.getPersonalizedPlan(userProfile);
       // setRecommendations(recs);
     } catch (err) {
@@ -69,7 +67,6 @@ export const useAICoach = () => {
     setError(null);
     try {
       // Implementation à venir
-      console.log('Starting AI coaching session:', { topic, userId });
       // const newSession = await AICoachService.getCoachingSession(userId, topic);
       // setSession(newSession);
       // setMessages(newSession.messages || []);

@@ -79,7 +79,6 @@ export class RecoveryService {
     } catch (error) {
       // Erreur silencieuse
       // Mock success
-      console.log('Activité enregistrée (mode mock):', activity);
     }
   }
 

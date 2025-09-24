@@ -124,7 +124,6 @@ export const useSocialModals = (): UseSocialModalsReturn => {
   const submitPost = async () => {
     try {
       // Mock API call
-      console.log('Creating post:', newPost);
       
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -143,7 +142,6 @@ export const useSocialModals = (): UseSocialModalsReturn => {
   const submitChallenge = async () => {
     try {
       // Mock API call
-      console.log('Creating challenge:', newChallenge);
       
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -164,7 +162,6 @@ export const useSocialModals = (): UseSocialModalsReturn => {
 
     try {
       // Mock API call
-      console.log('Creating comment:', {
         postId: showComments,
         content: newComment,
       });

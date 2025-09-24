@@ -304,7 +304,6 @@ export const useSocialData = (): UseSocialDataReturn => {
 
   const sharePost = useCallback(async (postId: string) => {
     // Mock share functionality
-    console.log('Sharing post:', postId);
   }, []);
 
   // Challenge actions

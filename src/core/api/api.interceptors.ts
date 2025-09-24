@@ -55,7 +55,6 @@ export class ApiInterceptor {
   // Logger pour le développement
   private static log(message: string, data?: any): void {
     if (import.meta.env.DEV) {
-      console.log(`[API] ${message}`, data || '');
     }
   }
 
