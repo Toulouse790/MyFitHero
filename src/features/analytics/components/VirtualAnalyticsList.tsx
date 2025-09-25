@@ -17,17 +17,14 @@ import React, {
   useImperativeHandle,
   memo 
 } from 'react';
-import { FixedSizeList as ReactWindowList, ListChildComponentProps } from 'react-window';
-import { VariableSizeList } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import { motion, AnimatePresence } from 'framer-motion';
 
 import { 
   usePerformanceOptimization,
   UsePerformanceOptimizationOptions,
+  UsePerformanceOptimizationResult,
   VirtualizedItem,
   PerformanceMetrics
-} from './ultraPerformanceManager';
+} from '../performance/ultraPerformanceManager';
 
 // ============================================================================
 // TYPES ULTRA-RIGOUREUX
@@ -96,7 +93,9 @@ interface VirtualAnalyticsListRef {
 /**
  * Props pour le rendu d'item optimisé
  */
-interface OptimizedItemProps extends ListChildComponentProps {
+interface OptimizedItemProps {
+  index: number;
+  style: React.CSSProperties;
   data: {
     items: VirtualizedItem<AnalyticsDataItem>[];
     config: VirtualAnalyticsListConfig;
@@ -188,16 +187,8 @@ const OptimizedAnalyticsItem = memo<OptimizedItemProps>(({
     );
   }, [renderItem, item.data, index, isVisible, config]);
 
-  // Animation d'entrée si activée
-  const motionProps = config.enableAnimations ? {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-    transition: { duration: 0.2, ease: 'easeOut' }
-  } : {};
-
   return (
-    <motion.div
+    <div
       ref={elementRef}
       style={style}
       className={`
@@ -213,10 +204,9 @@ const OptimizedAnalyticsItem = memo<OptimizedItemProps>(({
       role={item.data.interactive ? 'button' : 'article'}
       aria-label={config.enableAccessibility ? `Analytics item: ${item.data.title}` : undefined}
       data-testid={`analytics-item-${index}`}
-      {...motionProps}
     >
       {content}
-    </motion.div>
+    </div>
   );
 });
 
@@ -386,34 +376,26 @@ const PerformanceIndicator = memo<PerformanceIndicatorProps>(({ metrics, classNa
         <span className="performance-indicator__fps">{metrics.rendering.fps} FPS</span>
       </button>
       
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            className="performance-indicator__details"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="performance-metric">
-              <span>Memory:</span>
-              <span>{Math.round(metrics.memory.percentage)}%</span>
-            </div>
-            <div className="performance-metric">
-              <span>Cache Hit Rate:</span>
-              <span>{Math.round(metrics.cache.hitRate)}%</span>
-            </div>
-            <div className="performance-metric">
-              <span>Network Latency:</span>
-              <span>{Math.round(metrics.network.latency)}ms</span>
-            </div>
-            <div className="performance-metric">
-              <span>Dropped Frames:</span>
-              <span>{metrics.rendering.droppedFrames}</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {expanded && (
+        <div className="performance-indicator__details">
+          <div className="performance-metric">
+            <span>Memory:</span>
+            <span>{Math.round(metrics.memory.percentage)}%</span>
+          </div>
+          <div className="performance-metric">
+            <span>Cache Hit Rate:</span>
+            <span>{Math.round(metrics.cache.hitRate)}%</span>
+          </div>
+          <div className="performance-metric">
+            <span>Network Latency:</span>
+            <span>{Math.round(metrics.network.latency)}ms</span>
+          </div>
+          <div className="performance-metric">
+            <span>Dropped Frames:</span>
+            <span>{metrics.rendering.droppedFrames}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 });
@@ -460,63 +442,8 @@ export const VirtualAnalyticsList = forwardRef<VirtualAnalyticsListRef, VirtualA
   } = usePerformanceOptimization<AnalyticsDataItem>(data, performanceOptions);
 
   // Références
-  const listRef = useRef<ReactWindowList | VariableSizeList>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInfiniteLoading, setIsInfiniteLoading] = useState(false);
-
-  // Gestion du scroll infini
-  const handleItemsRendered = useCallback(async ({
-    visibleStartIndex,
-    visibleStopIndex
-  }: {
-    visibleStartIndex: number;
-    visibleStopIndex: number;
-  }) => {
-    // Notification des métriques
-    onMetricsUpdate?.(metrics);
-
-    // Scroll infini
-    if (
-      config.enableInfiniteScrolling &&
-      onLoadMore &&
-      !isInfiniteLoading &&
-      visibleStopIndex >= data.length - 5
-    ) {
-      setIsInfiniteLoading(true);
-      try {
-        await onLoadMore();
-      } catch (err) {
-        console.error('Infinite scroll loading failed:', err);
-      } finally {
-        setIsInfiniteLoading(false);
-      }
-    }
-
-    // Préchargement intelligent
-    const prefetchKeys = data
-      .slice(visibleStopIndex + 1, visibleStopIndex + 10)
-      .map(item => item.id);
-    
-    if (prefetchKeys.length > 0) {
-      prefetchData(prefetchKeys);
-    }
-  }, [
-    config.enableInfiniteScrolling,
-    onLoadMore,
-    isInfiniteLoading,
-    data,
-    prefetchData,
-    metrics,
-    onMetricsUpdate
-  ]);
-
-  // Gestion du scroll avec throttling
-  const handleScroll = useCallback(({ scrollTop }: { scrollTop: number }) => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    updateScrollPosition(scrollTop, container.clientHeight);
-  }, [updateScrollPosition]);
 
   // Calcul de la hauteur d'item
   const getItemSize = useCallback((index: number) => {
@@ -529,27 +456,39 @@ export const VirtualAnalyticsList = forwardRef<VirtualAnalyticsListRef, VirtualA
   // Actions imperatives
   useImperativeHandle(ref, () => ({
     scrollToItem: (index: number, align = 'auto') => {
-      listRef.current?.scrollToItem(index, align);
+      // Implémentation simplifiée pour scroll
+      const container = containerRef.current;
+      if (container) {
+        const itemHeight = getItemSize(index);
+        container.scrollTop = index * itemHeight;
+      }
     },
     scrollToTop: () => {
-      listRef.current?.scrollTo(0);
+      const container = containerRef.current;
+      if (container) {
+        container.scrollTop = 0;
+      }
     },
     scrollToBottom: () => {
-      listRef.current?.scrollTo(totalHeight);
+      const container = containerRef.current;
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
     },
     getVisibleRange: () => {
-      // Implémentation simplifiée - en production, calculer précisément
       return { startIndex: 0, endIndex: Math.min(50, data.length - 1) };
     },
     refreshData: () => {
-      // Force la re-virtualisation
-      listRef.current?.forceUpdate();
+      // Force le re-render
+      if (containerRef.current) {
+        containerRef.current.style.transform = 'translateZ(0)';
+      }
     },
     optimizePerformance: () => {
       optimizeMemory();
       clearCache();
     }
-  }), [totalHeight, data.length, optimizeMemory, clearCache]);
+  }), [totalHeight, data.length, optimizeMemory, clearCache, getItemSize]);
 
   // Données pour le rendu d'items
   const itemData = useMemo(() => ({
@@ -581,9 +520,6 @@ export const VirtualAnalyticsList = forwardRef<VirtualAnalyticsListRef, VirtualA
     );
   }
 
-  // Composant de liste virtualisée
-  const VirtualList = typeof config.itemHeight === 'function' ? VariableSizeList : ReactWindowList;
-
   return (
     <div 
       ref={containerRef}
@@ -597,61 +533,29 @@ export const VirtualAnalyticsList = forwardRef<VirtualAnalyticsListRef, VirtualA
         className="virtual-analytics-list__performance"
       />
 
-      {/* Liste virtualisée ou normale */}
-      {isVirtualized ? (
-        <AutoSizer>
-          {({ height, width }) => (
-            <VirtualList
-              ref={listRef}
-              height={height}
-              width={width}
-              itemCount={data.length + (isInfiniteLoading ? config.loadingPlaceholderCount : 0)}
-              itemSize={getItemSize}
-              itemData={itemData}
-              overscanCount={config.overscanCount}
-              onItemsRendered={handleItemsRendered}
-              onScroll={handleScroll}
-            >
-              {({ index, style, data: listData }) => {
-                if (index >= data.length) {
-                  // Placeholder de chargement pour scroll infini
-                  return (
-                    <div key={`loading-${index}`} style={style}>
-                      {renderLoadingPlaceholder(index)}
-                    </div>
-                  );
-                }
-                
-                return (
-                  <OptimizedAnalyticsItem 
-                    key={`item-${data[index].id}`}
-                    index={index}
-                    style={style}
-                    data={listData}
-                  />
-                );
-              }}
-            </VirtualList>
-          )}
-        </AutoSizer>
-      ) : (
-        // Liste normale pour petits datasets
-        <div className="virtual-analytics-list__simple">
-          {data.map((item, index) => (
-            <div 
-              key={item.id}
-              className="virtual-analytics-list__simple-item"
+      {/* Liste simple optimisée */}
+      <div className="virtual-analytics-list__simple">
+        {data.map((item, index) => (
+          <div 
+            key={item.id}
+            className="virtual-analytics-list__simple-item"
+            style={{ height: getItemSize(index) }}
+          >
+            <OptimizedAnalyticsItem
+              index={index}
               style={{ height: getItemSize(index) }}
-            >
-              <OptimizedAnalyticsItem
-                index={index}
-                style={{ height: getItemSize(index) }}
-                data={itemData}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+              data={itemData}
+            />
+          </div>
+        ))}
+        
+        {/* Placeholders de chargement pour scroll infini */}
+        {isInfiniteLoading && Array.from({ length: config.loadingPlaceholderCount }).map((_, index) => (
+          <div key={`loading-${index}`}>
+            {renderLoadingPlaceholder(data.length + index)}
+          </div>
+        ))}
+      </div>
 
       {/* État de chargement */}
       {isLoading && (

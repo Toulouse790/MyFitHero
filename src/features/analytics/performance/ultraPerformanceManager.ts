@@ -8,7 +8,7 @@
  */
 
 import { useMemo, useCallback, useRef, useEffect, useState } from 'react';
-import { debounce, throttle } from 'lodash-es';
+import { debounce, throttle } from '../utils/debounce';
 
 // ============================================================================
 // TYPES PERFORMANCE ULTRA-RIGOUREUX
@@ -1026,7 +1026,7 @@ export function usePerformanceOptimization<T = unknown>(
   );
 
   const prefetchData = useCallback(
-    debounce(async (keys: string[]) => {
+    debounce(async (keys: string[]): Promise<void> => {
       if (!enablePrefetching || !cache.current) return;
 
       setIsLoading(true);
@@ -1117,7 +1117,5 @@ export type {
   PerformanceConfig, 
   PerformanceMetrics, 
   VirtualizedItem, 
-  SmartCacheEntry,
-  UsePerformanceOptimizationOptions,
-  UsePerformanceOptimizationResult
+  SmartCacheEntry
 };
